@@ -1,0 +1,1814 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Text</title>
+	<style type="text/css">
+	</style>
+</head>
+<body>
+<script type="text/javascript">
+
+// "use strict";
+
+// 1的n次幂
+
+// var n = parseInt(window.prompt("输入数字"));
+// var mi = 1;
+// for (var i = 0; i < n; i++) {
+// 	mi *= 2;
+// }
+// document.write("2的" + n + "次幂等于" + mi);
+
+
+// 计算n的阶乘
+// var n = parseInt(window.prompt("计算阶乘"));
+// var ne = 1;
+// for (var i = 1; i <= n; i++) {
+// 	ne *= i;
+// }
+// document.write(ne);
+
+
+// 斐波那契数列
+// var n = parseInt(window.prompt("第几项"));
+// var a = 1;
+// var b = 1;
+// var c;
+// for (var i = 3; i <= n; i++) {
+// 	c = a + b;
+// 	a = b;
+// 	b = c;
+// }
+// document.write(b);
+
+
+// console.log(typeof(a));						//undefined
+// console.log(typeof(undefined));				//X---------undefined
+// console.log(typeof(NaN));					//X---------number
+// console.log(typeof(null));					//null------object
+// var a = "123abc";
+// console.log(typeof(+a));					//string----number
+// console.log(typeof(!!a));					//boolean
+// console.log(typeof(a + ""));				//stting
+// console.log(1 == "1");						//true
+// console.log(NaN == NaN);					//false
+// console.log(NaN == undefined);				//true------false
+// console.log("11" + 11);						//1111
+// console.log(1 === "1");						//false
+// console.log(parseInt("123abc"));			//123
+// var num = 123123.123923123;
+// console.log(num.toFixed(3));				//123123.124
+// console.log(typeof(typeof(a)));				//string
+
+
+
+// 反向输出
+// var a = parseInt(window.prompt("Number"));
+// var b;
+// for (var i = 10; i <= a; ) {
+// 	b = a % 10;
+// 	a = (a - b) / 10;
+// 	document.write(b);
+// }
+// document.write(a);
+
+
+// 输入最大值
+// var a = parseInt(window.prompt("Number1"));
+// var b = parseInt(window.prompt("Number2"));
+// var c = parseInt(window.prompt("Number3"));
+// var max;
+// if (a > b) {
+// 	max = a;
+// }else if (b > c) {
+// 	max = b;
+// }else
+// 	max = c;
+// document.write(max);
+
+
+// 输出n以内的质数
+// var n = parseInt(window.prompt("Number"));
+// for (var i = 1; i <= n; i++) {
+// 	var a = 0;
+// 	for (var j = 2; j <= i; j++) {
+// 		if (i % j == 0 ) {
+// 			a++;
+// 		}
+// 	}
+// 	if (a == 1) {
+// 		document.write(i + "<br/>");
+// 	}
+// }
+
+
+// function setName(obj){
+// 	obj.name = "Nike";
+// 	obj = new Object();
+// 	obj.name = "gump";
+// }
+// var person = new Object();
+// setName(person);
+// document.write(person.name);
+
+
+
+// function displayInfo(args){
+// 	var output = "";
+// 	if (typeof args.name == "string") {
+// 		output += "Name: " + args.name + "\n";
+// 	}
+// 	if (typeof args.age == "number") {
+// 		output += "Age: " + args.age + "<br/>";
+// 	}
+// 	document.write(output);
+// }
+// displayInfo({
+// 	name : "Nike",
+// 	age : 29
+// });
+// displayInfo({
+// 	name : "gump"
+// });
+
+
+// var person1 = {
+// 	toLocaleString : function () {
+// 		return "Nike";
+// 	},
+// 	toString : function() {
+// 		return "Nikolaos"
+// 	}
+// };
+// var person2 = {
+// 	toLocaleString : function(){
+// 		return "gump";
+// 	},
+// 	toString : function () {
+// 		return "forsetgump"
+// 	}
+// };
+
+
+// var people = [person1, person2];
+// alert(people);
+// alert(people.toString());
+// document.write(people.join("<br/>"));
+
+
+// var colors = new Array();
+// var count = colors.push("red", "blue", "yellow");
+// alert(count);
+
+// count = colors.push("black");
+// alert(count);
+
+// var item = colors.pop();
+// alert(item);
+// alert(colors[2]);
+
+
+// var colors = ["red", "blue"];
+// colors.push("brown");
+// colors[3] = "black";
+// alert(colors.length);
+
+// var item = colors.pop();
+// alert(item);
+
+
+// var colors = new Array();
+// var count = colors.unshift("A", "B", "C");
+// alert(colors);
+
+// count = colors.unshift("D");
+// alert(colors);
+
+// var item = colors.pop();
+// alert(item);
+// alert(colors);
+
+
+// var colors = ["A", "B", "C", "D", "E", "F", "G"];
+// var colors2 = colors.splice(1, 0 ,"111");
+// var colors3 = colors.splice(2,3);
+// var colors4 = colors.splice(0, 1, "a", "b", "c");
+
+// alert(colors);
+// alert(colors.indexOf("c"));
+
+
+// var numbers = [1, 2, 3, "blue", 5, 6, 7, 8, 9, 10, 11, 12];
+
+// function obj(item, index, array){
+// 	return (item > 5 && item);
+// }
+
+// var everyResult = numbers.every(obj);
+// document.write("every---" + everyResult + "<br/>");
+
+// var someResult = numbers.some(obj);
+// document.write("some---" + someResult + "<br/>");
+
+// var filterResult = numbers.filter(obj);
+// document.write("filter---" + filterResult + "<br/>");
+
+// var forEachResult = numbers.forEach(obj);
+// document.write("forEach---" + forEachResult + "<br/>");
+
+// var mapResult = numbers.map(obj);
+// document.write("map---" + mapResult + "<br/>");
+
+
+// var values = [1, 2, 3, 4, 5];
+// var sum = values.reduce(function(prev, cur, index, array){
+// 	return (cur + prev);
+// });
+// alert(sum);
+
+
+// var someDate = new Date("May 25, 2005");
+// document.write(someDate);
+// var someDate = new Date(Date.UTC(2000, 0));
+// document.write(someDate);
+// var someDate = new Date(Date.UTC(2000, 5, 5, ));
+// document.write(someDate);
+// var someDate = new Date(2000, 5);
+// document.write(someDate);
+// var start = Date.now();
+// function doStmething(){};
+// var stop = Date.now(),
+// 	result = stop - start;
+// alert(result);
+
+// var date1 = new Date(Date.now());
+// alert(date1.toUTCString());
+
+
+
+// var re =null;
+
+// for (var i = 0; i < 10; i++) {
+// 	re = /cat/g;
+// 	re.test("catastrophe");
+// }
+
+// for (var i = 0; i < 10; i++) {
+// 	re = new RegExp("cat", "g");
+// 	re.test("catastrophe");
+// }
+
+// var text = "mom and dad and baby";
+// var pattern = /mom( and dad( and baby)?)?/gi;
+// var matches = pattern.exec(text);
+// document.write(matches.index);
+// document.write("<br/>" + matches.input);
+// document.write("<br/>" + matches[0]);
+// document.write("<br/>" + matches[1]);
+// document.write("<br/>" + matches[2]);
+
+
+// var text = "cat, bat, sat, fat";
+// var pattern1 = /.at/;
+// document.write(text);
+
+// var matches = pattern1.exec(text);
+// document.write("<br/>" + matches.index);
+// document.write("<br/>" + matches[0]);
+// document.write("<br/>" + pattern1.lastIndex);
+
+// matches = pattern1.exec(text);
+// document.write("<br/>" + matches.index);
+// document.write("<br/>" + matches[0]);
+// document.write("<br/>" + pattern1.lastIndex);
+
+// var pattern2 = /.at/g;
+// var matches = pattern2.exec(text);
+// document.write("<br/>" + matches.index);
+// document.write("<br/>" + matches[0]);
+// document.write("<br/>" + pattern2.lastIndex);
+
+// var matches = pattern2.exec(text);
+// document.write("<br/>" + matches.index);
+// document.write("<br/>" + matches[0]);
+// document.write("<br/>" + pattern2.lastIndex);
+
+// var matches = pattern2.exec(text);
+// document.write("<br/>" + matches.index);
+// document.write("<br/>" + matches[0]);
+// document.write("<br/>" + pattern2.lastIndex);
+
+// var matches = pattern2.exec(text);
+// document.write("<br/>" + matches.index);
+// document.write("<br/>" + matches[0]);
+// document.write("<br/>" + pattern2.lastIndex);
+
+// function sum(a){
+// 	arguments[0] = 1;;
+// 	console.log(arguments[0]);
+// }
+// sum(11,12,4);
+ 
+// text1
+// function animal (name){
+// 	switch(arguments[0]) {
+// 		case "dog":
+// 			console.log("wangwangwang");
+// 			break;
+// 		case "cat":
+// 			console.log("maomaomao");
+// 			break;
+// 	}
+// }
+// animal("cat");
+ 
+// // text2
+// function sum(a, b){
+// 	console.log(a + b);
+// }
+// sum(199,1);
+
+// // text5
+// function fbnqsl(n) {
+//     if (n == 1) {
+//     	return 1;
+//     }
+//     else{
+//     	var a = 1,
+//     		b = 1;
+    	
+//     }
+// }
+// fbnqsl(10);
+ 
+// // text3
+//  function backvalue(a) {
+//      var b,
+//          sum = Array();
+//  	for (var i = 10; i <= a;) {
+// 		b = a % 10;
+// 		a = (a - b) / 10;
+// 		// sum.push(b);
+// 		output(b);
+// 		}
+// 		// sum.push(a);
+// 	 output(a);
+//  }
+// backvalue(119);
+
+// function output(value) {
+//  		switch(value){
+//  			case 0:
+//                 console.log("零");
+//  				break;
+//  			case 1:
+//                 console.log("一");
+//  				break;
+//  			case 2:
+//                 console.log( "二");
+//  				break;
+//  			case 3:
+//                 console.log("三");
+//  				break;
+//  			case 4:
+//                 console.log("四");
+//  				break;
+//  			case 5:
+//                 console.log("五");
+//  				break;
+//  			case 6:
+//                 console.log("六");
+//  				break;
+//  			case 7:
+//                 console.log("七");
+//  				break;
+//  			case 8:
+//                 console.log("八");
+//  				break;
+//  			case 9:
+//                 console.log("九");
+//  				break;
+//  			default:
+//                 console.log(undefined);
+//  	}
+//  }
+
+// // text4
+// function nXn(n){
+// 	var j = 1;
+// 	for (var i = 1; i <= n; i++) {
+// 		j *= i;
+// 	}
+// 	console.log(j);
+// }
+// nXn(5);
+
+// 斐波那契数列
+// function rabbit(n) {
+// 	if (n <= 2){
+// 		return 1;
+// 	} else {
+//         n = rabbit(n - 1) + rabbit(n - 2);
+// 	return n;
+// 	}
+// }
+
+
+//预编译
+// function fn(a) {
+// 	console.log(a);
+// 	var a = 123;
+// 	console.log(a);
+// 	function a(){};
+// 	console.log(a);
+// 	var b = function (){};
+// 	console.log(b);
+// 	function d (){};
+// }
+// fn(1);
+
+// function text(a, b){
+// 	document.write(a);		//1
+// 	c = 0;
+// 	var c;
+// 	a = 3;
+// 	b = 2;
+// 	document.write(b);		//2
+// 	function b () {};
+// 	function d () {};
+// 	document.write(b);		//2
+// }
+// text(1);
+
+// function test(a, b){
+// 	console.log(a);			//function
+// 	console.log(b);			//undefined
+// 	var b = 234;
+// 	console.log(b);			//234
+// 	a = 123;
+// 	console.log(a);			//123
+// 	function a () {};
+// 	var a;
+// 	b = 234;
+// 	var b = function () {};
+// 	console.log(a);			//123
+// 	console.log(b);			//234---X--->function
+// }
+// test(1);
+
+//1
+// function bar () {
+// 	return foo;
+// 	foo = 10;
+// 	function foo() {
+// 		//body...
+// 	}
+// 	var foo = 11;
+// }
+// alert(bar());			//unction foo() {body...}
+//2
+// console.log(bar());			//11
+// function bar() {
+// 	foo = 10;
+// 	function foo () {
+// 	}
+// 	var foo = 11;
+// 	return foo;
+// }
+//3
+// a = 100;
+// function demo(e) {
+// 	function e() {};
+// 	arguments[0] = 2;
+// 	document.write(e);		//function e() {}--X--->2
+// 	if (a) {
+// 		var b = 123;
+// 		function c () {
+// 			//猪都能做出来
+// 		}
+// 	}
+// 	var c;
+// 	a = 10;
+// 	var a;
+// 	document.write(b);		//123---X--->undefined
+// 	f = 123;
+// 	document.write(c);		//function c(){//猪都能做出来}---X--->undefined
+// 	document.write(a);		//10
+// }
+// var a;
+// demo(1);
+// document.write(a);			//100
+// document.write(f);			//123
+//4
+// var str = false + 1;
+// document.write(str);
+// var demo = false == 1;
+// document.write(demo);
+// if (typeof(a) && -true + (+undefuned) + "") {
+// 	document.write(1);
+// }
+// if (11 + "11" * 2 == 23) {
+// 	document.write(1);
+// }
+// !!" " + !!"" -!!false || document.write(1);
+//5
+// var x = 1;
+// if (function f() {}) {
+// 	x += typeof(f);	
+// }
+// console.log(x);
+
+// var text = "000-00-0000";
+// var pattern = /\d{3}-\d{2}-\d{4}/;
+// if (pattern.test(text)) {
+// 	alert("The pattern was matched.");
+// }else{
+// 	alert("errow");
+// }
+
+
+
+
+
+// var pattern = new RegExp("\\[bc\\]at", "gi");
+// alert(pattern.toString());
+// alert(pattern.toLocaleString());
+// alert(pattern.valueOf());
+
+// var text = "this has been a short summer";
+// var pattern = /(.)hort/g;
+// if (pattern.test(text)) {
+// 	document.write(RegExp.input);
+// 	document.write("<br/>" + RegExp.leftContext);
+// 	document.write("<br/>" + RegExp.rightContext);
+// 	document.write("<br/>" + RegExp.lastMatch);
+// 	document.write("<br/>" + RegExp.lastParen);
+// 	document.write("<br/>" + RegExp.multiline);
+// }
+
+
+
+// function sum(sum1 ,sum2){
+// 	return sum1 + sum2;
+// }
+// alert (sum(10, 10));
+// var anotherSum = sum;
+// alert(anotherSum(10, 10));
+// sum = null;
+// alert(anotherSum(10, 10));
+
+// function addSomeNumber (num){
+// 	return num + 100;
+// }
+// function addSomeNumber (num){
+// 	return num + 200;
+// }
+// var result = addSomeNumber(100);
+// alert(result);
+
+
+// function callSomeFunction(someFunction, someArgument){
+// 	return someFunction(someArgument);
+// }
+// function add10(num){
+// 	return num + 10;
+// }
+// var result1 = callSomeFunction(add10, 10);
+// alert(result1);
+// function getGreeting(name){
+// 	return "Hello," + name;
+// }
+// var result2 = callSomeFunction(getGreeting,"Nike");
+// alert(result2);
+
+
+// function createComparisonFunction(propertyName){
+// 	return function(object1, object2){
+// 		var value1 = object1[propertyName];
+// 		var value2 = object2[propertyName];
+// 		if(value1 < value2){
+// 			return -1;
+// 		}else if (value1 > value2) {
+// 			return 1;
+// 		}else{
+// 			return 0;
+// 		}
+// 	};
+// }
+
+// var data = [{name: "Zach", age: 29}, {name: "Nich", age: 33}];
+// data.sort(createComparisonFunction("name"));
+// alert(data[0].name);
+// data.sort(createComparisonFunction("age"));
+// alert(data[0].name);
+
+
+// function factorial(num){
+// 	if (num <= 1) {
+// 		return 1;
+// 	}else{
+// 		return num * factorial(num - 1);
+// 	}
+// }
+
+
+// window.color = "red";
+// var o = {color : "bule"};
+// function sayColor(){
+// 	document.write(this.color);
+// }
+// sayColor();
+// o.sayColor = sayColor;
+// o.sayColor();
+
+// window.color = "red";
+// var o = {color : "bule"};
+// function sayColor(){
+// 	document.write(this.color);
+// }
+// sayColor.call(this);
+// sayColor.call(window);
+// sayColor.call(o);
+
+
+
+
+// function outer(){
+// 	inner();
+// }
+// function inner(){
+// 	alert(inner.caller);
+// }
+// outer();
+
+// function sum(num1, num2){
+// 	return num1 + num2;
+// }
+// function callSum1(num1, num2){
+// 	return sum.call(sum, num1, num2);
+// }
+
+// alert(callSum1(10, 10));
+
+// window.color = "red";
+// var o = {color : "blue"};
+// function sayColor(){
+// 	document.write(this.color);
+// }
+// sayColor();
+// sayColor.call(this);
+// sayColor.call(window);
+// sayColor.call(o);
+
+// var objectSayColor = sayColor.bind(o);
+// objectSayColor();
+
+
+// var s1 = "some text";
+// var s2 = s1.substring(2);
+// console.log(s2);
+// console.log(s2.length);
+// console.log(s2[3]);
+
+// var obj = new Object("some text");
+// console.log(obj instanceof String);
+// var value = new Number("22");
+// console.log(typeof value);
+
+
+// var falseObject = new Boolean(false);
+// var result = falseObject && true;
+// console.log(result);
+// var falseValue = false;
+// result = falseValue && true;
+// console.log(result);
+
+// var num = 10.045;
+// console.log(num.toFixed(2));
+// console.log(num.toExponential());
+
+
+// /*定义一个人类*/
+// function Person(name, age) {
+//     this.name = name;
+//     this.age = age;
+// }
+// /*定义一个学生类*/
+// function Student(name, age, grade) {
+//     Person.apply(this, arguments);
+//     // Person.call(this, name, age);
+//     this.grade = grade;
+// }
+// //创建一个学生类
+// var student = new Student("qian", 21, "一年级");
+// //测试
+// console.log("name:" + student.name + "\n" + "age:" + student.age + "\n" + "grade:" + student.grade);
+// //大家可以看到测试结果name:qian  age:21  grade:一年级
+// //学生类里面我没有给name和age属性赋值啊,为什么又存在这两个属性的值呢,这个就是apply的神奇之处.
+
+
+// var stringValue = "hello world";
+// console.log(stringValue.charAt(3)+ "\n" +
+// 			stringValue.charCodeAt(3)+ "\n" +
+// 			stringValue.slice(3)+ "\n" +
+// 			stringValue.substring(3)+ "\n" +
+// 			stringValue.substr(3)+ "\n" +
+// 			stringValue.slice(3, 7)+ "\n" +
+// 			stringValue.substring(3, 7)+ "\n" +
+// 			stringValue.substr(3, 7));
+
+
+// var stringValue = "Lorem ipsum dolor sit amet, consectetur adipisicing elit";
+// var positions = new Array();
+// var pos = stringValue.indexOf("e");
+// while( pos > -1 ){
+// 	positions.push(pos);
+// 	pos = stringValue.indexOf("e", pos + 1);
+// }
+// console.log(positions);
+// var trimmedStringValue = stringValue.trim();
+// console.log(trimmedStringValue);
+
+
+// var text = "cat, bat, sat, fat";
+// var result = text.replace("at", "ong");
+// console.log(result);
+// result = text.replace(/at/g, "ong");
+// console.log(result);
+
+// function htmlEscape(text){
+// 	return text.replace(/[<>"&]/g, function(match, pos, originalText){
+// 		switch(match){
+// 			case  "<":
+// 				return "&lt;";
+// 			case ">":
+// 				return	"&gt;";
+// 			case "&":
+// 				return	"&amp;";
+// 			case "\"":
+// 				return	"&quot;";
+// 		}
+// 	})
+// }
+// document.write(htmlEscape("<p class = \"greeting\">Hello world!</p>"));
+
+
+// var msg = "hello world";
+// eval("alert(msg)");
+
+// var color = "red";
+// function sayColor(){
+// 	alert(window.color);
+// }
+// window.sayColor();
+
+// var values = [1, 2, 3, 4, 5, 6, 7, "8"];
+// var max = Math.max.apply(Math, values);
+// console.log(max);
+
+// alert(Math.floor(Math.random() * 6 + 1));
+
+
+
+/* 
+    对象
+*/
+
+
+ 
+// 理解对象
+// var person = {
+// 	name: "Nike",
+// 	age: 29,
+// 	job: "software",
+
+// 	sayName:function (){
+// 		alert(this.name);
+// 	}
+// };
+
+// 访问器属性
+// var book = {
+// 	_year: 2004,
+// 	edition: 1
+// };
+// Object.defineProperty(book, "year", {
+// 	get: function(){
+// 		return this._year;
+// 	},
+// 	set:function(newValue){
+// 		if (newValue > 2004) {
+// 			this._year = newValue;
+// 			this.edition += newValue - 2004;
+// 		}
+// 	}
+// });
+// book.year = 2005;
+// console.log(book.edition);
+
+// var book = {};
+// Object.defineProperties(book, {
+// 	_year: {
+// 		writable: true,
+// 		value: 2004
+// 	},
+// 	edition: {
+// 		writable: true,
+// 		value: 1
+// 	},
+// 	year: {
+// 		get: function () {
+// 			return this._year;
+// 		},
+// 		set: function (newValue) {
+// 			if (newValue > 2004) {
+// 				this._year = newValue;
+// 				this.edition += newValue - 2004;
+// 			}
+// 		}
+// 	}
+// });
+// console.log(book);
+
+// 工厂模式
+// function Person(name, age, job){
+// 	this.name = name;
+// 	this.age = age;
+// 	this.job = job;
+// 	this.sayName = function(){
+// 		console.log(this.name);
+// 	};
+// }
+// let person1 = new Person("Nike", 22, "teacher");
+// var person2 = new  Person("gump", 33, "gardener");
+// person1.sayName();
+// alert(person1 instanceof Person);//true
+// alert(person2 instanceof Object);//true
+// console.log("");
+// function CreatePerson(name, age, sex){
+//     return {
+//     name: name,
+//     age: age,
+//     sex: sex,
+//    sayHello: function () {
+// 			console.log(this.name);
+// 			},
+// 	}
+// }
+// var person3 = new CreatePerson('jero', 26, 'male');
+// console.log(typeof person3 === 'object');
+// console.log(person3.name);
+// console.log(person3.age)
+// console.log(person3.sex);
+// person3.sayHello();
+// alert(person3 instanceof Object);//true
+// alert(person3 instanceof CreatePerson);//false
+
+// function Person(name, age, job){
+// 	this.name = name;
+// 	this.age = age;
+// 	this.job = job;
+// 	this.sayName = sayName;
+// }
+// function sayName() {
+// 	alert(this.name);
+// }
+// var person1 = new Person("Nike", 29, "baidu");
+
+
+// 理解和in
+// function Person() {};
+// Person.prototype.name = "Nike";
+// Person.prototype.age = 20;
+// Person.prototype.job = "tencet";
+// Person.prototype.sayName = function () {
+// 	console.log(this.name);
+// };
+// var person1 = new Person();
+// var person2 = new Person();
+// console.log(Object.getPrototypeOf(person1) == Person.prototype);
+// console.log(Object.getPrototypeOf(person1).name);
+// console.log(person1.hasOwnProperty("name"));
+// person1.name = "Gump";
+// console.log(person1.name);
+// console.log(person1.hasOwnProperty("name"));
+// console.log(person2.name);
+// delete person1.name;
+// console.log(person1.name);
+// console.log("name" in person1);
+
+// function hasPerototypeProperty(objcet, name){
+// 	return !objcet.hasOwnProperty(name) && (name in objcet);
+// }
+// function Person() {};
+// Person.prototype.name = "Nike";
+// Person.prototype.age = 20;
+// Person.prototype.job = "tencet";
+// Person.prototype.sayName = function () {
+// 	console.log(this.name);
+// };
+// var person = new Person();
+// alert(hasPerototypeProperty(person, "name"));//true
+// person.name = "Gump";
+// alert(hasPerototypeProperty(person, "name"));//false
+
+// var o = {
+// 	toString: function () {
+// 		return "My Objcet";
+// 	}
+// };
+// for (var prop in o) {
+// 	if (prop == "toString") {
+// 		console.log("Found toString");
+// 	}
+// }
+
+// function Person() {};
+// Person.prototype.name = "Nike";
+// Person.prototype.age = 23;
+// Person.prototype.job = "dedao";
+// Person.prototype.sayName = function () {
+// 	console.log(this.name);
+// }
+// var keys = Object.keys(Person.prototype);
+// console.log(keys);//["name", "age", "job", "sayName"]
+// var p1 = new Person();
+// p1.name = "Gump";
+// p1.age = 23;
+// var p1keys = Object.keys(p1);
+// console.log(p1keys);//["name", "age"]
+// keys = Object.getOwnPropertyNames(Person.prototype);
+// console.log(keys);
+
+// 更简单的原型语法
+// function Person() {};
+// Person.prototype = {
+// 	// constructor: Person,
+// 	name: "Nike",
+// 	age: 24,
+// 	job: "alibaba",
+// 	sayName: function () {
+// 		console.log(this.name);
+// 	}
+// };
+// Object.defineProperty(Person.prototype, "constructor", {
+// 	enumerable: false,
+// 	value: Person,
+// });
+// var friend = new Person();
+// console.log(friend instanceof Object);
+// console.log(friend instanceof Person);
+// console.log(friend.constructor == Person);
+// console.log(friend.constructor == Object);
+
+// function Person() {
+// };
+// var friend = new Person();
+// Person.protoytpe = {
+// 	constructor: Person,
+// 	name: "Nike",
+// 	age: 19,
+// 	job: "didi",
+// 	sayName: function () {
+// 		console.log(this.name);
+// 	}
+// };
+// friend.sayName();
+
+// 原型对象问题
+// function Person() {};
+// Person.prototype = {
+// 	constroctory: Person,
+// 	name: "Nike",
+// 	age: 29,
+// 	job: "cctv",
+// 	friends: ["Arrmy", "Gump"],
+// 	sayName: function () {
+// 		console.log(this.name);
+// 	}
+// };
+// var person1 = new Person();
+// var person2 = new Person();
+// person1.friends.push("Red");
+// console.log(person1.friends);
+// console.log(person2.friends);
+// console.log(person1.friends === person2.friends);
+
+// 组合使用构造函数模式和原型模式
+// function Person(name, age, job) {
+// 	this.name = name;
+// 	this.age = age;
+// 	this.job = job;
+// 	this.friends = ['Arrmy', 'Gump'];
+// }
+// Person.prototype = {
+// 	constroctor: Person,
+// 	sayName: function () {
+// 		console.log(this.name);
+// 	}	
+// }
+// var person1 = new Person('Nike', 29, 'baidu'),
+// 	person2 = new Person('Gump', 22, 'cctv');
+// person1.friends.push('Doge');
+// console.log(person1.friends);
+// console.log(person2.friends);
+// console.log(person1.friends === person2.friends);
+// console.log(person1.sayName === person2.sayName);
+
+// 动态原型模式
+// function Person(name, age, job) {
+//	//属性
+// 	this.name = name;
+// 	this.age = age;
+// 	this.job = job;
+//	//方法
+// 	if (typeof this.sayName != "function") {
+// 		Person.prototype.sayName = function() {
+// 			console.log(this.name);
+// 		};
+// 	}
+// }
+// var friend = new Person("Nike", 29, "baidu");
+// friend.sayName();
+
+// 寄生构造函数模式
+// function Person(name, age, job) {
+// 	var o = new Object;
+// 	o.name = name;
+// 	o.age = age;
+// 	o.job = job;
+// 	o.sayName = function() {
+// 		console.log(this.name);
+// 	};
+// 	return o;
+// }
+// var friend = new Person("Nike", 29, "baidu");
+// friend.sayName();
+
+// function SpecialArray() {
+// 	var values = new Array();
+// 	values.push.apply(values, arguments);
+// 	values.toPipedString = function() {
+// 		return this.join('|');
+// 	};
+// 	return values;
+// }
+// var colors = new SpecialArray('red', 'blue', 'yellow');
+// console.log(colors.toPipedString());
+
+// 稳妥构造函数模式
+// function Person(name, age, job) {
+// 	var o = new Object;
+// 	// 可以在这里定义私有变电和函数
+
+// 	//添加方法
+// 	o.sayName = function() {
+// 		console.log(name);
+// 	};
+// 	//返回对象
+// 	return o;
+// }
+// var friend = Person('Nike', 29, 'baidu');
+// friend.sayName();
+
+
+
+
+/* 
+    继承
+*/
+
+
+
+// 原型链
+// function SuperType(){
+//     this.property = true;
+// }
+
+// SuperType.prototype.getSuperValue = function(){
+//     return this.property;
+// };
+
+// function SubType(){
+//     this.subproperty = false;
+// }
+
+// //继承了 SuperType
+// SubType.prototype = new SuperType();
+
+// SubType.prototype.getSubValue = function (){
+//     return this.subproperty;
+// };
+
+// var instance = new SubType();
+// console.log(instance.getSuperValue());   //true
+
+////
+// function dog() {
+//     this.name = 'wang';
+// }
+// dog.prototype.getValue = function() {
+//     return this.prototype;
+// }
+// function bigDog() {
+//     this.name = 'wangwang';
+//     this.age = 9;
+// }
+
+// dog.prototype = new bigDog();
+// dog.prototype.getValue = function() {
+//     return this.age;
+// }
+
+// var baby = new dog();
+// console.log(baby.getValue());
+// console.log(baby instanceof Object);
+// console.log(baby instanceof dog);
+// console.log(baby instanceof bigDog);
+// console.log(Object.prototype.isPrototypeOf(baby));
+// console.log(dog.prototype.isPrototypeOf(baby));
+// console.log(bigDog.prototype.isPrototypeOf(baby));
+
+//谨慎的定义方法
+// function superType() {
+//     this.property = true;
+// }
+// superType.prototype.getsuperValue = function() {
+//     return this.property;
+// }
+// function subType() {
+//     this.subproperty = false;
+// }
+// // 添加新方法
+// subType.prototype.getSubValue = function() {
+//     return this.subproperty;
+// }
+// // 重写超类型中的方法
+// subType.prototype.getSuperValue = function() {
+//     return NaN;
+// }
+// var instance = new subType();
+// console.log(instance.getSuperValue());
+// console.log(instance.getSubValue());
+
+//原型链的问题
+// function SuperType() {
+//     this.colors = ['red', 'blue', 'yellow'];
+// }
+// function SubType(){}
+
+// //继承了SuperType
+// SubType.prototype = new SuperType();
+
+// var instance1 = new SubType();
+// instance1.colors.push('black');
+// console.log(instance1.colors);
+// var instance2 = new SubType();
+// console.log(instance2.colors)
+
+//借用构造函数
+// function SuperType() {
+//     this.colors = ['red', 'blue', 'yellow'];
+// }
+
+// function SubType(){
+//     //继承了SuperType
+//     SuperType.call(this);
+// }
+
+// var instance1 = new SuperType();
+// instance1.colors.push('black');
+// console.log(instance1.colors);
+
+// var instance2 = new SubType();
+// console.log(instance2.colors)
+
+//传递参数
+// function SuperType(name) {
+//     this.name = name;
+// }
+
+// function SubTYpe() {
+//     //继承了SuperType，同事还传递了参数
+//     SuperType.call(this, "Nike");
+
+//     //实例属性
+//     this.age = 29;
+// }
+//  var  instance = new SubTYpe();
+//  console.log(instance.name);
+//  console.log(instance.age);
+
+
+//组合继承
+// function SuperType(name) {//构造函数
+//     this.name =name;
+//     this.colors = ['red', 'blue', 'yellow'];
+// }
+
+// SuperType.prototype.sayName = function() {//原型
+//     console.log(this.name);
+// };
+
+// function SubType(name, age) {
+//     //继承属性
+//     SuperType.call(this, name);
+
+//     this.age = age;
+// }
+// //继承方法
+// SubType.prototype = new SuperType();
+// SubType.prototype.constructor = SubType;
+// SubType.prototype.sayAge = function() {
+//     console.log(this.age);
+// };
+
+// var instance1 = new SubType('Nike', 29);
+// instance1.colors.push('black');
+// console.log(instance1.colors);
+// instance1.sayName();
+// instance1.sayAge();
+
+// var instance2 = new SubType('Gump', 22);
+// instance2.colors.push('black');
+// console.log(instance2.colors);
+// instance2.sayName();
+// instance2.sayAge();
+
+
+// 原型式继承
+// var person = {
+//     name: 'Nike',
+//     friends:['A', 'B', 'C']
+// };
+
+// var anotherPerson = Object(person);
+// anotherPerson.name = 'G';
+// anotherPerson.friends.push('R');
+
+// var yetAnotherPerson = Object(person);
+// yetAnotherPerson.name = 'L';
+// yetAnotherPerson.friends.push('D');
+
+// console.log(person.friends);
+
+// var person = {
+//     name: 'Nike',
+//     friends:['A', 'B', 'C']
+// };
+
+// var anotherPerson = Object.create(person);
+// anotherPerson.name = 'G';
+// anotherPerson.friends.push('R');
+
+// var yetAnotherPerson = Object.create(person);
+// yetAnotherPerson.name = 'L';
+// yetAnotherPerson.friends.push('D');
+
+// console.log(person.friends);
+
+
+//寄生式继承
+// function createAnother(original){
+//     var clone = Object(original);
+//     clone.sayHi = function () {
+//         console.log('hi');
+//     };
+//     return clone;
+// }
+
+// var person = {
+//     name: 'Nike',
+//     firends: ['S', 'C', 'V']
+// };
+
+// var anotherPerson = createAnother(person);
+// anotherPerson.sayHi(); 
+
+// 寄生组合式继承
+// function SuperType(name) {
+//     this.name = name;
+//     this.colors = ['red', 'blue', 'green'];
+// }
+
+// SuperType.prototype.sayName = function() {
+//     console.log(this.name);
+// };
+
+// function SubType(name, age) {
+//     SuperType.call(this, name);          //第二次调用SuperType()
+
+//     this.age = age;
+// }
+
+// SubType.prototype = new SuperType();    //第一次调用SuperType()
+// SubType.prototype.constructor = SubType;
+// SubType.prototype.sayAge = function() {
+//     console.log(this.age);
+// };
+// var instance = new SubType('Bob', 29);
+// console.log(instance.sayAge);
+
+// function SuperType(name) {
+//     this.name = name;
+//     this.colors = ['red', 'blue', 'green'];
+// }
+
+// SyperType.prototype.sayName = function() {
+//     console.log(this.name);
+// };
+
+// function SybThype(name, age) {
+//     SyperType.call(this, name)
+
+//     this.age = age;
+// }
+
+// inheritPrototype(SubType, SuperType);
+
+// subType.prototype.sayAge = function() {
+//     console.log(this.age);
+// };
+
+
+
+/* 
+    函数表达式
+*/
+
+
+
+//递归
+// function factorial(num) {
+//     if (num <= 1) {
+//         return 1;
+//     } else {
+//         return num * arguments.callee(num - 1);
+//     }
+// }
+// console.log(factorial(10));
+
+////
+// var factorial = (function f(num) {
+//     if (num <= 1) {
+//         return 1;
+//     } else {
+//         return num * f(num - 1);
+//     }
+// });
+// console.log(factorial(5));
+
+//闭包
+// function createComparisonFunction(propertName) {
+
+//     return function(object1, object2){
+//         var value1 = object1[propertyName];         //内部函数访问外部函数
+//         var value2 = object2[perpertyName];         //内部函数访问外部函数
+
+//         if (value1 < value2) {
+//             return -1;
+//         } else if (value1 > value2) {
+//             return 1;
+//         } else {
+//             return 0;
+//         }
+//     };
+// }
+
+// function compare(value1, value2) {
+//     if (value1 < value2) {
+//         return -1;
+//     } else if (value1 > value2) {
+//         return 1;
+//     } else {
+//         return 0;
+//     }
+// }
+// var result = compare(5, 10);
+// console.log(result);
+
+// var compareNames = createComparisonFunction('name');
+// var result = compareNames({name: 'Nike'}, {name: 'Gump'});
+// conpaerName = null;
+
+//闭包于变量
+// function createFunction() {
+//     var result = new Array();
+
+//     for (let i = 0; i < 10; i++) {
+//         result[i] = function() {
+//             return i;
+//         };
+//     }
+//     return result;
+// }
+
+////
+// function createFunction() {
+//     var result = new Array();
+
+//     for (let i = 0; i < 10; i++) {
+//         result[i] = function (num) {
+//             return function () {
+//                 return num;
+//             };
+//         }(i);
+//     }
+//     return result;
+// }
+// console.log(createFunction);
+
+//闭包于变量
+// var name = 'The Window';
+// var object = {
+//     name: 'My Object',
+
+//     getNameFunc: function() {
+//         return function() {
+//             return this.name;
+//         };
+//     }
+// };
+// console.log(object.getNameFunc()());
+
+// var name = 'The Window';
+// var object = {
+//     name: 'My Object',
+
+//     getNameFunc: function() {
+//         var that = this;
+//         return function() {
+//             return that.name;
+//         };
+//     }
+// };
+// console.log(object.getNameFunc()());
+
+// 内存泄漏
+// function assignHandler() {
+//     var element = document.getElementById('someElement');
+//     elemrnt.onclick = function() {
+//         alert(element.id);
+//     };
+// }
+
+// function assignHandler() {
+//     var element = document.getElementById('someElement'),
+//         id =eement.id;
+
+//     elemrnt.onclick = function() {
+//         alert(id);
+//     };
+
+//     element = null;
+// }
+
+// 模仿块级作用域
+// function outputNumbers(count) {
+//     (function() {
+//         for (let i = 0; i < count; i++) {
+//             console.log(i);
+//         }
+//     })();
+    
+//     console.log(i);
+// }
+// outputNumbers(5);
+
+// (function() {
+
+//     var now = new Date();
+//     if (now.getMonth() == 0 && new.getDate() == 1) {
+//         alert('Happy new year!');
+//     }
+// })();
+
+// 私有变量
+// function MyObject() {
+
+//     // 私有变量和私有函数
+//     var privateVariable = 10;
+
+//     function privateFunction() {
+//         return false;
+//     }
+
+//     // 特权方法
+//     this.publicMethod = function() {
+//         privateVariable++;
+//         return privateFunction();
+//     };
+// }
+
+// function Person(name) {
+
+//     this.getName = function() {
+//         return name;
+//     };
+
+//     this.setName = function (value) {
+//         name = value;
+//     };
+// }
+
+// var person = new Person('Nike');
+// console.log(person.getName());
+// person.setName('Gump');
+// console.log(person.getName());
+
+// 静态私有变量
+// (function () {
+
+//     // 私有变量和函数
+//     var privateVariable = 10;
+
+//     function privateFunction() {
+//         return false;
+//     }
+
+//     // 构造函数
+//     MyObject = function () {};
+
+//     // 公有\特权方法
+//     MyObject.prototype.publicMethod = function () {
+//         privateVariable++;
+//         return privateFunction();
+//     }
+// })();
+
+////
+// (function() {
+    
+//     var name = '';
+
+//     Person = function(value) {
+//         name = value;
+//     };
+
+//     Person.prototype.getName = function() {
+//         return name;
+//     };
+//     Person.prototype.setName = function (value) {
+//         name = value;
+//     };
+// })();
+
+// var person1 = new Person('Nike');
+// console.log(person1.getName());
+// person1.setName('Gump');
+// console.log(person1.getName());
+
+// var person2 = new Person('Miko');
+// console.log(person1.getName());
+// console.log(person2.getName());
+
+// 模块模式
+// var singleton = function() {
+
+//     // 私有变量和私有函数
+//     var privateVariable = 10;
+
+//     function privateFunction() {
+//         return false;
+//     }
+//     // 公有\特权方法和属性
+//     return {
+
+//         publicProperty: true,
+
+//         publicMethod: function() {
+//             privateVariable++;
+//             return privateFunction();
+//         }
+//     };
+// }();
+
+// var application = function() {
+
+//     // 私有变量和函数
+//     var components = new Array();
+
+//     //初始化
+//     components.push(new BaseComponent());
+
+//     // 公共
+//     return {
+//         getComponentCount: function() {
+//             return components.length;
+//         },
+
+//         registerComponent: function (component) {
+//             if (typeof component == 'object') {
+//                 components.push(component);
+//             }
+//         }
+//     };
+// }();
+
+// 增强的模块模式
+// var singleton = function() {
+
+//     // 私有变量和私有函数
+//     var privateVariable = 10;
+
+//     function privateFunction() {
+//         return false;
+//     }
+
+//     // 创建对象
+//     var object = new CustonType();
+
+//     // 添加特权\共有属性和方法
+//     object.publicProperty = true;
+
+//     object.publicMethod = function() {
+//         privateVariable++;
+//         return privateFunction();
+//     };
+
+//     // 返回这个对象
+//     return object;
+// }();
+
+// var application = function() {
+
+//     // 私有变量和函数
+//     var components = new Array();
+
+//     //初始化
+//     components.push(new BaseComponent());
+
+//     // 创建application的一个局部副本
+//     var app = new BaseCOmponent();
+
+//     // 公共接口
+//     app.getCompontCount = function() {
+//         return components.length;
+//     };
+
+//     app.regusterComperent = function(component) {
+//         if (tpeof component == 'object') {
+//             components.push(component);
+//         }
+//     };
+
+//     // 返回这个副本
+//     return app;
+// }();
+
+//网课start
+//可以做缓存（存储结构）
+// function eater() {
+//     var food = '';
+//     var obj = {
+//         eat: function () {
+//             console.log('I\'m eating ' + food);
+//             food = '';
+//         },
+//         push: function (myfood) {
+//             food = myfood;
+//         }
+//     }
+//     return obj;
+// }
+
+// var food1 = eater();
+
+// food1.push('people');
+// food1.eat();
+
+// (function() {
+// 	var a = 123,
+// 		b = 321;
+// 	console.log(a + b);
+// }());// W3C建议把括号放里面
+
+// ————————————————闭包问题触发
+// function test() {
+//     var arr = [];
+//     for (var i = 0; i < 10; i++) {
+//         arr[i] = function () {
+//             document.write(i + ' ');
+//         }
+//     }
+//     return arr;
+// }
+
+// var myArr = test();
+// for (let j = 0; j < 10; j++) {
+//     myArr[j]();
+// }
+// ——————————————闭包问题解决
+// function test() {
+//     var arr = [];
+//     for (var i = 0; i < 10; i++) {
+//         (function (j) {
+//             arr[j] = function () {
+//                 document.write(j + ' ');
+//             };
+//         }(i));
+//     }
+//     return arr;
+// }
+
+// var myArr = test();
+// for (var j = 0; j < 10; j++) {
+//     myArr[j]();
+// }
+
+// var x = 1;
+// if (function f(){}) {
+//     x += typeof f;
+// }
+// console.log(x);
+
+// var str = 'abc';
+// str += 1;
+// var test = typeof(str);
+// if (test.length == 6) {
+//     test.sign = '没有结果';
+// }
+// console.log(test.sign);
+//网课end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</body>
+</html>

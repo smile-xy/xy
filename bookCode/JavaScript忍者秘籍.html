@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>JavaScript忍者秘籍</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            font-size: 12pt;
+        }
+
+        #results {
+            background-color: #e0e0e0;
+            border-radius: 1em;
+            padding: 0.5em;
+            list-style-position: inside;
+        }
+
+        #results li {
+            margin-bottom: 0.2em;
+        }
+
+        #results li.pass {
+            color: green;
+        }
+
+        #results li.fail {
+            color: red;
+            text-decoration: line-through;
+        }
+    </style>
+</head>
+<body>
+<script>
+// 测试环境配置-Start
+function assert(value, text) {
+  var li = document.createElement("li");
+  li.className = value ? "pass" : "fail";
+  li.appendChild(document.createTextNode(text));
+  var results = document.getElementById("results");
+  if (!results) {
+    results = document.createElement("ul");
+    results.setAttribute('id','results');
+    document.body.appendChild(results);
+  }
+  results.appendChild(li);
+}
+function pass(text) { assert(true, text); }
+function fail(text) { assert(false, text); }
+function report(text) { pass(text); }
+// 测试环境配置-End
+
+
+// 3.1
+
+var text = 'Domo arigate!';
+report('Before defining functions');
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+    <style>
+      #results li.pass { color: green; }
+      #results li.fail { color: red; }
+    </style>
+  </head>
+  <body>
+    <ul id="results"></ul>
+  </body>
+</html>

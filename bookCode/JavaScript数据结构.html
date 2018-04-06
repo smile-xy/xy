@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>数据结构</title>
+</head>
+<body>
+<script>
+
+//6去零
+function deleteZero(array) {
+        for (let i = 0; i <= array.length; i += 3) {
+            if (array[i] != 0 && array[i + 1] === 0 && array[i + 2] === 0 && array[i + 3] === 0 && array[i + 4] === 0) {
+                array[i + 1] = '';
+                array[i + 2] = '';
+                array[i + 3] = '';
+                array[i + 4] = '';
+            }
+            if (array[i] != 0 && array[i + 1] === 0 && array[i + 2] === 0 && array[i + 3] === 0) {
+                array[i + 1] = '';
+                array[i + 2] = '';
+                array[i + 3] = '';
+            }
+            if (array[i] != 0 && array[i + 1] === 0 && array[i + 2] === 0) {
+                array[i + 1] = '';
+                array[i + 2] = '';
+            }
+            if (array[i] != 0 && array[i + 1] === 0) {
+                array[i + 1] = '';
+            }
+        }
+    // if (array[0] === 0) {
+    //     array[0] = '';
+    // }
+
+    for (let i = 0; i < array.length; i++) {
+        if (array[i] === 0 && array[i + 1] != 0 && array[i - 1] != 0) {
+            array[i] = '零';
+        }
+        if (array[i] === 0 && array[i + 1] === 0 && array[i + 2] === 0 && array[i + 3] === 0) {
+            array[i] = '';
+            array[i + 1] = '';
+            array[i + 2] = '';
+            array[i + 3] = '';
+        }
+        if (array[i] === 0 && array[i + 1] === 0 && array[i + 2] === 0) {
+            array[i] = '';
+            array[i + 1] = '';
+            array[i + 2] = '';
+        }
+        if (array[i] === 0 && array[i + 1] === 0) {
+            array[i] = '';
+            array[i + 1] = '';
+        }
+    }
+    return array;
+}
+
+console.log(deleteZero([0,0,0,1,0,0,1]));
+</script> 
+</body>
+</html>

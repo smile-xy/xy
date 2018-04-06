@@ -1,0 +1,30 @@
+<!doctype html>
+<html>
+	<head>
+		<meta charset="UTF-8" />
+		<title>正在加载...</title>
+		<style>
+dot {
+    display: inline-block; 
+    height: 1em;
+    line-height: 1;
+    text-align: left;
+    vertical-align: -.25em;
+    overflow: hidden;
+}
+dot::before {
+    display: block;
+    content: '...\A..\A.';
+    white-space: pre-wrap;
+    animation: dot 3s infinite step-start both;
+}
+@keyframes dot {
+    33% { transform: translateY(-2em); }
+    66% { transform: translateY(-1em); }
+}
+		</style>
+	</head>
+	<body>
+		<h4>正在加载中<dot>...</dot></h4>
+	</body>
+</html>
