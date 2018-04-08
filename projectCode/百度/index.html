@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>百度一下，你就知道</title>
+    <style>
+    body,
+    p{
+        margin: 0;
+    }
+    input,
+    button{
+        padding: 0;
+    }
+    .wrapper {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        min-width: 810px;
+        min-height: 600px;
+        text-align: center;
+    }
+    .top-nav {
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 2;
+    margin: 19px 0 5px;
+    padding: 0 96px 0 0;
+    
+    }
+    .top-nav .li-a{
+    float: left;
+    margin-left: 20px;
+    color: #333;
+    line-height: 24px;
+    font-size: 13px;
+    font-weight: 700;
+    text-decoration: underline;
+    }
+    .top-nav .no-bold{
+    font-weight:normal;
+    }
+    .top-nav .li-a:hover{
+        color: #0000cf;
+    }
+    .top-nav .more{
+    display: inline-block;
+    float: left;
+    position: absolute;
+    right: 10px;
+    margin-left: 19px;
+    margin-right: 2px;
+    width: 60px;
+    height: 23px;
+    border-bottom: 1px solid #38f;
+    background: #38f;
+    color: #fff;
+    line-height: 24px;
+    font-size: 13px;
+    text-align: center;
+    overflow: hidden;
+   
+    text-decoration: none;
+    }
+    .search {
+        position: relative;
+        top: 191px;
+    }
+
+    .search > .logo {
+        margin-top: -20px;
+        width: 270px;
+        height: 129px;
+    }
+    .search form{
+        margin-top: 20px;
+    }
+    .search input{
+        display: inline-block;
+        padding-left: 10px;
+        width: 529px;
+        height: 34px;
+        margin-right: 0;
+        border-right-width: 0;
+        border: 1px solid #b6b6b6;
+        border-color: #b8b8b8 transparent #ccc #b8b8b8;
+        vertical-align: top;
+        overflow: hidden;
+        outline: none;
+    }
+    .search button{
+        display: inline-block;
+        margin-left: -1px;
+        width: 100px;
+        height: 36px;
+        border: 0;
+        border-bottom: 1px solid #2d78f4;
+        color: #fff;
+        background-color: #3385ff;
+        font-size: 16px;
+        outline: none;
+        cursor: pointer;
+    }
+    .search-img{
+        position: absolute;
+        left: 50%;
+    }
+    .search-img span {
+        display: block;
+        position: relative;
+        top: 10px;
+        left: 190px;
+        width: 18px;
+        height: 16px;
+        background: url("camera_new_5606e8f.png") no-repeat;
+        cursor: pointer;
+    }
+    .search-img span:hover {
+        background-position-y: -20px;
+    }
+    .search button:hover{
+        background-color: #317ef3;
+        box-shadow: 1px 1px 3px #d5d5d5;
+    }
+    .downlord{
+    position: absolute;
+    bottom: 140px;
+    height: 60px;
+    width: 100%;
+    text-align: center;
+    }
+    .downlord > div{
+        position: absolute;
+        left: 50%;
+        margin-left: -30px;
+        width: 60px;
+        height:86px;
+    }
+    .downlord em{
+        color: #666;
+        font-style: normal;
+        font-weight: 700;
+        font-size: 11px;
+        vertical-align: 5px;
+    }
+    .bottom-menu {
+    position: absolute;
+    bottom: 47px;
+    z-index: 0;
+    margin: 0 auto;
+    width: 100%;
+    height: 50px;
+    text-align: center;
+    }
+    .bottom-menu > div{
+    display: inline-block;
+    position: relative;
+    top: -2px;
+    line-height: 22px;
+    color: #999;
+    font-size: 12px;
+    text-align: center;
+    }
+    .bottom-menu > div a{
+    color: #999;
+    }
+    .bottom-menu .bot-p-1 a{
+    margin-left: 25px;
+    }
+    .bottom-menu .bot-p-1 .no-margin{
+    margin-left: 0;
+    }
+    .bottom-menu .marg-left{
+    margin-left: 19px;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="wrapper">
+        <div class="top-nav">
+            <a href="#" class="li-a">新闻</a>
+            <a href="#" class="li-a">hao123</a>
+            <a href="#" class="li-a">新闻</a>
+            <a href="#" class="li-a">新闻</a>
+            <a href="#" class="li-a">新闻</a>
+            <a href="#" class="li-a">新闻</a>
+            <a href="#" class="li-a no-bold">登录</a>
+            <a href="#" class="li-a no-bold">设置</a>
+            <a href="#" class="more">更多产品</a>
+        </div>
+        <div class="search">
+            <img class="logo" src="bd_logo1.png" alt="百度">
+            <form action="#" method="get">
+                <div class="search-img">
+                    <span></span>
+                </div>
+                <input type="text" name="search"><button id="search">百度一下</button>
+            </form>
+        </div>
+        <div class="downlord">
+            <div>
+                <img src="zbios_efde696.png" alt="百度">
+                <em>百度</em>
+            </div>
+           
+        </div>
+        <div class="bottom-menu">
+            <div>
+                <p class="bot-p-1">
+                    <a class="no-margin" href="#">把百度设为首页</a>
+                    <a href="#">关于百度</a>
+                    <a href="#">About  Baidu</a>
+                    <a href="#">百度推广</a>
+                </p>
+                <p>
+                    ©2018 Baidu
+                    <a href="#">使用百度前必读</a>
+                    <a href="#">意见反馈</a>
+                    京ICP证030173号
+                    <a class="marg-left" href="#">京公网安备11000002000001号</a>
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
