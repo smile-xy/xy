@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Text</title>
+	<title>渡一网课</title>
 	<style type="text/css">
 	</style>
 </head>
@@ -1130,7 +1130,7 @@
 // var instance = new SubType();
 // console.log(instance.getSuperValue());   //true
 
-////
+//////
 // function dog() {
 //     this.name = 'wang';
 // }
@@ -1375,7 +1375,7 @@
 // }
 // console.log(factorial(10));
 
-////
+//////
 // var factorial = (function f(num) {
 //     if (num <= 1) {
 //         return 1;
@@ -1430,7 +1430,7 @@
 //     return result;
 // }
 
-////
+//////
 // function createFunction() {
 //     var result = new Array();
 
@@ -1563,7 +1563,7 @@
 //     }
 // })();
 
-////
+//////
 // (function() {
     
 //     var name = '';
@@ -1757,67 +1757,400 @@
 // }
 // console.log(test.sign);
 
+//////
+// function Person() {
+
+// }
+// Car.prototype = new Person;
+//     constructor = Person;
+// function Car() {
+
+// }
+// car = new Car;
+
+//////
+// Person.prototype.name = 'Sunny';
+
+// function Person() {
+
+// }
+// Person.prototype = {
+//     name: 'Yeoo'
+// }
+// var person = new Person();
+
+// // Person.prototype.name = 'Gump';
+
+// Person.prototype = {
+//     name: 'Fire'
+// }
+
+//////
+// Ground.prototype.lastName = 'Deng';
+// function Ground() {
+
+// }
+// var ground = new Ground();
+
+// Father.prototype = ground;
+// function Father() {
+//     this.name = 'Xu';
+//     this.fortune = {
+//         card1: 'visa'
+//     };
+//     this.num = 100;
+// }
+
+// var father = new Father;
+
+// Son.prototype = father;
+// function Son() {
+//     this.hobbit = 'look';
+// }
+// var son = new Son;
+
+//////
+// Person.prototype = {// 谁调用this，this就指谁
+//     name: 'A',
+//     sayName: function() {
+//         console.log(this.name);
+//     }
+// }
+
+// function Person() {
+//     this.name = 'B';
+// }
+
+// var person = new Person();
+
+//////
+// Perosn.prototype = {
+//     height: 100
+// }
+
+// function Person() {
+//     this.eat = function() {
+//         this.height++;
+//     };
+// }
+
+// var person = new Person();
+// person.eat();//Person.height:101 Person.prototype.height:100
+
+//////
+// Object.prototype.toString = function () {
+//     return 'hehe';
+// }
+// person.prototype = {
+
+// }
+// function Person() {
+
+// }
+// var person = new Person();
+
+//////
+// var obj = Object.create(null);
+// obj.toString = function () {
+//     return 'hahahaha'
+// }
+// document.write(obj);// 隐式调用toString()
+
+//////
+// function Person(name, age) {
+//     this.name = name;
+//     this.age = age;
+// }
+
+// var person = new Person('laodeng', 100);
+// var obj = {
+
+// };
+// Person.call(obj, 'Nike', 20);
+
+//////
+// function Person(name, age, sex) {
+//     this.name = name;
+//     this.age = age;
+//     this.sex = sex;
+// }
+// function Student(name, age, sex, tel, grade) {
+//     Person.call(this, name, age, sex);
+//     this.tel = tel;
+//     this.grade = grade;
+// }
+// var student = new Student('Gump', 12, 'man', 138377, 2017);
+
+//////call
+// function Wheel(wheelSize, style) {
+//     this.wheelSize = wheelSize;
+//     this.style = style;
+// }
+// function Sit(c, sitColor) {
+//     this.c = c;
+//     this.sitColor = sitColor;
+// }
+// function Model(height, width, len) {
+//     this.height = height;
+//     this.width = width;
+//     this.len = len;
+// }
+// function Car (wheelSize, style, c, sitColor, height, width, len) {
+//     Wheel.call(this, wheelSize, style);
+//     Sit.call(this, c, sitColor);
+//     Model.call(this, height, width, len);
+// }
+// var car = new Car(100, 'CSS', '真皮', 'red', 199, 27, 150);
+
+//////
+// function foo() {
+//     bar.apply(null, arguments)
+// }
+// function bar(x) {
+//     console.log(arguments)
+// }
+// foo(1, 2, 3, 4, 5)
+
+//////继承-原型链
+// grand.prototype.lastName = 'J';
+// function Grand() {
+
+// }
+
+// var grand = new Grand();
+
+// Father.prototype = grand;
+// function Father() {
+//     this.name = 'hehe';
+// }
+
+// var father = new Father();
+
+// Son.prototype = father;
+// function Son() {
+    
+// }
+
+// var son = new Son();
+
+//////继承-借用构造函数
+// function Person(name, age, sex) {
+//     this.name = name;
+//     this.age = age;
+//     this.sex = sex;
+// }
+
+// function Student(name, age, sex, grade) {
+//     Person.call(this, name, age, sex);
+//     this.grade = grade;
+// }
+
+// var student = new Student();
+
+//////继承-共享原型
+// Father.prototype.lastName = 'D';
+// function Father() {
+
+// }
+
+// inherit(Son, Father);
+// function Son() {
+
+// }
+
+// function inherit(Target, Origin) {//继承函数
+//     Target.prototype = Origin.prototype;
+// }
+//  Son.prototype.sex = 'male';
+// var son = new Son();
+// var father = new Father();
+// console.log(son.sex);// male
+// console.log(father.sex);// male
+
+//////继承-圣杯模型
+// Father.prototype.lastName = 'D';
+// function Father() {
+
+// }
+
+// function Son() {
+
+// }
+
+// function inherit(Target, Origin) {//继承函数
+//     function F() { };
+//     F.prototype = Origin.prototype;
+//     Target.prototype = new F();
+//     Target.prototype.constructor = Target;
+//     Target.prototype.uber = Origin.prototype;
+// }
+// inherit(Son, Father);
+
+//  Son.prototype.sex = 'male';
+// var son = new Son();
+// var father = new Father();
+// console.log(son.sex);// male
+// console.log(father.sex);// undefined
+
+//////继承-圣杯模型
+// Father.prototype.lastName = 'D';
+// function Father() {
+
+// }
+
+// function Son() {
+
+// }
+// var inherit = (function () {
+//     var F = function () {};
+//     return function (Target, Origin) {
+//         F.prototype = Origin.prototype;
+//         Target.prototype = new F();
+//         Target.prototype.constructor = Target;
+//         Target.prototype.uber = Origin.prototype;
+//     }
+// }());
+
+// inherit(Son, Father);
+
+//  Son.prototype.sex = 'male';
+// var son = new Son();
+// var father = new Father();
+// console.log(son.sex);// male
+// console.log(father.sex);// undefined
+
+//////私有变量
+// function Deng(name, wife) {
+
+//     var prepareWife = 'XZ';
+
+//     this.name = name;
+//     this.wife = wife;
+//     this.divorce = function() {
+//         this.wife = perpareWife;
+//     }
+//     this.chagePrepareWife = function() {
+//         prepareWife = target;
+//     }
+//     this.sayPrepareWife = function () {
+//         console.log(prepareWife);
+//     }
+// }
+
+// var deng = new Deng('deng', 'XL');
+
+////// 圣杯模式-复习
+// Father.prototype.lastName = 'Nike';
+// function Father() { };
+
+// function Son() { };
+
+// var inherit = (function () {
+//     var F = function () { };
+//     return function (Target, Origin) {
+//         F.prototype = Origin.prototype;
+//         Target.prototype = new F();
+//         Target.prototype.constructor = Target;
+//         Target.prototype.uber = Origin.prototype;
+//     }
+// }());
+// inherit(Son, Father);
+
+// var son = new Son();
+// Son.prototype.sex = 'male';
+// console.log(son.sex);
+// var father = new Father();
+// console.log(father.sex);
+
+////// 命名空间
+// var name = 'bcd';
+// var init = (function () {
+    
+//     var name = 'abc';
+
+//     function callName() {
+//         console.log(name);
+//     }
+
+//     return function () {
+//         callName();
+//     }
+// }());
+
+// init();// abc
+
+////// 模仿JQ
+// var deng = {
+//     somke: function () {
+//         console.log('I am somking');
+//         return this;
+//     },
+//     drink: function () {
+//         console.log('I am drinking');
+//         return this;
+//     },
+//     perm: function () {
+//         console.log('I permed hair');
+//         return this;
+//     }
+// }
+
+// deng.somke().drink().perm();
+
+////// 字符串调用属性
+// var deng = {
+//     wife1: {name: 'XL'},
+//     wife2: {name: 'XZ'},
+//     wife3: {name: 'XM'},
+//     wife4: {name: 'XW'},
+//     sayWife: function (num) {
+//         console.log(deng['wife' + num]);
+//     }
+// }
+// // deng.name----> deng['name']
+// deng.sayWife(2);
 
 
+//////对象遍历枚举
+// var deng = {
+//     wife1: {name: 'XL'},
+//     wife2: {name: 'XZ'},
+//     wife3: {name: 'XM'},
+//     wife4: {name: 'XW'}
+// }
+// for (var prop in deng) {
+//         console.log(deng[prop]);
 
+// }
 
+// var obj1 = {
+//     a: 123,
+//     b: 234,
+//     c: 345,
+//     d: undefined,
+//     __proto__: {
+//         lastName: 'deng'
+//     }
+// }
+// for (var prop in obj1) {
+//     if(obj1.hasOwnProperty(prop)){
+//         obj1.prop += 1;
+//         console.log(obj1[prop]);
+//     }
+// }
 
+/*
+    区别数组和对象的三种方法
+        A.constructor
+        A instanceof B
+        Object.prototype.toString.call(A)
+ */
+// function Person () {
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+// }
+// var person = new Person();
+// console.log(person instanceof Person);
+// console.log(person instanceof Object); 
 
 
 
