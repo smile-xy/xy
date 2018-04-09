@@ -308,7 +308,7 @@
 // 	console.log(arguments[0]);
 // }
 // sum(11,12,4);
- 
+
 // text1
 // function animal (name){
 // 	switch(arguments[0]) {
@@ -321,7 +321,7 @@
 // 	}
 // }
 // animal("cat");
- 
+
 // // text2
 // function sum(a, b){
 // 	console.log(a + b);
@@ -336,11 +336,11 @@
 //     else{
 //     	var a = 1,
 //     		b = 1;
-    	
+
 //     }
 // }
 // fbnqsl(10);
- 
+
 // // text3
 //  function backvalue(a) {
 //      var b,
@@ -514,7 +514,7 @@
 //5
 // var x = 1;
 // if (function f() {}) {
-// 	x += typeof(f);	
+// 	x += typeof(f);
 // }
 // console.log(x);
 
@@ -770,7 +770,7 @@
 
 
 
-/* 
+/*
     4变量
 */
 
@@ -786,12 +786,12 @@
 
 
 
-/* 
+/*
     对象
 */
 
 
- 
+
 // 理解对象
 //  var person = new Object();
 //  person.name = 'Nike';
@@ -1032,7 +1032,7 @@
 // 	constroctor: Person,
 // 	sayName: function () {
 // 		console.log(this.name);
-// 	}	
+// 	}
 // }
 // var person1 = new Person('Nike', 29, 'baidu'),
 // 	person2 = new Person('Gump', 22, 'cctv');
@@ -1101,7 +1101,7 @@
 
 
 
-/* 
+/*
     继承
 */
 
@@ -1310,7 +1310,7 @@
 // };
 
 // var anotherPerson = createAnother(person);
-// anotherPerson.sayHi(); 
+// anotherPerson.sayHi();
 
 // 寄生组合式继承
 // function SuperType(name) {
@@ -1359,7 +1359,7 @@
 
 
 
-/* 
+/*
     函数表达式
 */
 
@@ -1497,7 +1497,7 @@
 //             console.log(i);
 //         }
 //     })();
-    
+
 //     console.log(i);
 // }
 // outputNumbers(5);
@@ -1565,7 +1565,7 @@
 
 //////
 // (function() {
-    
+
 //     var name = '';
 
 //     Person = function(value) {
@@ -1928,7 +1928,7 @@
 
 // Son.prototype = father;
 // function Son() {
-    
+
 // }
 
 // var son = new Son();
@@ -2065,7 +2065,7 @@
 ////// 命名空间
 // var name = 'bcd';
 // var init = (function () {
-    
+
 //     var name = 'abc';
 
 //     function callName() {
@@ -2111,7 +2111,7 @@
 // deng.sayWife(2);
 
 
-//////对象遍历枚举
+////// 对象遍历枚举
 // var deng = {
 //     wife1: {name: 'XL'},
 //     wife2: {name: 'XZ'},
@@ -2139,18 +2139,442 @@
 //     }
 // }
 
-/*
-    区别数组和对象的三种方法
-        A.constructor
-        A instanceof B
-        Object.prototype.toString.call(A)
- */
+////// 区别数组和对象的三种方法
+////// A.constructor
+////// A instanceof B
+////// Object.prototype.toString.call(A)
+
 // function Person () {
 
 // }
 // var person = new Person();
 // console.log(person instanceof Person);
-// console.log(person instanceof Object); 
+// console.log(person instanceof Object);
+
+//////typeof返回的六个值
+// console.log(typeof(function(){var a = 1;}));
+
+////// arguments的映射关系
+// function b (x, y, z) {
+//     arguments[2] = 10;
+//     alert(a);//10
+// }
+// b(1, 2, 3);
+// function c (x, y, z) {
+//     a = 10;
+//     alert(arguments[2]);//10
+// }
+// b(1, 2, 3);
+
+////// 逗号运算符 输出逗号后面的对象
+// console.log((false, 2));
+
+//////
+// var x = 1;
+// if(function f() {}) {
+
+//     x += typeof f;
+// }
+// console.log(x);// 1undefiend
+// null == undefined
+
+////// isANaN
+// function isANaN (num) {
+//     var value = Number(num);
+//     value += '';
+//     if (value == 'NaN') {
+//         return console.log(true);
+//     } else {
+//         return console.log(false);
+//     }
+// }
+// isANaN(NaN);
+// isANaN('abc');
+
+////// __________________________________试题
+// var foo = '123';
+// function print() {
+//     var foo = '456';
+//     this.foo = '789';
+//     console.log(foo);
+// }
+// print();// 456
+
+
+// var foo = 123;
+// function print() {
+//     this.foo = 234;
+//     console.log(foo);
+// }
+// print();// 234
+
+
+// var foo = 123;
+// function print() {
+//     this.foo = 234;
+//     console.log(foo);
+// }
+// var a = new print();// 234___X___123
+
+// 运行test()和new test()的结果分别是什么
+// var a = 5;
+// function test() {
+//     a = 0;
+//     console.log(a);
+//     console.log(this.a);
+//     var a;
+//     console.log(a);
+// }
+// test();// undefined undefined undefined ___X___ 0 5 0
+// new test();// 0 0 0___X___ 0 undefined 0
+
+// 写出程序执行结果
+// function print() {
+//     console.log(foo);
+//     var foo = 2;
+//     console.log(foo);
+//     console.log(hello);
+// }
+// print();// undefined 2 hello is not defined
+
+// 写出程序执行结果
+// function print() {
+//     var test;
+//     test();
+//     function test() {
+//         console.log(1);
+//     }
+// }
+// print();// 1
+
+// 写出程序执行结果
+// function print() {
+//     var x = 1;
+//     if (x == '1') {
+//         console.log('One');
+//     }
+//     if (x === '1') {
+//         console.log('Two');
+//     }
+// }
+// print();// One
+
+// 写出程序执行结果
+// function print() {
+//     var marty = {
+//         name: 'marty',
+//         printName: function() {
+//             console.log(this.name);
+//         }
+//     }
+//     var test1 = {name:'test1'};
+//     var test2 = {name:'test2'};
+//     var test3 = {name:'test3'};
+//     test3.printName = marty.printName;
+//     var printName2 = marty.printName.bind({name:123});
+
+//     marty.printName.call(test1);   //test1
+//     marty.printName.apply(test2);  //test2
+//     marty.printName();             //marty
+//     printName2();                  //123
+//     test3.printName();             //test3
+// }
+// print();
+
+// 写出程序执行结果
+// var bar = {a: '002'};
+// function print() {
+//     bar.a = 'a';
+//     Object.prototype.b = 'b';
+//     return function inner() {
+//         console.log(bar.a);//   a
+//         console.log(bar.b);//   b
+//     }
+// }
+// print()();// 第一个括号返回函数，第二个括号执行
+
+
+// var name = '222';
+// var a = {
+//     name: '111',
+//     say: function() {
+//         console.info(this.name);
+//     }
+// }
+// var fun = a.say;
+// fun();// 222
+// a.say();// 111
+
+// var b = {
+//     name: '333',
+//     say: function (fun) {
+//         fun();
+//     }
+// }
+// b.say(a.say);// 333___X___fun()只是把a的方法传过来 且fun()前面没有this 属于预编译指向全局
+// b.say = a.say;
+// b.say();// 333
+
+//////argunemts
+// var num = (function (n) {
+//     if (n == 1) {
+//         return 1;
+//     }
+//     return n * arguments.callee(n - 1);
+// }(20));
+// console.log(num);
+
+
+// function test() {
+//     console.log(arguments.callee);// test
+//     function demo() {
+//         console.log(arguments.callee);// demo
+//     }
+//     demo();
+// }
+// test();
+
+// function test() {
+//     demo();
+// }
+// function demo() {
+//     console.log(demo.caller);
+// }
+// test();
+
+////// 浅度克隆
+// var obj = {
+//     name: 'a',
+//     age: 1,
+//     sex: 'female',
+//     car: ['visa', 'key1']
+// }
+
+// var obj1 = {};
+
+// function clone(origin, target) {
+//     var target = target || {};
+//     for (var key in origin) {
+//         target[key] = origin[key];
+//     }
+// }
+// clone(obj, obj1);
+
+////// 深度克隆
+// var obj = {
+//     name: 'a',
+//     age: 1,
+//     car: ['visa', 'master'],
+//     wife: {
+//         name: 'bbb',
+//         son: {
+//             name: 'ba'
+//         }
+//     }
+// }
+// var obj1 = {};
+
+// function deepClone(origin, target) {
+//     var target = target || {},
+//         toStr = Object.prototype.toString,
+//         isArr = '[object Array]';
+
+//     for (var key in origin) {
+//         if (origin.hasOwnProperty(key)) {
+
+//             if (origin[key] !== 'null' && typeof(origin[key]) == 'object') {
+
+//                 // if (toStr.call(origin[key]) == isArr) {
+//                 //     target[key] = [];
+//                 // } else {
+//                 //     target[key] = {};
+//                 // }
+//                 target[key] = (toStr.call(origin[key]) == isArr) ? [] : {};
+
+//                 deepClone(origin[key], target[key]);
+//             } else {
+//                 target[key] = origin[key];
+//             }
+//         }
+//     }
+//     return target;
+// }
+// deepClone(obj, obj1);
+// obj1.car.push('ccc');
+// console.log(obj1);
+// console.log(obj);
+
+
+//////数组
+// var arr = [10];//传入一个数值10
+// var arrr = new Array(10);//只有一个值时表示数组长度
+
+//////push模仿
+// var arr = [1];
+// Array.prototype.push = function () {
+//     for (var i = 0; i < arguments.length; i++) {
+//         this[this.length] = arguments[i];
+//     }
+//     return this.length;
+// }
+// arr.push(7,1);
+// console.log(arr);
+
+
+//////splice
+// var arr = [1, 2, 3, 10, 0, -1, 9];
+// arr.splice(3,0,4);
+// console.log(arr);
+
+//////sort
+// var arr = [1, 2, 3, 10, 20, -1, 9];
+
+// arr.sort(function(num1, num2) {
+//     return num2 - num1;
+// });
+// console.log(arr);
+
+//////给一个有序数组乱序
+// var arr = [1, 2, 3, 4, 5, 6, 7, 8];
+// arr .sort(function () {
+//     return (Math.random()-0.5);
+// });
+// console.log(arr);
+
+
+// var cheng = {
+//     name: 'cheng',
+//     age: 18,
+//     sex: 'male',
+//     face: 'handsome'
+// }
+// var deng = {
+//     name: 'deng',
+//     age: 40,
+//     sex: undefined,
+//     face: 'amazing'
+// }
+// var zhang = {
+//     name: 'zheng',
+//     age: 22,
+//     sex: 'male',
+// }
+// var arr = [cheng, deng, zhang];
+
+// arr.sort(function (name1, name2) {
+//     return name1.age - name2.age;
+// });
+// console.log(arr);
+
+
+// var arr = ['ac', 'acfsdf', 'acdfdsfsdf', 'dfdfc', 'a', 'adfdsc',];
+// arr.sort(function(a, b) {
+//     return a.length - b.length;
+// })
+// console.log(arr);
+
+
+// var arr = ['ac', 'acfsdf', 'acdfdsfsdf', 'dfdfc', 'a', 'adfdsc',];
+// arr.sort(function(a, b) {
+//     return a.length - b.length;
+// })
+// console.log(arr);
+
+
+// function retBytes(str) {
+//     var num = str.length;
+//     for (var i = 0; i < str.length; i++) {
+//         if (str.charCodeAt(i) > 255) {
+//             num++;
+//         }
+//     }
+//     return num;
+// }
+// var arr = ['a邓', 'b邓', '老邓', 'df邓fc', 'a', 'adfdsc',];
+// arr.sort(function(a, b) {
+//     return retBytes(a) - retBytes(b);
+// })
+// console.log(arr);
+
+//////join和split
+// var arr = [1, 2, 3, 10, 20, -1, 9];
+// console.log(arr);
+// var str = arr.join('A');
+// console.log(str);
+// console.log(str.split('A'));
+// console.log(str.split('-'));
+
+//////把下面字符串拼接一起
+// var str = 'alibaba';
+// var str1 = 'baidu';
+// var str2 = 'tencent';
+// var str3 = 'toutiao';
+// var str4 = 'wangyi';
+// var str5 = 'xiaowang';
+// var str6 = 'nv';
+
+// var arr = [str, str1, str2, str3, str4, str5, str6];
+// console.log(arr.join(''));
+
+
+//////类数组
+//////属性要为索引（数字）属性
+//////必须有length属性
+//////最好加上push方法
+// var obj = {
+//     "2" : 'a',
+//     "3" : 'b',
+//     "length" : 2,
+//     "push" : Array.prototype.push
+// }
+// console.log(obj);
+// obj.push('c');
+// obj.push('d');
+// console.log(obj);//c d 4
+
+// var obj = {
+//     "1" : 'a',
+//     "2" : 'c',
+//     "3" : 'd',
+//     "length" : 3,
+//     "push" : Array.prototype.push
+// }
+// obj.push('b');
+// console.log(obj);//a c b 4
+
+
+//////封装一个type方法
+//////Object.prototype.toString.call(new Number(123)); ---[object Number]
+var type = function() {
+    if (typeof(this) === 'number') {
+        return 'number';
+    }else if (false) {
+        
+    }
+}
+console.log(type([]));              //array
+console.log(type({}));              //object
+console.log(type(function(){}));    //object
+console.log(type(new Number()));    //number Object
+console.log(type(123));             //number
+
+//////数组去重
+//////要求在原型链上编程 11行以内
+// Array.prototype.unique = function () {
+
+//     for (var i = 0; i < this.length; i++) {
+//         for (var j = this.length; j > i; j--) {
+
+//             if (this[i] === this[j]) {
+//                 this.splice(j,1);
+//             }
+//         }
+//     }
+//     return this;
+// }
+
+// var arr = [1,'b',  1, 'a', 1, 0, 0, 'a', 'c', 'a', 'b'];
+// console.log(arr.unique());//-->[1, 0, 'a', 'b'];
 
 
 
