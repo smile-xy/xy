@@ -1995,11 +1995,9 @@
 //////继承-圣杯模型
 // Father.prototype.lastName = 'D';
 // function Father() {
-
 // }
 
 // function Son() {
-
 // }
 // var inherit = (function () {
 //     var F = function () {};
@@ -2544,55 +2542,345 @@
 
 
 //////封装一个type方法
-//////Object.prototype.toString.call(new Number(123)); ---[object Number]
-var type = function() {
-    if (typeof(this) === 'number') {
-        return 'number';
-    }else if (false) {
-        
-    }
-}
-console.log(type([]));              //array
-console.log(type({}));              //object
-console.log(type(function(){}));    //object
-console.log(type(new Number()));    //number Object
-console.log(type(123));             //number
+// function type (target) {
+//     var template = {
+//         '[object Array]': 'array',
+//         '[object Object]': 'object',
+//         '[object Number]': 'number - object',
+//         '[object Boolean]': 'boolean - object',
+//         '[object String]': 'string - object'
+//     }
+//     if(target === null){
+//         return 'null';
+//     }
+//     if (typeof target == 'object') {
+//         var str = Object.prototype.toString.call(target);
+//         return template[str];
+//     }else {
+//         return typeof target;
+//     }
+// }
+
+// function type(target) {
+//     var typeOfTar = typeof target,
+//         toStrTar = Object.prototype.toString.call(target),
+//         value = {
+//             '[object Array]': 'array',
+//             '[object Object]': 'object',
+//             '[object Number]': 'number - object',
+//             '[object Boolean]': 'boolean - object',
+//             '[object String]': 'string - object'
+//         };
+//     function inner(target) {
+//         if (target === null) {
+//             return 'null';
+//         } else if (typeOfTar == 'object') {
+//             return value[toStrTar];
+//         } else {
+//             return typeOfTar;
+//         }
+//     }
+//     return inner(target);
+// }
+
+// console.log(type(null));            //null
+// console.log(type([]));              //array
+// console.log(type({}));              //object
+// console.log(type(function(){}));    //function
+// console.log(type(new Number()));    //number Object
+// console.log(type(123));             //number
 
 //////数组去重
 //////要求在原型链上编程 11行以内
-// Array.prototype.unique = function () {
+// Array.prototype.uniqueFor = function () {
+//     var temp = this,
+//         len = this.length;
+//     for (var i = 0; i < len; i++) {
+//         for (var j = len; j > i; j--) {
 
-//     for (var i = 0; i < this.length; i++) {
-//         for (var j = this.length; j > i; j--) {
-
-//             if (this[i] === this[j]) {
-//                 this.splice(j,1);
+//             if (temp[i] === temp[j]) {
+//                 temp.splice(j,1);
 //             }
 //         }
 //     }
-//     return this;
+//     return temp;
+// }
+
+// Array.prototype.uniqueObj = function () {
+//     var temp = {},
+//         arr= [],
+//         len = this.length;
+//     for (var i = 0; i < len; i++) {
+//         var value = temp[this[i]];
+//         if (!value) { // Boolean(undefined)-->false
+//             value = true;
+//             arr.push(this[i]);
+//         }
+//     }
+//     return arr;
 // }
 
 // var arr = [1,'b',  1, 'a', 1, 0, 0, 'a', 'c', 'a', 'b'];
-// console.log(arr.unique());//-->[1, 0, 'a', 'b'];
+// console.log(arr.uniqueFor());//-->[1,0,'a','b']
+// console.log(arr.uniqueObj());
+
+//////复习
+// var name = 'window';
+// var obj = {
+//     name: 'obj',
+//     say: function() {
+//         console.log(this.name);
+//     }
+// }
+// obj.say();
+// obj.say.call(window);
+// var fun = obj.say;
+// fun(); // 预编译 this指向window
+// fun.call(obj);
 
 
+// function Person(name, age) {
+//     this.name = name;
+//     this.age = age;
+// }
+// function Student(name, age, sex) {
+//     Person.call(this, name, age);
+//     this.sex = sex;
+// }
+// var son = new Student('Nile', 20, 'male');
+// console.log(son);
 
 
+// function Person(name) { // 闭包
+//     // new --> var this = {
+//     //             makeM : function() {}
+//     //             makeM : function() {}
+//     //             }
+//     var money = 100;
+//     this.name = name;
+//     this.makeM = function() {
+//         return money++;
+//     }
+//     this.offer = function() {
+//         return money--;
+//     }
+//     // new --> return this;
+// }
+// var person = new Person();
+// console.log(person.money);
+// console.log(person.name);
+// console.log(person.makeM());
+// console.log(person.offer());
 
 
+// var obj = {
+//     name: 'aaa',
+//     wife: {
+//         name: 'XL',
+//         son: {
+//             name: 'XLL'
+//         }
+//     }
+// };
+// var obj1 = {};
+
+// function deepClone(origin, target) {
+//     var target = target || {},
+//         toStr = Object.prototype.toString,
+//         isArr = '[object Array]';
+
+//     for (var key in origin) {
+//         if (origin.hasOwnProperty(key)) {
+
+//             if (origin[key] !== 'null' && typeof(origin[key]) === 'object') {
+
+//                 target[key] = (toStr.call(origin[key]) == isArr) ? [] : {};
+
+//                 deepClone(origin[key], target[key]);
+//             } else {
+//                 target[key] = origin[key];
+//             }
+//         }
+//     }
+//     return target;
+// };
+// deepClone(obj, obj1);
+// obj1.wife.name = 'XXXX';
+// console.log(obj1);
+// console.log(obj);
+
+// function test(a) { // 预编译
+//     var a = 123;
+//     var b = 234;
+//     function a () {}
+//     return (a + ' ' + b);
+// }
+// console.log(test(1));
+
+//////练习题
+// function Person(name, age, sex) {
+//     var a = 0;
+//     this.name = name;
+//     this.age = age;
+//     this.sex = sex;
+//     function sss() {
+//         a++;
+//         console.log(a);
+//     }
+//     this.say = sss;
+// }
+// var oPerson = new Person();
+// oPerson.say(); // 1
+// oPerson.say(); // 2
+// var oPerson1 = new Person();
+// oPerson.say(); // 3
+
+// (function (x) {
+//     delete x; // var的变量不能删
+//     return console.log(x);
+// }(1)); // undefined__X__1
+
+// (function () {
+//     return console.log(typeof argunents);
+// }()); // null__X__undefined
+
+// var b = function a() {
+//     return 23;
+// }
+// console.log(typeof a()); //error a is not defined
+
+/////用熟悉的方式实现继承
+// Father.prototype.lastName = 'Nike';
+// function Father() {};
+// function Son() {};
+
+// var inherit = (function() {
+//     var F = function() {};
+//     return function (Target, Origin) {
+//         F.prototype = Origin.prototype;
+//         Target.prototype = new F();
+//         Target.prototype.consructor = Target;
+//         Target.prototype.uber = Origin.prototype;
+//     }
+// }());
+// inherit(Son, Father);
+// var son = new Son();
+// console.log(son.lastName);
 
 
+/////实现object类型的clone方法
+// function deepClone(target, origin) {
+//     var origin = origin || {},
+//     tsStr = Object.prototype.toString,
+//     isArr = '[object Array]';
+
+//     for (var key in target) {
+//         if (target.hasOwnProperty(key)) {
+            
+        
+//         if (target[key] !== 'null' && typeof(target[key]) == 'object') {
+//             origin[key] = (tsStr.call(target[key]) == isArr) ? [] : {};
+//             deepClone(target[key], origin[key]);
+//         }else{
+//             origin[key] = target[key];
+//         }
+//     }}
+//     return origin;
+// }
+
+// obj = {
+//     name:123,
+//     friend: {
+//         f1: 'Nike',
+//         f2: 'Gump'
+//     }
+// }
+// obj1 = {};
+// deepClone(obj, obj1);
+// obj1.friend.f1 = 'NNNN';
+// console.log(obj1);
+// console.log(obj);
+
+//////代码优化
+// function getDay(day) {
+//     var toDay = ['0', 'Mon', 'Tue', 'Wed','Thu', 'Fri', 'Sat', 'Sun'];
+//     if (day > 7) {
+//         console.log('error');
+//     }else{
+//         console.log(toDay[day]);
+//     };
+// }
+// getDay(3);
+// getDay(7);
+// getDay(9);
+
+//////一个字符串由[a-z]组成，请找出该字符串第一个只出现一次的字母
+//////str[0]输出第一位字符串
+//////str.split('')字符串转数组
+
+// var target = 'qweqorywqetyrwueiiiryuqppawtywueorpywtytywubeqw';
+// uniqueChar = function (target) {
+
+//     var value = {},
+//         len = target.length,
+//         targetArr = target.split(''),
+//         arr = [];
+
+//     for (var i = 0; i < len; i++) {
+
+//          if (!value[targetArr[i]]) {
+//             value[targetArr[i]] = 1;
+//         } else {
+//             value[targetArr[i]] += 1;
+//         }
+//     }
+
+//     for (var key in value) {
+//         if (value[key] == 1) {
+//             arr.push(key);
+//         }
+//     }
+    
+//     return arr[0];
+// }
+// console.log(uniqueChar(target));
 
 
+//////字符串去重
+
+// var arr = [1, 2, 1, 'a', 1, 1, 2, 'c'];
+// Array.prototype.uniqueFor = function () {
+
+//     var value = {},
+//         len = this.length,
+//         arr = [];
+
+//     for (var i = 0; i < len; i++) {
+
+//         if (!value[this[i]]) {
+//             value[this[i]] = true;
+//             arr.push(this[i]);
+//         }
+//     }
+//     return arr;
+// }
+// console.log(arr.uniqueFor());
+
+//////try catch
+//////try里面发生错误，不会执行错误后面try里的代码
+// try{
+//     console.log('a'); 
+//     console.log(b);
+//     console.log('c');
+// }catch(e) {
+//     console.log(e.message + ' ' + e.name);
+// }
+// console.log('d');
+// console.log(e);
 
 
-
-
-
-
-
-
+//////ES5介绍
+// "use strict";
 </script>
 </body>
 </html>
