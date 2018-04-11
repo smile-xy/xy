@@ -1,4 +1,6 @@
-body,ul{
+body,
+ul,
+p{
 	margin: 0;
 }
 ul{
@@ -169,4 +171,47 @@ footer{
 	width: 100%;
 	height: 380px;
 	background-color: #fff;
+}
+.floor-2-content img{
+	position: absolute;
+	top: 35px;
+	right: 140px;
+	width: 265px;
+	height: 540px;
+}
+.floor-2{
+	position: relative;
+	width: 432px;
+	height: 100px;
+	margin-left: 150px;
+	margin-top: 210px;
+}
+
+.footer {
+	position: absolute;
+	top: 70px;
+	/* width:350px; */
+
+}
+.footer-left{
+    left: 140px;
+}
+.footer-right{
+	left: 680px;
+}
+.footer-logo {
+    margin-bottom: 18px;
+    color: #333;
+	font-size: 14px;
+	line-height: 88px;
+}
+.footer-logo > img{
+	float: left;
+    margin-right: 20px;
+	width: 88px;
+}
+.footer p{
+	font-size: 14px;
+    color: #333;
+    line-height: 2.58;
 }
