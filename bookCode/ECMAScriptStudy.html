@@ -2901,11 +2901,126 @@
 // fun(a);
 // console.log(a); // 1
 
+//////get set
+// var man = {
+//     name: 'Boss',
+//     webo: 'boss',
+//     get age() {
+//         return new Date().getFullYear() - 1988;
+//     },
+//     set age(val) {
+//         console.log('Age can\'t be set to ' + val);
+//     }
+// }
+// console.log(man.age);
+// man.age = 100;
+// console.log(man.age);
 
+// var man = {
+//     wb: '@boss',
+//     $age: null,
+//     get age() {
+//         if (this.$age == undefined) {
+//             return new Date().getFullYear() - 1988;
+//         } else {
+//             return this.$age;
+//         }
+//     },
+//     set age(val) {
+//         val = +val;
+//         if (!isNaN(val) && val > 0 && val < 150) {
+//             this.$age = +val;
+//         } else {
+//             throw new Error('Icorrect val = ' + val);
+//         }
+//     }
+// }
+// console.log(man.age);
+// man.age = 100;
+// console.log(man.age);
+// man.age = 'abc';
 
+// function foo() {}
+//     Object.defineProperty(foo.prototype,'z',{get: function(){return 1;}});
+// var obj = new foo();
+// console.log(obj.z);
+// obj.z = 100;
+// console.log(obj.z);
+// Object.defineProperty(obj,'z',{value:100,configurable:true});
+// console.log(obj.z);
+// obj.z = 100;
+// console.log(obj.z);
+// delete obj.z;
+// console.log(obj.z);
 
+// var person = {};
+// Object.defineProperty(person, 'name', {
+//     configurable: false,
+//     writable: false,
+//     enumerable: true,
+//     value: 'Bob Ma'
+// });
+// console.log(person.name);
+// person.name = 'CC';
+// console.log(person.name);
+// console.log(delete person.name);
 
+// Object.defineProperty(person,'type',{
+//     configurable: true,
+//     wirtable: true,
+//     enumerable: false,
+//     value: 'Object'
+// });
+// Object.keys(person);
 
+// var arr = [1, 2, 3, 4];
+// Array.prototype.x = 'inherited';
+// for (var i = 0; i < arr.length; i++) {
+//     console.log(arr[i]);
+// }
+// for (var key in arr) {
+//     console.log(arr[key]);
+// }
+// for (var key in arr) {
+//     if (arr.hasOwnProperty(key)) {
+//         console.log(arr[key]);
+//     }
+// }
+
+//////数组
+// var arr = [[0,1],[2,3],[4,6]];
+// var i = 0, j = 0;
+// var row;
+// for (var i = 0; i < arr.length; i++) {
+//     row = arr[i];
+//     console.log('row' + i);
+//     for(j = 0; j < row.length; j++) {
+//         console.log(row[j]);
+//     }
+// }
+
+// var str = 'Nike';
+// console.log(str.charAt(1));
+// console.log(str[1]);
+// console.log(Array.prototype.join.call('str', ' '));
+
+//////bind
+// function f() {
+//     return this.a;
+// }
+// var g = f.bind({a: 'test'});
+// console.log(g());
+// var o = {a:37,f:f,g:g};
+// console.log(o.f(),o.g());
+
+//////继承模型
+// if (!Object.create) {
+//     Object.create = function (proto) {
+//         function F() {}
+//         F.prototype = proto;
+//         return new F;
+//     };
+// }
 </script>
 </body>
 </html>
