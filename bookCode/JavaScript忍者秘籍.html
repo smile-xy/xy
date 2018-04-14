@@ -1,206 +1,347 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8">
-    <title>JavaScript忍者秘籍</title>
-    <style>
-        body {
-            font-family: sans-serif;
-            font-size: 12pt;
-        }
+<meta charset="UTF-8">
+<title>JavaScript忍者秘籍</title>
+<style>
+    body {
+        font-family: sans-serif;
+        font-size: 12pt;
+    }
 
-        #results {
-            background-color: #e0e0e0;
-            border-radius: 1em;
-            padding: 0.5em;
-            list-style-position: inside;
-        }
+    #results {
+        background-color: #e0e0e0;
+        border-radius: 1em;
+        padding: 0.5em;
+        list-style-position: inside;
+    }
 
-        #results li {
-            margin-bottom: 0.2em;
-        }
+    #results li {
+        margin-bottom: 0.2em;
+    }
 
-        #results li.pass {
-            color: green;
-        }
+    #results li.pass {
+        color: green;
+    }
 
-        #results li.fail {
-            color: red;
-            text-decoration: line-through;
-        }
-    </style>
+    #results li.fail {
+        color: red;
+        text-decoration: line-through;
+    }
+</style>
 </head>
+
 <body>
 <script>
-// 测试环境配置-Start
-function assert(value, text) {
-  var li = document.createElement("li");
-  li.className = value ? "pass" : "fail";
-  li.appendChild(document.createTextNode(text));
-  var results = document.getElementById("results");
-  if (!results) {
-    results = document.createElement("ul");
-    results.setAttribute('id','results');
-    document.body.appendChild(results);
-  }
-  results.appendChild(li);
-}
-function pass(text) { assert(true, text); }
-function fail(text) { assert(false, text); }
-function report(text) { pass(text); }
-// 测试环境配置-End
+    // 测试环境配置
+    function assert(value, text) {
+        var li = document.createElement("li");
+        li.className = value ? "pass" : "fail";
+        li.appendChild(document.createTextNode(text));
+        var results = document.getElementById("results");
+        if (!results) {
+            results = document.createElement("ul");
+            results.setAttribute('id', 'results');
+            document.body.appendChild(results);
+        }
+        results.appendChild(li);
+    }
+    function pass(text) { assert(true, text); }
+    function fail(text) { assert(false, text); }
+    function report(text) { pass(text); }
+</script>
+</head>
+<body>
+
+<script>
+//// 3.1 简单的回调函数
+
+    // var text = 'Domo arigate!';
+    // report('Before defining functions');
+
+    // function useless(ninjaCallback) {
+    //     report('In useless function');
+    //     return ninjaCallback();
+    // }
+
+    // function getText() {
+    //     report('In getText function');
+    //     return text;
+    // }
+    // report('Before making all the calls');
+
+    // assert(useless(getText) === text, "The useless function works!" + text);
+
+    // report('After the calls have been made');
+////
+    // var text = 'Demo arigato!';
+
+    // function useless(ninjaCallback)  {
+    //     return ninjaCallback();
+    // }
+
+    // assert (useless(function () {return text;}) === text, 'The useless function works!' + text);
+////
+    // var values = [0, 3, 2, 5, 7, 4, 9, 1];
+
+    // values.sort(function(value1, value2){
+    //     return value1 - value2;
+    // });
+
+    // report(values.sort());
+
+//// 3.2 存储唯一函数集合
+
+    // var store = {
+    //     nextId: 1,
+    //     cache: {},
+    //     add: function (fn) {
+    //         if (!fn.id) {
+    //             fn.id = this.nextId++;
+    //             this.cache[fn.id] = fn;
+    //             return true;
+    //         }
+    //     }
+    // };
+    // function ninja(){}
+    // assert(store.add(ninja), 'Function was safely added.');
+    // assert(!store.add(ninja), 'But it was only added once');
+
+//// 3.3 计算先前得到的值
+
+    // function isPrime(value) {
+    //     if (!isPrime.answers) {
+    //         isPrime.answers = {};
+    //     }
+    //     if (isPrime.answers[value] !== undefined) {
+    //         return isPrime.answers[value];
+    //     }
+    //     var prime = value !== 0 && value !== 1; // 1 is not a prime
+    //     for (var i = 2; i < value; i++) {
+    //         if (value % i === 0) {
+    //             prime = false;
+    //             break;
+    //         }
+    //     }
+    //     return isPrime.answers[value] = prime;
+    // }
+
+    // assert(isPrime(3), '3 is prime!');
+    // assert(isPrime(5), '5 is prime!');
+    // assert(isPrime.answers[5], 'The answer was cached!');
+    // assert(isPrime.answers[3], 'The answer was cached!');
+
+//// 3.5 函数声明和函数表达式
+
+    // function myFunctionDeclareatuion() {
+    //     function innerFunction() {}
+    // }
 
+    // var myFunc = function() {};
+    // myFunc(function() {
+    //     return function() {};
+    // });
 
-// 3.1
+    // (function nameFunctionExpression() {
+    // }());
+ 
+//// 3.6 比较箭头函数和函数表达式
 
-var text = 'Domo arigate!';
-report('Before defining functions');
+    // var greet = name => 'Greetings ' + name;
+    // assert(greet('Oishi') === 'Greetings Oishi', 'Oishi is properly greeted');
 
+    // var anotherGreet = function(name) {
+    //     return 'Greetings ' + name;
+    // }
+    // assert(anotherGreet('Oishi') === 'Greetings Oishi', 'Again, Oishi is properly greeted');
+    
+    // var another = (name, uselessName) => {
+    //     return 'Greetings ' + name;
+    // }
+    // assert(another('Oishi') === 'Greetings Oishi', 'Oishi is properly greeted');
 
+//// 3.7 使用剩余参数
 
+    // function multiMax(first, ...remainingNumbers) {
+    //     var sorted = remainingNumbers.sort(function(a,b){
+    //         return b - a;
+    //         });
+    //     return first * sorted[0];
+    // }
+    // assert(multiMax(3, 1, 2, 3) == 9, '3*3=9 (First arg, by largest.)');
 
+//// 3.8 ES6之前处理默认参数的方式
 
+    // function performAction(ninja, action) {
+    //     action = typeof action === 'undefined' ? 'skulking' : action;
+    //     return ninja + ' ' + action;
+    // }
 
+    // assert(performAction('Fuma') === 'Fuma skulking', 'The default value is used for Fuma');
+    // assert(performAction('Yagyu', 'sneaking') === 'Yagyu sneaking', 'Yagyu caj do whatever he pleases, even sneak!');
 
+//// 3.9 ES6中处理默认参数的方式
 
+    // function performAction1(ninja, action = 'skulking') {
+    //     return ninja + ' ' + action;
+    // }
 
+    // assert(performAction1('Fuma') === 'Fuma skulking', 'The default value is used for Fuma');
+    // assert(performAction1('Yagyu', 'sneaking') === 'Yagyu sneaking', 'Yagyu caj do whatever he pleases, even sneak!');
 
+//// 第三章习题
 
+    // var a = (() => 'A'()); // A
+    // var b = (() => {'B'})(); // undefined 
 
+    // function test(a, b, ...c){/*a, b, c*/};
+    // test(1, 2, 3, 4, 5); // 1 2 [3, 4, 5]
+    // test(); // undefined undefined []
 
+    // function getNinjaWieldingWeapon(ninja, weapon = 'Katana') {
+    //     return ninja + ' ' + weapon;
+    // }
+    // var message1 = getNinjaWieldingWeapon('Yoshi'); // Yoshi katana
+    // var message2 = getNinjaWieldingWeapon('Yoshi', 'Wakizashi'); // Yoshi Wakizashi
 
+//// 4.1 使用参arguments数
 
+    // function whatever(a, b, c) {
+    //     assert(a === 1, 'The value of a is 1');
+    //     assert(b === 2, 'The value of b is 2');
+    //     assert(c === 3, 'The value of c is 3');
 
+    //     assert(arguments.length === 5, 'We\'ve passed in 5 parameters');
+    //     assert(arguments[0] === a, 'The first arguments is assigned to a!');
+    //     assert(arguments[3] === 4, 'We can access the fourth argument');
+    // }
 
+    // whatever(1, 2, 3, 4, 5);
 
+    // function whatever1(...a) {
+    //     console.log(a);
+    // }
+    // whatever1(1, 2, 3, 4, 5);
 
+//// 4.3 arguments对象作为函数参数的别名
 
+    // function infiltrate(person) {
+    //     assert(person === 'gardener', 'The person is gardener');
+    //     assert(arguments[0] === 'gardener', 'The first arguments is gardener');
 
+    //     arguments[0] = 'ninja';
 
+    //     assert(person === 'ninja', 'The person is ninja');
+    //     assert(arguments[0] === 'ninja', 'The first arguments is ninja');
 
+    //     person = 'gardener';
 
+    //     assert(person === 'gardener', 'The person is gardener');
+    //     assert(arguments[0] === 'gardener', 'The first arguments is gardener');
+    // }
+    // infiltrate('gardener');
 
+//// 4.4 使用严格模式避免使用arguments别名
 
+    // function infiltrate(person) {
+    //     'use strict';
+    //     assert(person === 'gardener', 'The person is gardener');
+    //     assert(arguments[0] === 'gardener', 'The first arguments is gardener');
 
+    //     arguments[0] = 'ninja';
+        
+    //     assert(arguments[0] === 'ninja', 'The first arguments is now a ninja');
+    //     assert(person === 'gardener', 'The person is still a gardener');
 
+    // }
+    // infiltrate('gardener');
 
+//// 4.6 函数的方法调用
 
+    // function whatsMyContext() {
+    //     return this;
+    // }
 
+    // var ninja = {
+    //     getMyThis: whatsMyContext
+    // };
 
+    // assert(ninja.getMyThis() === ninja, 'Working with ninja');
 
+    // var ninja1 = {
+    //     getMyThis: whatsMyContext
+    // };
 
+    // assert(ninja1.getMyThis() === ninja1, 'Working with ninja1');
 
+//// 4.8 返回原始值的构造函数
 
+    // function Ninja() {
+    //     this.skulk = function() {
+    //         return true;
+    //     };
+    //     return 1;
+    // };
 
+    // assert(Ninja() === 1, 'return value honored when not called as a constructor');
 
+    // var ninja = new Ninja();
 
+    // assert(typeof ninja === 'object', 'Object returned when called as a constructor');
+    // assert(typeof ninja.skulk === 'function', 'ninja object has a skulk method');
 
+//// 4.9 显式返回对象值的构造函数
 
+    // var puppet = {
+    //     rules: false
+    // };
+    // function Emperor() {
+    //     this.rules = true;
+    //     return puppet;
+    // }
 
+    // var emperor = new Emperor();
 
+    // assert(emperor === puppet, 'emperor === puppet');
+    // assert(emperor.rules === false, 'emperor.rules === false');
+</script>
 
+<!-- 4.10 为函数绑定特定的上下文 -->
 
+    <!-- <button id="test">Click Me!</button> -->
+<script>
 
+    // function Button() {
+    //     this.clicked = false;
+    //     this.click = function() {
+    //         this.clicked = true;
+    //         assert(button.clicked, 'button.clicked');
+    //     };
+    // }
+    // var button = new Button();
+    // var elem = document.getElementById('test');
+    // elem.addEventListener('click', button.click);
 
+//// 4.10 使用apply 和 call 方法来设置函数上下文
 
+    // function juggle() {
+    //     var result = 0;
+    //     for (var n = 0; n < arguments.length; n++) {
+    //         result += arguments[n];
+    //     }
+    //     this.result = result;
+    // }
 
+    // var ninja1 = {};
+    // var ninja2 = {};
 
+    // juggle.apply(ninja1, [1, 2, 3, 4]);
+    // juggle.call(ninja2, 5, 6, 7, 8);
 
+    // assert(ninja1.result === 10, 'ninja1.result === 10');
+    // assert(ninja2.result === 26, 'ninja2.result === 26');
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </script>
-    <style>
-      #results li.pass { color: green; }
-      #results li.fail { color: red; }
-    </style>
-  </head>
-  <body>
-    <ul id="results"></ul>
-  </body>
+</script>
+</body>
 </html>

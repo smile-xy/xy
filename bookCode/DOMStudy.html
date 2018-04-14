@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>DOM</title>
+</head>
+<body>
+
+<!-- 小试牛刀 -->
+
+    <!-- <div></div>
+    <script>
+        // dom 对象
+        var div = document.getElementsByTagName('div')[0];
+        div.style.width = '100px';
+        div.style.height = '100px';
+        div.style.backgroundColor = '#eee';
+
+        var count = 0;
+        div.onclick = function() {
+
+            count++;
+            if (count % 2 == 1) {
+                this.style.backgroundColor = '#aaa';
+            } else {
+                this.style.backgroundColor = '#eee';
+            }
+        }
+    </script>  -->
+
+
+    <!-- <style>
+        .content {
+            display: none;
+            border:2px solid #eee;
+            width: 120px;
+            height: 100px;
+        }
+        div .active {
+            background-color: #f50;
+        }
+    </style>
+
+    <div class="wrap">
+        <button class="active">111</button>
+        <button>222</button>
+        <button>333</button>
+        <div class="content" style="display: block;">AAAAAAAAAAA</div>
+        <div class="content">BBBBBBBBBB</div>
+        <div class="content">CCCCCCCCCCC</div>
+    </div>
+
+    <script>
+    var btn = document.getElementsByTagName('button');
+    var div = document.getElementsByClassName('content');
+
+    for (var i = 0; i < btn.length; i++) {
+        (function (act) {
+            btn[i].onclick = function () {
+
+                for (var j = 0; j < btn.length; j++) {
+                    btn[j].className = '';
+                    div[j].style.display = 'none';
+                }
+                this.className = 'active';
+                div[act].style.display = 'block';
+            };
+        }(i));
+    }
+    </script>  -->
+
+
+    <!-- <script>
+    var div = document.createElement('div');
+    document.body.appendChild(div);
+    div.style.width = '100px';
+    div.style.height = '100px';
+    div.style.backgroundColor = '#eee';
+    div.style.position = 'absolute';
+    div.style.top = '100px';
+    div.style.left = '100px';
+
+    ////方块加速移动
+    // var speed = 1;
+    // var timer = setInterval(function () {
+
+    //     speed += speed/20;
+    //     div.style.left = parseInt(div.style.left) + speed + 'px';
+    //     div.style.top = parseInt(div.style.top) + speed + 'px';
+    //     if (parseInt(div.style.left) > 400 && parseInt(div.style.top) > 400) {
+    //         clearInterval(timer);
+    //     }
+    // }, 35);
+
+    ////方向键控制方块移动
+    document.onkeydown = function (e) {
+        // console.log(e)
+        var speed = 100;
+        switch (e.which) {
+            case 38:
+                div.style.top = parseInt(div.style.top) - speed + 'px';
+                break;
+            case 40:
+                div.style.top = parseInt(div.style.top) + speed + 'px';
+                break;
+            case 37:
+                div.style.left = parseInt(div.style.left) - speed + 'px';
+                break;
+            case 39:
+                div.style.left = parseInt(div.style.left) + speed + 'px';
+                break;
+            default:
+                break;
+        }
+    }
+    </script> -->
+
+
+    <!-- <style>
+        /* 模仿画笔 */
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        li {
+            box-sizing:border-box;
+            float: left;
+            width: 20px;
+            height: 20px;
+            border: 1px solid black;
+            list-style: none;
+        }
+        ul {
+            width: 300px;
+            height: 300px;
+        }
+    </style>
+    <ul>
+        <li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li><li img-date = "0"></li>
+    </ul>
+    <script>
+    var ul = document.getElementsByTagName('ul')[0];
+    ul.onmouseover = function (e) {
+        var event = e || window.event;
+        var target = event.target || event.srcElement;
+
+        target.style.backgroundColor = 'rgb(255,255,' + target.getAttribute('img-date') +')';
+        target.setAttribute('img-date', parseInt(target.getAttribute('img-date')) + 20);
+    }
+    </script> -->
+
+<!-- DOM基本操作 -->
+
+    <!-- <div id="only" class="d-class">
+        <span>
+            <strong>1</strong>
+        </span>
+        <strong>2</strong>
+    </div>
+    <input name="myname">
+    <script>
+
+    // document生成的大部分都是类数组
+    var id = document.getElementById('only');
+    var tagName = document.getElementsByTagName('div')[0];
+    var cName = document.getElementsByClassName('d-class')[0]; // ie8及以下版本不支持
+    var name = document.getElementsByName('myname')[0]; // 只有带name属性的标签可生效
+
+    // query选出来的元素不是实时的,是静态副本
+    var strong = document.querySelector('div > span strong');
+    var strong1 = document.querySelectorAll('strong')[0];
+    </script> -->
+
+<!-- 遍历节点树 -->
+
+    <!-- <div>
+        第一句话和空格一起算文本
+        <strong></strong>
+        <span></span>
+    </div>
+
+    <script>
+    var div = document.getElementsByTagName('div')[0];
+    var strong = document.getElementsByTagName('strong')[0];
+
+    console.log(div.parentNode); // 父节点
+    console.log(div.childNodes); // 子节点们
+    console.log(div.childNodes.length);
+    // 元素节点 ———— Node.ELEMENT_NODE(1)
+    // 属性节点 ———— Node.ATTRIBUTE_NODE(2)
+    // 文本节点 ———— Node.TEXT_NODE(3)
+    // 注释节点 ———— Node.COMMENT_NODE(8)
+    // document节点 ———— Node.DOCUMENT_NODE(9)
+    // DocumentsFragment ———— Node.DOCUMENT_FRAGMENT_NODE(11)
+
+     console.log(div.firstChild); // 第一个子节点
+     console.log(div.lastChild); // 最后一个子节点
+     console.log(strong.nextSibling); // 后一个兄弟节点
+     console.log(strong.perviousSibling); // 前一个兄弟节点
+    </script> -->
+
+<!-- 遍历元素节点树 -->
+
+    <!-- <div>
+        第一句话和空格一起算文本
+        <strong></strong>
+        <span></span>
+        <em></em>
+        <i></i>
+        <b></b>
+    </div>
+
+    <script>
+    // 除了children以外 IE8及以下不兼容
+    var div = document.getElementsByTagName('div')[0];
+    var strong = document.getElementsByTagName('strong')[0];
+
+    console.log(div.parentElement); // 返回当前元素的父元素节点
+    console.log(div.children); // 只返回当前元素的元素子节点
+    console.log(div.firstElementChild); // 返回第一个元素子节点
+    console.log(div.lastElementChild); // 返回最后一个元素子节点
+
+    console.log(strong.nextElementSibling); // 返回最后一个兄弟元素
+    console.log(strong.previousElementSibling); // 返回前一个兄弟元素
+    </script> -->
+
+<!-- 节点的四个属性 -->
+
+    <!-- <div>
+        第一句话和空格一起算文本
+        <strong></strong>
+        <span></span>
+    </div>
+    <div>
+    </div>
+
+    <script>
+    var div = document.getElementsByTagName('div')[0];
+    console.log(div.childNodes[1].nodeName); // 元素的标签名，以大写形式表示，只读
+
+    console.log(div.childNodes[0].nodeValue); // Text节点或Comment节点的文本内容，可读写
+    div.childNodes[0].nodeValue = '字体已修改';
+    console.log(div.childNodes[0].nodeValue);
+
+    console.log(div.childNodes[1].nodeType); // 该节点的类型，只读
+    // 元素节点 ———— Node.ELEMENT_NODE(1)
+    // 属性节点 ———— Node.ATTRIBUTE_NODE(2)
+    // 文本节点 ———— Node.TEXT_NODE(3)
+    // 注释节点 ———— Node.COMMENT_NODE(8)
+    // document节点 ———— Node.DOCUMENT_NODE(9)
+    // DocumentsFragment ———— Node.DOCUMENT_FRAGMENT_NODE(11)
+    console.log(div.childNodes[1].attributes); // Element节点的属性集合
+
+    var div2 = document.getElementsByTagName('div')[0];
+    console.log(div2.hasChildNodes()); // 是否有自己的子节点
+
+    function retElementChild(node) {
+        //no children
+        var temp = {
+                length: 0,
+                push: Array.prototype.push
+        },
+            child = node.childNodes,
+            len = child.length;
+
+        for (var i = 0; i < len; i++) {
+            
+            if (child[i].nodeType === 1) {
+                temp.push(child[i]);
+            }
+        }
+        return temp;
+    }
+    console.log(retElementChild(div));
+    </script> -->
+</body>
+</html>
