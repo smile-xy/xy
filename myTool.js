@@ -19,7 +19,6 @@ function typeIs(target) {
     }
 }
 
-
 //深度克隆
 function deepClone(origin, target) {
     var target = target || {},
@@ -52,3 +51,21 @@ var inherit = (function () {
         Target.prototype.uber = Origin.prototype;
     }
 }());
+
+// 获取当前窗口大小，并返回数组[pageWidth, pageHeight];
+var getPageSize = function () {
+    var pageWidth = window.innerWidth,
+        pageHeight = window.innerHeight;
+
+    if (typeof pageWidth != 'number') {
+        if (document.compatMode == 'CSS1Compat') {
+
+            pageWidth = document.documentElement.clientWidth;
+            pageHeight = document.documentElement.clientHeight;
+        } else {
+            pageWidth = document.body.clientWidth;
+            pageHeight = document.body.clientHeight;
+        }
+    }
+    return [pageWidth, pageHeight];
+};

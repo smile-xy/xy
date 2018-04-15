@@ -54,8 +54,8 @@
 </head>
 <body>
 
-<script>
-//// 3.1 简单的回调函数
+    <script>
+'3.1 简单的回调函数'
 
     // var text = 'Domo arigate!';
     // report('Before defining functions');
@@ -91,7 +91,7 @@
 
     // report(values.sort());
 
-//// 3.2 存储唯一函数集合
+'3.2 存储唯一函数集合'
 
     // var store = {
     //     nextId: 1,
@@ -108,7 +108,7 @@
     // assert(store.add(ninja), 'Function was safely added.');
     // assert(!store.add(ninja), 'But it was only added once');
 
-//// 3.3 计算先前得到的值
+'3.3 计算先前得到的值'
 
     // function isPrime(value) {
     //     if (!isPrime.answers) {
@@ -132,7 +132,7 @@
     // assert(isPrime.answers[5], 'The answer was cached!');
     // assert(isPrime.answers[3], 'The answer was cached!');
 
-//// 3.5 函数声明和函数表达式
+'3.5 函数声明和函数表达式'
 
     // function myFunctionDeclareatuion() {
     //     function innerFunction() {}
@@ -146,7 +146,7 @@
     // (function nameFunctionExpression() {
     // }());
  
-//// 3.6 比较箭头函数和函数表达式
+'3.6 比较箭头函数和函数表达式'
 
     // var greet = name => 'Greetings ' + name;
     // assert(greet('Oishi') === 'Greetings Oishi', 'Oishi is properly greeted');
@@ -161,7 +161,7 @@
     // }
     // assert(another('Oishi') === 'Greetings Oishi', 'Oishi is properly greeted');
 
-//// 3.7 使用剩余参数
+'3.7 使用剩余参数'
 
     // function multiMax(first, ...remainingNumbers) {
     //     var sorted = remainingNumbers.sort(function(a,b){
@@ -171,7 +171,7 @@
     // }
     // assert(multiMax(3, 1, 2, 3) == 9, '3*3=9 (First arg, by largest.)');
 
-//// 3.8 ES6之前处理默认参数的方式
+'3.8 ES6之前处理默认参数的方式'
 
     // function performAction(ninja, action) {
     //     action = typeof action === 'undefined' ? 'skulking' : action;
@@ -181,7 +181,7 @@
     // assert(performAction('Fuma') === 'Fuma skulking', 'The default value is used for Fuma');
     // assert(performAction('Yagyu', 'sneaking') === 'Yagyu sneaking', 'Yagyu caj do whatever he pleases, even sneak!');
 
-//// 3.9 ES6中处理默认参数的方式
+'3.9 ES6中处理默认参数的方式'
 
     // function performAction1(ninja, action = 'skulking') {
     //     return ninja + ' ' + action;
@@ -190,7 +190,7 @@
     // assert(performAction1('Fuma') === 'Fuma skulking', 'The default value is used for Fuma');
     // assert(performAction1('Yagyu', 'sneaking') === 'Yagyu sneaking', 'Yagyu caj do whatever he pleases, even sneak!');
 
-//// 第三章习题
+'第三章 练习'
 
     // var a = (() => 'A'()); // A
     // var b = (() => {'B'})(); // undefined 
@@ -205,7 +205,7 @@
     // var message1 = getNinjaWieldingWeapon('Yoshi'); // Yoshi katana
     // var message2 = getNinjaWieldingWeapon('Yoshi', 'Wakizashi'); // Yoshi Wakizashi
 
-//// 4.1 使用参arguments数
+'4.1 使用参arguments数'
 
     // function whatever(a, b, c) {
     //     assert(a === 1, 'The value of a is 1');
@@ -224,7 +224,7 @@
     // }
     // whatever1(1, 2, 3, 4, 5);
 
-//// 4.3 arguments对象作为函数参数的别名
+'4.3 arguments对象作为函数参数的别名'
 
     // function infiltrate(person) {
     //     assert(person === 'gardener', 'The person is gardener');
@@ -242,7 +242,7 @@
     // }
     // infiltrate('gardener');
 
-//// 4.4 使用严格模式避免使用arguments别名
+'4.4 使用严格模式避免使用arguments别名'
 
     // function infiltrate(person) {
     //     'use strict';
@@ -257,7 +257,7 @@
     // }
     // infiltrate('gardener');
 
-//// 4.6 函数的方法调用
+'4.6 函数的方法调用'
 
     // function whatsMyContext() {
     //     return this;
@@ -275,7 +275,7 @@
 
     // assert(ninja1.getMyThis() === ninja1, 'Working with ninja1');
 
-//// 4.8 返回原始值的构造函数
+'4.8 返回原始值的构造函数'
 
     // function Ninja() {
     //     this.skulk = function() {
@@ -291,7 +291,7 @@
     // assert(typeof ninja === 'object', 'Object returned when called as a constructor');
     // assert(typeof ninja.skulk === 'function', 'ninja object has a skulk method');
 
-//// 4.9 显式返回对象值的构造函数
+'4.9 显式返回对象值的构造函数'
 
     // var puppet = {
     //     rules: false
@@ -305,13 +305,12 @@
 
     // assert(emperor === puppet, 'emperor === puppet');
     // assert(emperor.rules === false, 'emperor.rules === false');
-</script>
+    </script>
 
-<!-- 4.10 为函数绑定特定的上下文 -->
 
     <!-- <button id="test">Click Me!</button> -->
-<script>
-
+    <script>
+'4.10 为函数绑定特定的上下文'
     // function Button() {
     //     this.clicked = false;
     //     this.click = function() {
@@ -323,7 +322,7 @@
     // var elem = document.getElementById('test');
     // elem.addEventListener('click', button.click);
 
-//// 4.10 使用apply 和 call 方法来设置函数上下文
+'4.10 使用apply 和 call 方法来设置函数上下文'
 
     // function juggle() {
     //     var result = 0;
@@ -342,6 +341,159 @@
     // assert(ninja1.result === 10, 'ninja1.result === 10');
     // assert(ninja2.result === 26, 'ninja2.result === 26');
 
-</script>
+'4.12 实现forEach迭代方法'
+
+    // function forEach(list, callback) {
+    //     var len = list.length;
+    //     for (var n = 0; n < len; n++) {
+    //         callback.call(list[n], n);
+    //     }
+    // }
+
+    // var weapons = [{type: 'shuriken'}, {type: 'katana'}, {type: 'nunchucks'}];
+
+    // forEach(weapons, function(index) {
+    //     assert(this === weapons[index], 'Got the expected value of ' + weapons[index].type);
+    // });
+    </script>
+
+
+    <!-- <button id="test">Click Me!</button> -->
+    <script>
+'4.13 使用箭头函数解决回调函数上下文问题'
+    // function Button() {
+    //     this.clicked = false;
+    //     this.click = () => {
+    //         this.clicked = true;
+    //         assert(button.clicked, 'The button has been clicked');
+    //     };
+    // }
+    // var button = new Button();
+    // var elem = document.getElementById('test');
+    // elem.addEventListener('click', button.click);
+    </script>
+
+
+    <!-- <button id="test">Click Me!</button> -->
+    <script>
+'4.14 箭头函数和对象字面量'
+    // assert(this === window, 'this === window');
+    // var button = {
+    //     clicked: false,
+    //     click: () => {
+    //         this.clicked = true;
+    //         assert(button.clicked, 'The button has been clicked');
+    //         assert(this === window, 'In arrow function this === window');
+    //         assert(window.clicked, 'clicked is stored in window');
+    //     }
+    // };
+    // var elem = document.getElementById('test');
+    // elem.addEventListener('click', button.click);
+    </script>
+
+
+    <!-- <button id="test">Click Me!</button> -->
+    <script>
+'4.15 使用bind在事件处理中绑定指定上下文'
+    // var button = {
+    //     clicked: false,
+    //     click: function() {
+    //         this.clicked = true;
+    //         assert(button.clicked, 'The button has been clicked');
+    //     }
+    // };
+    // var elem = document.getElementById('test');
+    // elem.addEventListener('click', button.click.bind(button));
+
+    // var boundFunction = button.click.bind(button);
+    // assert(boundFunction != button.click, 'Calling bind creates a completely new function');
+
+'第四章 练习'
+//// 1
+    // function sum() {
+    //     var sum = 0;
+    //     for (var i = 0; i < arguments.length; i++) {
+    //         sum += arguments[i];
+    //     }
+    //     return sum;
+    // }
+    // assert(sum(1, 2, 3) === 6, 'sum(1, 2, 3) === 6');
+    // assert(sum(1, 2, 3, 4) === 10, 'sum(1, 2, 3, 4) === 6');
+
+    // function sum(sum, ...numArr) {
+    //     for (var i = 0; i < numArr.length; i++) {
+    //         sum += numArr[i];
+    //     }
+    //     return sum;
+    // }
+    // assert(sum(1, 2, 3) === 6, 'sum(1, 2, 3) === 6');
+    // assert(sum(1, 2, 3, 4) === 10, 'sum(1, 2, 3, 4) === 6');
+//// 2
+    // function getValue1(value) {
+    //     'use strict';
+    //     arguments[0] = 'AAA';
+    //     return value;
+    // }
+    // function getValue2(value) {
+    //     arguments[0] = 'BBB';
+    //     return value;
+    // }
+
+    // var value1 = getValue1('111'); // 111
+    // var value2 = getValue2('222'); // BBB
+//// 3
+    // function whoAmI1() {
+    //     'use strict';
+    //     return this;
+    // }
+    // function whoAmI2() {
+    //     return this;
+    // }
+
+    // assert(whoAmI1() === window, 'window?'); // undefined
+    // assert(whoAmI2() === window, 'window?'); // window
+//// 4
+    // var ninja1 = {
+    //     whoAmI: function() {
+    //         return this;
+    //     }
+    // };
+    // var ninja2 = {
+    //     whoAmI: ninja1.whoAmI
+    // };
+    
+    // var Identify = ninja2.whoAmI;
+
+    // assert(ninja1.whoAmI() === ninja1, 'ninja1?');            // true
+    // assert(ninja2.whoAmI() === ninja2, 'ninja1 again?');      // false ninja2
+    // assert(Identify() === ninja1, 'ninja1 again?');           // false window/undefined
+    // assert(ninja1.whoAmI.call(ninja2) === ninja2, 'ninja2?'); // true
+//// 5
+    // function Ninja() {
+    //     this.whoAmI = () => this;
+    // }
+    // var ninja1 = new Ninja();
+    // var ninja2 = {
+    //     whoAmI: ninja1.whoAmI
+    // };
+
+    // assert(ninja1.whoAmI() === ninja1, 'ninja1?'); // true
+    // assert(ninja2.whoAmI() === ninja2, 'ninja2?'); // false ninja1
+//// 6
+    // function Ninja() {
+    //     this.whoAmI = function() {
+    //         return this;
+    //     }.bind(this);
+    // }
+    // var ninja1 = new Ninja();
+    // var ninja2 = {
+    //     whoAmI: ninja1.whoAmI
+    // };
+
+    // assert(ninja1.whoAmI() === ninja1, 'ninja1?'); // true
+    // assert(ninja2.whoAmI() === ninja2, 'ninja2?'); // false ninja1
+
+
+    </script>
 </body>
 </html>

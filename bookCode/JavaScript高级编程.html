@@ -2,106 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Text</title>
+	<title>JavaScript高级程序设计</title>
 	<style type="text/css">
 	</style>
 </head>
 <body>
-<script type="text/javascript">
-
-
-// 1的n次幂
-
-// var n = parseInt(window.prompt("输入数字"));
-// var mi = 1;
-// for (var i = 0; i < n; i++) {
-// 	mi *= 2;
-// }
-// document.write("2的" + n + "次幂等于" + mi);
-
-
-// 计算n的阶乘
-// var n = parseInt(window.prompt("计算阶乘"));
-// var ne = 1;
-// for (var i = 1; i <= n; i++) {
-// 	ne *= i;
-// }
-// document.write(ne);
-
-
-// 斐波那契数列
-// var n = parseInt(window.prompt("第几项"));
-// var a = 1;
-// var b = 1;
-// var c;
-// for (var i = 3; i <= n; i++) {
-// 	c = a + b;
-// 	a = b;
-// 	b = c;
-// }
-// document.write(b);
-
-
-// console.log(typeof(a));						//undefined
-// console.log(typeof(undefined));				//X---------undefined
-// console.log(typeof(NaN));					//X---------number
-// console.log(typeof(null));					//null------object
-// var a = "123abc";
-// console.log(typeof(+a));					//string----number
-// console.log(typeof(!!a));					//boolean
-// console.log(typeof(a + ""));				//stting
-// console.log(1 == "1");						//true
-// console.log(NaN == NaN);					//false
-// console.log(NaN == undefined);				//true------false
-// console.log("11" + 11);						//1111
-// console.log(1 === "1");						//false
-// console.log(parseInt("123abc"));			//123
-// var num = 123123.123923123;
-// console.log(num.toFixed(3));				//123123.124
-// console.log(typeof(typeof(a)));				//string
-
-
-
-// 反向输出
-// var a = parseInt(window.prompt("Number"));
-// var b;
-// for (var i = 10; i <= a; ) {
-// 	b = a % 10;
-// 	a = (a - b) / 10;
-// 	document.write(b);
-// }
-// document.write(a);
-
-
-// 输入最大值
-// var a = parseInt(window.prompt("Number1"));
-// var b = parseInt(window.prompt("Number2"));
-// var c = parseInt(window.prompt("Number3"));
-// var max;
-// if (a > b) {
-// 	max = a;
-// }else if (b > c) {
-// 	max = b;
-// }else
-// 	max = c;
-// document.write(max);
-
-
-// 输出n以内的质数
-// var n = parseInt(window.prompt("Number"));
-// for (var i = 1; i <= n; i++) {
-// 	var a = 0;
-// 	for (var j = 2; j <= i; j++) {
-// 		if (i % j == 0 ) {
-// 			a++;
-// 		}
-// 	}
-// 	if (a == 1) {
-// 		document.write(i + "<br/>");
-// 	}
-// }
-
-
+<script>
 // function setName(obj){
 // 	obj.name = "Nike";
 // 	obj = new Object();
@@ -303,232 +209,6 @@
 // document.write("<br/>" + matches[0]);
 // document.write("<br/>" + pattern2.lastIndex);
 
-// function sum(a){
-// 	arguments[0] = 1;;
-// 	console.log(arguments[0]);
-// }
-// sum(11,12,4);
- 
-// text1
-// function animal (name){
-// 	switch(arguments[0]) {
-// 		case "dog":
-// 			console.log("wangwangwang");
-// 			break;
-// 		case "cat":
-// 			console.log("maomaomao");
-// 			break;
-// 	}
-// }
-// animal("cat");
- 
-// // text2
-// function sum(a, b){
-// 	console.log(a + b);
-// }
-// sum(199,1);
-
-// // text5
-// function fbnqsl(n) {
-//     if (n == 1) {
-//     	return 1;
-//     }
-//     else{
-//     	var a = 1,
-//     		b = 1;
-    	
-//     }
-// }
-// fbnqsl(10);
- 
-// // text3
-//  function backvalue(a) {
-//      var b,
-//          sum = Array();
-//  	for (var i = 10; i <= a;) {
-// 		b = a % 10;
-// 		a = (a - b) / 10;
-// 		// sum.push(b);
-// 		output(b);
-// 		}
-// 		// sum.push(a);
-// 	 output(a);
-//  }
-// backvalue(119);
-
-// function output(value) {
-//  		switch(value){
-//  			case 0:
-//                 console.log("零");
-//  				break;
-//  			case 1:
-//                 console.log("一");
-//  				break;
-//  			case 2:
-//                 console.log( "二");
-//  				break;
-//  			case 3:
-//                 console.log("三");
-//  				break;
-//  			case 4:
-//                 console.log("四");
-//  				break;
-//  			case 5:
-//                 console.log("五");
-//  				break;
-//  			case 6:
-//                 console.log("六");
-//  				break;
-//  			case 7:
-//                 console.log("七");
-//  				break;
-//  			case 8:
-//                 console.log("八");
-//  				break;
-//  			case 9:
-//                 console.log("九");
-//  				break;
-//  			default:
-//                 console.log(undefined);
-//  	}
-//  }
-
-// // text4
-// function nXn(n){
-// 	var j = 1;
-// 	for (var i = 1; i <= n; i++) {
-// 		j *= i;
-// 	}
-// 	console.log(j);
-// }
-// nXn(5);
-
-// 斐波那契数列
-// function rabbit(n) {
-// 	if (n <= 2){
-// 		return 1;
-// 	} else {
-//         n = rabbit(n - 1) + rabbit(n - 2);
-// 	return n;
-// 	}
-// }
-
-
-//预编译
-// function fn(a) {
-// 	console.log(a);
-// 	var a = 123;
-// 	console.log(a);
-// 	function a(){};
-// 	console.log(a);
-// 	var b = function (){};
-// 	console.log(b);
-// 	function d (){};
-// }
-// fn(1);
-
-// function text(a, b){
-// 	document.write(a);		//1
-// 	c = 0;
-// 	var c;
-// 	a = 3;
-// 	b = 2;
-// 	document.write(b);		//2
-// 	function b () {};
-// 	function d () {};
-// 	document.write(b);		//2
-// }
-// text(1);
-
-// function test(a, b){
-// 	console.log(a);			//function
-// 	console.log(b);			//undefined
-// 	var b = 234;
-// 	console.log(b);			//234
-// 	a = 123;
-// 	console.log(a);			//123
-// 	function a () {};
-// 	var a;
-// 	b = 234;
-// 	var b = function () {};
-// 	console.log(a);			//123
-// 	console.log(b);			//234---X--->function
-// }
-// test(1);
-
-//1
-// function bar () {
-// 	return foo;
-// 	foo = 10;
-// 	function foo() {
-// 		//body...
-// 	}
-// 	var foo = 11;
-// }
-// alert(bar());			//unction foo() {body...}
-//2
-// console.log(bar());			//11
-// function bar() {
-// 	foo = 10;
-// 	function foo () {
-// 	}
-// 	var foo = 11;
-// 	return foo;
-// }
-//3
-// a = 100;
-// function demo(e) {
-// 	function e() {};
-// 	arguments[0] = 2;
-// 	document.write(e);		//function e() {}--X--->2
-// 	if (a) {
-// 		var b = 123;
-// 		function c () {
-// 			//猪都能做出来
-// 		}
-// 	}
-// 	var c;
-// 	a = 10;
-// 	var a;
-// 	document.write(b);		//123---X--->undefined
-// 	f = 123;
-// 	document.write(c);		//function c(){//猪都能做出来}---X--->undefined
-// 	document.write(a);		//10
-// }
-// var a;
-// demo(1);
-// document.write(a);			//100
-// document.write(f);			//123
-//4
-// var str = false + 1;
-// document.write(str);
-// var demo = false == 1;
-// document.write(demo);
-// if (typeof(a) && -true + (+undefuned) + "") {
-// 	document.write(1);
-// }
-// if (11 + "11" * 2 == 23) {
-// 	document.write(1);
-// }
-// !!" " + !!"" -!!false || document.write(1);
-//5
-// var x = 1;
-// if (function f() {}) {
-// 	x += typeof(f);	
-// }
-// console.log(x);
-
-// var text = "000-00-0000";
-// var pattern = /\d{3}-\d{2}-\d{4}/;
-// if (pattern.test(text)) {
-// 	alert("The pattern was matched.");
-// }else{
-// 	alert("errow");
-// }
-
-
-
-
 
 // var pattern = new RegExp("\\[bc\\]at", "gi");
 // alert(pattern.toString());
@@ -545,7 +225,6 @@
 // 	document.write("<br/>" + RegExp.lastParen);
 // 	document.write("<br/>" + RegExp.multiline);
 // }
-
 
 
 // function sum(sum1 ,sum2){
@@ -1683,159 +1362,329 @@
 //     return app;
 // }();
 
-//网课start
-//可以做缓存（存储结构）
-// function eater() {
-//     var food = '';
-//     var obj = {
-//         eat: function () {
-//             console.log('I\'m eating ' + food);
-//             food = '';
-//         },
-//         push: function (myfood) {
-//             food = myfood;
-//         }
-//     }
-//     return obj;
-// }
+//
+//
+//
+// 第八章 BOM
+//
+//
+//
+
+// 窗口位置
+
+    // var leftPos = (typeof window.screenLeft == 'number') ? window.screenLeft : window.screenX;
+    // var topPos = (typeof window.screenTop == 'number') ? window.screenTop : window.screenY;
+    // console.log(leftPos +' '+ topPos);
+
+// 取得页面视口大小
+
+    // var getPageSize = function () {
+    //     var pageWidth = window.innerWidth,
+    //         pageHeight = window.innerHeight;
+
+    //     if (typeof pageWidth != 'number') {
+    //         if (document.compatMode == 'CSS1Compat') {
+
+    //             pageWidth = document.documentElement.clientWidth;
+    //             pageHeight = document.documentElement.clientHeight;
+    //         } else {
+    //             pageWidth = document.body.clientWidth;
+    //             pageHeight = document.body.clientHeight;
+    //         }
+    //     }
+    //     return [pageWidth, pageHeight];
+    // };
+    // document.write(getPageSize());
+
+// 间歇调用和超时调用
+
+    // 设置超时调用
+    // var timeoutId = setTimeout(function() {
+    //     alert('Hello DOM!');
+    // }, 2000);
+    // // 注意：把它取消
+    // clearTimeout(timeoutId);
+
+    //设置间歇调用
+    // var num = 0,
+    //     max = 10,
+    //     intervalId = null;
+
+    // function incrementNumber() {
+    //     num++;
+    //     document.write(num);
+    //     //如果执行次数达到了max设置值，则取消后续尚未执行的调用
+    //     if (num == max) {
+    //         clearInterval(intervalId);
+    //         document.write('Done');
+    //     }
+    // } 
+    // intervalId = setInterval(incrementNumber, 500);
+
+    //以上功能使用超时调用实现,推荐使用超时调用模拟间歇调用
+    // var num = 0,
+    //     max = 10;
+    // function incrementNumber() {
+    //     num++;
+
+    //     //如果执行次数达到了max设置值，则设置另一次超时调用
+    //     if (num < max) {
+    //         setTimeout(incrementNumber, 500);
+    //         document.write(num);
+    //     } else {
+    //         document.write('Done');
+    //     }
+    // } 
+    // setTimeout(incrementNumber, 500);
+
+// 系统对话框
+
+    // if (confirm('Are you sure?')) { // 输出警告对话框
+    //     alert('I\'m so happy');  // 输出提示对话框
+    // } else {
+    //     alert('I\'m sorry');
+    // }
+
+    // var result = prompt('What is your name?', '');  // 输出输入对话框
+    // if (result != null) {
+    //     alert('Welcome, ' + result);
+    // } else {
+    //     alert('Welcome, visitor');
+    // }
+
+// location 对象
+
+    //window.location === document.location
+    window.location.hash;      // 返回URL中的 hash
+    window.location.host;      // 返回服务器名称和端口号
+    window.location.hostname;  //  返回不带端口号的服务器名称
+    window.location.href;      // 返回当前加载页面的完整URL
+    window.location.pathname;  // 返回URL中的目录和文件名
+    window.location.port;      // 返回URL中指定的端口号
+    window.location.protocol;  // 返回页面使用的协议
+    window.location.search;    // 返回URL的查询字符串
 
-// var food1 = eater();
+    '查询字符串参数'
+   
+    // function getQueryStringArgs() {
 
-// food1.push('people');
-// food1.eat();
+    //     // 取得查询字符串并去掉开头的问号
+    //     var qs = (location.search.length > 0 ? location.search.substring(1) : ''),
+    //     // 保存数据的对象
+    //     args = {},
 
-// (function() {
-// 	var a = 123,
-// 		b = 321;
-// 	console.log(a + b);
-// }());// W3C建议把括号放里面
+    //     // 取得每一项
+    //     items = qs.length ? qs.split('&') : [],
+    //     item = null,
+    //     name = null,
+    //     value = null,
 
-// ————————————————闭包问题触发
-// function test() {
-//     var arr = [];
-//     for (var i = 0; i < 10; i++) {
-//         arr[i] = function () {
-//             document.write(i + ' ');
-//         }
-//     }
-//     return arr;
-// }
+    //     //在for循环中使用
+    //     i = 0,
+    //     len = items.length;
+
+    //     // 逐个将每一项添加到args对象中
+    //     for ( ; i < len; i++) {
+    //         item = items[i].split('=');
+    //         name = decodeURIComponent(item[0]);
+    //         value = decodeURIComponent(item[1]);
+
+    //         if (name.length) {
+    //             args[name] = value;
+    //         }
+    //     }
+    //     return args;
+    // }
+
+// 位置操作
+
+'NOT END';
+
+
+
 
-// var myArr = test();
-// for (let j = 0; j < 10; j++) {
-//     myArr[j]();
-// }
-// ——————————————闭包问题解决
-// function test() {
-//     var arr = [];
-//     for (var i = 0; i < 10; i++) {
-//         (function (j) {
-//             arr[j] = function () {
-//                 document.write(j + ' ');
-//             };
-//         }(i));
-//     }
-//     return arr;
-// }
+'第十章 DOM'
 
-// var myArr = test();
-// for (var j = 0; j < 10; j++) {
-//     myArr[j]();
-// }
 
-// var x = 1;
-// if (function f(){}) {
-//     x += typeof f;
-// }
-// console.log(x);
+    'Node类型'
+    // if(someNode.nodeType == 1) {
+    //     value = someNode.nodeName;
+    // }
 
-// var str = 'abc';
-// str += 1;
-// var test = typeof(str);
-// if (test.length == 6) {
-//     test.sign = '没有结果';
-// }
-// console.log(test.sign);
+    // var firstChild = someNode.childNodes[0];
+    // var secondChild = someNode.childNodes.item(1);
+    // var count = someNode.childNodes.length;
 
+    // var arrayOfNodes = prototype.slice.call(someNode.childNodes, 0);
 
+    // var returnedNode = someNode.appendChild(newNode);
+    // alert(returnedNode == newNode); -->true
+    // alert(someNode.lastChild == newNode); -->true
 
+    // someNode有多个节点
+    // var returnNode = someNode.appendChild(someNode.firstChild);
+    // alert(returnedNode == someNode.firstChild); -->false
+    // alert(returnedNode == someNode.lastChild); -->true
 
+    // insertBefore 插入后称为最后一个子节点
+    // var returnNode = someNode.insertBefore(newNode, null);
+    // alert(newNode == someNode.lastChild); -->true
 
+    // insertBefore 插入后称为第一个子节点
+    // var returnNode = someNode.insertBefore(newNode, someNode.firstChild);
+    // alert(returnedNode == newSNode); -->true
+    // alert(newNode == someNode.firstChild); -->true
 
+    // insertBefore 插入到最后一个子节点前面
+    // var returnNode = someNode.insertBefore(newNode, someNode.lastChild);
+    // alert(newNode == someNode.childNodes[someNode.childNodes.length - 2]); -->true
 
+    // replaceChild 替换第一个子节点
+    // var returnNode = someNode.replaceChild(newNode, someNode.firstChild);
 
+     // replaceChild 替换最后一个子节点
+    //  var returnNode = someNode.replaceChild(newNode, someNode.lastChild);
 
+    // removeChild 移除第一个子节点
+    // var returnNode = someNode.removeChild(newNode, someNode.firstChild);
 
+    // removeChild 移除最后一个子节点
+    //  var returnNode = someNode.removeChild(newNode, someNode.lastChild);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    //节点克隆
+    // var deepList = myList.cloneNode(true);
+    // console.log(deepList.childNodes.length);
+    // var shallowList = myList.cloneNode(false);
+    // console.log(shallowList.childNodes.length);
+
+    // 文档标题
+    document.title;
+    // 取得URL
+    document.URL;
+    // 取得域名
+    document.domain;
+    // 取得来源页面的URL
+    document.referrer;
+
+    'Element 类型'
+    // if (element.tagName.toLowerCase() == 'div') {
+        //推荐的比较操作
+    // }
+   
+   '创建元素'
+    // var div = document.createElement('div');
+    // div.id = 'myDiv';
+    // div.className = 'myClass';
+    // document.body.appendChild(div);
+
+    '节点检查'
+    // for (var i = 0, len = element.childNodes.length; i < len; i++) {
+    //     if (element.childNodes[i].nodeType == 1) {
+    //         //执行其他操作
+    //     }
+    // }
+
+    '创建文本节点'
+    // var element = document.createElement('div');
+    // element.className = 'message';
+
+    // var textNode = document.createTextNode('Hello!');
+    // element.appendChild(textNode);
+    // document.body.appendChild(element);
+
+    '创建多个文本节点'
+    // var element = document.createElement('div');
+    // element.className = 'message';
+
+    // var textNode = document.createTextNode('Hello!'); // 创建
+    // element.appendChild(textNode);
+
+    // var anotherTextNode = document.createTextNode('Yippee!'); // 创建
+    // element.appendChild(anotherTextNode);
+
+    // document.body.appendChild(element);
+
+    '个文本节点合并'
+    // var element = document.createElement('div');
+    // element.className = 'message';
+
+    // var textNode = document.createTextNode('Hello!');
+    // element.appendChild(textNode);
+
+    // var anotherTextNode = document.createTextNode('Yippee!');
+    // element.appendChild(anotherTextNode);
+
+    // document.body.appendChild(element);
+    // console.log(element.childNodes.length);
+
+    // element.normalize(); // 合并
+    // console.log(element.childNodes.length);
+    // console.log(element.firstChild.nodeValue);
+
+    '分割文本节点'
+    // var element = document.createElement('div');
+    // element.className = 'message';
+
+    // var textNode = document.createTextNode('Hello World!');
+    // element.appendChild(textNode);
+
+    // document.body.appendChild(element);
+
+    // var newNode = element.firstChild.splitText(5); // 分割
+    // console.log(element.firstChild.nodeValue);
+    // console.log(newNode.nodeValue);
+    // console.log(element.childNodes.length);
+    </script>
+
+
+    <!-- <ul id="myList"></ul> -->
+    <script>
+    'DocumentFragment 类型'
+    // var fragment = document.createDocumentFragment();
+    // var ul = document.getElementById('myList');
+    // var li = null;
+
+    // for (var i = 0; i < 3; i++) {
+    //     li = document.createElement('li');
+    //     li.appendChild(document.createTextNode('Item ' + (i + 1)));
+    //     fragment.appendChild(li);
+    // }
+    // ul.appendChild(fragment);
+
+    'DOM操作技术'
+    '动态脚本'
+    // var script = document.createElement('script');
+    // script.type = 'text/javascript';
+    // script.src = 'none.js';
+    // document.body.appendChild(script);
+
+    '封装成函数加载外部js文件'
+    // function loadScript(url) {
+    //     var script = document.createElement('script');
+    //     script.type = 'text/javascript';
+    //     script.src = url;
+    //     document.body.appendChild(script);
+    // }
+    // loadScript('none1.js');
+
+    '动态样式'
+    // var link = document.createElement('link');
+    // link.rel = 'stylesheet';
+    // link.type = 'text/css';
+    // link.href = 'none.css';
+    // var head = document.getElementsByTagName('head')[0];
+    // head.appendChild(link);
+
+    '封装成函数加载外部css文件'
+    // function loadStyles(url) {
+    //     var link = document.createElement('link');
+    //     link.rel = 'stylesheet';
+    //     link.type = 'text/css';
+    //     link.href = url;
+    //     var head = document.getElementsByTagName('head')[0];
+    //     head.appendChild(link);
+    // }
+    // loadStyles('style.css');
 </script>
 </body>
 </html>
