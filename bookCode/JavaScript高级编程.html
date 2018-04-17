@@ -1529,6 +1529,7 @@
     // // 检测QuickTime
     // console.log(hasQuickTime());
 
+
 '第十章 DOM'
 
 
@@ -1711,6 +1712,56 @@
     //     head.appendChild(link);
     // }
     // loadStyles('style.css');
-</script>
+
+
+'第十一章 DOM扩展'
+
+    '焦点管理'
+    </script>
+    <!-- <div id="myDiv">
+        <p>123</p>
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+    <button>no focus</button>
+    <button id="myButton" data-log="1">focus</button> -->
+    <script>
+    // var button = document.getElementById('myButton');
+    // button.focus();
+    // console.log(document.activeElement === button);
+    // console.log(document.hasFocus());
+
+    '插入标记'
+    // var div = document.getElementById('myDiv');
+    // div.innerHTML = 'Hello & welcome, <b>\"reader\"!</b>'; // 替换了所有子元素
+    // div.innerHTML; // "Hello &amp; welcome, <b>"reader"!</b>"
+    // div.outerHTML = 'Hello & welcome, <b>\"reader\"!</b>'; // 替换了所有子元素
+    // div.outerHTML; // "<div id="myDiv">Hello &amp; welcome, <b>"reader"!</b></div>"
+
+    '父节点.contains(是否存在该后代节点)'
+    // var div = document.getElementById('myDiv');
+    // var ul = document.getElementsByTagName('ul')[0];
+    // console.log(div.contains(ul)); // true
+    // console.log(ul.contains(div)); // false
+
+'第十二章 DOM2和DOM3'
+
+    '访问元素的样式'
+    // var div = document.getElementById('myDiv');
+    // div.style.width = '100px';
+    // div.style.height = '100px';
+    // div.style.backgroundColor = 'red';
+    // console.log(div.style.cssText);
+    // console.log(div.style);
+    // console.log(div.style.length);
+    // console.log(div.style[1]);
+    // console.log(div.style.getPropertyValue('height'));
+    // console.log(div.style.removeProperty('background-color')); // 填写CSS属性名
+
+    '操作样式表'
+    </script>
 </body>
 </html>

@@ -419,11 +419,11 @@
     // document.body.appendChild(div);
 
     </script>
-    <div>
+    <!-- <div>
         <i></i>
         <b></b>
         <span></span>
-    </div>
+    </div> -->
     <script>
     '1. 封装函数insertAfter()，功能类似insertBefore()。直接在Element.prototype上编程'
 
@@ -454,9 +454,111 @@
         //         this.appendChild(this.children[i]);
         //     }
         // }
-        var div = document.getElementsByTagName('div')[0];
+        // var div = document.getElementsByTagName('div')[0];
         // div.reverseElem();
+
+    '日期对象'
+    // var date = new Date();
+
+    // var timeStar = new Date().getTime();
+    // for (let i = 0; i < 1000000; i++) {
+    // }
+    // var timeEnd = new Date().getTime();
+    // console.log(timeEnd - timeStar + '毫秒');
+
+    // if (new Date().getTime() === Date.now()) {
+    //     console.log('Yes'); // yes
+    // }
+
+    '返回当前日期'
+    // var getTime = function () {
+    //     var date = new Date();
+    //     var dateYear = date.getFullYear();
+    //     var dateMonth = date.getMonth() + 1;
+    //     var dateDay = date.getDate();
+    //     var dateWeek = date.getDay();
+    //     return console.log(dateYear + '年' + dateMonth + '月' + dateDay + '日星期' + dateWeek);
+    // }
+    // getTime();
+
+    '定时器'
+    // var firstTime = Date.now();
+    // setInterval(function () {
+
+    //     var lastTime = Date.now();
+    //     console.log(lastTime - firstTime);
+    //     firstTime = lastTime;
+
+    // }, 1000);
+
+    // var i = 0;
+    // setInterval(function() {
+    //     console.log(i++);
+    //     if (i > 10) {
+    //         clearInterval(1);
+    //     }
+    // }, 100);
+    
+    // setTimeout(function(){
+    //     console.log('End');
+    // }, 3000);
+
+    // var i = 0;
+    // setInterval(function() {
+    //     console.log(i++);
+    // }, 500);
+    // setTimeout(function(){
+    //     clearInterval(1);
+    // }, 3000);
+    // clearTimeout(2);
     </script>
 
+
+    <!-- <style>
+        input {
+            border: 1px solid rgba(0,0,0,0.8);
+            text-align: right;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        button {
+            display:block;
+            margin-left: 45%;
+        }
+    </style>
+    minutes:<input type="text" value="0">
+    seconds:<input type="text" value="0">
+    <button id="active">开始计时</button> -->
+    <script>
+    '计时器 三分钟停止'
+    // var btn = document.getElementById('active'),
+    //     minutesInput = document.getElementsByTagName('input')[0],
+    //     secondsInput = document.getElementsByTagName('input')[1],
+    //     clicked = true;
+
+    // btn.onclick = function () {
+    //     if (clicked) {
+    //         clicked = false;
+    //         console.log('time begin');
+    //         timeBegin();
+    //     }
+    // }
+    // function timeBegin() {
+    //     var m = 0,
+    //         s = 0;
+    //     setInterval(function () {
+    //         s++;
+    //         if (s === 60) {
+    //             s = 0;
+    //             m++;
+    //         }
+    //         secondsInput.value = s;
+    //         minutesInput.value = m;
+    //         if (m === 3) {
+    //             clearInterval(1);
+    //         }
+    //     }, 20);
+    // }
+    </script>
 </body>
 </html>
