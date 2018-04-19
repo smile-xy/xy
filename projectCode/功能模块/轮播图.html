@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>轮播图功能</title>
+    <style type="text/css">
+        div {
+            position: relative;
+            width: 300px;
+            height: 180px;
+            border: 1px solid #000;
+            overflow: hidden;
+        }
+
+        div img {
+            width: 100%;
+            height: 100%;
+        }
+
+        ul {
+            position: relative;
+            left: 0;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            width: 1200px;
+        }
+
+        ul li {
+            display: block;
+            float: left;
+            width: 300px;
+            height: 180px;
+        }
+    </style>
+    <script type="text/javascript">
+        // 获取 elem元素的 prop属性的最终显示结果并返回
+        function getElementStyle(elem, prop) {
+            if (window.getComputedStyle) {
+                return window.getComputedStyle(elem, null)[prop];
+            } else {
+                return elem.currentStyle[prop];
+            }
+        };
+    </script>
+</head>
+
+<body>
+
+    <div id="div">
+        <ul id="ul">
+            <li>
+                <img src="" style="background-color:red;">
+            </li>
+            <li>
+                <img src="" style="background-color:yellow;">
+            </li>
+            <li>
+                <img src="" style="background-color:blue;">
+            </li>
+            <li>
+                <img src="" style="background-color:red;">
+            </li>
+        </ul>
+    </div>
+
+    <script>
+        var ul = document.getElementById('ul'),
+            timerChange = setInterval(function () {
+
+                if (parseInt(getElementStyle(ul, 'left')) === -900) {
+                    ul.style.left = '-300px';
+                } else {
+                    ul.style.left = parseInt(getElementStyle(ul, 'left')) - 300 + 'px';
+                }
+            }, 2000);
+    </script>
+
+</body>
+
+</html>

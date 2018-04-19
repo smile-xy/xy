@@ -267,7 +267,7 @@
     //         len = child.length;
 
     //     for (var i = 0; i < len; i++) {
-            
+
     //         if (child[i].nodeType === 1) {
     //             temp.push(child[i]);
     //         }
@@ -403,7 +403,7 @@
     // for (var i = 0; i < all.length; i++) {
     //     all[i].setAttribute('this-name', all[i].nodeName);
     // }
-    
+
     '练习'
     // function setElement(elem, name) {
     //     var value = document.createElement(elem);
@@ -498,7 +498,7 @@
     //         clearInterval(1);
     //     }
     // }, 100);
-    
+
     // setTimeout(function(){
     //     console.log('End');
     // }, 3000);
@@ -559,6 +559,392 @@
     //         }
     //     }, 20);
     // }
+    </script>
+
+
+    <!-- <style type="text/css">
+    div {
+        width: 2000px;
+        height: 4000px;
+        background-color: #eee;
+    }
+    </style>
+    <div></div> -->
+    <script>
+    '查看滚动条滚动距离'
+    // 不兼容IE8及以下
+    window.pageXOffset; // 当前页面X轴方向滚动距离
+    window.pageYOffset; // 当前页面Y轴方向滚动距离
+    // var div = document.getElementsByTagName('div')[0];
+    // setInterval(function () {
+    //     if (window.pageYOffset > innerHeight) {
+    //         div.style.backgroundColor = '#aaa';
+    //     } else {
+    //         div.style.backgroundColor = '#eee';
+    //     }
+    // }, 500);
+
+    // IE8及以下兼容混乱
+    document.body.scrollLeft;
+    document.body.scrollTop;
+    document.documentElement.scrollLeft;
+    document.documentElement.scrollTop;
+    // 解决
+    // var xOffset = document.body.scrollLeft + document.documentElement.scrollLeft;
+
+    '封装兼容性方法，求滚动条滚动距离'
+    // function getScrollOffset(){
+
+    //     if (window.pageXOffset) {
+    //         return {
+    //             x: window.pageXOffset,
+    //             y: window.pageYOffset
+    //         }
+    //     }else {
+    //         return {
+    //             x: document.body.scrollLeft + document.documentElement.scrollLeft,
+    //             y: document.body.scrollTop + document.documentElement.scrollTop
+    //         }
+    //     }
+    // };
+
+    '查看可视区窗口大小'
+    // IE8及以下不兼容
+    window.innerWidth;
+    window.innerHeight;
+
+    // IE8及以下 标准模式兼容
+    document.documentElement.clientWidth;
+    document.documentElement.clientHeight;
+
+    // IE8及以下 怪异模式兼容
+    document.body.clientWidth;
+    document.body.clientHeight;
+
+    '封装兼容性方法，求可视区窗口大小'
+    // var getPageSize = function () {
+    //     if (window.innerWidth) {
+    //         return {
+    //             pageWidth: window.innerWidth,
+    //             pageHeight: window.innerHeight
+    //         }
+    //     } else {
+    //         if (document.compatMode == 'CSS1Compat') {
+    //             return {
+    //                 pageWidth: document.documentElement.clientWidth,
+    //                 pageHeight: document.documentElement.clientHeight
+    //             }
+    //         } else {
+    //             return {
+    //                 pageWidth: document.body.clientWidth,
+    //                 pageHeight: document.body.clientHeight
+    //             }
+    //         }
+    //     }
+    // };
+    </script>
+
+
+    <!-- <div id="div" style="width:150px;height:150px;background-color:red;position:absolute;left:100px;top:100px"></div> -->
+    <script>
+    // var div = document.getElementById('div');
+    'ES5 静态查看元素几何尺寸'
+    // div.getBoundingClientRect();
+
+    '查看元素尺寸'
+    // div.offsetWidth; // 水平占用空间宽度
+    // div.offsetHeight; // 垂直占用空间宽度
+
+    //对于无定位父级元素，返回相对文档的坐标；对于一定位父级元素，返回相对于最近有定位父级元素坐标。
+    // div.offsetLeft;
+    // div.offsetTop;
+
+    // div.offsetParent; // 返回最近有定位父级
+    </script>
+
+
+    <!-- <div id="div" style="width:100%; height:600px; background-color:#eee"></div>
+    <button id="btn">More</button> -->
+    <script>
+    '让滚动条滚动 scroll(X轴滚动距离， Y轴滚动距离)'
+    scroll()/scrollTo(); // 滚动到指定坐标
+    scrollBy(); // 滚动指定距离
+
+    // var div = document.getElementById('div');
+    // var btn = document.getElementById('btn');
+    // btn.onclick = function () {
+    //     var index = getScrollOffset();
+    //     if (btn.innerText == 'More') {
+    //         div.style.height = '3000px';
+    //         btn.innerText = 'Return';
+    //     } else {
+    //         div.style.height = '600px';
+    //         window.scrollTo(index['x'], index['y']);
+    //         btn.innerText = 'More';
+    //     }
+    // }
+    </script>
+
+    <!-- <div id="div" style="width:150px;height:150px;background-color:red;position:absolute;left:100px;top:100px"></div> -->
+    <script>
+    '计算样式'
+    // var div = document.getElementById('div');
+    // window.getComputedStyle(div, null);
+
+    '封装兼容性方法 查询最终样式 getStyle(elem, prop)'
+    function getStyle(elem, prop) {
+        if (window.getComputedStyle) {
+            return window.getComputedStyle(elem, null)[prop];
+        } else {
+            return elem.currentStyle[prop];
+        }
+    }
+    </script>
+
+
+    <!-- <style type="text/css">
+    div {
+        width: 150px;
+        height: 150px;
+        background-color: red;
+    }
+    .green:after {
+        content:"";
+        display: inline-block;
+        width:50px;
+        height: 50px;
+        background-color: green;
+    }
+    .yellow:after {
+        content:"";
+        display: inline-block;
+        width:50px;
+        height: 50px;
+        background-color: yellow;
+    }
+    </style>
+    <div id="div" class="green"></div> -->
+    <script>
+    'JS修改样式思想 尽量只修改一次'
+    // var div = document.getElementById('div');
+    // div.onclick = function() {
+    //     // div.style.height = '100px';
+    //     // div.style.height = '100px';
+    //     // div.style.height = '100px';
+    //     div.className = 'yellow';
+    // }
+    </script>
+
+
+    <!-- <div id="div" style="width:100px;height:100px;background-color:red;position:absolute;left:0;top:0"></div> -->
+    <script>
+    '移动方块练习'
+    // var speed = 8;
+    // var div = document.getElementById('div');
+    // var timer = setInterval(function(){
+    //     div.style.left = parseInt(getStyle(div, 'left')) + speed + 'px';
+
+    //     if (parseInt(div.style.left) > 500) {
+    //         clearInterval(timer);
+    //     }
+    // }, 30);
+
+
+    '事件绑定'
+    </script>
+    <!-- <div id="div" style="width:100px;height:100px;background-color:red;position:absolute;left:0;top:0"></div> -->
+    <script>
+    // var div = document.getElementById('div');
+    // // 同一个元素只能绑定一个处理函数
+    // div.onclick = function () { // 类似于行间样式
+    //     this.style.backgroundColor = 'green';
+    // }
+
+    'addEventListener(事件类型， 函数，false)'
+    // div.addEventListener('click', function(){
+    //     console.log('a');
+    // }, false);
+    // div.addEventListener('click', function(){
+    //     console.log('a');
+    // }, false);
+    // div.addEventListener('click', text, false);
+    // function text(){
+    //     console.log('c');
+    // }
+
+    'IE独有 attachEvent(on + type, fun)'
+    // div.attachEvent('onclick', text);
+
+
+    '练习'
+    </script>
+    <!-- <ul>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+        <li>a</li>
+    </ul> -->
+    <script>
+    // var li = document.getElementsByTagName('li');
+    // for (var i = 0; i < li.length; i++) {
+    //     (function(i) {
+    //         li[i].addEventListener('click', function() {
+    //             console.log(i + 1);
+    //     }, false)
+    //     }(i));
+    // }
+
+
+    '事件处理'
+    </script>
+    <!-- <div id="div" style="width:100px;height:100px;background-color:red;position:absolute;left:0;top:0"> -->
+    <script>
+    // var div = document.getElementById('div');
+    // div.onclick = function() { // 指向dom元素自己
+    //     console.log(this);
+    //     this.onclick = null; // 只能执行一次
+    // }
+
+    // div.addEventListener('click', function() {
+    //     console.log(this);
+    // }, false); // 指向dom元素自己
+    // div.removeEventListener('click', funName, false); // 指向dom元素自己
+
+    // div.attachEvent('onclick', function() {
+    //     console.log(this);
+    // }); // 指向window
+    // div.detachEvent('onclick', funName); // 指向window
+
+    // 改正指向 window的 BUG
+    // div.attachEvent('onclick', handler); // 指向dom元素自己
+    // function handler() {
+    //     function hand() {
+    //         console.log(this);
+    //     }
+    //     console.log(hand.call(div));
+    // }
+    // div.detachEvent('onclick', handler); // 指向window
+
+
+    '兼容性事件处理'
+    // function addEvent(clem, type, handle) {
+    //     if (elem.addEventListener) {
+    //         elem.addEventListener(type, handle, false);
+    //     } else if(elem.attachEvent){
+    //         elem.attachEvent('on' + type, function(){
+    //             hadle,call(elem);
+    //         })
+    //     }else {
+    //         elem['on' + type] = handle;
+    //     }
+    // }
+
+
+    '事件流'
+    </script>
+    <!-- <style>
+    .wrapper {
+        margin-top: 400px;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+    }
+    </style>
+    <div id="div" class="wrapper">
+        <a href="#">AcFun</a>
+    </div> -->
+    <script>
+    // document.onclick = function() {
+    //     console.log('ABCD');
+    // }
+    // var div = document.getElementById('div');
+    // div.onclick = function(event) {
+    //     console.log(event);
+    //     stopBubble(event);
+    //     this.style.backgroundColor = 'green';
+    // }
+
+    '取消事件的进一步捕获或冒泡'
+    // function stopBubble(event) {
+    //     if (even.stopPropagation) {
+    //         even.stopPropagation();
+    //     }else {
+    //         event.cancelBubble = true;
+    //     }
+    // }
+
+    '取消鼠标右键默认事件'
+    // document.oncontextmenu = function() {
+    //     console.log('a');
+    //     return false; // 以对象属性的方式注册的事件有效
+    // }
+
+    // document.oncontextmenu = function(event) {
+    //     console.log('b');
+    //     event.preventDefault(); // W3C IE9以下不兼容
+    // }
+
+    // document.oncontextmenu = function(event) {
+    //     console.log('b');
+    //     event.returnValue = false; // 兼容IE
+    // }
+
+    document.oncontextmenu = function(event) {
+        console.log('b');
+        cancelHandler(event);
+    }
+    '兼容 取消默认事件'
+    function cancelHandler(event) {
+        var event = event || window.event;
+        if (event.preventDefault) {
+            event.preventDefault();
+        } else {
+            event.returnValue = false;
+        }
+    }
+
+    '取消a标签的默认事件'
+    // var a = document.getElementsByTagName('a')[0];
+    // a.onclick = function(event) {
+    //     cancelHandler(event);
+    // }
+
+
+    '事件源对象'
+    </script>
+    <div id="wrap" style="width:200px;height:200px;background-color:red;position:absolute;left:0;top:0">
+        <div id="box" style="width:100px;height:100px;background-color:green">
+        </div>
+    </div>
+    <ul id="ul" style="margin-top:200px;">
+        <li>1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+        <li>6</li>
+        <li>7</li>
+        <li>8</li>
+        <li>9</li>
+        <li>10</li>
+    </ul>
+    <script>
+    var wrap = document.getElementById('wrap');
+    wrap.onclick = function (event) {
+        var event = event || window.event;
+        var target = event.target || event.scrElement;
+        console.log(target);
+    }
+    '事件委托'
+    var ul = document.getElementById('ul');
+    ul.onclick = function (event) {
+        var event = event || window.event;
+        var target = event.target || event.scrElement;
+        console.log(target.innerText);
+    }
+
+
+    '可拖拽的小方块 onmouseenter onmouseleave onmousemove'
     </script>
 </body>
 </html>
