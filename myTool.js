@@ -52,6 +52,16 @@ var inherit = (function () {
     }
 }());
 
+// insertAfter()，功能类似insertBefore()
+Element.prototype.insertAfter = function(node, index) {
+    var beforeNode = index.nextElementSibling;
+    if (beforeNode == null) {
+        this.appendChild(node);
+    } else {
+        this.insertBefore(node, beforeNode);
+    }
+}
+
 // 获取当前窗口大小，并返回对象{pageWidth, pageHeight};
 var getPageSize = function () {
     if (window.innerWidth) {
@@ -121,7 +131,7 @@ var EventTool = {
     },
 }
 
-// 跨浏览器 事件绑定 (解决了IE this指向 window 的BUG)
+// 跨浏览器 事件绑定 (解决了IE this指向 window 的BUG 但是IE的事件是匿名函数无法取消)
 function addEvent(elem, type, handler) {
     if (elem.addEventListener) {
         elem.addEventListener(type, handler, false);
@@ -141,5 +151,46 @@ function cancelHandler(event) {
         event.preventDefault();
     } else {
         event.returnValue = false;
+    }
+}
+
+// 取消事件的进一步捕获或冒泡
+function stopBubble(event) {
+    if (event.stopPropagation) {
+        event.stopPropagation();
+    }else {
+        event.cancelBubble = true;
+    }
+}
+
+//夸浏览器 获取事件源对象 elem.type = eventTarget;
+function eventTarget(event) {
+    var event = event || window.event;
+    var target = event.target || event.scrElement;
+    return target;
+}
+
+//元素拖拽
+function dragElement(elem) {
+    var divX,
+        divY;
+        EventTool.addHandler(elem, 'mousedown' ,function(event){
+        var event = event || window.event;
+        divX = event.clientX - parseInt(getElementStyle(elem,'left'));
+        divY = event.clientY - parseInt(getElementStyle(elem,'top'));
+        EventTool.addHandler(document, 'mousemove', mouseMove);
+        EventTool.addHandler(document, 'mouseup', mouseUp);
+        stopBubble(event);
+        cancelHandler(event);
+    });
+    function mouseMove(event){
+        var event = event || window.event;
+        elem.style.left = event.clientX - divX + 'px';
+        elem.style.top = event.clientY - divY + 'px';
+    }
+    function mouseUp(event){
+        var event = event || window.event;
+        EventTool.removeHandler(document, 'mousemove', mouseMove);
+        EventTool.removeHandler(document, 'mouseup', mouseUp);
     }
 }

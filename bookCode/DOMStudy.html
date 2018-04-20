@@ -460,7 +460,7 @@
     '日期对象'
     // var date = new Date();
 
-    // var timeStar = new Date().getTime();
+    // var timeStar = new Date().getTime(); // Date.now()
     // for (let i = 0; i < 1000000; i++) {
     // }
     // var timeEnd = new Date().getTime();
@@ -593,20 +593,20 @@
     // var xOffset = document.body.scrollLeft + document.documentElement.scrollLeft;
 
     '封装兼容性方法，求滚动条滚动距离'
-    // function getScrollOffset(){
+    function getScrollOffset(){
 
-    //     if (window.pageXOffset) {
-    //         return {
-    //             x: window.pageXOffset,
-    //             y: window.pageYOffset
-    //         }
-    //     }else {
-    //         return {
-    //             x: document.body.scrollLeft + document.documentElement.scrollLeft,
-    //             y: document.body.scrollTop + document.documentElement.scrollTop
-    //         }
-    //     }
-    // };
+        if (window.pageXOffset) {
+            return {
+                x: window.pageXOffset,
+                y: window.pageYOffset
+            }
+        }else {
+            return {
+                x: document.body.scrollLeft + document.documentElement.scrollLeft,
+                y: document.body.scrollTop + document.documentElement.scrollTop
+            }
+        }
+    };
 
     '查看可视区窗口大小'
     // IE8及以下不兼容
@@ -692,15 +692,14 @@
     // window.getComputedStyle(div, null);
 
     '封装兼容性方法 查询最终样式 getStyle(elem, prop)'
-    function getStyle(elem, prop) {
-        if (window.getComputedStyle) {
-            return window.getComputedStyle(elem, null)[prop];
-        } else {
-            return elem.currentStyle[prop];
-        }
-    }
+    // function getStyle(elem, prop) {
+    //     if (window.getComputedStyle) {
+    //         return window.getComputedStyle(elem, null)[prop];
+    //     } else {
+    //         return elem.currentStyle[prop];
+    //     }
+    // }
     </script>
-
 
     <!-- <style type="text/css">
     div {
@@ -754,6 +753,7 @@
     </script>
     <!-- <div id="div" style="width:100px;height:100px;background-color:red;position:absolute;left:0;top:0"></div> -->
     <script>
+    'onclick'
     // var div = document.getElementById('div');
     // // 同一个元素只能绑定一个处理函数
     // div.onclick = function () { // 类似于行间样式
@@ -827,12 +827,12 @@
 
 
     '兼容性事件处理'
-    // function addEvent(clem, type, handle) {
+    // function addEvent(elem, type, handle) {
     //     if (elem.addEventListener) {
     //         elem.addEventListener(type, handle, false);
     //     } else if(elem.attachEvent){
     //         elem.attachEvent('on' + type, function(){
-    //             hadle,call(elem);
+    //             handle,call(elem);
     //         })
     //     }else {
     //         elem['on' + type] = handle;
@@ -881,7 +881,7 @@
 
     // document.oncontextmenu = function(event) {
     //     console.log('b');
-    //     event.preventDefault(); // W3C IE9以下不兼容
+    //     event.preventDefault(); // W3C推荐 IE9以下不兼容
     // }
 
     // document.oncontextmenu = function(event) {
@@ -889,19 +889,19 @@
     //     event.returnValue = false; // 兼容IE
     // }
 
-    document.oncontextmenu = function(event) {
-        console.log('b');
-        cancelHandler(event);
-    }
+    // document.oncontextmenu = function(event) {
+    //     console.log('b');
+    //     cancelHandler(event);
+    // }
     '兼容 取消默认事件'
-    function cancelHandler(event) {
-        var event = event || window.event;
-        if (event.preventDefault) {
-            event.preventDefault();
-        } else {
-            event.returnValue = false;
-        }
-    }
+    // function cancelHandler(event) {
+    //     var event = event || window.event;
+    //     if (event.preventDefault) {
+    //         event.preventDefault();
+    //     } else {
+    //         event.returnValue = false;
+    //     }
+    // }
 
     '取消a标签的默认事件'
     // var a = document.getElementsByTagName('a')[0];
@@ -912,7 +912,7 @@
 
     '事件源对象'
     </script>
-    <div id="wrap" style="width:200px;height:200px;background-color:red;position:absolute;left:0;top:0">
+    <!-- <div id="wrap" style="width:200px;height:200px;background-color:red;position:absolute;left:0;top:0">
         <div id="box" style="width:100px;height:100px;background-color:green">
         </div>
     </div>
@@ -927,24 +927,143 @@
         <li>8</li>
         <li>9</li>
         <li>10</li>
-    </ul>
+    </ul> -->
     <script>
-    var wrap = document.getElementById('wrap');
-    wrap.onclick = function (event) {
-        var event = event || window.event;
-        var target = event.target || event.scrElement;
-        console.log(target);
-    }
-    '事件委托'
-    var ul = document.getElementById('ul');
-    ul.onclick = function (event) {
-        var event = event || window.event;
-        var target = event.target || event.scrElement;
-        console.log(target.innerText);
-    }
+    // var wrap = document.getElementById('wrap');
+    // wrap.onclick = function (event) {
+    //     var event = event || window.event;
+    //     var target = event.target || event.scrElement;
+    //     console.log(target);
+    // }
+    // '事件委托'
+    // var ul = document.getElementById('ul');
+    // ul.onclick = function (event) {
+    //     var event = event || window.event;
+    //     var target = event.target || event.scrElement;
+    //     console.log(target.innerText);
+    // }
 
+
+    '复习'
+    </script>
+    <!-- <style>
+    div {
+        opacity: 0.8;
+        }
+    .wrap {
+        width: 300px;
+        height: 300px;
+        background-color: red;
+    }
+    .box {
+        width: 200px;
+        height: 200px;
+        background-color: blue;
+
+    }
+    .content {
+        width: 100px;
+        height: 100px;
+        background-color: yellow;
+
+    }
+    .mouse {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        width:80px;
+        height: 100px;
+        background-color: #eee;
+    }
+    </style>
+    <div id="div" class="class1 class2 class3">
+        <div class="wrap">
+            <div class="box">
+                <div class="content">
+                    <a href="#">Click Me!</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="mouseR" class="mouse">
+        <ul id="ul">
+            <li>1111</li>
+            <li>2222</li>
+            <li>3333</li>
+            <li>4444</li>
+        </ul>
+    </div> -->
+    <script>
+    // var mouseR = document.getElementById('mouseR');
+    // var div = document.getElementById('div');
+    // var divChild = div.children;
+    // var wrap = document.getElementsByClassName('wrap')[0];
+    // var box = document.getElementsByClassName('box')[0];
+    // var content = document.getElementsByClassName('content')[0];
+
+    // var fun = function (event) {
+    //     var event = event || window.event;
+    //     var target = event.target || event.scrElement;
+    //     event.stopPropagation();
+    //     console.log(target.className || target.tagName);
+    // }
+    // wrap.addEventListener('click', fun, false);
+    // box.addEventListener('click', fun, false);
+    // content.addEventListener('click', fun, false);
+
+    // //模仿右键弹出框，取消鼠标右键默认事件（无法取消弹出框）
+    // document.oncontextmenu = function(event) {
+    //     // console.log(event);
+    //     event.preventDefault(); // W3C推荐 IE9以下不兼容
+    //     mouseR.style.display = 'block';
+    //     mouseR.style.top = event.clientY + 'px';
+    //     mouseR.style.left = event.clientX + 'px';
+    // }
+
+    // //'兼容 取消默认事件'
+    // function cancelHandler(event) {
+    //     var event = event || window.event;
+    //     if (event.preventDefault) {
+    //         event.preventDefault();
+    //     } else {
+    //         event.returnValue = false;
+    //     }
+    // }
 
     '可拖拽的小方块 onmouseenter onmouseleave onmousemove'
+    </script>
+    <!-- <style>
+    #div {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 200px;
+        background-color: #666;
+    }
+    </style>
+    <div id="div"></div> -->
+    <script>
+    // var div = document.getElementById('div');
+    // function dragElement(elem, ) {
+    //     var divX,
+    //         divY;
+    //     elem.onmousedown = function (event) {
+    //         divX = event.clientX - parseInt(elem.style.left || 0);
+    //         divY = event.clientY - parseInt(elem.style.top || 0);
+
+    //         document.onmousemove = function (event) {
+    //             var event = event || window.event;
+    //             elem.style.left = event.clientX - divX + 'px';
+    //             elem.style.top = event.clientY - divY + 'px';
+    //         }
+    //         document.onmouseup = function () {
+    //             document.onmousemove = null;
+    //         }
+    //     }
+    // }
+    // dragElement(div);
     </script>
 </body>
 </html>
