@@ -7,6 +7,7 @@
 	</style>
 </head>
 <body>
+<script type="text/javascript" src="D:\github\myTool.js"></script>
 <script>
 // function setName(obj){
 // 	obj.name = "Nike";
@@ -1451,14 +1452,14 @@
 // location 对象
 
     //window.location === document.location
-    window.location.hash;      // 返回URL中的 hash
-    window.location.host;      // 返回服务器名称和端口号
-    window.location.hostname;  //  返回不带端口号的服务器名称
-    window.location.href;      // 返回当前加载页面的完整URL
-    window.location.pathname;  // 返回URL中的目录和文件名
-    window.location.port;      // 返回URL中指定的端口号
-    window.location.protocol;  // 返回页面使用的协议
-    window.location.search;    // 返回URL的查询字符串
+    // window.location.hash;      // 返回URL中的 hash
+    // window.location.host;      // 返回服务器名称和端口号
+    // window.location.hostname;  //  返回不带端口号的服务器名称
+    // window.location.href;      // 返回当前加载页面的完整URL
+    // window.location.pathname;  // 返回URL中的目录和文件名
+    // window.location.port;      // 返回URL中指定的端口号
+    // window.location.protocol;  // 返回页面使用的协议
+    // window.location.search;    // 返回URL的查询字符串
 
     '查询字符串参数'
    
@@ -1584,14 +1585,14 @@
     // var shallowList = myList.cloneNode(false);
     // console.log(shallowList.childNodes.length);
 
-    // 文档标题
-    document.title;
-    // 取得URL
-    document.URL;
-    // 取得域名
-    document.domain;
-    // 取得来源页面的URL
-    document.referrer;
+    // // 文档标题
+    // document.title;
+    // // 取得URL
+    // document.URL;
+    // // 取得域名
+    // document.domain;
+    // // 取得来源页面的URL
+    // document.referrer;
 
     'Element 类型'
     // if (element.tagName.toLowerCase() == 'div') {
@@ -1765,7 +1766,7 @@
 
     'DOM2'
     </script>
-    <button id="myBtn">Click!</button>
+    <!-- <button id="myBtn">Click!</button> -->
     <script>
     // var btn = document.getElementById('myBtn');
     // btn.addEventListener('click', function(){ // 匿名函数无法移除
@@ -1781,6 +1782,185 @@
     // }
     // btn.addEventListener('click', event, false);
     // btn.removeEventListener('click', event, false);
+
+    'load事件'
+    // EventTool.addHandler(window, 'load', function(event){
+    //     console.log('Loaded!');
+    // });
+    </script>
+    <!-- <style>
+    #myImg {
+        width: 1000px;
+        height: 3000px;
+    }
+    input{
+        display: block;
+    }
+    </style>
+    <input type="text" value="something">
+    <img id="myImg"/> -->
+    <script>
+    // EventTool.addHandler(window, 'load', function () {
+    //     var image = document.getElementById('myImg');
+    //     EventTool.addHandler(image, 'load', function (event) {
+    //         event = EventTool.getEvent(event);
+    //         alert(EventTool.getTarget(event).src);
+    //     });
+    //     document.body.appendChild(image);
+    //     image.src = 'D:\\github\\projectCode\\得到\\2016.jpg';
+    // });
+    
+    // EventTool.addHandler(window, 'load', function(){
+    //     var script = document.createElement('script');
+    //     EventTool.addHandler(script, 'load', function(){
+    //         alert('Loaded');
+    //     });
+    //     script.src = 'none.js';
+    //     document.body.appendChild(script);
+    // });
+
+    'load事件'
+    // EventTool.addHandler(window, 'unload', function(event){
+    //     console.log('Unloaded');
+    // })
+    
+    'scroll事件'
+    // EventTool.addHandler(window, 'scroll', function(){
+    //     console.log(getScrollOffset().yOffset);
+    // })
+
+    '焦点事件'
+    // var input = document.getElementsByTagName('input')[0];
+    // EventTool.addHandler(input, 'focusin', function () {
+    //     if (input.value == 'something') {
+    //         input.value = '';
+    //     }
+    // })
+    // EventTool.addHandler(input, 'focusout', function () {
+    //     if (input.value == '') {
+    //         input.value = 'something';
+    //     }
+    // })
+
+    '鼠标与滚轮'
+    // EventTool.addHandler(window, 'click', function(event){
+    //     event = EventTool.getEvent(event);
+    //     console.log('client ' + event.clientX + ' ' + event.clientY);
+    //     console.log('page ' + event.pageX + ' ' + event.pageY);
+    //     console.log('screen ' + event.screenX + ' ' + event.screenY);
+    // })
+
+    '修改键'
+    //  EventTool.addHandler(window, 'click', function(event){
+    //      event = EventTool.getEvent(event);
+    //      var keys = [];
+    //      if (event.shiftKey) {
+    //             keys.push('shift');
+    //      }
+    //      if (event.ctrlKey) {
+    //             keys.push('ctrl');
+    //      }
+    //      if (event.altKey) {
+    //             keys.push('alt');
+    //      }
+    //      if (event.metaKey) {
+    //             keys.push('meta');
+    //      }
+    //      console.log('Keys: ' +keys.join('+'));
+    //  });
+
+    '相关元素'
+    // // mouseout
+    //  var input = document.getElementsByTagName('input')[0];
+    //  EventTool.addHandler(input, 'mouseout', function(event){
+    //     // event = EventTool.getEvent(event);
+    //     var target = EventTool.getTarget(event);
+    //     var relateTarget = EventTool.getRelatedTarget(event);
+    //     console.log('Mouse out of '+ target.tagName +' to '+ relateTarget.tagName);
+    // })
+    // // mouseover
+    // EventTool.addHandler(input, 'mouseover', function(event){
+    //     event = EventTool.getEvent(event);
+    //     var target = EventTool.getTarget(event);
+    //     var relateTarget = EventTool.getRelatedTarget(event);
+    //     console.log('Mouse out of '+ relateTarget.tagName +' to '+ target.tagName);
+    // })
+
+    '鼠标按钮'
+    // EventTool.addHandler(document, 'mousedown', function(event){
+    //     event = EventTool.getEvent(event);
+    //     console.log(EventTool.getClickButton(event));
+    // })
+
+    '鼠标滚轮事件'
+    // EventTool.addHandler(document, 'mousewheel', function(event){
+    //     event = EventTool.getEvent(event);
+    //     console.log(event.wheelDelta);
+    // })
+
+    '按键键码'
+    // var input = document.getElementsByTagName('input')[0];
+    // EventTool.addHandler(input, 'keyup', function(){
+        // console.log('key'+ event.keyCode);
+    '字符编码'
+        // console.log('char'+ event.charCode);
+    '兼容字符编码'    
+    //     console.log(EventTool.getCharCode(event));
+    // })
+
+    'contextmenu事件————模拟右键菜单'
+    </script>
+    <style>
+    #div {
+        display: none;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border: 1px solid #666;
+        background-color: #ccc;
+    }
+    ul {
+        list-style: none;
+        margin: 0;
+        margin-bottom: -1px;
+        padding: 0;
+        width: 100px;
+        text-indent: 1em;
+    }
+    ul li {
+        width: 100%;
+        border-bottom: 1px solid;
+        line-height: 22px;
+    }
+    li:hover {
+        background-color: #666;
+        cursor: default;
+    }
+    </style>
+    <div id="div">
+        <ul>
+            <li id="li1">11111</li>
+            <li id="li2">22222</li>
+            <li id="li3">33333</li>
+            <li id="li4">44444</li>
+            <li id="li5">55555</li>
+        </ul>
+    </div>
+    <script>
+        EventTool.addHandler(window, 'load', function(event){
+            var div = document.getElementById('div');
+            EventTool.addHandler(window, 'contextmenu', function(event){
+                EventTool.preventDefault(event);
+                
+                div.style.left = event.clientX + 'px';
+                div.style.top = event.clientY + 'px';
+                div.style.display = 'block';
+            });
+
+            EventTool.addHandler(document, 'click', function(event){
+                div.style.display = 'none';
+            });
+        })
     </script>
 </body>
 </html>
