@@ -1056,25 +1056,81 @@
     <div id="useless"></div> -->
     <script>
     // var div = document.getElementById('div');
-    // function dragElement(elem) {
-    //     var divX,
-    //         divY;
-    //     elem.onmousedown = function (event) {
-    //         divX = event.clientX - parseInt(elem.style.left || 0);
-    //         divY = event.clientY - parseInt(elem.style.top || 0);
+    // dragElement('useless');
 
-    //         document.onmousemove = function (event) {
-    //             var event = event || window.event;
-    //             elem.style.left = event.clientX - divX + 'px';
-    //             elem.style.top = event.clientY - divY + 'px';
+    
+    '点击跳转，按住拖拽'
+    </script>
+    <!-- <style>
+    #div {
+        position: absolute;
+        width: 200px;
+        height: 200px;
+        background-color: red;
+    }
+    </style>
+    <i>拖动不能出div，点击跳转</i>
+    <div id="div"></div> -->
+    <script>
+    // var div = document.getElementById('div'),
+    // timeBegin = 0,
+    // timeENd = 0,
+    // clicked = false;
+    
+    // EventTool.addHandler(div, 'mousedown', function (event) {
+    //     timeBegin = Date.now();
+    //     var downX = event.clientX;
+    //     var downY = event.clientY;
+    //     var divX = parseInt(div.style.left) || 0;
+    //     var divY = parseInt(div.style.top) || 0;
+        
+    //     EventTool.addHandler(div, 'mouseup', function (event) {
+    //         timeEnd = Date.now();
+    //         if (timeEnd - timeBegin < 200) {
+    //             clicked = true;
+    //         } else {
+    //             console.log(event.clientX + ' ' + event.clientY);
+    //             div.style.left = divX + event.clientX - downX + 'px';
+    //             div.style.top = divY + event.clientY - downY + 'px';
     //         }
-    //         document.onmouseup = function () {
-    //             document.onmousemove = null;
-    //         }
+    //     })
+    // })
+    // EventTool.addHandler(div, 'click' ,function(event){
+    //     if (clicked) {
+    //         console.log('clicked');
+    //         clicked = false;
     //     }
-    // }
-// dragElement('useless');
+    // })
 
+    '随机移动方块 mouseover 怎么点也点不到' // TODO:
+    '方块跟随鼠标方向摆动'
+    
+    '键盘事件'
+    //keyCode keydown 任意按键 不区分大小写
+    //charCode  keypress 字符按键
+
+    'input事件'
+    </script>
+    <!-- <input type="text"> -->
+    <div style="height:3000px"></div>
+    <script>
+    // var input = document.getElementsByTagName('input')[0];
+    // input.oninput = function(event) {
+    //     console.log(this.value);
+    // }
+    // input.onchange = function(event) {
+    //     console.log('---'+ this.value);
+    // }
+
+    'scroll事件'
+    window.onscroll = function() {
+        console.log(window.pageXOffset +' '+ window.pageYOffset);
+    }
+
+    '二阶菜单栏'
+    '贪吃蛇游戏(跟随上一块身体)'
+    '扫雷游戏(闭包)'
+    '打方块游戏'
     </script>
 </body>
 </html>

@@ -101,7 +101,7 @@ function getScrollOffset() {
     }
 };
 
-// 获取 elem元素的prop 属性的最终计算结果并返回
+// 获取 elem 元素的prop 属性的最终计算结果并返回
 function getElementStyle(elem, prop) {
     if (window.getComputedStyle) {
         return window.getComputedStyle(elem, null)[prop];

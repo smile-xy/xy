@@ -1910,7 +1910,7 @@
 
     'contextmenu事件————模拟右键菜单'
     </script>
-    <style>
+    <!-- <style>
     #div {
         display: none;
         position: absolute;
@@ -1945,22 +1945,60 @@
             <li id="li4">44444</li>
             <li id="li5">55555</li>
         </ul>
-    </div>
+    </div> -->
     <script>
-        EventTool.addHandler(window, 'load', function(event){
-            var div = document.getElementById('div');
-            EventTool.addHandler(window, 'contextmenu', function(event){
-                EventTool.preventDefault(event);
-                
-                div.style.left = event.clientX + 'px';
-                div.style.top = event.clientY + 'px';
-                div.style.display = 'block';
-            });
+    // EventTool.addHandler(window, 'load', function(event){
+    //     var div = document.getElementById('div');
+    //     EventTool.addHandler(window, 'contextmenu', function(event){
+    //         EventTool.preventDefault(event);
+            
+    //         div.style.left = event.clientX + 'px';
+    //         div.style.top = event.clientY + 'px';
+    //         div.style.display = 'block';
+    //     });
 
-            EventTool.addHandler(document, 'click', function(event){
-                div.style.display = 'none';
-            });
-        })
+    //     EventTool.addHandler(document, 'click', function(event){
+    //         div.style.display = 'none';
+    //     });
+    // })
+
+
+    '事件委托'
+    </script>
+    <!-- <ul id="myLinks">
+        <li id="go">GO</li>
+        <li id="do">DO</li>
+        <li id="say">SAY</li>
+    </ul> -->
+    <script>
+    // var list = document.getElementById('myLinks');
+    // EventTool.addHandler(list, 'click', function(){
+    //     var target = EventTool.getTarget();
+
+    //     switch (target.id) {
+    //         case 'do':
+    //             document.title = 'DODODO';
+    //             break;
+    //         case 'go':
+    //             location.href = 'https://www.baidu.com';
+    //             break;
+    //         case 'say':
+    //             console.log('Hi');
+    //             break;
+    //     }
+    // });
+
+    '模拟鼠标事件'
+    </script>
+    <!-- <button id="btn">Click Me!</button> -->
+    <script>
+    // var btn = document.getElementById('btn');
+    // EventTool.addHandler(btn, 'click', function(){
+    //     console.log('clicked!');
+    // })
+    // var event = document.createEvent('MouseEvents');
+    // event.initMouseEvent('click', true, true, document.defaultView, 0, '5px', '5px', '5px', '5px', false, false, false, false, 0, null);
+    // btn.dispatchEvent(event);
     </script>
 </body>
 </html>

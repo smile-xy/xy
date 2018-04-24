@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>扫雷</title>
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
+    <style>
+        body,
+        ul,
+        p,
+        h2 {
+            margin: 0;
+        }
+
+        ul {
+            padding: 0;
+        }
+
+        ul {
+            list-style: none;
+        }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+
+        body {
+            background-color: #c3c3c3;
+        }
+
+        .wrap {
+            position: relative;
+            left: 50%;
+        }
+
+
+        header {
+            box-sizing: border-box;
+            margin-bottom: 15px;
+            border: 4px solid;
+            border-top-color: #7e7e7e;
+            border-right-color: #fff;
+            border-bottom-color: #fff;
+            border-left-color: #7e7e7e;
+            width: 100%;
+            height: 100px;
+            background-color: #c2c2c2;
+        }
+
+        .grade {
+            margin-left: -5px;
+            margin-top: -5px;
+        }
+
+        h2 {
+            display: inline-block;
+            margin: 5px;
+            border: 4px solid;
+            border-top-color: #fff;
+            border-right-color: #fff;
+            border-bottom-color: #7e7e7e;
+            border-left-color: #7e7e7e;
+            padding: 0 5px;
+            font-size: 16px;
+            font-weight: normal;
+            cursor: pointer;
+        }
+
+        .grade .active {
+            border-top-color: #7e7e7e;
+            border-right-color: #7e7e7e;
+            border-bottom-color: #fff;
+            border-left-color: #fff;
+        }
+
+        .message {
+            padding: 5px 10px;
+            text-align: center;
+            font-size: 35px;
+            font-weight: 700;
+            color: #ff0024;
+        }
+
+        .mes-style {
+            padding: 5px;
+            line-height: 1em;
+            background-color: #000;
+            cursor: pointer;
+        }
+
+        .mes-left {
+            float: left;
+        }
+
+        .mes-right {
+            float: right;
+        }
+
+        li {
+            box-sizing: border-box;
+            float: left;
+            width: 28px;
+            height: 28px;
+            background-color: #c9c9c9;
+            font-size: 20px;
+            font-weight: 600;
+            line-height: 20px;
+            text-align: center;
+            cursor: default;
+        }
+
+        i {
+            font-style: normal;
+        }
+
+        .noNumber {
+            display: none;
+        }
+
+        .number {
+            display: inline;
+        }
+
+        .pack {
+            box-sizing: border-box;
+            border: 4px solid;
+            border-top-color: #fff;
+            border-right-color: #fff;
+            border-bottom-color: #7e7e7e;
+            border-left-color: #7e7e7e;
+        }
+
+        .mark {
+            background: url('img/mark.png') no-repeat 2px 2px;
+            background-size: 80% 80%;
+        }
+
+        .target {
+            background: red url('img/target.png') no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .target-else {
+            background: url('img/target.png') no-repeat;
+            background-size: 100% 100%;
+        }
+
+        .question {
+            background: url('img/question.png') no-repeat;
+        }
+
+        .unpack {
+            border: 1px solid;
+            border-top-color: #848484;
+            border-right-color: transparent;
+            border-bottom-color: transparent;
+            border-left-color: #848484;
+            padding: 3px;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap" class="wrap">
+        <header>
+            <div id="grade" class="grade">
+                <h2 class="active">初级</h2>
+                <h2>中级</h2>
+                <h2>高级</h2>
+            </div>
+            <div class="message">
+                <img id="start" src="#">
+                <p id="target" class="mes-left mes-style"></p>
+                <p id="time" class="mes-right mes-style">000</p>
+            </div>
+        </header>
+        <ul id="ulMap" class="ul-wrap clearfix"></ul>
+    </div>
+    <script>
+        var wrap = document.getElementById('wrap'),
+            grade = document.getElementById('grade'),
+            levelTarget = document.getElementById('target'),
+            time = document.getElementById('time'),
+            start = document.getElementById('start'),
+            ulMap = document.getElementById('ulMap'),
+            levelNumber,
+            firstClick = true;
+
+        // 默认地图
+        createList(9, 9, 10);
+        // 取消右键弹窗
+        EventTool.addHandler(wrap, 'contextmenu', function (event) {
+            EventTool.preventDefault(event);
+        })
+        // click事件
+        EventTool.addHandler(ulMap, 'click', function (event) {
+            var target = EventTool.getTarget(),
+                timeBegin,
+                timer;
+            // 计时器
+            if (firstClick) {
+                firstClick = false;
+                timeBegin = Date.now();
+                timer = setInterval(timeFun, 100);
+                function timeFun() {
+                    var timeEnd = Date.now();
+                    time.innerText = addZero(parseInt((timeEnd - timeBegin) / 1000));
+                }
+            }
+            // game over
+            if (target.children[0] != null && target.children[0].innerText === '9') {
+                clearInterval(1);
+                target.className = target.className + ' target';
+                var levelTarget = document.getElementsByClassName('pack');
+                for (var i = 0; i < levelTarget.length; i++) {
+                    if (levelTarget[i].children[0].innerText === '9' && levelTarget[i].className !== 'pack mark') {
+                        levelTarget[i].className = 'target-else';
+                    }
+                }
+                console.log('Game Over');
+            }
+            // game win
+            var levelNumberEnd = document.getElementsByClassName('unpack');
+            if (levelNumberEnd.length === levelNumber) {
+                clearInterval(1);
+                console.log('Game win! Use time: ' + time.innerText);
+            }
+        })
+
+        // down事件
+        EventTool.addHandler(wrap, 'mousedown', function (event) {
+            var target = EventTool.getTarget(),
+                mouseBtn = EventTool.getClickButton(event);
+
+            // 鼠标左键
+            if (mouseBtn == 0) {
+
+                // 等级设置
+                if (target.parentNode == grade) {
+                    ulMap.innerHTML = '';
+                    for (var i = 0; i < 3; i++) {
+                        grade.children[i].className = '';
+                    };
+                    switch (target) {
+                        case grade.children[0]:
+                            grade.children[0].className = 'active';
+                            createList(9, 9, 10);
+                            break;
+                        case grade.children[1]:
+                            grade.children[1].className = 'active';
+                            createList(16, 16, 40);
+                            break;
+                        case grade.children[2]:
+                            grade.children[2].className = 'active';
+                            createList(16, 30, 99);
+                            break;
+                    }
+                }
+                // li事件
+                if (target.className == 'pack' && target.parentNode.parentNode == ulMap) {
+
+                    target.className = 'unpack';
+                    target.children[0].className = 'number';
+
+                    if (target.innerText == '0') {
+                        packZero(target);
+                    }
+                    function packZero(target) {
+                        up(target);
+                        down(target);
+                        left(target);
+                        right(target);
+                        // 向上开启空白
+                        function up(target) {
+                            if (target.parentNode.previousElementSibling != null) {
+                                if (target.parentNode.previousElementSibling.children[target.children[0].id % 100].children[0].innerText === '0') {
+                                    target.parentNode.previousElementSibling.children[target.children[0].id % 100].className = 'unpack';
+                                    target.parentNode.previousElementSibling.children[target.children[0].id % 100].children[0].className = 'number';
+                                    up(target.parentNode.previousElementSibling.children[target.children[0].id % 100]);
+                                    left(target.parentNode.previousElementSibling.children[target.children[0].id % 100]);
+                                    right(target.parentNode.previousElementSibling.children[target.children[0].id % 100]);
+                                } else {
+                                    if (target.parentNode.previousElementSibling.children[target.children[0].id % 100].children[0].innerText !== '9') {
+                                        target.parentNode.previousElementSibling.children[target.children[0].id % 100].className = 'unpack';
+                                        target.parentNode.previousElementSibling.children[target.children[0].id % 100].children[0].className = 'number';
+                                    }
+                                }
+                            }
+                        }
+                        // 向下开启空白
+                        function down(target) {
+                            if (target.parentNode.nextElementSibling != null) {
+                                if (target.parentNode.nextElementSibling.children[target.children[0].id % 100].children[0].innerText === '0') {
+                                    target.parentNode.nextElementSibling.children[target.children[0].id % 100].className = 'unpack';
+                                    target.parentNode.nextElementSibling.children[target.children[0].id % 100].children[0].className = 'number';
+                                    down(target.parentNode.nextElementSibling.children[target.children[0].id % 100]);
+                                    left(target.parentNode.nextElementSibling.children[target.children[0].id % 100]);
+                                    right(target.parentNode.nextElementSibling.children[target.children[0].id % 100]);
+                                } else {
+                                    if (target.parentNode.nextElementSibling.children[target.children[0].id % 100].children[0].innerText !== '9') {
+                                        target.parentNode.nextElementSibling.children[target.children[0].id % 100].className = 'unpack';
+                                        target.parentNode.nextElementSibling.children[target.children[0].id % 100].children[0].className = 'number';
+                                    }
+                                }
+                            }
+                        }
+                        // 向左开启空白
+                        function left(target) {
+                            if (target.previousElementSibling != null) {
+                                if (target.previousElementSibling.className == 'pack' && target.previousElementSibling.children[0].innerText === '0') {
+                                    target.previousElementSibling.className = 'unpack';
+                                    target.previousElementSibling.children[0].className = 'number';
+                                    left(target.previousElementSibling);
+                                    up(target.previousElementSibling);
+                                    down(target.previousElementSibling);
+                                } else {
+                                    if (target.previousElementSibling.children[0].innerText !== '9') {
+                                        target.previousElementSibling.className = 'unpack';
+                                        target.previousElementSibling.children[0].className = 'number';
+                                    };
+                                }
+                            }
+                        }
+                        // 向右开启空白
+                        function right(target) {
+                            if (target.nextElementSibling != null) {
+                                if (target.nextElementSibling.className == 'pack' && target.nextElementSibling.children[0].innerText === '0') {
+                                    target.nextElementSibling.className = 'unpack';
+                                    target.nextElementSibling.children[0].className = 'number';
+                                    right(target.nextElementSibling);
+                                    up(target.nextElementSibling);
+                                    down(target.nextElementSibling);
+                                } else {
+                                    if (target.nextElementSibling.children[0].innerText !== '9') {
+                                        target.nextElementSibling.className = 'unpack';
+                                        target.nextElementSibling.children[0].className = 'number';
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+
+                // 鼠标右键标记
+            } else if (target.className != 'unpack' && mouseBtn == 2 && target.parentNode.parentNode == ulMap) {
+                if (target.className != 'pack question' && target.className != 'pack mark') {
+                    target.className = 'pack mark';
+                    if (parseInt(levelTarget.innerText) - 1 > 0) {
+                        levelTarget.innerText = addZero(levelTarget.innerText - 1);
+                    } else {
+                        levelTarget.innerText = addZero(0);
+                    }
+                } else {
+                    if (target.className != 'pack question') {
+                        levelTarget.innerText = addZero(Number(levelTarget.innerText) + 1);
+                        target.className = 'pack question';
+                    } else {
+                        target.className = 'pack';
+                    }
+                }
+            }
+
+        })
+        // 地图创建
+        function createList(a, b, c) {
+            var fragment = document.createDocumentFragment(),
+                ulUl,
+                ulUlLi,
+                liWidth,
+                arr = new Array();
+
+            // 数字显示
+            levelTarget.innerText = addZero(c);
+            levelNumber = a * b - c;
+            // 创建数组
+            for (var x = 0; x < a; x++) {
+                arr[x] = new Array();
+                for (var y = 0; y < b; y++) {
+                    arr[x][y] = 0;
+                }
+            }
+            for (var z = 0; z < c; z++) {
+                var arrA = parseInt(Math.random() * (a - 1));
+                var arrB = parseInt(Math.random() * (b - 1));
+                if (arr[arrA][arrB] != 9) {
+                    arr[arrA][arrB] = 9;
+
+                    if (arrA - 1 >= 0) {
+                        arr[arrA - 1][arrB] != 9 ? arr[arrA - 1][arrB] += 1 : false;
+                        if (arrB - 1 >= 0) {
+                            arr[arrA - 1][arrB - 1] != 9 ? arr[arrA - 1][arrB - 1] += 1 : false;
+                        }
+                        if (arrB + 1 <= b) {
+                            arr[arrA - 1][arrB + 1] != 9 ? arr[arrA - 1][arrB + 1] += 1 : false;
+                        }
+                    }
+                    if (arrB - 1 >= 0) {
+                        arr[arrA][arrB - 1] != 9 ? arr[arrA][arrB - 1] += 1 : false;
+                    }
+                    if (arrB + 1 <= b) {
+                        arr[arrA][arrB + 1] != 9 ? arr[arrA][arrB + 1] += 1 : false;
+                    }
+                    if (arrA + 1 <= a) {
+                        arr[arrA + 1][arrB] != 9 ? arr[arrA + 1][arrB] += 1 : false;
+                        if (arrB - 1 > 0) {
+                            arr[arrA + 1][arrB - 1] != 9 ? arr[arrA + 1][arrB - 1] += 1 : false;
+                        }
+                        if (arrB + 1 <= b) {
+                            arr[arrA + 1][arrB + 1] != 9 ? arr[arrA + 1][arrB + 1] += 1 : false;
+                        }
+                    }
+                } else {
+                    continue;
+                }
+            }
+            // li赋值
+            for (var i = 0; i < a; i++) {
+                ulUl = document.createElement('ul');
+                for (var j = 0; j < b; j++) {
+                    ulUlLi = document.createElement('li');
+                    ulUlLi.className = 'pack';
+                    liNumber = document.createElement('i');
+                    liNumber.className = 'noNumber';// FIXME:数字写完恢复隐藏
+                    liNumber.innerText = arr[i][j];
+                    liNumber.id = 100 * i + j;
+                    switch (liNumber.innerText) {
+                        case '0':
+                            liNumber.style.color = '#c9c9c9';
+                            break;
+                        case '1':
+                            liNumber.style.color = '#00f';
+                            break;
+                        case '2':
+                            liNumber.style.color = '#070';
+                            break;
+                        case '3':
+                            liNumber.style.color = '#f00';
+                            break;
+                        case '4':
+                            liNumber.style.color = '#007';
+                            break;
+                        case '5':
+                            liNumber.style.color = '#800';
+                            break;
+                        case '6':
+                            liNumber.style.color = '#177';
+                            break;
+                        case '7':
+                            liNumber.style.color = '#000';
+                            break;
+                        case '8':
+                            liNumber.style.color = '#808080';
+                            break;
+                        case '9':
+                            liNumber.style.color = 'transparent';//:FIXME:取消注释
+                            break;
+                    }
+                    ulUlLi.appendChild(liNumber);
+                    ulUl.appendChild(ulUlLi);
+                    fragment.appendChild(ulUl);
+                }
+            }
+            ulMap.appendChild(fragment);
+            liWidth = getComputedStyle(ulMap.children[0].children[0]).width;
+            wrap.style.width = b * parseInt(liWidth) + 'px';
+            wrap.style.marginLeft = 0 - parseInt(wrap.style.width) / 2 + 'px';
+        }
+        // 补0
+        function addZero(num) {
+            if (num < 10) {
+                return ('00' + num);
+            } else if (num < 100) {
+                return ('0' + num);
+            } else {
+                return num;
+            }
+        }
+    </script>
+</body>
+
+</html>
