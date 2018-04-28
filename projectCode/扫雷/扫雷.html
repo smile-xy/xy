@@ -170,12 +170,12 @@
     <div id="wrap" class="wrap">
         <header>
             <div id="grade" class="grade">
-                <h2 class="active">初级</h2>
-                <h2>中级</h2>
-                <h2>高级</h2>
+                <h2 id="grade1" class="active">初级</h2>
+                <h2 id="grade2">中级</h2>
+                <h2 id="grade3">高级</h2>
             </div>
             <div class="message">
-                <img id="start" src="#">
+
                 <p id="target" class="mes-left mes-style"></p>
                 <p id="time" class="mes-right mes-style">000</p>
             </div>
@@ -189,6 +189,7 @@
             time = document.getElementById('time'),
             start = document.getElementById('start'),
             ulMap = document.getElementById('ulMap'),
+            timer,
             levelNumber,
             firstClick = true;
 
@@ -201,8 +202,7 @@
         // click事件
         EventTool.addHandler(ulMap, 'click', function (event) {
             var target = EventTool.getTarget(),
-                timeBegin,
-                timer;
+                timeBegin;
             // 计时器
             if (firstClick) {
                 firstClick = false;
@@ -215,7 +215,7 @@
             }
             // game over
             if (target.children[0] != null && target.children[0].innerText === '9') {
-                clearInterval(1);
+                clearInterval(timer);
                 target.className = target.className + ' target';
                 var levelTarget = document.getElementsByClassName('pack');
                 for (var i = 0; i < levelTarget.length; i++) {
@@ -223,13 +223,39 @@
                         levelTarget[i].className = 'target-else';
                     }
                 }
-                console.log('Game Over');
+                setTimeout(function () {
+                    alert('Game Over! And start again in Three seconds.');
+                }, 400)
+                clearTimeout();
+                startAgain(event);
             }
             // game win
             var levelNumberEnd = document.getElementsByClassName('unpack');
             if (levelNumberEnd.length === levelNumber) {
-                clearInterval(1);
-                console.log('Game win! Use time: ' + time.innerText);
+                clearInterval(timer);
+                setTimeout(function () {
+                    alert('Game win! Use time: ' + time.innerText);
+                }, 400)
+                clearTimeout();
+            }
+            // 重开
+            function startAgain(event) {
+                var start = document.getElementsByClassName('active')[0];
+                setTimeout(function () {
+                    ulMap.innerHTML = '';
+                    switch (start.id) {
+                        case 'grade1':
+                            createList(9, 9, 10);
+                            break;
+                        case 'grade2':
+                            createList(16, 16, 40);
+                            break;
+                        case 'grade3':
+                            createList(16, 30, 99);
+                            break;
+                    }
+                }, 3000);
+                clearTimeout();
             }
         })
 
@@ -376,6 +402,8 @@
                 arr = new Array();
 
             // 数字显示
+            time.innerText = '000';
+            firstClick = true;
             levelTarget.innerText = addZero(c);
             levelNumber = a * b - c;
             // 创建数组

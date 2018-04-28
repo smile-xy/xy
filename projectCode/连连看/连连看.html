@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>连连看</title>
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
+    <style>
+        body,
+        h2 {
+            margin: 0;
+        }
+
+        body {
+            background-size: 100% 100%;
+            background-color: #aaa;
+        }
+
+        button {
+            outline: none;
+            margin: 10px 10px;
+            width: 70px;
+            height: 40px;
+            border: none;
+            border-radius: 20%;
+            font-size: 18px;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background-color: #4A495B;
+            color: #fff;
+        }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        .wrap {
+            position: absolute;
+            z-index: 5;
+            left: 50%;
+            background-color: #fff;
+        }
+
+        header {
+            text-align: center;
+            background: url("img/70%.png");
+        }
+
+        .grade h2 {
+            display: inline-block;
+            width: 120px;
+            height: 40px;
+            margin-bottom: 10px;
+            font-size: 22px;
+            line-height: 40px;
+            cursor: pointer;
+        }
+
+        .active {
+            color: #fff;
+            background-color: red;
+        }
+
+
+        /* header .stop {} */
+
+        header .start {
+            width: 120px;
+            height: 50px;
+            border-radius: 20px;
+            color: red;
+            font-size: 24px;
+            line-height: 50px;
+        }
+
+        /* header .rank {} */
+
+        main {
+            position: relative;
+            top: 0;
+        }
+
+        img {
+            box-sizing: border-box;
+            float: left;
+            display: block;
+            width: 50px;
+            height: 50px;
+            border: 1px solid #aaa;
+        }
+
+        .img-active {
+            border: 3px solid #FF7D1D;
+        }
+
+        .img-line {
+            background-color: red;
+        }
+
+        .border {
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="wrap" class="wrap">
+        <header>
+            <div id="grade" class="grade">
+                <h2 id="grade1" class="active">初级</h2>
+                <h2 id="grade2">中级</h2>
+                <h2 id="grade3">高级</h2>
+            </div>
+            <div>
+                <button class="stop" id="stop">暂停</button>
+                <button class="start" id="start">开始</button>
+                <button class="rank" id="rank">刷新</button>
+            </div>
+        </header>
+        <main id="mainMap" class="clearfix"></main>
+    </div>
+    <script>
+        var wrap = document.getElementById('wrap'),
+            start = document.getElementById('start'),
+            rank = document.getElementById('rank'),
+            stop = document.getElementById('stop'),
+            timeBar = document.getElementById('timeBar'),
+            mainMap = document.getElementById('mainMap'),
+            grade1 = [14, 10, 12],
+            grade2 = [14, 10, 18],
+            grade3 = [18, 10, 25],
+            targetNum = (levelMap().mapX - 2) * (levelMap().mapY - 2),
+            timer;
+        firstClick = true;
+
+        // 默认界面
+        document.body.style.background = 'url(img/bg' + parseInt(Math.random() * 2) + '.jpg) no-repeat';
+        createMap(grade1[0], grade1[1], grade1[2]);
+
+        // 取消右键弹窗
+        EventTool.addHandler(mainMap, 'contextmenu', function (event) {
+            EventTool.preventDefault(event);
+        })
+
+        // click事件
+        EventTool.addHandler(wrap, 'click', function (event) {
+            var target = EventTool.getTarget(),
+                timeSize = 150,
+                timeStart,
+                targetAId,
+                targetBId;
+            // console.log(target); // FIXME:用完删除
+
+            // game start timer
+            if (target == start) {
+                if (target.innerText == '开始') {
+                    mainMap.style.display = 'block';
+                    timeStart = Date.now();
+                    timer = setInterval(startFun, 100);
+                } else {
+                    changeLevel(document.getElementsByClassName('active')[0]);
+                }
+
+            }
+            // game stop
+            if (target == stop) {
+                if (target.innerText == '暂停') {
+                    mainMap.style.display = 'none';
+                    target.innerText = '继续';
+                    clearInterval(timer);
+                } else {
+                    mainMap.style.display = 'block';
+                    target.innerText = '暂停';
+                    timeSize = parseInt(start.innerText);
+                    timeStart = Date.now();
+                    timer = setInterval(startFun, 100);
+                }
+
+            }
+            // timer fun
+            function startFun() {
+                var timeEnd = Date.now();
+                start.innerText = timeSize - parseInt((timeEnd - timeStart) / 1000) + 'S';
+            }
+            // game rank
+            if (target == rank) {
+                getAllImg();
+            }
+            // game over
+            if (start.innerText == '0S') {
+                clearInterval(timer);
+                alert('Game over!');
+            }
+            // game win
+            if (targetNum == 0) {
+                clearInterval(timer);
+                alert('Game win! And your remaining time is: ' + start.innerText);
+            }
+            // change level
+            changeLevel(target);
+
+            if (target.parentNode == mainMap && target.className !== 'border') {
+                if (target.className != 'img-active') {
+                    var len = mainMap.children.length;
+                    for (var i = 0; i < len; i++) {
+                        if (mainMap.children[i].className == 'img-active') {
+                            targetAId = mainMap.children[i].id;
+                            targetBId = target.id;
+
+                            if (targetAId !== undefined && getSrc(targetAId) == getSrc(targetBId)) {
+                                if (imgCanClear(target, targetAId, targetBId)) {
+                                    clearImg(targetAId);
+                                    clearImg(targetBId);
+                                    targetNum -= 2;
+                                } else {
+                                    mainMap.children[i].className = '';
+                                }
+                            } else {
+                                mainMap.children[i].className = '';
+                            }
+                        } else {
+                            continue;
+                        }
+                    }
+                    target.className = 'img-active';
+                } else {
+                    target.className = '';
+                }
+                console.log(targetNum)
+            }
+        })
+
+        // 图形比较
+        function imgCanClear(target, targetAId, targetBId) {
+            var a = compare(targetAId, targetBId).little,
+                b = compare(targetAId, targetBId).big,
+                imgValue = false;
+            imgValue = oneLine(a, b, 2) || twoLine(a, b) || threeLine(a, b);
+            return imgValue;
+
+            // let A < B
+            function compare(a, b) {
+                var a = String(a),
+                    b = String(b),
+                    aa = Number(a.split('xy')[0]) * 100 + Number(a.split('xy')[1]),
+                    bb = Number(b.split('xy')[0]) * 100 + Number(b.split('xy')[1]);
+                if (bb - aa > 0) {
+                    return { little: a, big: b };
+                } else {
+                    return { little: b, big: a };
+                }
+            };
+
+            // 一条线
+            function oneLine(valueA, valueB, imgNum) {
+                var a = compare(valueA, valueB).little,
+                    b = compare(valueA, valueB).big,
+                    x,
+                    y,
+                    num = 0,
+                    arr = [];
+                if (getXY(a).x == getXY(b).x) {
+                    x = getXY(a).x;
+                    for (y = getXY(a).y; y <= getXY(b).y; y++) {
+                        getSrc(x + 'xy' + y) !== '70%.png' ? num++ : false;
+                        arr.push(x + 'xy' + y);
+                    }
+                }
+                if (getXY(a).y == getXY(b).y) {
+                    y = getXY(a).y;
+                    for (x = getXY(a).x; x <= getXY(b).x; x++) {
+                        getSrc(x + 'xy' + y) !== '70%.png' ? num++ : false;
+                        arr.push(x + 'xy' + y);
+                    }
+                }
+                if (num == imgNum) {
+                    return true;
+                }
+            }
+
+            // 二条线
+            function twoLine(a, b) {
+                var arrAY = [],
+                    arrAX = [],
+                    arrBY = [],
+                    arrBX = [],
+                    point;
+                getOnLineArr(a, arrAX, arrAY);
+                getOnLineArr(b, arrBX, arrBY);
+                // console.log('====twoLine===');
+                // console.log(getOnLineArr(a, arrAX, arrAY));
+                // console.log(getOnLineArr(b, arrBX, arrBY));
+                point = getSamePoint(arrAX, arrBY) || getSamePoint(arrBX, arrAY);
+                return oneLine(a, point, 1) && oneLine(b, point, 1);
+            };
+
+            // 三条线
+            function threeLine(a, b) {
+                var arrAY = [],
+                    arrAX = [],
+                    arrBY = [],
+                    arrBX = [],
+                    returnValue = [];
+                getOnLineArr(a, arrAX, arrAY);
+                getOnLineArr(b, arrBX, arrBY);
+                // console.log('====threeLine===');
+                // console.log(getOnLineArr(a, arrAX, arrAY));
+                // console.log(getOnLineArr(b, arrBX, arrBY));
+                for (var i = 0; i < getSameLine('x', arrAY, arrBY).length; i++) {
+                    returnValue.push(
+                        // X轴方向 a到 sameLine是否成线
+                        oneLine(a, getSameLine('x', arrAY, arrBY)[i][0], 1)
+                        // X轴方向 sameLine是否成线
+                        && oneLine(getSameLine('x', arrAY, arrBY)[i][0], getSameLine('x', arrAY, arrBY)[i][1], 0)
+                        // X轴方向 b到 sameLine是否成线
+                        && oneLine(b, getSameLine('x', arrAY, arrBY)[i][1], 1)
+                    );
+                }
+                for (var j = 0; j < getSameLine('y', arrAX, arrBX).length; j++) {
+                    returnValue.push(
+                        // Y轴方向 a到 sameLine是否成线
+                        oneLine(a, getSameLine('y', arrAX, arrBX)[j][0], 1)
+                        // Y轴方向 a到 sameLine是否成线
+                        && oneLine(getSameLine('y', arrAX, arrBX)[j][0], getSameLine('y', arrAX, arrBX)[j][1], 0)
+                        // Y轴方向 a到 sameLine是否成线
+                        && oneLine(b, getSameLine('y', arrAX, arrBX)[j][1], 1)
+                    );
+                }
+                // 只要有一种情况 就返回true
+                for (var z = 0; z < returnValue.length; z++) {
+                    if (returnValue[z]) {
+                        return true;
+                    }
+                }
+            }
+
+            // 获取坐标同行列所有空图片的坐标
+            function getOnLineArr(A, arrX, arrY) {
+                // Y轴
+                for (var x = 0; x < levelMap().mapY; x++) {
+                    getSrc(x + 'xy' + getXY(A).y) == '70%.png' ? arrY.push(x + 'xy' + getXY(A).y) : false;
+                }
+                // X轴
+                for (var y = 0; y < levelMap().mapX; y++) {
+                    getSrc(getXY(A).x + 'xy' + y) == '70%.png' ? arrX.push(getXY(A).x + 'xy' + y) : false;
+                }
+                return { arrX, arrY };
+            };
+
+            // 获取两个数组的公共点
+            function getSamePoint(arrA, arrB) {
+                for (var i = 0; i < arrA.length; i++) {
+                    for (var j = 0; j < arrB.length; j++) {
+                        if (arrA[i] == arrB[j]) {
+                            return arrA[i];
+                        }
+                    }
+                }
+            };
+            // 找出两个数组共n轴的点
+            function getSameLine(n, arrA, arrB) {
+                var arrSameLine = [];
+                for (var i = 0; i < arrA.length; i++) {
+                    for (var j = 0; j < arrB.length; j++) {
+                        if (n == 'x' && getXY(arrA[i]).x === getXY(arrB[j]).x) {
+                            arrSameLine.push([arrA[i], arrB[j]]);
+                        }
+                        if (n == 'y' && getXY(arrA[i]).y === getXY(arrB[j]).y) {
+                            arrSameLine.push([arrA[i], arrB[j]]);
+                        }
+                    }
+                }
+                return arrSameLine;
+            };
+            // // 连线 TODO:
+            // function jointLine(arr) {
+            //     for (var i = 0; i < arr.length; i++) {
+            //         document.getElementById(arr[i]).className = 'img-line';
+            //     }
+            //     setTimeout(timer, 300);
+            //     clearTimeout(timer);
+            //     function timer() {
+            //         for (var i = 0; i < arr.length; i++) {
+            //             document.getElementById(arr[i]).className = '';
+            //         }
+            //     };
+            // }
+        }
+
+        // 更改难度
+        function changeLevel(target) {
+            if (target.parentNode == grade) {
+                mainMap.innerHTML = '';
+                for (var i = 0; i < 3; i++) {
+                    grade.children[i].className = '';
+                };
+                switch (target) {
+                    case grade.children[0]:
+                        grade.children[0].className = 'active';
+                        createMap(grade1[0], grade1[1], grade1[2]);
+                        break;
+                    case grade.children[1]:
+                        grade.children[1].className = 'active';
+                        createMap(grade2[0], grade2[1], grade2[2]);
+                        break;
+                    case grade.children[2]:
+                        grade.children[2].className = 'active';
+                        createMap(grade3[0], grade3[1], grade3[2]);
+                        break;
+                }
+            }
+        }
+        // 当前难度地图属性
+        function levelMap() {
+            var level = document.getElementsByClassName('active')[0],
+                x,
+                y;
+            switch (level.id) {
+                case 'grade1':
+                    x = grade1[0];
+                    y = grade1[1];
+                    break;
+                case 'grade2':
+                    x = grade2[0];
+                    y = grade2[1];
+                    break;
+                case 'grade3':
+                    x = grade3[0];
+                    y = grade3[1];
+                    break;
+            }
+            return {
+                mapX: (x + 2),
+                mapY: (y + 2)
+            }
+        }
+        // 地图创建
+        function createMap(a, b, c) {
+            var fragment = document.createDocumentFragment(),
+                img;
+            // img赋值
+            for (var x = 0; x < b + 2; x++) {
+                for (var y = 0; y < a + 2; y++) {
+                    img = document.createElement('img');
+                    img.id = x + 'xy' + y;
+                    if (x == 0 || y == 0 || x == b + 1 || y == a + 1) {
+                        img.className = 'border';
+                        img.src = 'img/70%.png';
+                    }
+                    fragment.appendChild(img);
+                }
+            }
+            for (var i = 0; i < (a + 2) * (b + 2); i++) {
+                if (fragment.children[i].className !== 'border') {
+                    fragment.children[i].src = 'img/' + parseInt(Math.random() * c) + '.jpg';
+                    i++;
+                    fragment.children[i].src = 'img/' + parseInt(Math.random() * c) + '.jpg';
+                }
+            }
+            mainMap.appendChild(fragment);
+            wrap.style.width = parseInt(getComputedStyle(mainMap.children[0]).width) * (a + 2) + 'px';
+            wrap.style.marginLeft = 0 - parseInt(wrap.style.width) / 2 + 'px';
+            clearInterval(timer);
+            start.innerText = '开始';
+            mainMap.style.display = 'none';
+        }
+        // 取得img坐标
+        function getXY(id) {
+            return {
+                x: Number(id.split('xy')[0]),
+                y: Number(id.split('xy')[1])
+            }
+        }
+        // 取得img地址
+        function getSrc(id) {
+            if (document.getElementById(id)) {
+                return document.getElementById(id).src.split('img/')[1];
+            }
+        }
+        //消除图片
+        function clearImg(id) {
+            document.getElementById(id).src = 'img/70%.png';
+            setTimeout(function () {
+                document.getElementById(id).className = '';
+            }, 300);
+            clearTimeout();
+        }
+        // 获得当前所有img
+        function getAllImg() {
+            var imgArr = [],
+                num = 0;
+            fragment = document.createDocumentFragment();
+            for (var i = 1; i < levelMap().mapY - 1; i++) {
+                for (var j = 1; j < levelMap().mapX - 1; j++) {
+                    imgArr.push(getSrc(i + 'xy' + j));
+                }
+            }
+            imgArr.sort(() => Math.random() > .5 ? -1 : 1);
+            for (var x = 0; x < levelMap().mapY; x++) {
+                for (var y = 0; y < levelMap().mapX; y++) {
+                    img = document.createElement('img');
+                    img.id = x + 'xy' + y;
+                    if (x == 0 || y == 0 || x == levelMap().mapY - 1 || y == levelMap().mapX - 1) {
+                        img.className = 'border';
+                        img.src = 'img/70%.png';
+                    } else if (img.className != 'border' && img.src == '') {
+                        img.src = 'img/' + imgArr[num++];
+                    }
+                    fragment.appendChild(img);
+                }
+            }
+            mainMap.innerHTML = '';
+            mainMap.appendChild(fragment);
+        }
+    </script>
+</body>
+
+</html>
