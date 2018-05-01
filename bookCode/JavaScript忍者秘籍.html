@@ -22,6 +22,7 @@
     }
 
     #results li.pass {
+        font-weight: bold;
         color: green;
     }
 
@@ -34,7 +35,7 @@
 
 <body>
 <script>
-    // 测试环境配置
+    // 测试工具配置
     function assert(value, text) {
         var li = document.createElement("li");
         li.className = value ? "pass" : "fail";
@@ -55,6 +56,7 @@
 <body>
 
     <script>
+'第三章'
 '3.1 简单的回调函数'
 
     // var text = 'Domo arigate!';
@@ -205,6 +207,7 @@
     // var message1 = getNinjaWieldingWeapon('Yoshi'); // Yoshi katana
     // var message2 = getNinjaWieldingWeapon('Yoshi', 'Wakizashi'); // Yoshi Wakizashi
 
+'第四章'
 '4.1 使用参arguments数'
 
     // function whatever(a, b, c) {
@@ -493,7 +496,888 @@
     // assert(ninja1.whoAmI() === ninja1, 'ninja1?'); // true
     // assert(ninja2.whoAmI() === ninja2, 'ninja2?'); // false ninja1
 
+'第五章'
+'5.2 闭包'
+    // var outerValue = 'S';
+    // var later;
 
+    // function outerFun() {
+    //     var innerValue = 'N';
+
+    //     function innerFun(){
+    //         console.log(outerValue);
+    //         console.log(innerValue);
+    //     }
+
+    //     later = innerFun;
+    // }
+    // outerFun();
+    // later();
+
+'5.3 使用闭包模拟私有变量'
+    // function Ninja() {
+    //     var feints = 0;
+    //     this.getFeints = function(){
+    //         return feints;
+    //     };
+    //     this.feint = function(){
+    //         feints++;
+    //     };
+    // }
+
+    // var ninja1 = new Ninja();
+    // console.log(ninja1.feint());
+    // var ninja2 = new Ninja();
+    // console.log(ninja2.getFeints());
+
+'5.4 在interval的回调函数中使用闭包'
     </script>
+    <!-- <div id="box1">First Box</div> -->
+    <script>
+    // function animateIt(elementId) {
+    //     var elem = document.getElementById(elementId);
+    //     var tick = 1;
+    //     var timer = setInterval(function(){
+    //         if (tick <= 5) {
+    //             elem.innerText = tick;
+    //             tick++;
+    //         }
+    //         else {
+    //             clearInterval(timer);
+    //             console.log(tick);
+    //             console.log(elem);
+    //             console.log(timer);
+    //         }
+    //     }, 1000);
+    // }
+    // animateIt('box1');
+        
+'5.5 创建执行上下文'
+    // function skulk(ninja){
+    //     report(ninja + ' skulk');
+    // }
+    // function report(message){
+    //     console.log(message);
+    // }
+
+    // skulk('K');
+    // skulk('Y');
+
+'5.6 const变量的行为'
+    // const firstConst = 'samurai';
+    // assert(firstConst == 'samurai', 'firstConst == samurai');
+    // try{
+    //     firstConst = 'ninja';
+    //     fail('Shouldn\'t be here');
+    // }catch{
+    //     pass('An exception has occurred');
+    // }
+    // assert(firstConst == 'samurai', 'firstConst == samurai');
+
+    // const secondConst = {};
+    // secondConst.weapon = 'Wiki';
+    // assert(secondConst.weapon == 'Wiki', 'secondConst.weapon == Wiki');
+
+    // const thirdConst = [];
+    // assert(thirdConst == 0, 'thirdConst == 0');
+    // thirdConst.push('Yoshi');
+    // assert(thirdConst.length == 1, 'thirdConst.length == 1');
+
+'5.7 使用关键字var'
+    // var globalNinja = 'Yoshi';
+
+    // function reportActivity(){
+    //     var functionActivity = 'jumping';
+
+    //     for (var i = 1; i < 3; i++) {
+    //         var forMessage = globalNinja + ' '+ functionActivity;
+    //         assert(forMessage === 'Yoshi jumping', 'forMessage == Yoshi jumping');
+    //         assert(i, 'Current loop counter: '+ i);
+    //     }
+
+    //     assert(i === 3 && forMessage === 'Yoshi jumping', 'i === 3 && forMessage === Yoshi jumping');
+    // }
+
+    // reportActivity();
+    // assert(typeof functionActivity === 'undefined', 'typeof functionActivity === undefined');
+
+'5.8 使用const 与let关键字'
+    // const GLOBAL_NINJA = 'yoshi';
+
+    // function reportActivity() {
+    //     const functionActivity = 'jumping';
+
+    //     for (let i = 1; i < 3; i++) {
+    //         let forMessage = GLOBAL_NINJA +' '+ functionActivity;
+    //         assert(forMessage === 'yoshi jumping', 'forMessage === yoshi jumping');
+    //         assert(i, 'Current loop counter: '+ i);
+    //     }
+        
+    //     assert(typeof i === 'undefined' && typeof forMessage === 'undefined', 'typeof i === undefined && typeof forMessage === undefined');
+    // }
+
+    // reportActivity();
+    // assert(typeof functionActivity === 'undefined' && typeof i === 'undefined' && typeof forMessage === 'undefined', 'typeof functionActivity === undefined && typeof i === undefined && typeof forMessage === undefined');
+
+'5.10 重载函数标识符'
+    // assert(typeof fun === 'function', 'function'); // y
+
+    // var fun = 3;
+
+    // assert(typeof fun === 'number', 'number'); // y
+
+    // function fun(){};
+
+    // assert(typeof fun === 'number', 'number'); // y
+
+'5.11 使用闭包模拟私有变量'
+    // function Ninja() {
+    //     var feints = 0;
+    //     this.getFeints = function() {
+    //         return feints;
+    //     };
+    //     this.feint = function() {
+    //         feints++;
+    //     };
+    // }
+    // var ninja1 = new Ninja();
+    // assert(ninja1.feints === undefined, 'ninja1.feints === undefined');
+    // ninja1.feint();
+    // assert(ninja1.getFeints() === 1, 'ninja1.getFeints() === 1');
+
+    // var ninja2 = new Ninja();
+    // assert(ninja2.getFeints() === 0, 'ninja2.getFeints() === 0');
+
+'5.12 通过函数访问私有变量，而不是通关对象访问'
+    // function Ninja() {
+    //     var feints = 0;
+    //     this.getFeints = function() {
+    //         return feints;
+    //     };
+    //     this.feint = function() {
+    //         feints++;
+    //     };
+    // }
+    // var ninja1 = new Ninja();
+    // ninja1.feint();
+
+    // var imposter = {};
+    // imposter.getFeints = ninja1.getFeints;
+
+    // assert(imposter.getFeints() === 1, 'imposter.getFeints() === 1');
+
+'5.13 在计时器的回调函数中使用闭包'
+    </script>
+    <!-- <div id="box1">First Box</div>
+    <div id="box2">Second Box</div> -->
+    <script>
+    // function animateIt(elementId, number) {
+    //     var elem = document.getElementById(elementId);
+    //     var tick = 0;
+    //     var timer = setInterval(function(){
+    //         if (tick < number) {
+    //             elem.innerText = tick;
+    //             tick++;
+    //         }
+    //         else {
+    //             clearInterval(timer);
+    //             assert(tick === 100, 'tick === 100');
+    //             assert(tick === 200, 'tick === 200');
+    //             assert(elem, 'elem');
+    //             assert(timer, 'timer');
+    //         }
+    //     }, 10);
+    // }
+    // animateIt('box1', 100);
+    // animateIt('box2', 200); 
+
+'第六章'
+    // TODO:P125
+
+'第七章'
+'7.2 通过原型方法创建新的实例'
+    // function Ninja(){};
+    // Ninja.prototype.swingSword = function() {
+    //     return true;
+    // };
+    // Ninja.prototype.returnThis = function() {
+    //     return this;
+    // };
+    // const ninja1 = Ninja();
+    // assert(ninja1 === undefined, 'ninja1 === undefined');
+
+    // const ninja2 = new Ninja();
+    // assert(ninja2 && ninja2.swingSword && ninja2.swingSword(), 'ninja2 && ninja2.swingSword && ninja2.swingSword()');
+    // assert(ninja2.returnThis() === Ninja, 'ninja2.returnThis === Ninja');
+    // assert(ninja2.returnThis() === ninja2, 'ninja2.returnThis === ninja2');
+
+'7.3 观察初始化过程中的优先级'
+    // function Ninja() {
+    //     this.swung = false;
+    //     this.swingSword = function() {
+    //         return !this.swung;
+    //     }
+    // };
+    // Ninja.prototype.swingSword = function() {
+    //     return this.swung;
+    // };
+
+    // const ninja = new Ninja();
+    // assert(ninja.swingSword(), 'ninja.swingSword()');
+
+'7.4 通过原型，一切都可以在运行时修改'
+    // function Ninja() {
+    //     this.swung = true;
+    // }
+
+    // const ninja1 = new Ninja();
+
+    // Ninja.prototype.swingSword = function() {
+    //     return this.swung;
+    // };
+    // assert(ninja1.swingSword(), 'ninja1.swingSword()');
+
+    // Ninja.prototype = {
+    //     pierce: function() {
+    //         return true;
+    //     }
+    // }
+
+    // assert(ninja1.swingSword(), 'ninja1.swingSword()');
+
+    // const ninja2 = new Ninja();
+    // assert(ninja2.pierce(),'ninja2.pierce()');
+    // assert(ninja2.swingSword,'ninja2.swingSword');
+    
+'7.6 使用constructor的引用创建新对象'
+    // function Ninja(){};
+
+    // const ninja = new Ninja();
+    // const ninja2 = new ninja.constructor();
+
+    // assert(ninja2 instanceof Ninja, 'ninja2 instanceof Ninja');
+    // assert(ninja !== ninja2, 'ninja !== ninja2');
+
+'7.7 尝试实现原型继承'
+    // function Person(){};
+    // Person.prototype.dance = function(){};
+
+    // function Ninja(){};
+    // Ninja.prototype = {
+    //     dance: Person.prototype.dance
+    // };
+
+    // const ninja = new Ninja();
+    // assert(ninja instanceof Ninja, 'ninja instanceof Ninja');
+    // assert(ninja instanceof Person, 'ninja instanceof Person');
+    // assert(ninja instanceof Object, 'ninja instanceof Object');
+
+'7.7 使用原型实现继承'
+    // function Person(){};
+    // Person.prototype.dance = function(){};
+
+    // function Ninja(){};
+    // Ninja.prototype = new Person();
+
+    // const ninja = new Ninja();
+    // assert(ninja instanceof Ninja, 'ninja instanceof Ninja');
+    // assert(ninja instanceof Person, 'ninja instanceof Person');
+    // assert(ninja instanceof Object, 'ninja instanceof Object');
+    // assert(ninja.constructor === Ninja, 'ninja.constructor === Ninja');
+    // assert(ninja.constructor === Person, 'ninja.constructor === Person');
+
+'7.10 解决constructor属性的问题'
+    // function Person(){};
+    // Person.prototype.dance = function(){};
+
+    // function Ninja(){};
+    // Ninja.prototype = new Person();
+
+    // // Object.defineProperty(Ninja.prototype, 'constructor', {
+    // //     enumerable: false,
+    // //     value: Ninja,
+    // //     writable: true
+    // // });
+
+    // const ninja = new Ninja();
+    // ninja.constructor = Ninja;
+
+    // assert(ninja instanceof Ninja, 'ninja instanceof Ninja');
+    // assert(ninja instanceof Person, 'ninja instanceof Person');
+    // assert(ninja instanceof Object, 'ninja instanceof Object');
+    // assert(ninja.constructor === Ninja, 'ninja.constructor === Ninja');
+    // assert(ninja.constructor === Person, 'ninja.constructor === Person');
+
+'第七章习题'
+//// 2
+    // function Ninja(){};
+    // Ninja.prototype.talk = function() {
+    //     return 'H';
+    // };
+    
+    // const ninja = new Ninja();
+    // const a1 = ninja.talk();
+    // console.log(a1);
+//// 3
+    // function Ninja(){};
+    // Ninja.message = 'H';
+    
+    // const ninja = new Ninja();
+    // const a1 = ninja.message;
+    // console.log(a1);
+//// 4 
+    // function Person1(firstName, lastName) {
+    //     this.firstName = firstName;
+    //     this.lastName = lastName;
+
+    //     this.getFullName = function() {
+    //         return this.firstName + ' ' + this.lastName;
+    //     }
+    // }
+
+    // function Person2(firstName, lastName) {
+    //     this.firstName = firstName;
+    //     this.lastName = lastName;
+    // }
+
+    // Person1.prototype.getFullName = function() {
+    //     return this.firstName + ' ' + this.lastName;
+    // }
+
+    // ninja1 = new Person1('A1', 'B1');
+    // ninja2 = new Person2('A2', 'B2');
+    // assert(typeof ninja1.getFullName === 'function', 'typeof ninja1.getFullName === function');
+    // assert(typeof ninja2.getFullName === 'function', 'typeof ninja2.getFullName === function');
+//// 5
+    // function Person(){}
+    // function Ninja(){}
+
+    // const ninja = new Ninja();
+    // assert(ninja.constructor === Ninja, 'ninja.constructor === Ninja');
+    // assert(ninja.constructor === Person, 'ninja.constructor === Person');
+//// 6
+    // function Person(){}
+    // function Ninja(){}
+    // Ninja.prototype = new Person();
+    // const ninja = new Ninja();
+    // assert(ninja.constructor === Ninja, 'ninja.constructor === Ninja');
+    // assert(ninja.constructor === Person, 'ninja.constructor === Person');
+
+'第八章'
+    // TODO:P199
+
+'第九章'
+'9.4  splice'    
+    // var arr1 = [1, 2, 3, 4];
+    // arr1.splice(1);
+    // console.log(arr1);
+    
+    // var arr2 = [1, 2, 3, 4];
+    // arr2.splice(1, 1);
+    // console.log(arr2);
+
+    // var arr3 = [1, 2, 3, 4];
+    // arr3.splice(1, 1, 'A');
+    // console.log(arr3);
+
+'9.5  forEach'    
+    // var arr = [1, 2, 3, 4];
+    // arr.forEach(function(num){ // 对数组每一项运行该函数
+    //     num > 2 ? console.log(num) : false;
+    // });
+
+'9.6  forEach 提取属性的粗略方法'    
+    // const ninjas = [
+    //     {name: 'A', weapon: 'aaaa'},
+    //     {name: 'B', weapon: 'bbbb'},
+    //     {name: 'C', weapon: 'cccc'}
+    // ];
+
+    // const weapons = [];
+    // ninjas.forEach(function(ninja){
+    //     weapons.push(ninja.weapon);
+    // });
+    // ninjas.forEach(ninja => {
+    //     weapons.push(ninja.weapon);
+    // });
+
+    // console.log(weapons);
+
+'9.7  映射数组'    
+    // const ninjas = [
+    //     {name: 'A', weapon: 'aaaa'},
+    //     {name: 'B', weapon: 'bbbb'},
+    //     {name: 'C', weapon: 'cccc'}
+    // ];
+
+    // const weapons = ninjas.map(function(ninja){
+    //     return ninja.weapon;
+    //     });
+    // const weapons = ninjas.map(ninja => ninja.weapon);
+
+
+    // console.log(weapons);
+
+'9.8  映射数组'    
+    // const ninjas = [
+    //     {name: 'A', weapon: 'aaaa'},
+    //     {name: 'B'},
+    //     {name: 'C', weapon: 'cccc'}
+    // ];
+
+    // const allAreName = ninjas.every(ninja => 'name' in ninja);
+    // const allAreWeapon = ninjas.every(ninja => 'weapon' in ninja);
+
+    // console.log(allAreName);
+    // console.log(allAreWeapon);
+
+    // const someAreWeapon = ninjas.some(ninja => 'weapon' in ninja);
+    // console.log(someAreWeapon);
+
+'9.9  查找数组元素'    
+    // const ninjas = [
+    //     {name: 'A', weapon: 'aaaa'},
+    //     {name: 'B'},
+    //     {name: 'C', weapon: 'cccc'}
+    // ];
+
+    // const findCccc = ninjas.find(ninja =>{ 
+    //     return ninja.weapon === 'cccc';
+    //     });
+    // console.log(findCccc); // C
+
+    // const findDddd = ninjas.find(ninja =>{ 
+    //     return ninja.weapon === 'dddd';
+    //     });
+    // console.log(findDddd); // undefined
+
+    // const findIndexAaaa = ninjas.findIndex(ninja =>{ 
+    //     return ninja.weapon === 'aaaa';
+    //     });
+    // console.log(findIndexAaaa); // undefined
+
+    // const filterWeapon = ninjas.filter(ninja => 'weapon' in ninja);
+    // console.log(filterWeapon); // A C
+
+'9.10  查找数组索引'    
+    // const ninjas = [1, 2, 3, 4, 2, 2];
+
+    // console.log(ninjas.indexOf(2));
+    // console.log(ninjas.lastIndexOf(2));
+    // console.log(ninjas.indexOf(5));
+
+    // const findIndexCccc = ninjas.findIndex(ninja =>{ 
+    //     return ninja === 4;
+    //     });
+    // console.log(findIndexCccc); // C
+
+'9.12 使用reduce合计数组元素'
+    // const numbers = [1, 2, 3, 4];
+
+    // const sum = numbers.reduce((aggregated, number) => aggregated + number, 0);
+    // console.log(sum);
+
+'9.13 模拟类数组方法'
+    </script>
+    <!-- <input id="first"/>
+    <input id="second"/> -->
+    <script>
+    // const elems = {
+    //     length: 0,
+    //     add: function(elem){
+    //         Array.prototype.push.call(this, elem);
+    //     },
+    //     gather: function(id){
+    //         this.add(document.getElementById(id));
+    //     },
+    //     find: function(callback){
+    //         return Array.prototype.find.call(this, callback);
+    //     }
+    // };
+
+    // elems.gather('first');
+    // console.log(elems.length);
+
+    // elems.gather('second');
+    // console.log(elems.length);
+
+    // console.log(elems.find(elem => elem.id === 'second'));
+
+'9.14 访问对象未显示定义的属性'
+    // const dictionary = {
+    //     'ja': {
+    //         'Ninja' : 'にんじゃ'
+    //     },
+    //     'zh': {
+    //         'Ninja' : '忍者'
+    //     },
+    //     'ko': {
+    //         'Ninja' : '나루터'
+    //     }
+    // };
+    // console.log(dictionary.ja['Ninja']);
+    // console.log(dictionary.zh['Ninja']);
+    // console.log(dictionary.ko['Ninja']);
+    // console.log(dictionary.ko['constructor']); // 无法访问构造函数
+
+'9.15 将对象的key映射为HTML节点'
+    </script>
+    <!-- <div id="firstElement"></div>
+    <div id="secondElement"></div> -->
+    <script>
+    // const firstElement = document.getElementById('firstElement');
+    // const secondElement = document.getElementById('secondElement');
+
+    // const map = {};
+
+    // map[firstElement] = {data: 'firstElement'}; // firstElement转义成[object HTMLDivElement]
+    // assert(map[firstElement].data === 'firstElement', 'firstElement].data === firstElement');
+
+    // map[secondElement] = {data: 'secondElement'}; // secondElement转义成[object HTMLDivElement]
+    // assert(map[secondElement].data === 'secondElement', 'secondElement].data === secondElement');
+
+    // assert(map[firstElement].data === 'firstElement', 'firstElement].data === firstElement');
+    // assert(map[firstElement].data === 'secondElement', 'firstElement].data === secondElement'); // map[object HTMLDivElement] 所以相等
+
+'9.16 创建第一个map'
+    // TODO:P248
+
+'第十章'
+    // TODO:P260
+
+'第十一章'
+'11.2 模块模式'
+    // const MouseCounterModule = (function() {
+    //     let numClicks = 0;
+    //     const handleClick = () => {
+    //         console.log(++numClicks);
+    //     };
+
+    //     return {
+    //         countClicks: () => {
+    //             document.addEventListener('click', handleClick);
+    //         }
+    //     };
+    // }());
+
+    // (function(module) {
+    //     let numScrolls = 0;
+    //     const handleScroll = () => {
+    //         console.log(++numScrolls);
+    //     }
+
+    //     module.countScrolls = () => {
+    //         document.addEventListener('wheel', handleScroll);
+    //     };
+    // }(MouseCounterModule));
+
+    // assert(typeof MouseCounterModule.countClicks === 'function', 'function');
+    // assert(typeof MouseCounterModule.countScrolls === 'function', 'function');
+    // assert(typeof MouseCounterModule.numClicks === 'undefined', 'undefined');
+    // assert(typeof MouseCounterModule.handleClicks === 'undefined', 'undefined');
+    // MouseCounterModule.countClicks();
+    // MouseCounterModule.countScrolls();
+
+    // TODO:P289
+
+'第十二章'
+'12.5 通过DOM方法和属性访问特性值'
+    </script>
+    <!-- <div></div> -->
+    <script>
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const  div = document.querySelector('div');
+    //     div.setAttribute('id', 'ninja-1');
+    //     assert(div.getAttribute('id') === 'ninja-1','div.getAttribute(id) === ninja-1');
+    //     div.id = 'ninja-2';
+    //     assert(div.id === 'ninja-2','div.id === ninja-2');
+
+    //     assert(div.getAttribute('id') === 'ninja-2','div.getAttribute(id) === ninja-2');
+    //     div.setAttribute('id', 'ninja-3');
+    //     assert(div.id === 'ninja-3','div.id === ninja-3');
+    //     assert(div.getAttribute('id') === 'ninja-3','div.getAttribute(id) === ninja-3');
+    // })
+
+'12.8 获取计算后样式信息'
+    </script>
+    <!-- <style>
+    div{
+        display: inline;
+        font-size: 1.8em;
+        background-color: #ffc;
+        border: 1px solid crimson;
+        color: green;
+    }
+    </style>
+    <div id="testSubject" style="color:crimson;" title="Ninja power!">
+        忍者无敌
+    </div> -->
+    <script>
+    // function fetchComputedStyle(elem, property) {
+    //     const computedStyles = getComputedStyle(elem);
+    //     if (computedStyles) {
+    //         property = property.replace(/([A-Z])/g, '-$1').toLowerCase();
+    //         return computedStyles.getPropertyValue(property);
+    //     }
+    // }
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     const div = document.querySelector('div');
+    //     report('background-color: '+ fetchComputedStyle(div, 'background-color'));
+    //     report('display: '+ fetchComputedStyle(div, 'display'));
+    //     report('font-size: '+ fetchComputedStyle(div, 'font-size'));
+    //     report('color: '+ fetchComputedStyle(div, 'color'));
+    //     report('border-width: '+ fetchComputedStyle(div, 'border-width'));
+    // });
+
+'12.8 获取计算后样式信息'
+    </script>
+    <!-- <div>
+        getPropertyValue方法可以获取CSS样式申明对象上的属性值（直接属性名称），例如： window.getComputedStyle(element, null).getPropertyValue("float");如果我们不使用getPropertyValue方法，直接使用键值访问，其实也是可以的。<img id="withPole" src="D:\github\projectCode\连连看\img\0.jpg" alt="ninja pole"/><img id="withShuriken" src="D:\github\projectCode\连连看\img\0.jpg" style="display:none;" alt="ninja shuriken"/>但是，比如这里的的float，如果使用键值访问，则不能直接使用getComputedStyle(element, null).float，而应该是cssFloat与styleFloat，自然需要浏览器判断了，比较折腾！使用getPropertyValue方法不必可以驼峰书写形式（不支持驼峰写法），例如：style.getPropertyValue("border-top-left-radius");
+    </div> -->
+    <script>
+    // (function() {
+    //     const PROPERTIES = {
+    //         position: 'absolute',
+    //         visibility: 'hidden',
+    //         display: 'block'
+    //     };
+    //     window.getDimensions = element => {
+    //         const previous = {}; // 保存初始值，以便恢复原状
+    //         for (let key in PROPERTIES) {
+    //             previous[key] = element.style[key];
+    //             element.style[key] = PROPERTIES[key];
+    //         }
+    //         const result = {
+    //             width: element.offsetWidth,
+    //             height: element.offsetHeight
+    //         };
+    //         for(let key in PROPERTIES) {
+    //             element.style[key] = previous[key]; 
+    //         }
+    //     return result;
+    //     }
+    // }());
+    // document.addEventListener('DOMContentLoaded', () => {
+    //     setTimeout(() => {
+    //         const withPole = document.getElementById('withPole'),
+    //             withShuriken = document.getElementById('withShuriken');
+    //         assert(withPole.offsetWidth === 100, 'withPole.offsetWidth === 100');
+    //         assert(withPole.offsetHeight === 100, 'withPole.offsetHeight === 100');
+    //         assert(withShuriken.offsetWidth === 100, 'withShuriken.offsetWidth === 100');
+    //         assert(withShuriken.offsetHeight === 100, 'withShuriken.offsetHeight === 100');
+
+    //         const dimensions = getDimensions(withShuriken);
+    //         assert(dimensions.width === 100, 'dimensions.width === 100');
+    //         assert(dimensions.height === 100, 'dimensions.height === 100');
+    //     }, 1000);
+    // });
+
+'12.11 批量DOM读取和写入可以避免布局抖动'
+    </script>
+    <!-- <style>
+    div {
+        width: 300px;
+        background-color: red;
+    }
+    </style>
+    <div id="ninja">ninja</div>
+    <div id="samurai">samurai</div>
+    <div id="ronin">ronin</div> -->
+    <script>
+    // const ninja = document.getElementById('ninja');
+    // const samurai = document.getElementById('samurai');
+    // const ronin = document.getElementById('ronin');
+
+    // const ninjaWidth = ninja.clientWidth;
+    // const samuraiWidth = samurai.clientWidth;
+    // const roninWidth = ronin.clientWidth;
+
+    // ninja.style.Width = ninjaWidth/2 + 'px';
+    // samurai.style.Width = samuraiWidth/2 + 'px';
+    // ronin.style.Width = roninWidth/2 + 'px';
+
+'第十二章 练习'
+//// 1
+    </script>
+    <!-- <div id="samurai"></div> -->
+    <script>
+    // const element = document.querySelector('#samurai');
+
+    // assert(element.id === 'samurai', 'element.id === samurai');
+    // assert(element.getAttribute('id') === 'samurai', 'element.getAttribute(id) === samurai');
+
+    // element.id = 'newSamurai';
+
+    // assert(element.id === 'newSamurai', 'element.id === newSamurai');
+    // assert(element.getAttribute('id') === 'newSamurai', 'element.getAttribute(id) === newSamurai');
+//// 2
+    </script>
+    <!-- <div id="element" style="border-width:5px;border-color: red"></div> -->
+    <script>
+    // const element =document.querySelector('#element');
+    // // unable to run => assert(element.border-width === '5px', 'element.border-width');
+    // assert(element.getAttribute['border-width'] === '5px', 'element.getAttribute[border-width]');
+    // assert(element.style['border-width'] === '5px', 'element.style[border-width]');
+    // assert(element.style.borderWidth === '5px', 'element.style.borderWidth');
+
+'第十三章'
+'13.5 使用一个计时器来中断一个长时间运行的任务'
+    </script>
+    <!-- <table>
+        <tbody></tbody>
+    </table> -->
+    <script>
+    // time1 = Date.now();
+    // const table = document.getElementsByTagName('tbody')[0];
+    // for (let i = 0; i < 20000; i++) {
+    //     const tr = document.createElement('tr');
+    //     for (let t = 0; t < 6; t++) {
+    //         const td = document.createElement('td');
+    //         td.appendChild(document.createTextNode(i + ',' + t));
+    //         tr.appendChild(td);
+    //     }
+    //     table.appendChild(tr);
+    // }
+    // time2 = Date.now();
+    // console.log(time2 - time1); // 175
+
+'第十三章'
+'13.5 使用一个计时器来中断一个长时间运行的任务'
+    </script>
+    <!-- <table>
+        <tbody></tbody>
+    </table> -->
+    <script>
+    // var time1 = Date.now();
+    // const rowCount = 20000;
+    // const divideInto = 4;
+    // const chunkSize = rowCount / divideInto;
+    // let iteration = 0;
+    // const table = document.getElementsByTagName('tbody')[0];
+    // setTimeout(function generateRows(){
+    //     const base = chunkSize * iteration;
+    //     for (let i = 0; i < chunkSize; i++) {
+    //         const tr = document.createElement('tr');
+    //         for (let t = 0; t < 6; t++) {
+    //             const td = document.createElement('td');
+    //             td.appendChild(document.createTextNode((i + base) +','+ t +','+ iteration));
+    //             tr.appendChild(td);
+    //         }
+    //         table.appendChild(tr);
+    //     }
+    //     iteration++;
+    //     if (iteration < divideInto) {
+    //         setTimeout(generateRows, 0);
+    //     }
+    // }, 0);
+    // var time2 = Date.now();
+    // console.log(time2 - time1); // 1
+
+'13.9 事件处理器中this和event.target的区别'
+    </script>
+    <!-- <style>
+    #outerContainer{
+        width: 100px;
+        height: 100px;
+        background-color: blue;
+    }
+    #innerContainer{
+        width: 50px;
+        height: 50px;
+        background-color: red;
+    }
+    </style>
+    <div id="outerContainer">
+        <div id="innerContainer"></div>
+    </div> -->
+    <script>
+    // const outerContainer = document.getElementById('outerContainer');
+    // const innerContainer = document.getElementById('innerContainer');
+
+    // innerContainer.addEventListener('click', function(event) {
+    //     report('========innerContainer handler========');
+    //     assert(this === innerContainer, 'this === innerContainer');
+    //     assert(event.target === innerContainer, 'event.target === innerContainer');
+    // });
+    // outerContainer.addEventListener('click', function(event) {
+    //     report('========outerContainer handler========');
+    //     assert(this === outerContainer, 'this === outerContainer');
+    //     assert(event.target === outerContainer, 'event.target === outerContainer');
+    // });
+
+'13.10 使用自定义事件'
+    </script>
+    <!-- <style>
+    #whirlyThing {
+        display: none;
+    }
+    </style>
+    <button id="clickMe" type="button">Start</button>
+    <img id="whirlyThing" src="D:\github\projectCode\淘宝网\img\logo.gif" /> -->
+    <script>
+    // function triggerEvent(target, eventType, eventDetail){
+    //     const event = new CustomEvent(eventType, {
+    //         detail: eventDetail
+    //     });
+    //     target.dispatchEvent(event);
+    // }
+
+    // function performAjaxOperation() {
+    //     triggerEvent(document, 'ajax-start', {
+    //         url: 'my-url'
+    //     });
+    //     setTimeout(() => {
+    //         triggerEvent(document, 'ajax-complete');
+    //     }, 5500);
+    // }
+
+    // const button = document.getElementById('clickMe');
+    // button.addEventListener('click', () => {
+    //     performAjaxOperation();
+    // });
+
+    // document.addEventListener('ajax-start', e => {
+    //     document.getElementById('whirlyThing').style.display = 'inline-block';
+    //     assert(e.detail.url === 'my-url', 'e.detail.url === my-url');
+    // });
+
+    // document.addEventListener('ajax-complete', e => {
+    //     document.getElementById('whirlyThing').style.display = 'none';
+    // });
+
+'第十三章习题'
+//// 5
+    </script>
+    <!-- <style>
+    #outer {
+        width: 100px;
+        height: 100px;
+        border: 1px solid red;
+    }
+    #inner {
+        width: 50px;
+        height: 50px;
+        border: 1px solid blue;
+    }
+    </style>
+    <div id="outer">
+        <div id="inner"></div>
+    </div> -->
+    <script>
+        // const innerElement = document.querySelector('#inner'),
+        //     outerElement = document.querySelector('#outer'),
+        //     bodyElement = document.querySelector('body');
+        
+        // innerElement.addEventListener('click', function() {
+        //     console.log('inner');
+        // })
+        // outerElement.addEventListener('click', function() {
+        //     console.log('outer');
+        // }, true)
+        // bodyElement.addEventListener('click', function() {
+        //     console.log('body');
+        // }) // outer => inner => body
+    </script>
+THE END
 </body>
 </html>

@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>连连看</title>
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .clearfix:after {
+            content: '';
+            display: block;
+            clear: both;
+        }
+
+        header {
+            text-align: center;
+        }
+
+        header h2 {
+            display: inline-block;
+            margin: 10px;
+            width: 80px;
+            font-size: 22px;
+            line-height: 1.5em;
+            background-color: #aaa;
+            cursor: pointer;
+
+        }
+
+        main {
+            position: relative;
+            margin: 0 auto;
+            background-color: #ccc;
+        }
+
+        .row {
+            height: 20px;
+        }
+
+        .col {
+            box-sizing: border-box;
+            float: left;
+            height: 20px;
+            width: 20px;
+            border: 1px solid #fff;
+        }
+
+        .food {
+            background-color: yellow;
+        }
+
+        .snake-body {
+            border: none;
+            border-radius: 50%;
+            background-color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h2 id="score">000</h2>
+        <h2 id="start">开始</h2>
+        <h2 id="stop">暂停</h2>
+        <h2 id="speed">1</h2>
+    </header>
+    <main id="mainMap" class="clearfix"></main>
+    <script>
+        var score = document.getElementById('score'),
+            map = document.getElementById('mainMap'),
+            start = document.getElementById('start'),
+            stop = document.getElementById('stop'),
+            timer,
+            scoreNum = 0,
+            mapDivArr = [],
+            mapRowNum = 25, // 宽
+            mapColumnNum = 25, // 高
+            speed = 400, // 移动速度
+            foodX,
+            foodY;
+
+        // create map
+        map.style.width = mapRowNum * 20 + 'px';
+        map.style.height = mapColumnNum * 20 + 'px';
+        createMap(mapRowNum, mapColumnNum);
+        createFood();
+
+        // var snake
+        var snake = {
+            direction: 'right',
+            x: 2,
+            y: 0,
+            body: createSnake()
+        };
+        // 地图创建
+        function createMap(mapRowNum, mapColumnNum) {
+            var fragment = document.createDocumentFragment(),
+                rowDiv,
+                columnDiv;
+            for (var i = 0; i < mapRowNum; i++) {
+                rowDiv = document.createElement('div');
+                rowDiv.className = 'row';
+                var rowArr = [];
+                for (var j = 0; j < mapColumnNum; j++) {
+                    columnDiv = document.createElement('div');
+                    columnDiv.className = 'col';
+                    rowDiv.appendChild(columnDiv);
+                    rowArr.push(columnDiv);
+                }
+                fragment.appendChild(rowDiv);
+                mapDivArr.push(rowArr);
+            }
+            map.appendChild(fragment);
+        }
+        // 蛇蛇创建
+        function createSnake() {
+            var snakeArr = [];
+            for (var i = 0; i < 3; i++) {
+                mapDivArr[0][i].className = 'col snake-body';
+                snakeArr[i] = mapDivArr[0][i];
+            }
+            return snakeArr;
+        }
+        // 蛇蛇移动
+        function snakeMove() {
+            console.log('move');
+            switch (snake.direction) {
+                case 'left':
+                    snake.x--;
+                    break;
+                case 'right':
+                    snake.x++;
+                    break;
+                case 'up':
+                    snake.y--;
+                    break;
+                case 'down':
+                    snake.y++;
+                    break;
+            };
+            // game over 撞墙
+            if (snake.x < 0 || snake.y < 0 || snake.x >= mapColumnNum || snake.y >= mapRowNum) {
+                alert('Game over!');
+                clearInterval(timer);
+                return;
+            }
+            // game over 撞自己
+            for (var i = 0; i < snake.body.length; i++) {
+                if (snake.body[i] == mapDivArr[snake.y][snake.x]) {
+                    alert('Game over!');
+                    clearInterval(timer);
+                    return;
+                };
+            }
+            // eat food 加长
+            if (foodX == snake.x && foodY == snake.y) {
+                mapDivArr[foodY][foodX].class = 'col food';
+                snake.body.push(mapDivArr[foodY][foodX]);
+                mapDivArr[snake.y][snake.x].className = 'col snake-body';
+                scoreNum++;
+                score.innerHTML = scoreNum;
+                createFood();
+            } else {
+                // not food 移除尾巴
+                snake.body[0].className = 'col';
+                snake.body.shift();
+                // 加个头
+                mapDivArr[snake.y][snake.x].className = 'col snake-body';
+                snake.body.push(mapDivArr[snake.y][snake.x]);
+            }
+        }
+
+        // 创建food
+        function createFood() {
+            foodX = parseInt(random(0, mapColumnNum - 1));
+            foodY = parseInt(random(0, mapRowNum - 1));
+            if (mapDivArr[foodY][foodX].className == 'col snake-body') {
+                createFood();
+            } else {
+                mapDivArr[foodY][foodX].className = 'col food';
+            }
+            function random(a, b) {
+                return (Math.random() * (b - a + 1) + a);
+            }
+        }
+
+        // 键盘事件
+        EventTool.addHandler(document, 'keydown', function () {
+            console.log(event.keyCode);
+            switch (event.keyCode) {
+                case 37:
+                    if (snake.direction != "right") {
+                        snake.direction = "left";
+                    }
+                    break;
+                case 38:
+                    if (snake.direction != 'down') {
+                        snake.direction = "up";
+                    }
+                    break;
+                case 39:
+                    if (snake.direction != "left") {
+                        snake.direction = "right";
+                    }
+                    break;
+                case 40:
+                    if (snake.direction != "up") {
+                        snake.direction = "down";
+                    }
+                    break;
+            }
+        })
+
+        // start
+        EventTool.addHandler(start, 'click', function () {
+            clearInterval(timer);
+            timer = setInterval(snakeMove, speed);
+        })
+        
+        // stop
+        EventTool.addHandler(stop, 'click', function () {
+            clearInterval(timer);
+        })
+    </script>
+</body>
+
+</html>
