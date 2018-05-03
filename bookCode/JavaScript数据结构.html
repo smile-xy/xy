@@ -1,64 +1,205 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>数据结构</title>
 </head>
-<body>
+
 <script>
+    //TODO: 第三章 栈
+    function Stack() {
 
-//6去零
-function deleteZero(array) {
-        for (let i = 0; i <= array.length; i += 3) {
-            if (array[i] != 0 && array[i + 1] === 0 && array[i + 2] === 0 && array[i + 3] === 0 && array[i + 4] === 0) {
-                array[i + 1] = '';
-                array[i + 2] = '';
-                array[i + 3] = '';
-                array[i + 4] = '';
-            }
-            if (array[i] != 0 && array[i + 1] === 0 && array[i + 2] === 0 && array[i + 3] === 0) {
-                array[i + 1] = '';
-                array[i + 2] = '';
-                array[i + 3] = '';
-            }
-            if (array[i] != 0 && array[i + 1] === 0 && array[i + 2] === 0) {
-                array[i + 1] = '';
-                array[i + 2] = '';
-            }
-            if (array[i] != 0 && array[i + 1] === 0) {
-                array[i + 1] = '';
-            }
-        }
-    // if (array[0] === 0) {
-    //     array[0] = '';
-    // }
+        let items = [];
 
-    for (let i = 0; i < array.length; i++) {
-        if (array[i] === 0 && array[i + 1] != 0 && array[i - 1] != 0) {
-            array[i] = '零';
+        // 添加元素
+        this.push = (element) => {
+            items.push(element);
         }
-        if (array[i] === 0 && array[i + 1] === 0 && array[i + 2] === 0 && array[i + 3] === 0) {
-            array[i] = '';
-            array[i + 1] = '';
-            array[i + 2] = '';
-            array[i + 3] = '';
+
+        // 移除元素
+        this.pop = () => items.pop();
+
+        // 查看栈顶的元素
+        this.peek = () => items[items.length - 1];
+
+        // 检查栈是否为空
+        this.isEmpty = () => items.length === 0;
+
+        // 栈长度
+        this.size = () => items.length;
+
+        // 栈清空
+        this.clear = () => {
+            items = [];
         }
-        if (array[i] === 0 && array[i + 1] === 0 && array[i + 2] === 0) {
-            array[i] = '';
-            array[i + 1] = '';
-            array[i + 2] = '';
+
+        // 打印
+        this.print = () => {
+            console.log(items.toString());
         }
-        if (array[i] === 0 && array[i + 1] === 0) {
-            array[i] = '';
-            array[i + 1] = '';
-        }
+
+        // 返回数组
+        this.printArr = () => items;
     }
-    return array;
-}
+    // let stack = new Stack();
+    // console.log('Is empty: ' + stack.isEmpty());
+    // stack.push(5);
+    // stack.push(8);
+    // console.log(stack.peek());
+    // stack.push(10);
+    // stack.push(15);
+    // console.log(stack.peek());
+    // stack.pop();
+    // console.log(stack.peek());
 
-console.log(deleteZero([0,0,0,1,0,0,1]));
-</script> 
+
+    //FIXME: 用栈解决十进制转二进制
+    function divideBy2(decNumber) {
+
+        var remStack = new Stack(),
+            rem,
+            binaryString = '';
+
+        while (decNumber > 0) {
+            rem = Math.floor(decNumber % 2);
+            remStack.push(rem);
+            decNumber = Math.floor(decNumber / 2);
+        }
+
+        while (!remStack.isEmpty()) {
+            binaryString += remStack.pop().toString();
+        }
+
+        return binaryString;
+    }
+    // console.log(divideBy2(233));
+    // console.log(divideBy2(232133));
+    // console.log(divideBy2(3));
+
+
+    //FIXME: 用栈解决十进制转任意进制
+    function baseConverter(decNumber, base) {
+
+        var remStack = new Stack(),
+            rem,
+            baseString = '',
+            digits = '0123456789ABCDEF';
+
+        while (decNumber > 0) {
+            rem = Math.floor(decNumber % base);
+            remStack.push(rem);
+            decNumber = Math.floor(decNumber / base);
+        }
+
+        while (!remStack.isEmpty()) {
+            baseString += digits[remStack.pop()];
+        }
+
+        return baseString;
+    }
+    // console.log(baseConverter(2233, 16));
+    // console.log(baseConverter(2233, 8));
+    // console.log(baseConverter(2233, 2));
+
+
+    //FIXME: 用栈解决平衡括号
+    function BalanceBrackets(str) {
+        var arr = str.split(''),
+            len = arr.length,
+            num = len / 2,
+            target = new Stack();
+
+        if (num === parseInt(num)) {
+
+            // 镜像复制arr
+            for (let i = len - 1; i >= 0; i--) {
+                switch (arr[i]) {
+                    case '(':
+                        target.push(')');
+                        break;
+                    case ')':
+                        target.push('(');
+                        break;
+                    case '[':
+                        target.push(']');
+                        break;
+                    case ']':
+                        target.push('[');
+                        break;
+                    case '{':
+                        target.push('}');
+                        break;
+                    case '}':
+                        target.push('{');
+                        break;
+                }
+            }
+            
+            // 镜像后跟原数组相等 
+            for (let i = 0; i < len; i++) {
+                if (target.printArr()[i] === arr[i]) {
+                    continue;
+                } else {
+                    return false;
+                }
+            }
+        } else {
+            return false;
+        }
+        return true;
+    }
+    // var str1 = '{[]()[]}';
+    // var str2 = '(({)[}])';
+    // var str3 = '{()[]}';
+    // console.log(BalanceBrackets(str1));
+    // console.log(BalanceBrackets(str2));
+    // console.log(BalanceBrackets(str3));
+
+
+    //FIXME: 用栈解决汉诺塔
+    function Hanoi() {
+
+    }
+
+    //TODO: 第四章 队列
+    //TODO: 第五章 链表
+    function LinkedList() {
+        let Node = function (element) {
+            this.element = element;
+            this.next = null;
+        };
+
+        let length = 0;
+        let head = null;
+
+        this.append = function (element) {
+
+            let node = new Node(element),
+                current;
+
+            if (head === null) {
+                head = node;
+            } else {
+                current = head;
+            }
+        };
+        this.insert = function (position, element) { };
+        this.removeAt = function (position) { };
+        this.remove = function (element) { };
+        this.indexIf = function (element) { };
+        this.isEmpty = function () { };
+        this.size = function () { };
+        this.getHead = function () { };
+        this.toString = function () { };
+        this.print = function () { };
+    };
+
+</script>
+
+<body>
 </body>
+
 </html>

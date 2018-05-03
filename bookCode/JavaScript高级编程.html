@@ -1717,6 +1717,7 @@
 
 '第十一章 DOM扩展'
 
+
     '焦点管理'
     </script>
     <!-- <div id="myDiv">
@@ -1748,7 +1749,9 @@
     // console.log(div.contains(ul)); // true
     // console.log(ul.contains(div)); // false
 
+
 '第十二章 DOM2和DOM3'
+
 
     '访问元素的样式'
     // var div = document.getElementById('myDiv');
@@ -1762,7 +1765,9 @@
     // console.log(div.style.getPropertyValue('height'));
     // console.log(div.style.removeProperty('background-color')); // 填写CSS属性名
 
+
  '第十三章 事件'
+
 
     'DOM2'
     </script>
@@ -1999,6 +2004,57 @@
     // var event = document.createEvent('MouseEvents');
     // event.initMouseEvent('click', true, true, document.defaultView, 0, '5px', '5px', '5px', '5px', false, false, false, false, 0, null);
     // btn.dispatchEvent(event);
+
+
+'第二十章 JSON'
+
+
+    'JSON对象'
+    // var book = {
+    //     title: 'JS',
+    //     authors: ['Nicholas'],
+    //     edition: 3,
+    //     year: 2001
+    // };
+
+    // var jsonText = JSON.stringify(book);
+    // console.log(jsonText);
+
+    '过滤'
+    // var book = {
+    //     title: 'JS',
+    //     authors: ['Nicholas'],
+    //     edition: 3,
+    //     year: 2001
+    // };
+
+    // var jsonText = JSON.stringify(book, ["title", "edition"]);
+    // console.log(jsonText);
+
+    '过滤'
+    // var book = {
+    //     title: 'JS',
+    //     authors: ['Nicholas'],
+    //     edition: 3,
+    //     year: 2001
+    // };
+
+    // var jsonText = JSON.stringify(book, function(key, value){
+    //     switch (key) {
+    //         case "authors":
+    //             return value.join(",");
+            
+    //         case "year":
+    //             return 5000;
+
+    //         case "edition":
+    //             return undefined;
+
+    //         default:
+    //             return value;
+    //     }
+    // });
+    // console.log(jsonText);
     </script>
 </body>
 </html>

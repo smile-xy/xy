@@ -69,7 +69,6 @@
         <h2 id="score">000</h2>
         <h2 id="start">开始</h2>
         <h2 id="stop">暂停</h2>
-        <h2 id="speed">1</h2>
     </header>
     <main id="mainMap" class="clearfix"></main>
     <script>
@@ -82,7 +81,7 @@
             mapDivArr = [],
             mapRowNum = 25, // 宽
             mapColumnNum = 25, // 高
-            speed = 400, // 移动速度
+            speed = 200, // 移动速度
             foodX,
             foodY;
 
@@ -130,7 +129,6 @@
         }
         // 蛇蛇移动
         function snakeMove() {
-            console.log('move');
             switch (snake.direction) {
                 case 'left':
                     snake.x--;

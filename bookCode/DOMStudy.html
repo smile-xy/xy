@@ -13,22 +13,22 @@
 
     <!-- <div></div>
     <script>
-        // dom 对象
-        var div = document.getElementsByTagName('div')[0];
-        div.style.width = '100px';
-        div.style.height = '100px';
-        div.style.backgroundColor = '#eee';
+    // dom 对象
+    var div = document.getElementsByTagName('div')[0];
+    div.style.width = '100px';
+    div.style.height = '100px';
+    div.style.backgroundColor = '#eee';
 
-        var count = 0;
-        div.onclick = function() {
+    var count = 0;
+    div.onclick = function() {
 
-            count++;
-            if (count % 2 == 1) {
-                this.style.backgroundColor = '#aaa';
-            } else {
-                this.style.backgroundColor = '#eee';
-            }
+        count++;
+        if (count % 2 == 1) {
+            this.style.backgroundColor = '#aaa';
+        } else {
+            this.style.backgroundColor = '#eee';
         }
+    }
     </script>  -->
 
 
@@ -1102,7 +1102,7 @@
     //     }
     // })
 
-    '随机移动方块 mouseover 怎么点也点不到' // TODO:
+    '随机移动方块 mouseover 怎么点也点不到'
     '方块跟随鼠标方向摆动'
     
     '键盘事件'
@@ -1111,8 +1111,8 @@
 
     'input事件'
     </script>
-    <!-- <input type="text"> -->
-    <div style="height:3000px"></div>
+    <!-- <input type="text">
+    <div style="height:3000px"></div> -->
     <script>
     // var input = document.getElementsByTagName('input')[0];
     // input.oninput = function(event) {
@@ -1123,14 +1123,51 @@
     // }
 
     'scroll事件'
-    window.onscroll = function() {
-        console.log(window.pageXOffset +' '+ window.pageYOffset);
-    }
+    // window.onscroll = function() {
+    //     console.log(window.pageXOffset +' '+ window.pageYOffset);
+    // }
 
-    '二阶菜单栏'
-    '贪吃蛇游戏(跟随上一块身体)'
-    '扫雷游戏(闭包)'
-    '打方块游戏'
+    // '二阶菜单栏'
+    // '贪吃蛇游戏(跟随上一块身体)'
+    // '扫雷游戏(闭包)'
+    // '打方块游戏'
+
+    'JSON 数据传输的格式'
+    // var obj = {
+    //     "name": 'deng',
+    //     "age": 12
+    // }
+    // var str = JSON.stringify(obj);
+    // console.log(str);
+    // console.log(JSON.parse(str));
+    
+    'JS异步加载'
+    // <script defer = 'defer'>
+    // <script async = 'async'>
+
+    // var script = document. createElement('script');
+    // script.type = 'text/javascript';
+    // script.src = 'D:/github/myTool.js';
+    // // 写完地址以后只会下载，并不会执行，直到添加到dom
+    // document.head.appendChild(script);
+
+    // // asyncLoading('D:/github/myTool.js', test()); // 报错 test未定义 将函数放入立即执行函数里面
+    // asyncLoading('D:/github/myTool.js', () => test());
+
+    'JS加载时间线'
+    //TODO: 1. 创建document对象，开始解析web页面。document.readyState='loading'
+    //TODO: 2. 遇到link外部css，创建县城加载并继续解析文档。
+    //TODO: 3. 遇到script外部JS，并且没有设置async、defer，浏览器加载并阻塞，等待js加载完成并执行该脚本，然后继续解析文档。
+    //TODO: 4. 遇到script外部JS，并设置async、defer，浏览器创建线程加载并继续解析文档。async属性的脚本加载完成后立即执行（异步加载禁止document.write()）
+    //TODO: 5. 遇到img等，先解析dom结构，然后浏览器异步加载src并继续解析文档。
+    //TODO: 6. 当文档解析完成，document.readyState='interactive'
+    //TODO: 7. 文档解析完成后，所有设置defer的脚本按顺序执行。async不保证执行顺序。
+    //TODO: 8. document对象触发DOMContentLoaded事件，标志着程序执行从同步脚本执行阶段变为事件驱动阶段（可以监听事件）
+    //TODO: 9. 当所有async脚本加载并执行、img等加载完成后，document.readyState='complete'，window对象触发load事件
+    //TODO:10. 页面异步响应用户事件。
+    // console.log(document.readyState); // loading
+    // EventTool.addHandler(document, 'readystatechange', () => console.log(document.readyState));
+    // EventTool.addHandler(document, 'DOMContentLoaded', () => console.log('a'));
     </script>
 </body>
 </html>

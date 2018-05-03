@@ -9,7 +9,6 @@ function typeIs(target) {
             '[object Boolean]': 'boolean - object',
             '[object String]': 'string - object'
         };
-
     if (target === null) {
         return 'null';
     } else if (typeOfTar == 'object') {
@@ -24,7 +23,6 @@ function deepClone(origin, target) {
     var target = target || {},
         toStr = Object.prototype.toString,
         isArr = '[object Array]';
-
     for (var key in origin) {
         if (origin.hasOwnProperty(key)) {
 
@@ -52,15 +50,34 @@ var inherit = (function () {
     }
 }());
 
+// 异步加载
+function asyncLoading(url, callback) {
+    var script = document.createElement('script');
+    script.type = 'text/javascript';
+    if (script.readyState) { // IE
+        script.onreadystatechange = function () {
+            if (script.readyState == 'complete' || script.readyState == 'loaded') {
+                callback();
+            }
+        }
+    } else { // W3C
+        EventTool.addHandler(window, function () {
+            callback();
+        });
+    }
+    script.src = url;
+    document.head.appendChild(script);
+}
+
 // insertAfter()，功能类似insertBefore()
-// Element.prototype.insertAfter = function(node, index) {
-//     var beforeNode = index.nextElementSibling;
-//     if (beforeNode == null) {
-//         this.appendChild(node);
-//     } else {
-//         this.insertBefore(node, beforeNode);
-//     }
-// }
+Element.prototype.insertAfter = function (node, index) {
+    var beforeNode = index.nextElementSibling;
+    if (beforeNode == null) {
+        this.appendChild(node);
+    } else {
+        this.insertBefore(node, beforeNode);
+    }
+}
 
 // 获取当前窗口大小，并返回对象{pageWidth, pageHeight};
 var getPageSize = function () {
@@ -144,12 +161,12 @@ var EventTool = {
         return event.target || event.srcElement;
     },
     // 获取相关元素
-    getRelatedTarget: function(event){
+    getRelatedTarget: function (event) {
         if (event.relatedTarget) {
             return event.relatedTarget;
-        } else if(event.toElement){
+        } else if (event.toElement) {
             return event.toElement;
-        } else if(event.fromElement){
+        } else if (event.fromElement) {
             return event.fromElement;
         } else {
             return null;
@@ -159,7 +176,7 @@ var EventTool = {
     getClickButton: function (event) {
         if (document.implementation.hasFeature('MouseEvents', '2.0')) {
             return event.button;
-        }else {
+        } else {
             switch (event.button) {
                 case 0:
                 case 1:
@@ -219,7 +236,7 @@ var EventTool = {
     getCharCode: function (event) {
         if (typeof event.charCode == 'number') {
             return event.charCode;
-        } else{
+        } else {
             return event.keyCode;
         }
     }
