@@ -1,3 +1,5 @@
+// TODO: 方法
+
 //强化版typeof
 function typeIs(target) {
     var typeOfTar = typeof target,
@@ -126,6 +128,30 @@ function getElementStyle(elem, prop) {
         return elem.currentStyle[prop];
     }
 };
+
+// 兼容性获取className （个人感觉没什么用）
+Document.prototype.getByClassName = function (className) {
+
+    var domArr = Array.prototype.slice.call(document.getElementsByTagName('*'), 0);
+    var filterArr = [];
+
+    function dealClass(elem) {
+        var reg = /\s+/g;
+        var arrClassName = elem.className.replace(reg, ' ').trim();
+        return arrClassName;
+    }
+
+    domArr.forEach(function (elem, index) {
+        var itemClassArr = dealClass(elem).split(' ');
+        for (let i = 0; i < itemClassArr.length; i++) {
+            if (itemClassArr[i] === className) {
+                filterArr.push(elem);
+                break;
+            }
+        }
+    })
+    return filterArr;
+}
 
 /* 事件处理工具
  * 事件绑定 EventTool.addHandler(elem, type, handler)
@@ -266,4 +292,56 @@ function dragElement(elemId) {
         EventTool.removeHandler(document, 'mousemove', mouseMove);
         EventTool.removeHandler(document, 'mouseup', mouseUp);
     }
+}
+
+// TODO: 框架
+
+// 多物体多值链式运动框架
+function chainMotionFrame(elem, objAttr, callback) {
+    // 执行前清除计时器
+    clearInterval(elem.timer);
+    var timer,
+        speed,
+        getStyle,
+        attrOpacity,
+        isComplete;
+    // 对opacity保存副本并乘100以便计算
+    if (objAttr.opacity) {
+        attrOpacity = objAttr.opacity;
+        objAttr.opacity = objAttr.opacity * 100;
+    }
+
+    elem.timer = setInterval(function () {
+        isComplete = true;
+        for (var key in objAttr) {
+            // 获取当前元素样式
+            if (key == 'opacity') {
+                getStyle = parseFloat(getElementStyle(elem, key)) * 100;
+            } else {
+                getStyle = parseFloat(getElementStyle(elem, key));
+            }
+
+            // 减速运动
+            speed = (objAttr[key] - getStyle) / 7;
+            // 速度区间 [1,n)
+            speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
+
+            if (key == 'opacity') {
+                elem.style.opacity = (getStyle + speed) / 100;
+            } else {
+                elem.style[key] = getStyle + speed + 'px';
+            }
+
+            // 全部运动执行完毕前等于false
+            if (getStyle != objAttr[key]) {
+                isComplete = false;
+            }
+        }
+        // 清除计时器，恢复修改数据，执行回调函数
+        if (isComplete) {
+            clearInterval(elem.timer);
+            objAttr.opacity = attrOpacity;
+            typeof callback === 'function' ? callback() : false;
+        }
+    }, 30);
 }

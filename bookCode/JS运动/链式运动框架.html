@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS运动</title>
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            position: absolute;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            opacity: 1;
+        }
+
+        .top {
+            top: 100px;
+        }
+
+        .bottom {
+            top: 300px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top"></div>
+    <div class="bottom"></div>
+    <script>
+        var oDivArr = document.getElementsByTagName('div');
+        var timer = null;
+        var targetObj = {
+            width: 400,
+            height: 400,
+            opacity: 0.5,
+            left: 300,
+            top: 200
+        }
+        oDivArr[0].onclick = function () {
+            startMove(this, targetObj, function () {
+                startMove(oDivArr[1], targetObj);
+            })
+            // chainMotionFrame(this, targetObj, function () {
+            //     chainMotionFrame(oDivArr[1], targetObj);
+            // })
+        }
+
+
+        function startMove(obj, json, callback) {
+            clearInterval(obj.timer);
+            var sSpeed;
+            var iCur;
+            if (json.opacity) {
+                jsonOpacity = json.opacity;
+                json.opacity = 100 * json.opacity;
+
+            }
+
+            obj.timer = setInterval(function () {
+                var stop = true;
+                for (var attr in json) {
+
+                    if (attr == 'opacity') {
+                        iCur = parseFloat(getElementStyle(obj, attr)) * 100;
+                    } else {
+                        iCur = parseFloat(getElementStyle(obj, attr))
+                    }
+
+                    iSpeed = (json[attr] - iCur) / 7;
+                    iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+
+                    if (attr == 'opacity') {
+                        obj.style.opacity = (iCur + iSpeed) / 100;
+                    } else {
+                        obj.style[attr] = iCur + iSpeed + 'px';
+                    }
+                    if (iCur != json[attr]) {
+                        console.log(iCur, json[attr]);
+                        stop = false;
+                    }
+                }
+                if (stop) {
+                    clearInterval(obj.timer);
+                    json.opacity = jsonOpacity;
+                    typeof callback === 'function' ? callback() : false;
+                }
+            }, 30);
+        }
+    </script>
+</body>
+
+</html>

@@ -1168,6 +1168,69 @@
     // console.log(document.readyState); // loading
     // EventTool.addHandler(document, 'readystatechange', () => console.log(document.readyState));
     // EventTool.addHandler(document, 'DOMContentLoaded', () => console.log('a'));
+
+    '图片预加载'
+    // var img = new Image();
+    // img.src = 'https://nie.res.netease.com/r/pic/20170907/5e19409a-3f67-4949-b493-ff3617d846ba';
+    // EventTool.addHandler(img, 'load', () => {
+    //     document.body.appendChild(img);
+    // })
+
+    '图片懒加载'
+    // var btn = document.createElement('button');
+    // btn.innerText = '点击加载';
+    // document.body.appendChild(btn);
+    // EventTool.addHandler(btn, 'click', () => {
+    //     // 预加载
+    //     var img = new Image();
+    //     img.src = 'https://nie.res.netease.com/r/pic/20170907/5e19409a-3f67-4949-b493-ff3617d846ba';
+    //     EventTool.addHandler(img, 'load', () => {
+    //         document.body.appendChild(img);
+    //     })
+    // })
+
+    'Math.random'
+    // var arr = ['a', 'b', 'c', 'd', 'e'];
+    // var value = '';
+    // for (let i = 0; i < 3; i++) {
+    //     value += arr[parseInt(Math.random()*arr.length)];
+    // }
+    // console.log(value);
+
+    'byClassName兼容'
+    </script>
+    <!-- <div class="demo     item          aaa">
+        <p class="   bbb    demo">
+            <span class="dd cc  demos       "></span>
+        </p>
+        <li class="li"></li>
+    </div> -->
+    <script>
+    // Document.prototype.getByClassName = function(className) {
+
+    //     var domArr = Array.prototype.slice.call(document.getElementsByTagName('*'), 0);
+    //     var filterArr = [];
+
+    //     function dealClass(elem) {
+    //         var reg = /\s+/g;
+    //         var arrClassName = elem.className.replace(reg, ' ').trim();
+    //         return arrClassName;
+    //     }
+
+    //     domArr.forEach(function(elem, index) {
+    //         var itemClassArr = dealClass(elem).split(' ');
+    //         for (let i = 0; i < itemClassArr.length; i++) {
+    //             if (itemClassArr[i]  === className) {
+    //                 filterArr.push(elem);
+    //                 break;
+    //             }
+    //         }
+    //     })
+    //     return filterArr;
+    // }
+
+    // var aClass = document.getByClassName('demo');
+    // console.log(aClass);
     </script>
 </body>
 </html>

@@ -9,126 +9,152 @@
     <script type="text/javascript" src="D:\github\myTool.js"></script>
 </head>
 
+<script>
+    '贪婪匹配原则'
+
+    '修饰符'
+    // i 忽略大小写
+    // g 全局匹配
+    // m 多行匹配
+    // 多行字符串 后加转义字符取消回车
+    //     var text = '\
+    // <div></div>\
+    // <div></div>\
+    // ';
+
+    // var reg1 = new RegExp('abc', 'g');
+    // var reg1 = /^a/gm;
+
+    '表达式' // 表达式里面可以写元字符
+
+    // var reg1 = /[0123456789]/g; // []一位字符
+    // var reg1 = /[0-9][0-9A-Za-z][0-9A-z]/g; // 从0到9
+    // var reg1 = /[^a][^b]/g; // 非a
+    // var reg1 = /(abc|bcd)[0-9]/g; // 或
+
+
+    '元字符'
+    /*
+        . === [^\n\r]       单个字符 除了换行和回车符
+        \w === [0-9A-z_]     单词
+        \W === [^\w]         非单词
+        \d === [0-9]         数字
+        \D === [^\d]         非数字
+        \s === [\n\f\r\t\v ] 空白字符
+        \S === [^\s]         非空白字符
+        \b === 单词边界
+        \B === 非单词边界
+        \n 换行符 LF
+        \f 换页符 FF
+        \r 回车符 CR
+        \t 水平制表符 HT (TAB)
+        \v 垂直制表符 VT
+    */
+
+    'Unicode编码'
+    // \u0000 ~ \uffff
+    // \u010000 ~ \u01ffff
+    // \u020000 ~ \u02ffff
+    //   ...... ~ ......
+    // \u100000 ~ \u10ffff
+
+    '量词'
+    /* 
+        n+  	匹配任何包含至少一个 n 的字符串。
+        n*	    匹配任何包含零个或多个 n 的字符串。
+        n?  	匹配任何包含零个或一个 n 的字符串。
+        n{X}	匹配包含 X 个 n 的序列的字符串。
+        n{X,Y}	匹配包含 X 至 Y 个 n 的序列的字符串。
+        n{X,}	匹配包含至少 X 个 n 的序列的字符串。
+        n$	    匹配任何结尾为 n 的字符串。
+        ^n	    匹配任何开头为 n 的字符串。
+        ?=n	    匹配任何其后紧接指定字符串 n 的字符串。
+        ?!n	    匹配任何其后没有紧接指定字符串 n 的字符串。
+    */
+    //  /^abc$/ === abc !== abcabc
+
+
+    'reg.test();'
+    // 检索字符串中指定的值。返回 true 或 false。
+    'reg.lastIndex'
+    // 	一个整数，标示开始下一次匹配的字符位置。
+    // global 模式下才会变
+    'reg.exec();'
+    //检索字符串中指定的值。返回找到的值，并确定其位置。
+    'reg.compile()'
+    // 	编译正则表达式。
+
+    // var reg = /ab/g;
+    // var str = 'ababab';
+    // console.log(reg.lastIndex); // 0
+    // console.log(reg.exec(str));
+    // console.log(reg.lastIndex); // 2
+    // console.log(reg.exec(str));
+
+    // var str = 'aa';
+    // console.log(str.replace('a', 'b')); // ba 没有匹配全局能力
+
+    // var reg = /(\w)\1(\w)\2/g;
+    // var str = 'aabb';
+    // console.log(str.replace(reg, '$2$2$1$1')); // bbaa
+
+    // console.log(str.replace(reg, function ($, $1, $2) {
+    //     return $2 + $2 + $1 + $1;
+    // })); // bbaa
+
+    '试题1 把 the-first-name 改成小驼峰式写法'
+    // var str = 'the-first-name';
+    // var reg = /-(\w)/g;
+    // console.log(str.replace(reg, function($,$1){
+    //     return $1.toUpperCase();
+    // }))
+
+    // 非贪婪匹配
+    // var str = 'ababab';
+    // var reg = /a{1,3}?/g;
+
+    '试题2 去重'
+    // var str = 'aaaaaaabbbbbbbbcccccccc';
+    // var reg = /(\w)\1*/g;
+    // console.log(str.replace(reg, '$1'));
+
+    '试题3 科学计数法'
+    // var str = '123456789';
+    // var reg = /(?=(\B)(\d{3})+$)/g;
+    // console.log(str.replace(reg, '.'));
+</script>
+
+<script>
+    '匹配结尾的数字'
+    // var str1 = '30AFVDGOO30';
+    // var str2 = '40SDFDTGS40';
+    // var reg = /\d+$/g;
+    // console.log(str1.match(reg));
+    // console.log(str2.match(reg));
+
+    '统一空格数'
+    // var str1 = '30A     FVDGOO   30';
+    // var str2 = '40   SDF    DTGS4   0';
+    // var reg = /\s+/g;
+    // console.log(str1.replace(reg, ' '));
+    // console.log(str2.replace(reg, ' '));
+
+    '判断字符串是不是由数字组成'
+    // var str1 = '30AFVDGOO30';
+    // var str2 = '16534654654';
+    // function fun(str) {
+    //     var reg = /^\d*$/;
+    //     return reg.test(str);
+    // }
+    // console.log(fun(str1));
+    // console.log(fun(str2));
+
+    '电话号码'
+    // var reg = /\w/;
+    // console.log(reg.compile(reg));
+</script>
+
 <body>
-    <script>
-        '贪婪匹配原则'
-
-        '修饰符'
-        // i 忽略大小写
-        // g 全局匹配
-        // m 多行匹配
-        // 多行字符串 后加转义字符取消回车
-        //     var text = '\
-        // <div></div>\
-        // <div></div>\
-        // ';
-
-        var reg1 = new RegExp('abc', 'g');
-        var reg1 = /^a/gm;
-
-        '表达式' // 表达式里面可以写元字符
-
-        var reg1 = /[0123456789]/g; // []一位字符
-        var reg1 = /[0-9][0-9A-Za-z][0-9A-z]/g; // 从0到9
-        var reg1 = /[^a][^b]/g; // 非a
-        var reg1 = /(abc|bcd)[0-9]/g; // 或
-
-
-        '元字符'
-        /*
-            . === [^\n\r]       单个字符 除了换行和回车符
-            \w === [0-9A-z_]     单词
-            \W === [^\w]         非单词
-            \d === [0-9]         数字
-            \D === [^\d]         非数字
-            \s === [\n\f\r\t\v ] 空白字符
-            \S === [^\s]         非空白字符
-            \b === 单词边界
-            \B === 非单词边界
-            \n 换行符 LF
-            \f 换页符 FF
-            \r 回车符 CR
-            \t 水平制表符 HT (TAB)
-            \v 垂直制表符 VT
-        */
-
-        'Unicode编码'
-        // \u0000 ~ \uffff
-        // \u010000 ~ \u01ffff
-        // \u020000 ~ \u02ffff
-        //   ...... ~ ......
-        // \u100000 ~ \u10ffff
-
-        '量词'
-        /* 
-            n+  	匹配任何包含至少一个 n 的字符串。
-            n*	    匹配任何包含零个或多个 n 的字符串。
-            n?  	匹配任何包含零个或一个 n 的字符串。
-            n{X}	匹配包含 X 个 n 的序列的字符串。
-            n{X,Y}	匹配包含 X 至 Y 个 n 的序列的字符串。
-            n{X,}	匹配包含至少 X 个 n 的序列的字符串。
-            n$	    匹配任何结尾为 n 的字符串。
-            ^n	    匹配任何开头为 n 的字符串。
-            ?=n	    匹配任何其后紧接指定字符串 n 的字符串。
-            ?!n	    匹配任何其后没有紧接指定字符串 n 的字符串。
-        */
-        //  /^abc$/ === abc !== abcabc
-
-
-        'reg.test();'
-        // 检索字符串中指定的值。返回 true 或 false。
-        'reg.lastIndex'
-        // 	一个整数，标示开始下一次匹配的字符位置。
-        // global 模式下才会变
-        'reg.exec();'
-        //检索字符串中指定的值。返回找到的值，并确定其位置。
-        'reg.compile()'
-        // 	编译正则表达式。
-        // var reg = /ab/g;
-        // var str = 'ababab';
-        // console.log(reg.lastIndex); // 0
-        // console.log(reg.exec(str));
-        // console.log(reg.lastIndex); // 2
-        // console.log(reg.exec(str));
-
-        // var str = 'aa';
-        // console.log(str.replace('a', 'b')); // ba 没有匹配全局能力
-
-        // var reg = /(\w)\1(\w)\2/g;
-        // var str = 'aabb';
-        // console.log(str.replace(reg, '$2$2$1$1')); // bbaa
-
-        // console.log(str.replace(reg, function ($, $1, $2) {
-        //     return $2 + $2 + $1 + $1;
-        // })); // bbaa
-
-        '试题1 把 the-first-name 改成小驼峰式写法'
-        // var str = 'the-first-name';
-        // var reg = /-(\w)/g;
-        // console.log(str.replace(reg, function($,$1){
-        //     return $1.toUpperCase();
-        // }))
-
-        // 非贪婪匹配
-        // var str = 'ababab';
-        // var reg = /a{1,3}?/g;
-
-        '试题2 去重'
-        // var str = 'aaaaaaabbbbbbbbcccccccc';
-        // var reg = /(\w)\1*/g;
-        // console.log(str.replace(reg, '$1'));
-
-        '试题3 科学计数法'
-        // var str = '123456789';
-        // var reg = /(?=(\B)(\d{3})+$)/g;
-        // console.log(str.replace(reg, '.'));
-    </script>
-
-    <script>
-        console.log(reg.test(str));
-        console.log(str.match(reg));
-
-    </script>
 </body>
 
 </html>

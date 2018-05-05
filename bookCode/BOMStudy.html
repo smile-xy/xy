@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>BOM</title>
+</head>
+<script>
+    'window对象'
+    alert(); //弹出框
+    confirm(); //确认框
+    prompt(); //输入框
+
+    focus(); //取消焦点
+    blur(); //焦点
+
+    window.open(URL, name, features); //打开新窗口
+    elem.close(); //关闭窗口
+
+    setInterval(); //间歇调用
+    clearInterval(); //
+    setTimeout(); //延时调用
+    clearTimeout(); //
+
+    scrollTo(); //滚动到
+    scrollBy(); //滚动多少距离
+
+    window.name; // 设置或返回的窗口名称
+    window.closed; // 返回窗口是否关闭
+    window.innerHeight; // 文档可视区高度
+    window.innerWidth; // 文档可视区宽度
+    window.pageXOffset; // 设置或返回当前页面相对于窗口显示区左上角X位置
+    window.pageYOffset; // 设置或返回当前页面相对于窗口显示区左上角Y位置
+    window.parent;
+    window.top;
+    window.self;
+    screenLeft; // 只读，窗口左上角距离屏幕左上角的距离
+    screenTop; // 只读，窗口左上角距离屏幕左上角的距离
+
+    'navigator对象'
+    navigator.cookieEnabled; // cookie是否启用
+    navigator.onLine; // 是否联网
+    navigator.userAgent; // 浏览器的用户代理字符串
+
+    'history对象'
+    history.length; // 历史记录数量
+    history.back();
+    history.forward();
+    history.go();
+
+    'location对象'
+    location.hash; // 返回URL中#号后跟的字符
+    location.host; // 返回服务器名称和端口号
+    // https默认端口:443 
+    // http默认端口:80 
+    location.href; // 返回完整的URL
+    location.pathname; // 返回当前URL路径
+    location.protocol; // 返回使用协议
+    location.search; // 返回URL的查询字符串
+
+    location.assign(); // 加载新的文档
+    location.reload(); // 重新加载
+    location.reload(true); // 强制从服务器重新加载
+    location.replace(); // 用新文档替换当前文档
+</script>
+
+<body>
+
+</body>
+
+</html>

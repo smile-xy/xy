@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS运动</title>
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            margin: 10px;
+            width: 100px;
+            height: 100px;
+            border: 1px solid yellow;
+            background-color: red;
+            opacity: 1;
+        }
+
+        .active {
+            width: 400px;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <script>
+        var divArr = document.getElementsByTagName('div');
+
+        // for (let i = 0; i < divArr.length; i++) {
+        //     // 鼠标移入
+        //     EventTool.addHandler(divArr[i], 'mouseenter', () => {
+        //         resize(divArr[i], 400);
+        //     })
+        //     // 鼠标移出
+        //     EventTool.addHandler(divArr[i], 'mouseleave', () => {
+        //         resize(divArr[i], 100);
+        //     })
+        // }
+        divArr[0].onclick = function () {
+            resize(this, 400, 'width');
+        }
+        divArr[1].onclick = function () {
+            resize(this, 400, 'height');
+        }
+        divArr[2].onclick = function () {
+            resize(this, 0.2, 'opacity');
+        }
+        divArr[3].onclick = function () {
+            resize(this, 10, 'borderWidth');
+        }
+
+        // 调整大小
+        function resize(obj, target, attr) {
+            clearInterval(obj.timer);
+            var iSpeed;
+            var iAttr;
+            attr == 'opacity' ? target = 100 * target : false;
+
+            obj.timer = setInterval(() => {
+
+                if (attr == 'opacity') {
+                    iAttr = parseFloat(getStyle(obj, attr)) * 100;
+                } else {
+                    iAttr = parseFloat(getStyle(obj, attr))
+                }
+
+                iSpeed = (target - iAttr) / 7;
+                iSpeed = iSpeed > 0 ? Math.ceil(iSpeed) : Math.floor(iSpeed);
+                console.log(attr, iAttr, target);
+                if (iAttr == target) {
+                    clearInterval(obj.timer);
+                } else {
+                    if (attr == 'opacity') {
+                        obj.style.opacity = (iAttr + iSpeed) / 100;
+                    }
+                    obj.style[attr] = iAttr + iSpeed + 'px';
+                }
+            }, 30)
+        }
+
+        // 获取样式
+        function getStyle(obj, attr) {
+            if (obj.currentStyle) {
+                return obj.currentStyle[attr];
+            } else {
+                return window.getComputedStyle(obj, false)[attr];
+            }
+        }
+    </script>
+</body>
+
+</html>

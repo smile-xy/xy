@@ -9,7 +9,7 @@
 </head>
 
 <script>
-    //TODO: 第三章 栈
+    //TODO:TODO:TODO: 第三章 栈
     function Stack() {
 
         let items = [];
@@ -56,7 +56,7 @@
     // console.log(stack.peek());
 
 
-    //FIXME: 用栈解决十进制转二进制
+    //TODO: 用栈解决十进制转二进制
     function divideBy2(decNumber) {
 
         var remStack = new Stack(),
@@ -80,7 +80,7 @@
     // console.log(divideBy2(3));
 
 
-    //FIXME: 用栈解决十进制转任意进制
+    //TODO: 用栈解决十进制转任意进制
     function baseConverter(decNumber, base) {
 
         var remStack = new Stack(),
@@ -105,7 +105,7 @@
     // console.log(baseConverter(2233, 2));
 
 
-    //FIXME: 用栈解决平衡括号
+    //TODO: 用栈解决平衡括号
     function BalanceBrackets(str) {
         var arr = str.split(''),
             len = arr.length,
@@ -137,7 +137,7 @@
                         break;
                 }
             }
-            
+
             // 镜像后跟原数组相等 
             for (let i = 0; i < len; i++) {
                 if (target.printArr()[i] === arr[i]) {
@@ -159,13 +159,155 @@
     // console.log(BalanceBrackets(str3));
 
 
-    //FIXME: 用栈解决汉诺塔
-    function Hanoi() {
+    // TODO 用栈解决汉诺塔 FIXME: 看了源码还不会。。。
+    function Hanoi(len, origin, middle, target) {
 
     }
 
-    //TODO: 第四章 队列
-    //TODO: 第五章 链表
+    var origin = new Stack();
+    var middle = new Stack();
+    var target = new Stack();
+    for (let i = 1; i <= 64; i++) {
+        origin.push(i);
+    }
+    // console.log(Hanoi(origin.size, origin, middle, target)); // 一共需要XXXX步
+
+
+    //TODO:TODO:TODO: 第四章 队列
+    function Queue() {
+
+        let items = [];
+
+        // 添加元素
+        this.enqueue = (element) => {
+            items.push(element);
+        }
+
+        // 移除元素
+        this.dequeue = () => items.shift();
+
+        // 查看栈顶的元素
+        this.front = () => items[0];
+
+        // 检查栈是否为空
+        this.isEmpty = () => items.length === 0;
+
+        // 栈长度
+        this.size = () => items.length;
+
+        // 栈清空
+        this.clear = () => {
+            items = [];
+        }
+
+        // 打印
+        this.print = () => {
+            console.log(items.toString());
+        }
+
+        // 返回数组
+        this.printArr = () => items;
+    }
+    // let queue = new Queue();
+    // console.log('Is empty: ' + queue.isEmpty());
+    // queue.push(5);
+    // queue.push(8);
+    // console.log(queue.front());
+    // queue.push(10);
+    // queue.push(15);
+    // console.log(queue.front());
+    // queue.shift();
+    // console.log(queue.front());
+
+    // TODO: 优先队列
+    function PriorityQueue() {
+
+        let items = [];
+
+        function QueueElement(element, priority) {
+            this.element = element;
+            this.priority = priority;
+        }
+
+        // 添加元素
+        this.enqueue = (element, priority) => {
+            let queueElement = new QueueElement(element, priority);
+            let added = false;
+
+            for (let i = 0; i < items.length; i++) {
+                if (queueElement.priority < items[i].priority) {
+                    items.splice(i, 0, queueElement);
+                    added = true;
+                    break;
+                }
+            }
+            if (!added) {
+                items.push(queueElement);
+            }
+        };
+
+        // 移除元素
+        this.dequeue = () => items.shift();
+
+        // 查看栈顶的元素
+        this.front = () => items[0];
+
+        // 检查栈是否为空
+        this.isEmpty = () => items.length === 0;
+
+        // 栈长度
+        this.size = () => items.length;
+
+        // 栈清空
+        this.clear = () => {
+            items = [];
+        }
+
+        // 打印 FIXME:看不懂这个是啥意思
+        this.print = () => {
+            for (let i = 0; i < items.length; i++) {
+                console.log(`${items[i].element} - ${items[i].priority}`);
+            }
+        }
+
+        // 返回数组
+        this.printArr = () => items;
+    }
+    // let priorityQueue = new PriorityQueue();
+    // priorityQueue.enqueue('Jon', 2);
+    // priorityQueue.enqueue('Jack', 1);
+    // console.log(priorityQueue.front());
+    // priorityQueue.enqueue('Cam', 1);
+    // priorityQueue.enqueue('Gump', 3);
+    // priorityQueue.print();
+    // priorityQueue.dequeue();
+    // console.log(priorityQueue.front());
+
+
+    // TODO: 模拟击鼓传花
+    function hotPotato(nameList, num) {
+        let queue = new Queue();
+
+        for (let i = 0; i < nameList.length; i++) {
+            queue.enqueue(nameList[i]);
+        }
+
+        let eliminated = '';
+        while (queue.size() > 1) {
+            for (var i = 0; i < num; i++) {
+                queue.enqueue(queue.dequeue());
+            }
+            eliminated = queue.dequeue();
+            console.log('第' + (nameList.length - queue.size()) + '轮 ' + eliminated + '淘汰');
+        }
+        return queue.dequeue();
+    }
+    let names = ['John', 'Jack', 'Camila', 'Ingrid', 'Carl'];
+    let winner = hotPotato(names, 515);
+    // console.log('The winner is ' + winner);
+
+
+    //TODO:TODO:TODO: 第五章 链表
     function LinkedList() {
         let Node = function (element) {
             this.element = element;
