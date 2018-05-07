@@ -129,6 +129,11 @@ function getElementStyle(elem, prop) {
     }
 };
 
+// 获取 elem 元素的prop 属性的最终计算结果并返回
+function getElementStyleNum(elem, prop) {
+    return parseInt(getElementStyle(elem, prop));
+};
+
 // 兼容性获取className （个人感觉没什么用）
 Document.prototype.getByClassName = function (className) {
 
@@ -268,33 +273,139 @@ var EventTool = {
     }
 }
 
-//元素拖拽
-function dragElement(elemId) {
+// TODO: 框架
+
+//元素鼠标拖拽、碰撞运动
+function dragElementFrame(elemId, canDrag, canMove) {
     var divX,
         divY,
+        timer,
+        speedX = 0,
+        speedY = 0,
+        distanceX,
+        distanceY,
+        elemNewTop,
+        elemNewLeft,
+        elemLastTop,
+        elemLastLeft,
+        elemDrag = canDrag || true, // 默认可以拖拽
+        elemMove = canMove || false, // 默认不能碰撞运动
         elem = document.getElementById(elemId);
-    EventTool.addHandler(elem, 'mousedown', function (event) {
-        var event = event || window.event;
-        divX = event.clientX - parseInt(getElementStyle(elem, 'left'));
-        divY = event.clientY - parseInt(getElementStyle(elem, 'top'));
-        EventTool.addHandler(document, 'mousemove', mouseMove);
-        EventTool.addHandler(document, 'mouseup', mouseUp);
-        EventTool.stopPropagation(event);
-        EventTool.preventDefault(event);
-    });
+    elemLastTop = elem.offsetTop;
+    elemLastLeft = elem.offsetLeft;
+
+    if (elemDrag) {
+        EventTool.addHandler(elem, 'mousedown', function (event) {
+            var event = event || window.event;
+            // 元素碰撞运动
+            if (canMove) {
+                distanceX = event.clientX - elem.offsetLeft;
+                distanceY = event.clientY - elem.offsetTop;
+            }
+
+            divX = event.clientX - getElementStyleNum(elem, 'left');
+            divY = event.clientY - getElementStyleNum(elem, 'top');
+
+            EventTool.addHandler(document, 'mousemove', mouseMove);
+            EventTool.addHandler(document, 'mouseup', mouseUp);
+
+            EventTool.stopPropagation(event);
+            EventTool.preventDefault(event);
+        });
+    }
+
     function mouseMove(event) {
         var event = event || window.event;
         elem.style.left = event.clientX - divX + 'px';
         elem.style.top = event.clientY - divY + 'px';
+
+        // 元素碰撞运动
+        if (canMove) {
+            clearInterval(elem.timer);
+            elemNewLeft = event.clientX - distanceX;
+            elemNewTop = event.clientY - distanceY;
+
+            speedX = elemNewLeft - elemLastLeft;
+            speedY = elemNewTop - elemLastTop;
+
+            elemLastTop = elemNewTop;
+            elemLastLeft = elemNewLeft;
+        }
     }
+
     function mouseUp(event) {
         var event = event || window.event;
         EventTool.removeHandler(document, 'mousemove', mouseMove);
         EventTool.removeHandler(document, 'mouseup', mouseUp);
+        if (elemMove) {
+            startElementMove(elem, speedX, speedY);
+        }
+    }
+
+    function startElementMove(elem, speedX, speedY) {
+        clearInterval(elem.timer);
+        var g = 6, // 重力，垂直方向速度增加量
+            u = 0.9, // 摩擦力，各个方向速度衰减比例
+            numTimes = 1.3; // 速度放大倍数
+
+        speedX *= numTimes;
+        speedY *= numTimes;
+
+        elem.timer = setInterval(function () {
+            // 垂直方向模仿重力加速度
+            speedY += g;
+
+            // 移动后Y位置
+            var newTop = elem.offsetTop + speedY,
+                // 窗口top到元素top距离
+                distanceTop = getPageSize().pageHeight - getElementStyleNum(elem, 'height'),
+                // 移动后X位置
+                newLeft = elem.offsetLeft + speedX,
+                // 窗口left到元素left距离
+                distanceLeft = getPageSize().pageWidth - getElementStyleNum(elem, 'width');
+
+
+            // 上边界碰撞
+            if (newTop <= 0) {
+                newTop = 0;
+                speedY *= -1; // 反向速度
+            }
+            // 右边界碰撞
+            if (newLeft >= distanceLeft) {
+                newLeft = distanceLeft;
+                speedX *= -1; // 反向速度
+            }
+            // 下边界碰撞
+            if (newTop >= distanceTop) {
+                newTop = distanceTop;
+                speedY *= -1; // 反向速度
+            }
+            // 左边界碰撞
+            if (newLeft <= 0) {
+                newLeft = 0;
+                speedX *= -1; // 反向速度
+            }
+            // 速度衰减
+            speedX *= u;
+            speedY *= u;
+
+            // 强制速度绝对值小于1的时候等于0
+            if (Math.abs(speedX) < 1) {
+                speedX = 0;
+            }
+            if (Math.abs(speedY) < 1) {
+                speedY = 0;
+            }
+
+            // 速度等于0并且落地停止
+            if (speedX == 0 && speedY == 0 && newTop == distanceTop) {
+                clearInterval(elem.timer);
+            }
+            elem.style.top = newTop + 'px';
+            elem.style.left = newLeft + 'px';
+        }, 30);
     }
 }
-
-// TODO: 框架
 
 // 多物体多值链式运动框架
 function chainMotionFrame(elem, objAttr, callback) {
@@ -344,4 +455,128 @@ function chainMotionFrame(elem, objAttr, callback) {
             typeof callback === 'function' ? callback() : false;
         }
     }, 30);
+}
+
+// 轮播图生成框架 需要同时引用turnPageFrame.css文件
+HTMLDivElement.prototype.createTurnPageFrame = function (turnTime, imgSrcArr, mapWidth, mapHeight) {
+    var index = 0,
+        canMove = true,
+        sliderLen = imgSrcArr.length,
+        li,
+        img,
+        span,
+        timer,
+        leftBtn,
+        rightBtn,
+        sliderPage,
+        sliderIndex,
+        sliderIndexChild;
+    this.className += ' turnPageFrame';
+    this.appendChild(createMap());
+    sliderIndexChild = sliderIndex.children;
+    // 左右按钮事件
+    leftBtn.onclick = function () {
+        autoMove('left');
+    };
+    rightBtn.onclick = function () {
+        autoMove('right');
+    };
+
+    for (var i = 0; i < sliderLen; i++) {
+        (function (myIndex) {
+            sliderIndexChild[i].onclick = function () {
+                canMove = false;
+                clearTimeout(timer);
+                index = myIndex;
+                chainMotionFrame(sliderPage, { left: - index * mapWidth }, function () {
+                    timer = setTimeout(autoMove, turnTime);
+                    changeIndex(index);
+                    canMove = true;
+                });
+            }
+        }(i));
+    }
+
+    function createMap() {
+        var fragment = document.createDocumentFragment();
+
+        // 轮播图li创建
+        sliderPage = document.createElement('ul');
+        sliderPage.className = 'slider-page';
+        sliderPage.style.width = mapWidth * (sliderLen + 1) + 'px';
+        sliderPage.style.height = mapHeight + 'px';
+
+        for (var i = 0; i <= sliderLen; i++) {
+            li = document.createElement('li');
+            li.style.width = mapWidth + 'px';
+            img = document.createElement('img');
+            if (i < sliderLen) {
+                img.src = imgSrcArr[i];
+            } else {
+                img.src = imgSrcArr[0];
+            }
+            li.appendChild(img);
+            sliderPage.appendChild(li);
+        }
+        fragment.appendChild(sliderPage);
+        // 左右按钮
+        leftBtn = document.createElement('div');
+        leftBtn.className = 'btn left-btn';
+        leftBtn.innerHTML = '&lt;';
+        rightBtn = document.createElement('div');
+        rightBtn.className = 'btn right-btn';
+        rightBtn.innerHTML = '&gt;';
+        fragment.appendChild(leftBtn);
+        fragment.appendChild(rightBtn);
+
+        // 底部定位点
+        sliderIndex = document.createElement('div');
+        sliderIndex.className = 'slider-index';
+        for (i = 0; i < sliderLen; i++) {
+            span = document.createElement('span');
+            sliderIndex.appendChild(span);
+        }
+        fragment.appendChild(sliderIndex);
+
+        return fragment;
+    }
+
+    function autoMove(direction) {
+        if (canMove) {
+            canMove = false;
+            clearTimeout(timer);
+            if (!direction || direction == 'right') {
+                index++;
+                chainMotionFrame(sliderPage, { left: sliderPage.offsetLeft - mapWidth }, function () {
+                    if (sliderPage.offsetLeft == -sliderLen * mapWidth) {
+                        index = 0;
+                        sliderPage.style.left = 0;
+                    }
+                    timer = setTimeout(autoMove, turnTime);
+                    canMove = true;
+                    changeIndex(index);
+                });
+
+            } else if (direction == 'left') {
+                if (sliderPage.offsetLeft == 0) {
+                    sliderPage.style.left = - sliderLen * mapWidth + 'px';
+                    index = sliderLen;
+                }
+                index--;
+                chainMotionFrame(sliderPage, { left: sliderPage.offsetLeft + mapWidth }, function () {
+                    timer = setTimeout(autoMove, turnTime);
+                    changeIndex(index);
+                    canMove = true;
+                });
+            }
+        }
+    }
+
+    function changeIndex(_index) {
+        for (var i = 0; i < sliderLen; i++) {
+            sliderIndexChild[i].className = '';
+        }
+        sliderIndexChild[_index].className = 'active';
+    }
+    timer = setTimeout(autoMove, turnTime);
 }

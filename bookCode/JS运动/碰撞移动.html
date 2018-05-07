@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS运动</title>
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: orange;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+    <script>
+        var div = document.getElementsByTagName('div')[0];
+        var timer;
+        div.onclick = function () {
+            startMove(this, );
+        }
+
+        function startMove(obj, target) {
+            clearInterval(obj.timer);
+            var iSpeedX = 90,
+                iSpeedY = 80,
+                g = 9.8,
+                u = 0.9;
+
+            obj.timer = setInterval(() => {
+                iSpeedY += g;
+                var newLeft = obj.offsetLeft + iSpeedX;
+                var newTop = obj.offsetTop + iSpeedY;
+                var topDistance = document.documentElement.clientHeight - getElementStyleNum(obj, 'height');
+                var leftDistance = document.documentElement.clientWidth - getElementStyleNum(obj, 'width');
+
+                if (newTop >= topDistance) {
+                    newTop = topDistance;
+                    iSpeedY *= -1;
+                }
+                if (newLeft >= leftDistance) {
+                    newLeft = leftDistance;
+                    iSpeedX *= -1;
+                }
+                if (newTop <= 0) {
+                    newTop = 0;
+                    iSpeedY *= -1;
+                }
+                if (newLeft <= 0) {
+                    newLeft = 0;
+                    iSpeedX *= -1;
+                }
+                iSpeedX *= u;
+                iSpeedY *= u;
+                obj.style.left = newLeft + 'px';
+                obj.style.top = newTop + 'px';
+            }, 30)
+        }
+    </script>
+</body>
+
+</html>

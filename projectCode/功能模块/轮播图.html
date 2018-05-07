@@ -5,76 +5,199 @@
     <meta charset="UTF-8">
     <title>轮播图功能</title>
     <style type="text/css">
-        div {
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        .wrapper {
             position: relative;
-            width: 300px;
-            height: 180px;
+            margin: 100px auto 0;
+            width: 400px;
+            height: 400px;
             border: 1px solid #000;
             overflow: hidden;
         }
 
-        div img {
+        .wrapper .slider-page {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 400px;
+            width: 2000px;
+            list-style: none;
+        }
+
+        .wrapper .slider-page li {
+            float: left;
+            width: 400px;
+            height: 400px;
+        }
+
+        .wrapper .slider-page img {
             width: 100%;
             height: 100%;
         }
 
-        ul {
-            position: relative;
-            left: 0;
-            margin: 0;
-            padding: 0;
-            list-style: none;
-            width: 1200px;
+        .wrapper .btn {
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            width: 40px;
+            height: 40px;
+            color: #fff;
+            background: #000;
+            text-align: center;
+            line-height: 40px;
+            opacity: 0.1;
+            cursor: pointer;
         }
 
-        ul li {
-            display: block;
-            float: left;
-            width: 300px;
-            height: 180px;
+        .wrapper:hover .btn {
+            opacity: 0.8;
+        }
+
+        .wrapper .left-btn {
+            left: -10px;
+            border-radius: 0 50% 50% 0;
+        }
+
+        .wrapper .right-btn {
+            right: -10px;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .wrapper .slider-index {
+            position: absolute;
+            width: 100%;
+            bottom: 15px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .wrapper .slider-index span {
+            display: inline-block;
+            margin-right: 5px;
+            width: 8px;
+            height: 8px;
+            background: #ccc;
+            border-radius: 50%;
+        }
+
+        .wrapper .slider-index .active {
+            background: #f40;
         }
     </style>
-    <script type="text/javascript">
-        // 获取 elem元素的 prop属性的最终显示结果并返回
-        function getElementStyle(elem, prop) {
-            if (window.getComputedStyle) {
-                return window.getComputedStyle(elem, null)[prop];
-            } else {
-                return elem.currentStyle[prop];
-            }
-        };
-    </script>
+
 </head>
 
 <body>
-
-    <div id="div">
-        <ul id="ul">
+    <div id="div" class="wrapper">
+        <ul id="ul" class="slider-page">
             <li>
-                <img src="" style="background-color:red;">
+                <img src="../淘宝网/img/adv-1.jpg" />
             </li>
             <li>
-                <img src="" style="background-color:yellow;">
+                <img src="../淘宝网/img/adv-2.jpg" />
             </li>
             <li>
-                <img src="" style="background-color:blue;">
+                <img src="../淘宝网/img/adv-3.jpg" />
             </li>
             <li>
-                <img src="" style="background-color:red;">
+                <img src="../淘宝网/img/adv-4.jpg" />
+            </li>
+            <li>
+                <img src="../淘宝网/img/adv-1.jpg" />
             </li>
         </ul>
+        <div class="btn left-btn" id="leftBtn">&lt;</div>
+        <div class="btn right-btn" id="rightBtn">&gt;</div>
+        <div class="slider-index" id="sliderIndex">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </div>
-
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
     <script>
-        var ul = document.getElementById('ul'),
-            timerChange = setInterval(function () {
+        var timer,
+            direction = 'right',
+            leftBtn = document.getElementById('leftBtn'),
+            rightBtn = document.getElementById('rightBtn'),
+            sliderPage = document.getElementById('ul'),
+            sliderIndex = document.getElementById('sliderIndex').children,
+            index = 0,
+            sliderNum = sliderPage.children.length - 1,
+            moveWidth = sliderPage.children[0].offsetWidth,
+            canMove = true;
 
-                if (parseInt(getElementStyle(ul, 'left')) === -900) {
-                    ul.style.left = '-300px';
-                } else {
-                    ul.style.left = parseInt(getElementStyle(ul, 'left')) - 300 + 'px';
+        leftBtn.onclick = function () {
+            autoMove('left');
+        };
+        rightBtn.onclick = function () {
+            autoMove('right');
+        };
+
+        for (let i = 0; i < sliderIndex.length; i++) {
+            (function (myIndex) {
+                sliderIndex[i].onclick = function () {
+                    canMove = false;
+                    clearTimeout(timer);
+                    index = myIndex;
+                    chainMotionFrame(sliderPage, { left: - index * moveWidth }, function () {
+                        timer = setTimeout(autoMove, 1500);
+                        changeIndex(index);
+                        canMove = true;
+                    });
                 }
-            }, 2000);
+            }(i));
+        }
+
+        function autoMove(direction) {
+            if (canMove) {
+                canMove = false;
+                clearTimeout(timer);
+                if (!direction || direction == 'right') {
+                    index++;
+                    chainMotionFrame(sliderPage, { left: sliderPage.offsetLeft - moveWidth }, function () {
+                        if (sliderPage.offsetLeft == -sliderNum * moveWidth) {
+                            index = 0;
+                            sliderPage.style.left = 0;
+                        }
+                        timer = setTimeout(autoMove, 1500);
+                        canMove = true;
+                        changeIndex(index);
+                    });
+
+                } else if (direction == 'left') {
+                    if (sliderPage.offsetLeft == 0) {
+                        sliderPage.style.left = - sliderNum * moveWidth + 'px';
+                        index = sliderNum;
+                    }
+                    index--;
+                    chainMotionFrame(sliderPage, { left: sliderPage.offsetLeft + moveWidth }, function () {
+                        timer = setTimeout(autoMove, 1500);
+                        changeIndex(index);
+                        canMove = true;
+                    });
+                }
+            }
+        }
+        function changeIndex(_index) {
+            for (var i = 0; i < sliderIndex.length; i++) {
+                sliderIndex[i].className = '';
+            }
+            sliderIndex[_index].className = 'active';
+        }
+        timer = setTimeout(autoMove, 1500);
+
+
+        //TODO: 作业 轮播图生成器
+        // HTMLDivElement.prototype.createTurnPage = function (['..\\淘宝网\\img\\adv-1.jpg', '..\\淘宝网\\img\\adv-1.jpg']) {
+        //     somefun;
+        // };
+        // oDiv.createTurnPage([]);
     </script>
 
 </body>

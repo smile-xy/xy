@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS运动</title>
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: orange;
+            border-radius: 50%;
+        }
+
+        span {
+            position: absolute;
+            top: 0;
+            left: 300px;
+            width: 1px;
+            height: 100px;
+            background: #ccc;
+        }
+    </style>
+</head>
+<div></div>
+<span></span>
+
+<body>
+
+    <script>
+        var div = document.getElementsByTagName('div')[0];
+        var timer;
+
+        // 点击事件
+        EventTool.addHandler(div, 'click', () => {
+            startMove(div);
+        })
+
+        function startMove(obj) {
+            clearInterval(obj.timer);
+            var iSpeed = 40,
+                a,
+                u = 0.8;
+
+            obj.timer = setInterval(() => {
+                a = (300 - obj.offsetLeft) / 7;
+                iSpeed = (iSpeed + a) * u;
+                if (Math.abs(iSpeed) < 1 && Math.abs(300 - obj.offsetLeft) < 1) {
+                    clearInterval(obj.timer);
+                } else {
+                    obj.style.left = obj.offsetLeft + iSpeed + 'px';
+                }
+            }, 30)
+        }
+    </script>
+</body>
+
+</html>

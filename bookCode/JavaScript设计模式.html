@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RegExp</title>
+    <script type="text/javascript" src="D:\github\myTool.js"></script>
+</head>
+
+<script>
+    '多态'
+    // function Animal(sound) {
+    //     this.sound = sound;
+    // }
+    // Animal.prototype.makeSound = function (animal) {
+    //     console.log(this.sound);
+    // }
+    // var Duck = new Animal('嘎嘎嘎');
+    // var Dog = new Animal('汪汪汪');
+    // var Cat = new Animal('喵喵喵');
+
+    // Duck.makeSound();
+    // Dog.makeSound();
+    // Cat.makeSound();
+
+    '封装'
+    // var myObject = (function () {
+    //     var _name = 'sven'; // 私有变量
+    //     return {
+    //         getName: function () { // 公共方法
+    //             return _name;
+    //         }
+    //     }
+    // }());
+    // console.log(myObject._name);
+    // console.log(myObject.getName());
+
+    '原型模式'
+    // var Plane = function() {
+    //     this.blood = 100;
+    //     this.attackLevel = 1;
+    //     this.defenseLevel = 1;
+    // };
+
+    // var plane = new Plane();
+    // plane.blood = 500;
+    // plane.attackLevel = 10;
+    // plane.defenseLevel = 7;
+
+    // var clonePlane = Object.create(plane);
+    // clonePlane.blood -= 200;
+    // console.log(plane.blood);
+    // console.log(clonePlane.blood);
+    // console.log(plane.attackLevel);
+    // console.log(plane.defenseLevel);
+
+    'new的运算过程'
+    // function Person(name) {
+    //     this.name = name;
+    // };
+
+    // Person.prototype.getName = function () {
+    //     return this.name;
+    // };
+
+    // var ObjectFactory = function () {
+    //     var obj = new Object(); // 从Object.prototype上克隆一个空对象
+    //     Constructor = [].shift.call(arguments); //取得外部传入的构造器，Person
+    //     obj.__proto__ = Constructor.prototype; // 指向正确的原型
+    //     var ret = Constructor.apply(obj, arguments); // 使用外部传入的构造器给obj设置属性
+
+    //     return typeof ret === 'object' ? ret : obj; // 确保构造器总会返回一个对象
+    // };
+
+    // var a = ObjectFactory(Person, 'sven');
+    // console.log(a.name);
+    // console.log(a.getName());
+    // console.log(Object.getPrototypeOf(a) === Person.prototype);
+
+    '原型继承'
+    // var obj = { name: 'sven' };
+
+    // var A = function () { };
+    // A.prototype = obj;
+
+    // var a = new A();
+    // console.log(a.name);
+    // console.log(a.__proto__); // obj
+    // console.log(a.__proto__.__proto__); // Object
+</script>
+
+<body>
+    <div id="div"></div>
+</body>
+
+</html>
