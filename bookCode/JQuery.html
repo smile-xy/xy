@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JQuery</title>
+    <script type="text/javascript" src="..\myTool.js"></script>
+    <script type="text/javascript" src="../../jquery/jquery-3.3.1.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .div-li {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            background: #eee;
+            border-radius: 50%;
+        }
+
+        .active {
+            background: red;
+        }
+
+        .wrapper {
+            position: absolute;
+            top: 0;
+            left: 200px;
+        }
+
+        .work li {
+            box-sizing: border-box;
+            float: left;
+            width: 100px;
+            height: 50px;
+            font-size: 22px;
+            font-weight: 600;
+            text-align: center;
+            border: 1px solid red;
+            line-height: 50px;
+        }
+
+        .work-active {
+            background-color: red;
+            color: #fff;
+        }
+
+        .content div {
+            display: none;
+        }
+
+        .content .content-active {
+            position: absolute;
+            display: block;
+            top: 50px;
+            left: 0;
+            width: 300px;
+            height: 200px;
+            background-color: #eee;
+        }
+
+        .add-class>li {
+            margin: 10px;
+            width: 200px;
+            height: 30px;
+            background: orange;
+            border-radius: 10px;
+        }
+
+        .add-class>li.add-class-act {
+            height: 200px;
+            background: red;
+        }
+
+        .remove-wrap {
+            width: 200px;
+            height: 200px;
+            background: #eee;
+        }
+
+        .remove-wrap div {
+            width: 100px;
+            height: 80px;
+        }
+
+        .remove-wrap .remove-div {
+            background: red;
+        }
+
+        .remove-wrap .detach-div {
+            background: green;
+        }
+
+        .log-in {
+            display: block;
+            width: 100px;
+            height: 30px;
+            border: 3px solid #000;
+            font-size: 28px;
+            line-height: 30px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .log-in:hover {
+            background: #000;
+            color: #fff;
+        }
+
+        .log-in-div {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            margin: -75px 0 0 -150px;
+            width: 300px;
+            height: 150px;
+            padding-top: 20px;
+            border: 1px solid #000;
+            border-radius: 10px;
+            background: #eee;
+        }
+
+        .log-in-div span {
+            position: absolute;
+            top: 5px;
+            right: 10px;
+            cursor: pointer;
+        }
+
+        .log-in-div div {
+            margin: 15px auto;
+            width: 200px;
+            height: 30px;
+            text-align: center;
+        }
+
+        .log-in-div button {
+            position: relative;
+            top: 5px;
+            left: 50%;
+            margin-left: -100px;
+            width: 200px;
+            height: 30px;
+        }
+
+        .log-in-div div label {
+            float: left;
+            font-size: 18px;
+            line-height: 30px;
+        }
+        .log-in-div div label:after{
+            content: ":";
+        }
+        .log-in-div div input {
+            float: right;
+            width: 75%;
+            height: 30px;
+        }
+
+        .offset-div {
+            position: relative;
+            top: 50px;
+            width: 200px;
+            height: 150px;
+            border: 1px solid red;
+        }
+
+        .offset-div div {
+            position: absolute;
+            top: 20px;
+            left: 50px;
+            width: 260px;
+            height: 100px;
+            background: #eee;
+        }
+    </style>
+</head>
+
+<body>
+    <ul class="text">
+        <li>111</li>
+        <li>222</li>
+        <li class="demo">333</li>
+        <li>444</li>
+        <li>
+            <p>555</p>
+        </li>
+    </ul>
+    <p>234</p>
+    <div id="demo">
+        123
+        <p>234</p>
+    </div>
+    <div class="demo">
+        <input type="checkbox" checked>
+        <input type="checkbox">
+    </div>
+    <div id="clickDiv">
+        <div class="div-li"></div>
+        <div class="div-li"></div>
+        <div class="div-li"></div>
+        <div class="div-li"></div>
+        <div class="div-li"></div>
+    </div>
+    <div class="wrapper">
+        <ul class="work">
+            <li class="work-active">新闻</li>
+            <li>公告</li>
+            <li>活动</li>
+        </ul>
+        <div class="content">
+            <div class="content-active">新闻新闻新闻新闻新闻新闻新闻新闻</div>
+            <div>公告公告公告公告公告公告公告公告</div>
+            <div>活动活动活动活动活动活动活动活动</div>
+        </div>
+    </div>
+    <ul class="add-class">
+        <li class="add-class-act">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+        <li>5</li>
+    </ul>
+    <li class="append-li">append</li>
+    <li class="prepend-li">prepend</li>
+    <div class="remove-wrap">
+        <p>点击回复</p>
+        <div class="remove-div">remove</div>
+        <div class="detach-div">detach</div>
+
+    </div>
+    <a class="log-in">log in</a>
+    <!-- <div class="log-in-div">
+        <span>X</span>
+        <div>
+            <label for="useName">账号</label>
+            <input id="useName" type="text">
+        </div>
+        <div>
+            <label for="usePassword">密码</label>
+            <input id="usePassword" type="password">
+        </div>
+        <button>登录</button>
+    </div> -->
+    <input class="event-which" type="text">
+    <a href="https://www.baidu.com">取消事件冒泡</a>
+    <div class="offset-div">
+        offset-div
+        <div></div>
+    </div>
+    <script>
+        // 函数链式调用
+        var a = function () {
+            return {
+                aa: function () {
+                    console.log('aa');
+                    return this;
+                },
+                bb: function () {
+                    console.log('bb');
+                    return this;
+                }
+            }
+        }
+
+        // 原生dom
+        $(document.getElementsByTagName('div'));
+        // css选择器
+        $('#demo>p');
+        // null undefined
+        $(null);
+        // jquery对象
+        $($('#demo'));
+        // 立即执行里面的函数
+        $(function () {
+            return ('立即执行函数');
+        });
+        // 参二 --> 执行期上下文
+        $('p', '#demo').css('color', 'red');
+        // $() ==> jQuery()
+        $();
+        jQuery();
+
+        // ul直接元素中第一个li
+        $('ul>li:first').css('color', 'red');
+        // ul直接元素中index是eq的li
+        $('ul>li:eq(3)').css('color', '#ccc');
+        // odd index为奇数 even index为偶数
+        $('.text>li:odd').css('font-size', '18px');
+        $('.text>li:even').css('font-size', '26px');
+
+        // 筛选css是demo的li
+        $('li:eq(2)').filter('.demo').css('font-weight', '600');
+        // 筛选符合函数运算的li
+        $('li:eq(4)').filter(function (index) {
+            return index % 3 === 0;
+        }).css('font-weight', '600');
+        // 除了demo的li 跟filter相反 用法一样
+        $('li').not('.demo');
+        //有XX 筛选有p的li
+        $('li').has('p');
+        // 查找li下面的p
+        $('li').find('p');
+        // 查找li下面index是1的元素
+        $('li:eq(1)');
+        $('li').eq(1);
+        // 判断是否为demo
+        $('li').is('.demo');
+
+        // jquery.css方法
+        $('.text>li').css('width', '100px').css('height', '70px'); // 赋值
+        $('.text>li').css({ width: 100, height: '70px' }); // 赋值
+        $('li:last').css('width'); // 取值
+
+        // jquery.html方法 ==> innerHTML
+        $('li:eq(1)').html('li'); // 赋值
+        $('li').html(); // 取值
+        // jquery.text方法 ==> innerText
+        $('li:first').text('123123'); // 赋值
+        $('li').text(); // 取值
+
+        // attr() ==> setAttribute()
+        $('#demo').attr('date-class', 'aa'); // 赋值
+        $('#demo').attr('date-class'); // 取值
+        // prop() ==> elem.className()
+        $('#demo').prop('class', 'aaaaa'); // 赋值
+        $('#demo').prop('class'); // 取值
+        // jQuery认为 attribute 的checked selected disabled 就是表示该属性初始状态的值，property 的checked selected disabled 才表示该属性实时状态的值
+        // checkbox 自带checked属性的时候
+        $('input').attr('checked'); // checked/checked
+        $('input').prop('checked'); // true/false
+        // checkbox 无checked属性
+        $('input:last').attr('checked'); // undefined
+        $('input:last').prop('checked'); // false
+
+        // 兄弟节点
+        $('li:eq(3)').next(); // 下一个
+        $('li:eq(3)').prev(); // 上一个
+        $('li:eq(3)').index(); // 当前兄弟节点中的索引
+
+        // class操作
+        $('li:eq(3)').addClass();
+        $('li:eq(3)').removeClass(); // 括号为空时清空所有class类名
+        // 点击变色
+        // $('.div-li').click(function () {
+        //     $('.div-li').css('background', '');
+        //     $(this).css('background', 'red');
+        //     console.log($(this).index());
+        // })
+        // 点击变色
+        $('.div-li').click(function () {
+            $('.active').removeClass('active');// 清空括号内class类名
+            $(this).addClass('active');
+        })
+        // addClass 中间有函数
+        // $('.add-class > li').addClass(function (index) {
+        //     if (index % 3 == 0) {
+        //         return 'aaa';
+        //     }
+        // });
+        // 作业 标签切换
+        $('.work > li').click(function () {
+            $('.work-active').removeClass('work-active');
+            $(this).addClass('work-active');
+
+            $('.content-active').removeClass('content-active');
+            $('.content > div').eq($(this).index()).addClass('content-active');
+        })
+
+        // toggleClass 没有添加有则删除 常用于点击事件
+        $('.add-class > li').click(function () {
+            $('.add-class-act').removeClass('add-class-act');
+            $(this).toggleClass('add-class-act');
+        });
+
+        // Before ==> A前面是B 主体是A
+        $('.add-class>li:eq(0)').before($('.add-class > li:eq(4)')).css('background', 'yellow');
+        // insertBefore ==> B插入到A前面 主体是B
+        $('.add-class > li').eq(4).insertBefore($('.add-class > li:eq(0)')).css('background', 'blue');
+        // after insertAfter 同上
+
+        // appendTo ==> B添加到A子元素最后 主体是B
+        $('.append-li').appendTo($('.add-class')).css('color', 'red');
+        // append ==> A子元素最后添加B 主体是A
+        $('.add-class').append($('.append-li'));
+        // prependTo ==> B添加到A子元素前面 主体是B
+        $('.prepend-li').prependTo($('.add-class')).css('color', '#fff');
+        // prepend ==> A子元素前面添加B 主体是A
+        $('.add-class').prepend($('.prepend-li'));
+
+        // remove  detach
+        $('.remove-div').click(function () {
+            // 只返回删除的DOM元素
+            window.item1 = $(this).remove();
+        });
+        $('.detach-div').click(function () {
+            // 删除的事件也会返回
+            window.item2 = $(this).detach();
+        });
+        $('.remove-wrap>p').click(function () {
+            $('.remove-wrap').append(item1).append(item2);
+        });
+
+        // on(事件，事件源的选择器，传入值，方法体);
+        // off (事件，事件源的选择器，传入值);
+        // one 只触发一次事件
+        $('.remove-wrap').on('click', '.remove-div', '点击一次后取消事件绑定', function (e) {
+            $('<p>新建的p标签</p>').appendTo($(this));
+            console.log(e.data);
+            $('.remove-wrap').off('click', '.remove-div');
+        });
+
+        // scrollTop scrollLeft 滚动距离
+        $(window).scroll(function () {
+            // console.log($(this).scrollTop());
+        });
+
+        // width 宽度=> content
+        // innerWidth 宽度=> content padding
+        // outerWidth() 宽度=> content padding border
+        // 参数为true的时候求出的宽度带有margin
+
+        // DOM创建
+        // $('<div>').appendTo($('body')).text('<div>');
+        $('<div></div>');
+        $('<div>');
+        $('<div/>');
+
+        /* 作业 登陆弹出框 动态生成弹窗
+            点击生成以下DOM元素
+            <div class="log-in-div">
+                <span>X</span>
+                <div>
+                    <label for="useName">账号</label>
+                    <input id="useName" type="text">
+                </div>
+                <div>
+                    <label for="usePassword">密码</label>
+                    <input id="usePassword" type="password">
+                </div>
+                <button>登录</button>
+            </div>
+        */
+        $('.log-in').click(function () {
+            var demo0 = $('<span>X</span>');
+            var demo1 = $('<div><label for="useName">账号</label><input id="useName" type="text"></div>');
+            var demo2 = $('<div><label for="usePassword">密码</label><input id="usePassword" type="password"></div>');
+            var demo3 = $('<button>登录</button>');
+            var demo4 = $('<div>').append(demo0).append(demo1).append(demo2).append(demo3).addClass('log-in-div');
+            $('body').append(demo4);
+
+            $('.log-in-div>span').click(() => {
+                $('.log-in-div').detach();
+            });
+        })
+
+
+        /* 事件event
+            e.pageX 相对于文档的距离
+            e.clientX 相对于浏览器窗口的距离
+            e.screenX 相对于屏幕的距离
+            e.which 哪个键或按钮
+            e.button 哪个鼠标按键被按下
+        */
+        $('body').click(function () {
+            // console.log('pageY ' + event.pageY);
+            // console.log('clientY ' + event.clientY);
+            // console.log('screenY ' + event.screenY);
+        })
+        $('.event-which').keydown(function () {
+            console.log('which ' + event.which);
+        })
+        $('.event-which').on('mousedown contextmenu', function () {
+            event.preventDefault(); // 取消默认事件
+            event.stopPropagation(); // 取消事件冒泡
+            console.log('which ' + event.which); // 左1-中2-右3
+            console.log('button ' + event.button);// 左0-中1-右2
+        })
+        // 取消冒泡和默认事件 => {return false}
+        $('a').click(() => false);
+
+        // offset().left/top; 相对文档
+        // position().left/top; 相对有定位父级
+        var _offset = $('.offset-div>div').offset();
+        var _position = $('.offset-div>div').position();
+        $('.offset-div>div').text('offset-top: ' + _offset.top + 'offset-left: ' + _offset.left + '  position-top: ' + _position.top + 'position-left: ' + _position.left);
+    </script>
+</body>
+
+
+</html>
