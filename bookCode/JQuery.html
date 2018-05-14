@@ -3,10 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>JQuery</title>
-    <script type="text/javascript" src="..\myTool.js"></script>
     <script type="text/javascript" src="../../jquery/jquery-3.3.1.js"></script>
     <style>
         * {
@@ -114,6 +111,7 @@
 
         .log-in-div {
             position: fixed;
+            display: none;
             top: 50%;
             left: 50%;
             margin: -75px 0 0 -150px;
@@ -153,9 +151,11 @@
             font-size: 18px;
             line-height: 30px;
         }
-        .log-in-div div label:after{
+
+        .log-in-div div label:after {
             content: ":";
         }
+
         .log-in-div div input {
             float: right;
             width: 75%;
@@ -164,7 +164,8 @@
 
         .offset-div {
             position: relative;
-            top: 50px;
+            top: 0;
+            margin-top: 20px;
             width: 200px;
             height: 150px;
             border: 1px solid red;
@@ -178,18 +179,25 @@
             height: 100px;
             background: #eee;
         }
+
+        .parent-demo {
+            position: absolute;
+        }
     </style>
 </head>
 
 <body>
     <ul class="text">
         <li>111</li>
+        <p>pppp</p>
         <li>222</li>
         <li class="demo">333</li>
         <li>444</li>
         <li>
             <p>555</p>
         </li>
+        <li>666</li>
+        <li>777</li>
     </ul>
     <p>234</p>
     <div id="demo">
@@ -253,244 +261,340 @@
         offset-div
         <div></div>
     </div>
-    <script>
-        // 函数链式调用
-        var a = function () {
-            return {
-                aa: function () {
-                    console.log('aa');
-                    return this;
-                },
-                bb: function () {
-                    console.log('bb');
-                    return this;
-                }
+    <ul class="parent-ul">
+        <div class="parent-demo">
+            <li>
+                <div class="parent-item">
+                    <p>
+                        <span></span>
+                    </p>
+                </div>
+            </li>
+        </div>
+        <li>11</li>
+        <li>222</li>
+        <li>3333</li>
+        <li>44444</li>
+    </ul>
+    <input type="text" id="val-input">
+    <ul class="slice-ul">
+        <li>001</li>
+        <li>002</li>
+        <li>003</li>
+        <li>004</li>
+        <li>005</li>
+    </ul>
+    <form action="" class="form-test">
+        <input type="text" name="user">
+        <input type="text" name="age">
+        <input type="submit">
+    </form>
+</body>
+<script>
+    // 函数链式调用
+    var a = function () {
+        return {
+            aa: function () {
+                console.log('aa');
+                return this;
+            },
+            bb: function () {
+                console.log('bb');
+                return this;
             }
         }
+    }
 
-        // 原生dom
-        $(document.getElementsByTagName('div'));
-        // css选择器
-        $('#demo>p');
-        // null undefined
-        $(null);
-        // jquery对象
-        $($('#demo'));
-        // 立即执行里面的函数
-        $(function () {
-            return ('立即执行函数');
+    // 原生dom
+    $(document.getElementsByTagName('div'));
+    // css选择器
+    $('#demo>p');
+    // null undefined
+    $(null);
+    // jquery对象
+    $($('#demo'));
+    // 立即执行里面的函数
+    $(function () {
+        return ('立即执行函数');
+    });
+    // 参二 --> 执行期上下文
+    $('p', '#demo').css('color', 'red');
+    // $() ==> jQuery()
+    $();
+    jQuery();
+
+    // ul直接元素中第一个li
+    $('ul>li:first').css('color', 'red');
+    // ul直接元素中index是eq的li
+    $('ul>li:eq(3)').css('color', '#ccc');
+    // odd index为奇数 even index为偶数
+    $('.text>li:odd').css('font-size', '18px');
+    $('.text>li:even').css('font-size', '26px');
+
+    // 筛选css是demo的li
+    $('li:eq(2)').filter('.demo').css('font-weight', '600');
+    // 筛选符合函数运算的li
+    $('li:eq(4)').filter(function (index) {
+        return index % 3 === 0;
+    }).css('font-weight', '600');
+    // each() 循环遍历所有元素
+    $('.parent-ul>li').each(function (index) {
+        // console.log(index);
+        // console.log(this);
+    });
+
+    // 除了demo的li 跟filter相反 用法一样
+    $('li').not('.demo');
+    //有XX 筛选有p的li
+    $('li').has('p');
+    // 查找li下面的p
+    $('li').find('p');
+    // 查找li下面index是1的元素
+    $('li:eq(1)');
+    $('li').eq(1);
+    // 判断是否为demo
+    $('li').is('.demo'); // true/false
+
+    // jquery.css方法
+    $('.text>li').css('width', '100px').css('height', '70px'); // 赋值
+    $('.text>li').css({ width: 100, height: '70px' }); // 赋值
+    $('li:last').css('width'); // 取值
+
+    // jquery.html方法 ==> innerHTML
+    $('li:eq(1)').html('li'); // 赋值
+    $('li').html(); // 取值
+    // jquery.text方法 ==> innerText
+    $('li:first').text('123123'); // 赋值
+    $('li').text(); // 取值
+    // empty 清空
+    // $('.slice-ul>li:eq(2)').empty(); // 清空
+    $('.slice-ul>li:eq(2)').html(''); // 清空 效果一样
+
+    // attr() ==> setAttribute()
+    $('#demo').attr('date-class', 'aa'); // 赋值
+    $('#demo').attr('date-class'); // 取值
+    // prop() ==> elem.className()
+    $('#demo').prop('class', 'aaaaa'); // 赋值
+    $('#demo').prop('class'); // 取值
+    // jQuery认为 attribute 的checked selected disabled 就是表示该属性初始状态的值，property 的checked selected disabled 才表示该属性实时状态的值
+    // checkbox 自带checked属性的时候
+    $('input').attr('checked'); // checked/checked
+    $('input').prop('checked'); // true/false
+    // checkbox 无checked属性
+    $('input:last').attr('checked'); // undefined
+    $('input:last').prop('checked'); // false
+
+    // 兄弟节点
+    $('li:eq(3)').siblings(); // 所有兄弟节点
+    $('li:eq(3)').next(); // 下一个
+    $('li:eq(3)').nextAll(); // 下面全部
+    // 当前到下面参数间元素 掐头去尾
+    $('li:eq(3)').nextUntil($('li:eq(6)'));
+    $('li:eq(3)').prev(); // 上一个
+    $('li:eq(3)').prevAll(); // 上面全部
+    // 当前到上面参数间元素 掐头去尾
+    $('li:eq(3)').prevUntil($('li:eq(0)'));
+    $('li:eq(3)').index(); // 当前兄弟节点中的索引
+    // slice 截取元素 取头去尾[a,b)
+    $('.slice-ul>li').slice(0, 2).css({ color: 'red' });
+
+    // class操作
+    $('li:eq(3)').addClass();
+    $('li:eq(3)').removeClass(); // 括号为空时清空所有class类名
+    // 点击变色
+    // $('.div-li').click(function () {
+    //     $('.div-li').css('background', '');
+    //     $(this).css('background', 'red');
+    //     console.log($(this).index());
+    // })
+    // 点击变色
+    $('.div-li').click(function () {
+        $('.active').removeClass('active');// 清空括号内class类名
+        $(this).addClass('active');
+    })
+    // addClass 中间有函数
+    // $('.add-class > li').addClass(function (index) {
+    //     if (index % 3 == 0) {
+    //         return 'aaa';
+    //     }
+    // });
+    // 作业 标签切换
+    $('.work > li').click(function () {
+        $('.work-active').removeClass('work-active');
+        $(this).addClass('work-active');
+
+        $('.content-active').removeClass('content-active');
+        $('.content > div').eq($(this).index()).addClass('content-active');
+    })
+
+    // toggleClass 没有添加有则删除 常用于点击事件
+    $('.add-class > li').click(function () {
+        $('.add-class-act').toggleClass('add-class-act');
+        $(this).toggleClass('add-class-act');
+    });
+
+    // Before ==> A前面是B 主体是A
+    $('.add-class>li:eq(0)').before($('.add-class > li:eq(4)')).css('background', 'yellow');
+    // insertBefore ==> B插入到A前面 主体是B
+    $('.add-class > li:eq(4)').insertBefore($('.add-class > li:eq(0)')).css('background', 'blue');
+    // after insertAfter 同上
+
+    // appendTo ==> B添加到A子元素最后 主体是B
+    $('.append-li').appendTo($('.add-class')).css('color', 'red');
+    // append ==> A子元素最后添加B 主体是A
+    $('.add-class').append($('.append-li'));
+    // prependTo ==> B添加到A子元素前面 主体是B
+    $('.prepend-li').prependTo($('.add-class')).css('color', '#fff');
+    // prepend ==> A子元素前面添加B 主体是A
+    $('.add-class').prepend($('.prepend-li'));
+
+    // remove/移除  detach/分离
+    $('.remove-div').click(function () {
+        // 只返回删除的DOM元素
+        window.item1 = $(this).remove();
+    });
+    $('.detach-div').click(function () {
+        // 删除的事件也会返回
+        window.item2 = $(this).detach();
+    });
+    $('.remove-wrap>p').click(function () {
+        $('.remove-wrap').append(item1).append(item2);
+    });
+
+    // on(事件，事件源的选择器，传入值，方法体);
+    // off (事件，事件源的选择器，传入值);
+    // one 只触发一次事件
+    $('.remove-wrap').on('click', '.remove-div', '点击一次后取消事件绑定', function (e) {
+        $('<p>新建的p标签</p>').appendTo($(this));
+        console.log(e.data);
+        $('.remove-wrap').off('click', '.remove-div');
+    });
+
+    // scrollTop scrollLeft 滚动距离
+    $(window).scroll(function () {
+        // console.log($(this).scrollTop());
+    });
+
+    // width 宽度==> content
+    // innerWidth 宽度==> content padding
+    // outerWidth() 宽度==> content padding border
+    // 参数为true的时候求出的宽度带有margin
+
+    // DOM创建
+    // $('<div>').appendTo($('body')).text('<div>');
+    $('<div></div>');
+    $('<div>');
+    $('<div/>');
+
+    // 作业 登陆弹出框 动态生成弹窗
+    var lock = true;
+    $('.log-in').click(function () {
+        if (lock) {
+            lock = false;
+            var str = '<div class="log-in-div">\
+            <span>X</span>\
+            <div>\
+                <label for="useName">账号</label>\
+                <input id="useName" type="text">\
+            </div>\
+            <div>\
+                <label for="usePassword">密码</label>\
+                <input id="usePassword" type="password">\
+            </div>\
+            <button>登录</button>\
+        </div>';
+            $('body').append($(str));
+        }
+        $('.log-in-div').css('display', 'block');
+
+        $('.log-in-div>span').one('click', () => {
+            $('.log-in-div').css('display', 'none');
         });
-        // 参二 --> 执行期上下文
-        $('p', '#demo').css('color', 'red');
-        // $() ==> jQuery()
-        $();
-        jQuery();
+    })
 
-        // ul直接元素中第一个li
-        $('ul>li:first').css('color', 'red');
-        // ul直接元素中index是eq的li
-        $('ul>li:eq(3)').css('color', '#ccc');
-        // odd index为奇数 even index为偶数
-        $('.text>li:odd').css('font-size', '18px');
-        $('.text>li:even').css('font-size', '26px');
+    /* 事件event
+        e.pageX 相对于文档的距离
+        e.clientX 相对于浏览器窗口的距离
+        e.screenX 相对于屏幕的距离
+        e.which 哪个键或按钮
+        e.button 哪个鼠标按键被按下
+    */
+    $('body').click(function () {
+        // console.log('pageY ' + event.pageY);
+        // console.log('clientY ' + event.clientY);
+        // console.log('screenY ' + event.screenY);
+    })
+    $('.event-which').keydown(function () {
+        console.log('which ' + event.which);
+    })
+    $('.event-which').on('mousedown contextmenu', function () {
+        event.preventDefault(); // 取消默认事件
+        event.stopPropagation(); // 取消事件冒泡
+        console.log('which ' + event.which); // 左1-中2-右3
+        console.log('button ' + event.button);// 左0-中1-右2
+    })
+    // 取消冒泡和默认事件 => {return false}
+    $('a').click(() => false);
 
-        // 筛选css是demo的li
-        $('li:eq(2)').filter('.demo').css('font-weight', '600');
-        // 筛选符合函数运算的li
-        $('li:eq(4)').filter(function (index) {
-            return index % 3 === 0;
-        }).css('font-weight', '600');
-        // 除了demo的li 跟filter相反 用法一样
-        $('li').not('.demo');
-        //有XX 筛选有p的li
-        $('li').has('p');
-        // 查找li下面的p
-        $('li').find('p');
-        // 查找li下面index是1的元素
-        $('li:eq(1)');
-        $('li').eq(1);
-        // 判断是否为demo
-        $('li').is('.demo');
+    // offset().left/top; 相对文档
+    // position().left/top; 相对有定位父级
+    var _offset = $('.offset-div>div').offset();
+    var _position = $('.offset-div>div').position();
+    $('.offset-div>div').text('offset-top: ' + _offset.top + 'offset-left: ' + _offset.left + '  position-top: ' + _position.top + 'position-left: ' + _position.left);
 
-        // jquery.css方法
-        $('.text>li').css('width', '100px').css('height', '70px'); // 赋值
-        $('.text>li').css({ width: 100, height: '70px' }); // 赋值
-        $('li:last').css('width'); // 取值
+    // parent() 返回直接父元素
+    $('.parent-ul span').parent();
+    $('.parent-ul span').parent('li'); // 父元素为参数则返回父元素，否则为空
+    // offsetParent() 返回最近的有定位父级
+    $('.parent-ul span').offsetParent();
+    // parents() 返回所有的父级
+    $('.parent-ul span').parents();
+    $('.parent-ul span').parents('div'); // 返回父级中所有参数元素
+    // closest()查找最近的祖先节点中参数元素 可帅选自身
+    $('.parent-ul span').closest('div');
 
-        // jquery.html方法 ==> innerHTML
-        $('li:eq(1)').html('li'); // 赋值
-        $('li').html(); // 取值
-        // jquery.text方法 ==> innerText
-        $('li:first').text('123123'); // 赋值
-        $('li').text(); // 取值
+    // val() input输入框的value值
+    $('#val-input').blur(function () {
+        console.log($(this).val());
+    })
 
-        // attr() ==> setAttribute()
-        $('#demo').attr('date-class', 'aa'); // 赋值
-        $('#demo').attr('date-class'); // 取值
-        // prop() ==> elem.className()
-        $('#demo').prop('class', 'aaaaa'); // 赋值
-        $('#demo').prop('class'); // 取值
-        // jQuery认为 attribute 的checked selected disabled 就是表示该属性初始状态的值，property 的checked selected disabled 才表示该属性实时状态的值
-        // checkbox 自带checked属性的时候
-        $('input').attr('checked'); // checked/checked
-        $('input').prop('checked'); // true/false
-        // checkbox 无checked属性
-        $('input:last').attr('checked'); // undefined
-        $('input:last').prop('checked'); // false
+    // clone()  参数为true时也会克隆事件
+    $('.parent-ul>li:eq(2)').on('click', function () {
+        $(this).text('点击事件');
+    });
+    var aClone = $('.parent-ul>li:eq(2)').clone(true);
+    $('.parent-ul').append(aClone);
 
-        // 兄弟节点
-        $('li:eq(3)').next(); // 下一个
-        $('li:eq(3)').prev(); // 上一个
-        $('li:eq(3)').index(); // 当前兄弟节点中的索引
+    // wrap 在元素外面循环包裹参数function
+    $('.parent-ul>li:eq(2)').wrap('<div>');
+    // wrapInner 在元素里面循环包裹参数function
+    $('.parent-ul>li:eq(1)').wrapInner('<h1>');
+    $('.parent-ul>li').wrapInner(function (index) {
+        if (index == 0) {
+            return '<h1>';
+        } else if (index == 1) {
+            return '<h3>';
+        } else {
+            return '<span>';
+        }
+    });
+    // wrapAll 包裹选中的所有元素 会破坏结构
+    // $('.parent-ul>li').wrapAll('<div>');
+    // unwrap 解除包装 接过话标签不能删除
+    $('.parent-ul>li:eq(0)').unwrap();
 
-        // class操作
-        $('li:eq(3)').addClass();
-        $('li:eq(3)').removeClass(); // 括号为空时清空所有class类名
-        // 点击变色
-        // $('.div-li').click(function () {
-        //     $('.div-li').css('background', '');
-        //     $(this).css('background', 'red');
-        //     console.log($(this).index());
-        // })
-        // 点击变色
-        $('.div-li').click(function () {
-            $('.active').removeClass('active');// 清空括号内class类名
-            $(this).addClass('active');
-        })
-        // addClass 中间有函数
-        // $('.add-class > li').addClass(function (index) {
-        //     if (index % 3 == 0) {
-        //         return 'aaa';
-        //     }
-        // });
-        // 作业 标签切换
-        $('.work > li').click(function () {
-            $('.work-active').removeClass('work-active');
-            $(this).addClass('work-active');
+    // end 返回上一级选中元素
+    $('.parent-ul>li').eq(0).css({ color: 'red' }).end().eq(3).css({ color: 'yellow' });
+    // add 添加元素
+    // $('.parent-ul>li').eq(0).add($('.parent-ul>li').eq(3)).css({width: '30px',height: '50px'});
 
-            $('.content-active').removeClass('content-active');
-            $('.content > div').eq($(this).index()).addClass('content-active');
-        })
-
-        // toggleClass 没有添加有则删除 常用于点击事件
-        $('.add-class > li').click(function () {
-            $('.add-class-act').removeClass('add-class-act');
-            $(this).toggleClass('add-class-act');
-        });
-
-        // Before ==> A前面是B 主体是A
-        $('.add-class>li:eq(0)').before($('.add-class > li:eq(4)')).css('background', 'yellow');
-        // insertBefore ==> B插入到A前面 主体是B
-        $('.add-class > li').eq(4).insertBefore($('.add-class > li:eq(0)')).css('background', 'blue');
-        // after insertAfter 同上
-
-        // appendTo ==> B添加到A子元素最后 主体是B
-        $('.append-li').appendTo($('.add-class')).css('color', 'red');
-        // append ==> A子元素最后添加B 主体是A
-        $('.add-class').append($('.append-li'));
-        // prependTo ==> B添加到A子元素前面 主体是B
-        $('.prepend-li').prependTo($('.add-class')).css('color', '#fff');
-        // prepend ==> A子元素前面添加B 主体是A
-        $('.add-class').prepend($('.prepend-li'));
-
-        // remove  detach
-        $('.remove-div').click(function () {
-            // 只返回删除的DOM元素
-            window.item1 = $(this).remove();
-        });
-        $('.detach-div').click(function () {
-            // 删除的事件也会返回
-            window.item2 = $(this).detach();
-        });
-        $('.remove-wrap>p').click(function () {
-            $('.remove-wrap').append(item1).append(item2);
-        });
-
-        // on(事件，事件源的选择器，传入值，方法体);
-        // off (事件，事件源的选择器，传入值);
-        // one 只触发一次事件
-        $('.remove-wrap').on('click', '.remove-div', '点击一次后取消事件绑定', function (e) {
-            $('<p>新建的p标签</p>').appendTo($(this));
-            console.log(e.data);
-            $('.remove-wrap').off('click', '.remove-div');
-        });
-
-        // scrollTop scrollLeft 滚动距离
-        $(window).scroll(function () {
-            // console.log($(this).scrollTop());
-        });
-
-        // width 宽度=> content
-        // innerWidth 宽度=> content padding
-        // outerWidth() 宽度=> content padding border
-        // 参数为true的时候求出的宽度带有margin
-
-        // DOM创建
-        // $('<div>').appendTo($('body')).text('<div>');
-        $('<div></div>');
-        $('<div>');
-        $('<div/>');
-
-        /* 作业 登陆弹出框 动态生成弹窗
-            点击生成以下DOM元素
-            <div class="log-in-div">
-                <span>X</span>
-                <div>
-                    <label for="useName">账号</label>
-                    <input id="useName" type="text">
-                </div>
-                <div>
-                    <label for="usePassword">密码</label>
-                    <input id="usePassword" type="password">
-                </div>
-                <button>登录</button>
-            </div>
-        */
-        $('.log-in').click(function () {
-            var demo0 = $('<span>X</span>');
-            var demo1 = $('<div><label for="useName">账号</label><input id="useName" type="text"></div>');
-            var demo2 = $('<div><label for="usePassword">密码</label><input id="usePassword" type="password"></div>');
-            var demo3 = $('<button>登录</button>');
-            var demo4 = $('<div>').append(demo0).append(demo1).append(demo2).append(demo3).addClass('log-in-div');
-            $('body').append(demo4);
-
-            $('.log-in-div>span').click(() => {
-                $('.log-in-div').detach();
-            });
-        })
-
-
-        /* 事件event
-            e.pageX 相对于文档的距离
-            e.clientX 相对于浏览器窗口的距离
-            e.screenX 相对于屏幕的距离
-            e.which 哪个键或按钮
-            e.button 哪个鼠标按键被按下
-        */
-        $('body').click(function () {
-            // console.log('pageY ' + event.pageY);
-            // console.log('clientY ' + event.clientY);
-            // console.log('screenY ' + event.screenY);
-        })
-        $('.event-which').keydown(function () {
-            console.log('which ' + event.which);
-        })
-        $('.event-which').on('mousedown contextmenu', function () {
-            event.preventDefault(); // 取消默认事件
-            event.stopPropagation(); // 取消事件冒泡
-            console.log('which ' + event.which); // 左1-中2-右3
-            console.log('button ' + event.button);// 左0-中1-右2
-        })
-        // 取消冒泡和默认事件 => {return false}
-        $('a').click(() => false);
-
-        // offset().left/top; 相对文档
-        // position().left/top; 相对有定位父级
-        var _offset = $('.offset-div>div').offset();
-        var _position = $('.offset-div>div').position();
-        $('.offset-div>div').text('offset-top: ' + _offset.top + 'offset-left: ' + _offset.left + '  position-top: ' + _position.top + 'position-left: ' + _position.left);
-    </script>
-</body>
-
+    // serialize 拼接form表单数据
+    // serializeArray 取出数据保存为数组
+    $('.form-test>input:eq(2)').click(function (e) {
+        e.preventDefault(); // 取消默认事件
+        console.log($('.form-test').serialize());
+        console.log($('.form-test').serializeArray());
+    })
+</script>
 
 </html>

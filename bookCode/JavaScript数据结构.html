@@ -302,13 +302,14 @@
         }
         return queue.dequeue();
     }
-    let names = ['John', 'Jack', 'Camila', 'Ingrid', 'Carl'];
-    let winner = hotPotato(names, 515);
+    // let names = ['John', 'Jack', 'Camila', 'Ingrid', 'Carl'];
+    // let winner = hotPotato(names, 515);
     // console.log('The winner is ' + winner);
 
 
     //TODO:TODO:TODO: 第五章 链表
     function LinkedList() {
+
         let Node = function (element) {
             this.element = element;
             this.next = null;
@@ -318,26 +319,160 @@
         let head = null;
 
         this.append = function (element) {
-
             let node = new Node(element),
                 current;
 
-            if (head === null) {
+            if (head === null) { // 链表中第一个节点
                 head = node;
+
             } else {
                 current = head;
+
+                // 循环列表，直到最后一项
+                while (current.next) {
+                    current = current.next;
+                }
+
+                // 找到最后一项，将其next赋值为node，建立链接
+                current.next = node;
+            }
+            length++; // 更新链表长度
+        };
+
+        this.insert = function (position, element) {
+
+            // 检查越界值
+            if (position >= 0 && position <= length) {
+
+                let node = new Node(element),
+                    current = head,
+                    previous,
+                    index = 0;
+
+                if (position === 0) { // 在第一个位置添加
+
+                    node.next = current;
+                    head = node;
+                } else {
+
+                    while (index++ < position) {
+                        previous = current; // 移除项后面的项都向前移一位
+                        current = current.next;
+                    }
+                    // 将current与node的下一项链接起来，node与previous的下一项链接起来从而田家湾它
+                    node.next = current;
+                    previous.next = node;
+                }
+
+                length++;
+
+                return true;
+            } else {
+
+                return false;
             }
         };
-        this.insert = function (position, element) { };
-        this.removeAt = function (position) { };
-        this.remove = function (element) { };
-        this.indexIf = function (element) { };
-        this.isEmpty = function () { };
-        this.size = function () { };
-        this.getHead = function () { };
-        this.toString = function () { };
-        this.print = function () { };
+
+        this.removeAt = function (position) {
+
+            // 检查越界值
+            if (position >= 0 && position < length) {
+
+                let current = head,
+                    previous,
+                    index = 0;
+
+                // 移除第一项
+                if (position === 0) {
+                    head = current.next; // 第二位移到head
+                } else {
+
+                    // 移除第一项以外的其他项
+                    while (index++ < position) {
+
+                        previous = current; // 移除项后面的项都向前移一位
+                        current = current.next;
+                    }
+
+                    // 将previous与current的下一项链接起来，跳过current从而移除它
+                    previous.next = current.next;
+                }
+
+                length--;
+
+                return current.element;
+
+            } else {
+                return null;
+            }
+        };
+
+        this.remove = function (element) {
+            let index = this.indexOf(element);
+            return this.removeAt(index);
+        };
+
+        this.indexOf = function (element) {
+
+            let current = head,
+                index = -1;
+
+            while (current) {
+                if (element === current.element) {
+                    return index;
+                }
+                index++;
+                current = current.next;
+            }
+
+            return -1;
+        };
+
+        this.isEmpty = function () {
+            return length === 0;
+        };
+
+        this.size = function () {
+            return length;
+        };
+
+        this.getHead = function () {
+            return head;
+        };
+
+        this.toString = function () {
+
+            let current = head,
+                string = '';
+
+            while (current) {
+                string += current.element + (current.next ? '==>' : '');
+                current = current.next;
+            }
+            return string;
+        };
+
+        this.print = function () {
+
+            let current = head,
+                array = [];
+
+            while (current) {
+                array.push(current);
+                current = current.next;
+            }
+            return array;
+        };
     };
+    let list = new LinkedList();
+    // console.log('Is empty: ' + queue.isEmpty());
+    // list.append([1, 2, 3]);
+    // list.append(234);
+    // list.insert(0, 'a');
+    // console.log(list.toString());
+    // list.append({ first: '1st' });
+    // list.append({ second: '2nd' });
+    // list.append({ third: '3rd' });
 
 </script>
 

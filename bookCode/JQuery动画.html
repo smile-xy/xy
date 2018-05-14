@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery</title>
+    <script type="text/javascript" src="../../jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="../../jquery/jquery.easing.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        #demo {
+            position: absolute;
+            left: 0;
+            width: 100px;
+            height: 100px;
+            background: red;
+        }
+
+        #demo1 {
+            position: absolute;
+            left: 300px;
+            width: 100px;
+            height: 100px;
+            background: green;
+        }
+
+        #demo2 {
+            position: absolute;
+            top: 300px;
+            left: 300px;
+            width: 100px;
+            height: 100px;
+            background: yellow;
+        }
+
+        .slide-show {
+            position: absolute;
+            top: 450px;
+            left: 50%;
+            margin-left: -150px;
+            width: 300px;
+            height: 500px;
+            border: 2px solid red;
+            background: #eee;
+            overflow: hidden;
+        }
+
+        .slide-show ul {
+            position: relative;
+            top: 0;
+            left: 0;
+            height: 100%;
+        }
+
+        .slide-show li {
+            height: 100%;
+            float: left;
+        }
+
+        .slide-show li img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .btn {
+            display: none;
+            position: absolute;
+            top: 50%;
+            margin-top: -20px;
+            width: 30px;
+            height: 40px;
+            background: #222;
+            line-height: 40px;
+            text-align: center;
+            color: #fff;
+            cursor: pointer;
+        }
+
+        .slide-show:hover .btn {
+            display: block;
+        }
+
+        .left-btn {
+            left: -5px;
+            border-radius: 0 50% 50% 0;
+        }
+
+        .right-btn {
+            right: -5px;
+            border-radius: 50% 0 0 50%;
+        }
+
+        .index {
+            position: absolute;
+            left: 50%;
+            bottom: 5px;
+            margin-left: -40px;
+            width: 80px;
+        }
+
+        .index span {
+            box-sizing: border-box;
+            float: left;
+            margin: 5px;
+            width: 10px;
+            height: 10px;
+            border: 1px solid red;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .index .active {
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="demo"></div>
+    <div id="demo1"></div>
+    <div id="demo2"></div>
+    <div class="slide-show">
+        <ul>
+            <li>
+                <img src="..\projectCode\淘宝网\img\adv-1.jpg">
+            </li>
+            <li>
+                <img src="..\projectCode\淘宝网\img\adv-2.jpg">
+            </li>
+            <li>
+                <img src="..\projectCode\淘宝网\img\adv-3.jpg">
+            </li>
+            <li>
+                <img src="..\projectCode\淘宝网\img\adv-4.jpg">
+            </li>
+        </ul>
+        <div class="btn left-btn"> &lt;</div>
+        <div class="btn right-btn"> &gt;</div>
+        <div class="index">
+            <span class="active"></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+</body>
+<script>// 轮播图
+    var first = $('.slide-show li:first').clone();
+    $(first).appendTo($('.slide-show>ul'));
+    var timer,
+        canMove = true,
+        liIndex = 0,
+        direction = 'right',
+        num = $('.slide-show li:last').index(),
+        liWidth = $('.slide-show').width(),
+        ulWidth = $('.slide-show li:last').index() * liWidth;
+    $('.slide-show li').css('width', liWidth);
+    $('.slide-show>ul').css('width', ulWidth + liWidth);
+
+    $('.left-btn').click(() => {
+        autoMove('left');
+    });
+    $('.right-btn').click(() => {
+        autoMove('right');
+    });
+    $('.index').each(function (index) {
+        $(this).click(function () {
+            canMove = false;
+            clearTimeout(timer);
+            liIndex = index;
+            $('.slide-show>ul').animate({ left: - liIndex * liWidth }, 1000, function () {
+                timer = setTimer(autoMove, 1500);
+                changeIndex(index);
+                canMove = true;
+            });
+        });
+    });
+
+    function autoMove(direction) {
+        if (canMove) {
+            canMove = false;
+            clearTimeout(timer);
+            if (!direction || direction == 'right') {
+                liIndex++;
+                $('.slide-show>ul').animate({ left: $('.slide-show>ul').position().left - liWidth }, 500, function () {
+                    if ($('.slide-show>ul').position().left == -num * liWidth) {
+                        liIndex = 0;
+                        $('.slide-show>ul').css('left', 0);
+                    }
+                    timer = setTimeout(autoMove, 1500);
+                    canMove = true;
+                    changeIndex(liIndex);
+                });
+            }
+        } else if (direction == 'left') {
+            if ($('.slide-show>ul').position().left == 0) {
+                $('.slide-show>ul').css('left', -num * liWidth);
+                liIndex = num;
+            }
+            liIndex--;
+            $('.slide-show>ul').animate({ left: $('.slide-show>ul').position().left + liWidth }, 500, function () {
+                timer = setTimeout(autoMove, 1500);
+                canMove = true;
+                changeIndex(liIndex);
+            });
+        }
+    }
+
+    function changeIndex(_index) {
+        $('.index>span').each(function () {
+            $(this).removeClass();
+        });
+        $('.index>span').eq(_index).addClass('active');
+    }
+
+    timer = setTimeout(autoMove, 1500);
+</script>
+<script>
+    // animate(属性， 移动时间，linear, callback) 通过插件增加特性
+
+    // $('#demo').on('click', function () {
+    //     $(this).animate({ left: 300, width: 200 }, 1000, 'easeOutElastic', function () {
+    //         $(this).animate({ top: 300 }, 1000, 'easeOutQuart');
+    //     });
+    // });
+
+    // stop 阻止当前运动 继续后续运动
+    // stop(true) 阻止后续所有运动
+    // delay 延迟执行
+    // finish()停止当前运动 并到达最后运动的目标点
+
+    // $('#demo').animate({ left: 300, width: 200 }, 3000, 'easeOutCubic').delay(2000).animate({ left: 300, top: 300, width: 200 }, 3000, 'easeOutQuart');
+    // $(document).click(() => {
+    //     // stop(是否停止后续所有运动,是否到达当前目标点)
+    //     $('#demo').stop(false,false);
+    // })
+
+    // slideUp(duration, easing, complete)
+    // slideUp 向上滑动消失
+    // slideDown 想下滑动出现
+    // slideToggle 改变当前状态 消失或者出现
+
+    // fadeIn(duration, easing, complete)
+    // fadeIn 淡入
+    // fadeTo(duration, opacity ,easing, complete)
+    // fadeOut 淡出
+    // fadeToggle 改变当前状态 消失或者出现
+
+    // $('#demo1').slideUp().slideDown();
+    // $('#demo1').click(() => {
+    //     $('#demo').slideToggle();
+    //     $('#demo2').fadeToggle(2000);
+    // });
+
+    // trigger 执行元素上的参数事件。
+    // trigger('click', [1]); // 点击一次并传参
+
+    // $('#demo').on('eat', function (event, a) {
+    //     $(this).animate({ width: $(this).width() + a })
+    // });
+    // $('#demo').click(() => {
+    //     if ($('#demo').width() > 300) {
+    //         $('#demo').detach();
+    //     }
+    //     $('#demo').trigger('eat', [100]);
+    // });
+</script>
+
+</html>

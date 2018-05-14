@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JQuery</title>
+    <script type="text/javascript" src="../../jquery/jquery-3.3.1.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .proxy-div {
+            width: 100px;
+            height: 50px;
+            background: red;
+        }
+    </style>
+</head>
+
+<body>
+
+</body>
+<script>
+    // $('elem').css() 实例方法 定义在原型
+    // $type() 工具方法 定义在函数
+    var arr = [1, 2, 3];
+    // console.log(Object.prototype.toString.call(arr));
+    // console.log(jQuery.type(arr)); // array
+
+    // 复习RedExp
+    var str = '       ab    ';
+    // console.log('去除首位空格|' + jQuery.trim(str) + '|');
+    // console.log('去除首位空格|' + str.replace(/(^\s*)|(\s*$)/g, '') + '|');
+    // var str1 = '   a    b   ';
+    // console.log('去除中间空格|' + str.replace(/(^\S)|(\S$)/g, '$1$2') + '|');
+
+    // jQuery.proxy(function, context[, additionalArguments])
+    // function S(a, b) {
+    //     console.log(a + b + this.name);
+    // }
+    // var obj = {
+    //     name: 'admin'
+    // }
+    // jQuery.proxy(S, obj, 'My name ')('is ');
+
+    // function student(grade, number) {
+    //     console.log(grade + ' | ' + number);
+    // }
+    // var fn = jQuery.proxy(student, student, 2014);
+    // fn(20140000000);
+    // fn(20140000001);
+    // fn(20140000002);
+
+    $('body').append($('<div>').addClass('proxy-div'));
+    var obj = {
+        init: function () {
+            this.bindEvent();
+        },
+        bindEvent: function () {
+            $('.proxy-div').click(jQuery.proxy(this.print, this, 1, 2));
+        },
+        print: function (a, b) {
+            console.log(this);
+            this.some(a, b);
+        },
+        some: function (a, b) {
+            console.log('some else' + a + b);
+        }
+    }
+    obj.init();
+
+    // noConflict() 将$权限移交
+    // var jSome = $.noConflict();
+    // $('div'); ==> $ is not a fun
+
+    // parseJSON()
+    var strJSON = {
+        "name": "admin",
+        "age": 20
+    }
+    var JSONToStr = JSON.stringify(strJSON);
+    // console.log($.parseJSON(JSONToStr));
+
+    // $.makeArray() 类数组转数组
+    var arrObj = {
+        a: 'a',
+        b: 'b',
+        length: 2
+    }
+    $.makeArray(arrObj);
+
+    // $.extend() 将两个或更多对象的内容合并到第一个对象(默认是$)。
+    // $.fn.extend() 原型上
+    // $.fn = $.prototype
+    $.extend({
+        leftTrim: function (str) {
+            var reg = /^\s+/g;
+            return str.replace(reg, '');
+        }
+    })
+    $.leftTrim('    aa');
+
+    var deep = {
+        number: 1
+    }
+    var shallow = {
+        number: 1
+    }
+    var obj2 = {
+        person: {
+            name: 'old'
+        },
+        number: 2
+    }
+    $.extend(true, deep, obj2); // name:111 深克隆
+    $.extend(shallow, obj2); //number:2 name:333 浅克隆
+    obj2.person.name = 'new';
+    // console.log(deep.person.name); // old
+    // console.log(shallow.person.name); // new
+
+    // Callbacks() 回调队列
+    fn1 = () => { console.log('111') };
+    fn2 = () => { console.log('222') };
+    fn3 = () => { console.log('333') };
+    fn4 = () => false;
+    // $.Callbacks(once) 只执行一次fire()
+    // $.Callbacks(unique) 相同回调只执行一次
+    // $.Callbacks(memory) fire()后add回调仍会执行
+    // $.Callbacks(stopOnFalse) 当一个回调返回false时中断调用
+    var callLine = $.Callbacks('memory stopOnFalse');
+    // callLine.add(fn1, fn1, fn2, fn3); // 添加
+    // callLine.fire(); // 可以多次执行
+    // callLine.add(fn1, fn1, fn4, fn2);
+
+    // Deferred() 延迟对象 相当于有状态的Callbacks
+    var aaDef = () => {
+        var def = $.Deferred();
+        def.resolve();
+        return def.progress(); // 返回只读的def
+    };
+    var bbDef = () => {
+        var def = $.Deferred();
+        setInterval(() => {
+            def.notify(); // 执行中
+        }, 500);
+        // 失败或成功后状态不可变
+        setInterval(() => {
+            def.reject(); // 失败
+        }, 1000);
+        setInterval(() => {
+            def.resolve(); // 成功
+        }, 2000);
+        return def.progress(); // 返回只读的def
+    };
+    var cb = aaDef();
+    var cb2 = bbDef();
+    // 执行一个或多个对象的回调函数 当参数全部触发done时才done
+    $.when(cb, cb2)
+        // done 完成
+        .done(() => { console.log('done') })
+        // fail 失败
+        .fail(() => { console.log('fail') })
+        // progress 执行中
+        .progress(() => { console.log('progress') });
+    aaDef();
+    bbDef();
+</script>
+
+</html>
