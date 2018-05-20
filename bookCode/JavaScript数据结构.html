@@ -474,6 +474,179 @@
     // list.append({ second: '2nd' });
     // list.append({ third: '3rd' });
 
+    //TODO: 双向链表
+    function DoublyLinkedList() {
+
+        let Node = function (element) {
+            this.element = element;
+            this.prev = null;
+            this.next = null; // <==新增
+        };
+
+        let length = 0;
+        let head = null;
+        let tail = null; // <==新增
+
+        this.append = function (element) {
+            let node = new Node(element),
+                current;
+
+            if (head === null) { // 链表中第一个节点
+                head = node;
+
+            } else {
+                current = head;
+
+                // 循环列表，直到最后一项
+                while (current.next) {
+                    current = current.next;
+                }
+
+                // 找到最后一项，将其next赋值为node，建立链接
+                current.next = node;
+            }
+            length++; // 更新链表长度
+        };
+
+        this.insert = function (position, element) {
+
+            // 检查越界值
+            if (position >= 0 && position <= length) {
+
+                let node = new Node(element),
+                    current = head,
+                    previous,
+                    index = 0;
+
+                if (position === 0) { // 在第一个位置添加
+
+                    if (!head) { // <==新增
+                        head = node;
+                        tail = node;
+                    } else {
+                        node.next = current;
+                        current.prev = node; // <==新增
+                        head = node;
+                    }
+                } else if (position === length) { // 最后一项 // <==新增
+
+                    current = tail;
+                    current.next = node;
+                    node.prev = current;
+                    taul = node;
+
+                } else {
+
+                    while (index++ < position) {
+                        previous = current; // 移除项后面的项都向前移一位
+                        current = current.next;
+                    }
+                    // 将current与node的下一项链接起来，node与previous的下一项链接起来从而田家湾它
+                    node.next = current;
+                    previous.next = node;
+                }
+
+                length++;
+
+                return true;
+            } else {
+
+                return false;
+            }
+        };
+
+        this.removeAt = function (position) {
+
+            // 检查越界值
+            if (position >= 0 && position < length) {
+
+                let current = head,
+                    previous,
+                    index = 0;
+
+                // 移除第一项
+                if (position === 0) {
+                    head = current.next; // 第二位移到head
+                } else {
+
+                    // 移除第一项以外的其他项
+                    while (index++ < position) {
+
+                        previous = current; // 移除项后面的项都向前移一位
+                        current = current.next;
+                    }
+
+                    // 将previous与current的下一项链接起来，跳过current从而移除它
+                    previous.next = current.next;
+                }
+
+                length--;
+
+                return current.element;
+
+            } else {
+                return null;
+            }
+        };
+
+        this.remove = function (element) {
+            let index = this.indexOf(element);
+            return this.removeAt(index);
+        };
+
+        this.indexOf = function (element) {
+
+            let current = head,
+                index = -1;
+
+            while (current) {
+                if (element === current.element) {
+                    return index;
+                }
+                index++;
+                current = current.next;
+            }
+
+            return -1;
+        };
+
+        this.isEmpty = function () {
+            return length === 0;
+        };
+
+        this.size = function () {
+            return length;
+        };
+
+        this.getHead = function () {
+            return head;
+        };
+
+        this.toString = function () {
+
+            let current = head,
+                string = '';
+
+            while (current) {
+                string += current.element + (current.next ? '==>' : '');
+                current = current.next;
+            }
+            return string;
+        };
+
+        this.print = function () {
+
+            let current = head,
+                array = [];
+
+            while (current) {
+                array.push(current);
+                current = current.next;
+            }
+            return array;
+        };
+    };
+
 </script>
 
 <body>

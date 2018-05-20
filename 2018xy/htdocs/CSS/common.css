@@ -1,0 +1,240 @@
+/* 全局样式 */
+
+a {
+    color: #569CD6;
+}
+
+a:hover {
+    color: #264F78;
+}
+
+.wrap {
+    position: relative;
+    margin: 0 auto;
+    background-color: #eee;
+}
+
+@media screen and (min-width:1200px) {
+    .wrap {
+        width: 1200px;
+    }
+}
+
+@media screen and (max-width: 1220px) {
+    .wrap {
+        width: 960px;
+        min-width: 768px;
+    }
+}
+
+main {
+    position: relative;
+}
+
+/* 顶部工具栏 */
+
+.top {
+    position: relative;
+    top: 2px;
+    margin-bottom: 5px;
+    left: 5%;
+    width: 90%;
+    height: 30px;
+    background: #eee;
+    line-height: 30px;
+}
+
+.login {
+    float: left;
+    cursor: default;
+}
+
+.login span {
+    color: #c1c1c1;
+}
+
+.search {
+    float: right;
+}
+
+.search-btn {
+    position: absolute;
+    top: 0;
+    right: 0;
+    font-size: 16px;
+    color: #FFF;
+    background-color: #c1c1c1;
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    cursor: pointer;
+    height: 30px;
+    border: none;
+    width: 50px;
+    outline: 0;
+}
+
+.search-btn:hover {
+    background-color: #007ACC;
+}
+
+.input-box {
+    box-sizing: border-box;
+    position: absolute;
+    top: 0;
+    right: 50px;
+    height: 30px;
+    box-sizing: border-box;
+    border: 1px solid #c1c1c1;
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+    border-right: none;
+    overflow: hidden;
+}
+
+.input-box label {
+    position: absolute;
+    left: 15px;
+    color: #c1c1c1;
+    cursor: text;
+    font-size: 16px;
+    line-height: 30px;
+}
+
+.input-box input {
+    text-indent: 15px;
+    height: 30px;
+    line-height: 30px;
+    width: 50px;
+    /* width: 200px; */
+    border: none;
+    outline: 0;
+    overflow-y: visible;
+}
+
+.search-line {
+    display: none;
+    z-index: 10;
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    width: 185px;
+    height: 7.5em;
+    font-size: 18px;
+    background: #fff;
+    overflow: hidden;
+    border: 1px solid #c1c1c1;
+}
+
+.search-line li {
+    height: 1.5em;
+    padding: 0 0.5em;
+    width: 180px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    cursor: default;
+}
+
+.search-line li a {
+    width: 100%;
+}
+
+.search-line li:hover {
+    background: #c1c1c1;
+}
+
+/* 头部导航栏 */
+
+header {
+    position: relative;
+    z-index: 9;
+    background-color: #007ACC;
+    height: 90px;
+    border-bottom: 2px solid #23527D;
+    box-shadow: 0 0 3px 1px #23527D;
+}
+
+header .logo {
+    position: absolute;
+    left: 50px;
+    top: 10px;
+}
+
+header nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20em;
+    height: 100%;
+    font-size: 30px;
+}
+
+header nav a {
+    float: left;
+    display: block;
+    margin-top: 40px;
+    width: 4em;
+    color: #eee;
+    text-align: center;
+}
+
+nav a:hover {
+    color: #ADD6FF;
+}
+
+/* 尾部信息栏 */
+
+footer {
+    position: relative;
+    height: 40px;
+    width: 100%;
+    line-height: 40px;
+    background-color: #C1C1C1;
+}
+
+footer .siteinfo {
+    position: relative;
+    margin: 0 auto;
+    width: 100%;
+    text-align: center;
+}
+
+footer .siteinfo a {
+    margin-right: 10px;
+    font-weight: 700;
+}
+
+/* 登录框样式 */
+
+.alert-box {
+    position: absolute;
+    top: 130px;
+    left: 50%;
+    margin-left: -167px;
+    border: 1px solid #A0B1C4;
+    border-radius: 5px;
+    width: 334px;
+    height: 400px;
+    background: #fff;
+    overflow: hidden;
+}
+
+.alert-close {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    height: 22px;
+    width: 22px;
+    background: url(https://res.mail.qq.com/zh_CN/htmledition/images/ptlogin_delete1e9c5d.png) 0 -22px no-repeat;
+    cursor: pointer;
+}
+
+.alert-close:hover {
+    background-color: red;
+    border-radius: 50%;
+}
+
+.alert-box iframe {
+    width: 100%;
+    height: 100%;
+}

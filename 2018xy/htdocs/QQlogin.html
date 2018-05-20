@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .login {
+            position: relative;
+            margin: 0 auto;
+            width: 334px;
+            border: 0px;
+            background-color: #ffffff;
+        }
+
+        .header {
+            position: relative;
+            height: 50px;
+            font-family: "lucida Grande", Verdana, "Microsoft YaHei";
+            border-bottom: 1px solid #c0cdd9;
+            background-color: #f9fbfe;
+        }
+
+        .switch {
+            position: absolute;
+            bottom: 0;
+            left: 53px;
+            height: 46px;
+            font-size: 16px;
+        }
+
+        .switch-btn {
+            margin-right: 55px;
+            color: #999;
+            display: inline-block;
+            height: 45px;
+            line-height: 45px;
+            outline: 0;
+            cursor: pointer;
+        }
+
+        .switch-btn:hover {
+            color: #000;
+        }
+
+        .focus {
+            color: #000;
+        }
+
+        .login-tips {
+            position: relative;
+            min-height: 28px;
+            height: auto;
+            padding-top: 4px;
+        }
+
+        .error-m {
+            display: inline-block;
+            padding-left: 20px;
+            line-height: 18px;
+            color: #434343;
+            vertical-align: middle;
+            text-align: left;
+            color: red;
+            padding-right: 15px;
+            font-size: 12px;
+        }
+
+        .login-form {
+            position: relative;
+            display: block;
+            margin: 0 auto;
+            width: 300px;
+            height: 330px;
+            overflow: hidden;
+        }
+
+        .q-login {
+            display: block;
+            position: relative;
+            margin: 0 auto;
+            width: 304px;
+            height: 317px;
+        }
+
+        .q-login .tips {
+            display: block;
+            padding-top: 35px;
+            height: 35px;
+            color: #A0A0A0;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .qlogin-show {
+            height: 220px;
+            position: absolute;
+            left: 0;
+            width: 300px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .qlogin-list {
+            width: 294px;
+            height: 100%;
+            position: absolute;
+            text-align: center;
+        }
+
+        .qr {
+            display: inline-block;
+            height: 120px;
+            text-align: center;
+            position: relative;
+        }
+
+        .qr img {
+            height: 82px;
+            position: absolute;
+            width: 82px;
+            border: 1px solid #D3D3D3;
+        }
+
+        .qr-1 {
+            width: 88px;
+            top: 0;
+            left: 0;
+        }
+
+        .qr-2 {
+            width: 93px;
+        }
+
+        .qr-1 img {
+            top: 4px;
+            left: 8px;
+            cursor: default;
+        }
+
+        .qr-2 img {
+            width: 74px;
+            height: 74px;
+            border: 4px solid #fff;
+            top: 5px;
+            left: 8px;
+            box-shadow: 0 0 3px 1px #A7D1FB;
+            cursor: pointer;
+        }
+
+        .qr-user-number {
+            display: none;
+            position: absolute;
+            left: 8px;
+            bottom: 30px;
+            width: 83px;
+            height: 22px;
+            line-height: 20px;
+            background: #000;
+            font-size: 12px;
+            text-align: center;
+            color: #fff;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        .qr-2:hover .qr-user-number {
+            display: block;
+        }
+
+        .qr-1-right-pic {
+            display: none;
+            position: absolute;
+            top: 99px;
+            left: 175px;
+            width: 200px;
+            height: 200px;
+            background: url(https://ui.ptlogin2.qq.com/style/20/images/shouQ_v2/small_24_tiny.png) no-repeat;
+        }
+
+        .qr-app-name {
+            display: inline-block;
+            text-align: center;
+            position: absolute;
+            top: 100px;
+            left: 0;
+            height: 20px;
+            line-height: 18px;
+            vertical-align: middle;
+            width: 88px;
+            overflow: hidden;
+        }
+
+        .qr-safe-login,
+        .qr-user-login {
+            font-size: 12px;
+            line-height: 18px;
+        }
+
+        .qr-user-name {
+            position: absolute;
+            top: 100px;
+            left: 0;
+            height: 20px;
+            width: 93px;
+            vertical-align: middle;
+            line-height: 18px;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .qr-short-tips {
+            display: inline;
+            color: #3481CF;
+        }
+
+        .p-login {
+            display: none;
+            position: relative;
+            margin: 0 auto;
+            width: 284px;
+        }
+
+        .p-login .tips {
+            position: relative;
+            margin: 0 auto;
+            z-index: 11;
+            height: 30px;
+            width: 280px;
+
+        }
+
+        .uin-area {
+            position: relative;
+            z-index: 10;
+            height: 50px;
+        }
+
+        .uin-area label {
+            position: absolute;
+            top: 12px;
+            left: 13px;
+            font-size: 14px;
+            line-height: 16px;
+            color: #aaa;
+            cursor: text;
+        }
+
+        .input-outer {
+            background: none;
+            border: 1px solid #96a5b4;
+            height: 38px;
+            width: 282px;
+            border-radius: 2px;
+        }
+
+        .input-style {
+            position: relative;
+            top: 0px;
+            padding: 10px 40px 10px 10px;
+            left: 0px;
+            width: 232px;
+            height: 18px;
+            border-radius: 3px;
+            line-height: 18px;
+            border: none;
+            background: 0 0;
+            color: #333;
+            font-family: Verdana, Tahoma, Arial;
+            font-size: 16px;
+        }
+
+        .uin-del {
+            position: absolute;
+            display: none;
+            top: 10px;
+            right: 10px;
+            height: 22px;
+            width: 22px;
+            background: url(https://res.mail.qq.com/zh_CN/htmledition/images/ptlogin_delete1e9c5d.png) 0 0 no-repeat;
+            cursor: pointer;
+        }
+
+        .uin-del:hover {
+            background: url(https://res.mail.qq.com/zh_CN/htmledition/images/ptlogin_delete1e9c5d.png) 0 -22px no-repeat;
+        }
+
+        .email-list {
+            display: none;
+            border: 1px solid #70c2ec;
+            background: #fff;
+            width: 280px;
+            position: absolute;
+            z-index: 10;
+            border-radius: 1px;
+            padding: 1px;
+        }
+
+        .email-list li {
+            height: 32px;
+            line-height: 32px;
+            margin: 0;
+            overflow: hidden;
+            padding-left: 10px;
+            list-style-type: none;
+            display: list-item;
+            cursor: default;
+        }
+
+        .email-list li:hover {
+            background-color: #CBE2FA;
+        }
+
+        .pwd-area {
+            position: relative;
+            z-index: 3;
+            height: 50px;
+        }
+
+        .pwd-area label {
+            position: absolute;
+            display: block;
+            top: 12px;
+            left: 13px;
+            font-size: 14px;
+            line-height: 16px;
+            color: #aaa;
+            cursor: text;
+        }
+
+        .submit {
+            display: block;
+            position: relative;
+            margin-top: 23px;
+            height: 177px;
+        }
+
+        .login-button {
+            display: block;
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 28px;
+            background-color: #5a98de;
+            outline: none;
+            border-radius: 3px;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .btn {
+            background: none;
+            height: 40px;
+            width: 100%;
+            line-height: 39px;
+            border: none;
+            outline: none;
+            font-weight: normal;
+            color: #fff;
+            font-size: 18px;
+            cursor: pointer;
+            font-family: inherit;
+            letter-spacing: 10px;
+        }
+
+        .btn:hover {
+            background: #6AA2E0;
+        }
+
+        .low-login {
+            display: block;
+            position: absolute;
+            left: 0;
+            top: -2px;
+        }
+
+        .low-login a {
+            display: block;
+            float: left;
+            height: 16px;
+            width: 16px;
+            border: 1px solid #96a5b4;
+            box-shadow: 0 0 3px rgba(154, 202, 249, 0.4);
+            outline: none;
+        }
+
+        .uncheck {
+            background: url(https://res.mail.qq.com/zh_CN/htmledition/images/icon_ptloginpage1e9c5d.png) no-repeat;
+            background-position: -38px -16px;
+        }
+
+        .checked {
+            background: url(https://res.mail.qq.com/zh_CN/htmledition/images/icon_ptloginpage1e9c5d.png) no-repeat;
+            background-position: -59px -17px;
+        }
+
+        .low-login-wording {
+            margin-left: 5px;
+            height: 18px;
+            cursor: pointer;
+            font-size: 12px;
+            line-height: 18px;
+            vertical-align: top;
+        }
+
+        .bottom {
+            position: absolute;
+            display: block;
+            width: 282px;
+            height: 16px;
+            right: 12px;
+            margin-bottom: 15px;
+            bottom: 2px;
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .link {
+            color: #225592;
+            text-decoration: none;
+            text-align: right;
+            font-size: 12px;
+        }
+
+        .link:hover {
+            text-decoration: underline;
+        }
+
+        .dotted {
+            color: #bfbfbf;
+            margin: 0 5px;
+            text-align: right;
+            font-size: 12px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="login">
+        <div class="header">
+            <div class="switch">
+                <a class="switch-btn focus" id="switcherGlogin" href="#">快速登录</a>
+                <a class="switch-btn" id="switcherPlogin" href="#">账号密码登录</a>
+            </div>
+        </div>
+        <div class="login-tips">
+            <span class="error-m"></span>
+        </div>
+        <div class="login-form">
+            <div class="tips"></div>
+            <div class="q-login">
+                <div class="tips">
+                    请用
+                    <a class="qr-short-tips" href="http://im.qq.com/mobileqq/#from=login" target="_blank">QQ手机版</a>扫描二维码，或点击头像登录
+                </div>
+                <div class="qlogin-show">
+                    <div class="qlogin-list">
+                        <span class="qr qr-1">
+                            <img src="http://sqimg.qq.com/qq_product_operations/im/mobileqq/pc/5/code.png">
+
+                            <span class="qr-app-name">
+                                <span class="qr-safe-login">安全登录</span>
+                            </span>
+                        </span>
+                        <span class="qr qr-2">
+                            <img src="https://avatars1.githubusercontent.com/u/37609247?s=460">
+                            <span class="qr-user-number">904128532</span>
+                            <span class="qr-user-name">
+                                <span class="qr-user-login">2018xy.xyz</span>
+                            </span>
+                        </span>
+                    </div>
+                    <div class="bottom">
+                        <div class="low-login" title="为了确保你的信息安全，不建议在网吧等公共环境勾选此项">
+                            <a class="uncheck"></a>
+                            <label class="low-login-wording">下次自动登录</label>
+                        </div>
+                        <a class="link" href="#">注册新账号</a>
+                        <span class="dotted">|</span>
+                        <a class="link" href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=904128532&website=www.oicqzone.com">意见反馈</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-login">
+                <form id="loginForm">
+                    <div class="uin-area">
+                        <label for="username">这里支持QQ号/邮箱/手机号输入</label>
+                        <div class="input-outer">
+                            <input class="input-style" type="text" id="username" name="username" autocomplete="off">
+                            <a class="uin-del" href="#"></a>
+                        </div>
+                        <ul class="email-list" id="emailList"></ul>
+                    </div>
+                    <div class="pwd-area">
+                        <label for="password">密码就算了</label>
+                        <div class="input-outer">
+                            <input class="input-style" type="password" id="password" name="password">
+                        </div>
+                    </div>
+                    <div class="submit">
+                        <a class="login-button">
+                            <input class="btn" id="loginButton" type="submit" value="登录">
+                        </a>
+                        <div class="low-login" title="为了确保你的信息安全，不建议在网吧等公共环境勾选此项">
+                            <a class="uncheck"></a>
+                            <label class="low-login-wording" for="">下次自动登录</label>
+                        </div>
+                    </div>
+                </form>
+                <div class="bottom">
+                    <a class="link" href="#">忘了密码？</a>
+                    <span class="dotted">|</span>
+                    <a class="link" href="#">注册新账号</a>
+                    <span class="dotted">|</span>
+                    <a class="link" href="tencent://AddContact/?fromId=45&fromSubId=1&subcmd=all&uin=904128532&website=www.oicqzone.com">意见反馈</a>
+                </div>
+            </div>
+        </div>
+        <div class="qr-1-right-pic"></div>
+    </div>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js" type="text/javascript"></script>
+    <script>
+        $('.switch>a').click(function () {
+            event.preventDefault();
+        });
+        $('#switcherGlogin').on('click', function () {
+            $('.switch>a').toggleClass('focus');
+            $('.p-login').css('display', 'none');
+            $('.q-login').css('display', 'block');
+        });
+        $('#switcherPlogin').on('click', function () {
+            $('.switch>a').toggleClass('focus');
+            $('.q-login').css('display', 'none');
+            $('.p-login').css('display', 'block');
+        });
+
+        $('.qr-1 img').on('mouseenter', function () {
+            $('.qr-1-right-pic').css('display', 'block');
+            $('.qr-1 img').on('mouseleave', function () {
+                $('.qr-1-right-pic').css('display', 'none');
+            });
+        });
+
+        $('.low-login-wording').click(function () {
+            $('.low-login>a').toggleClass('checked');
+            $('.low-login>a').toggleClass('uncheck');
+        });
+        $('.low-login>a').click(function () {
+            $(this).toggleClass('checked');
+            $(this).toggleClass('uncheck');
+        });
+
+        (function () {
+            var toggle = location.hash.slice(1);
+            toggle = toggle.split('&');
+            if (toggle[0] === 'vip') {
+                $('.error-m').text('小伙子，很高兴你再次光临。');
+            } else if (typeof toggle[1] === 'number') {
+                $('.error-m').text('亲爱的，这么久没来人家想你了。');
+            } else {
+                $('.error-m').text('恭喜您被选为今天的幸运访客');
+            }
+            setTimeout(function () {
+                $('.error-m').text('');
+            }, 5000);
+        }());
+
+        $('#username').focus(function () {
+            $('.uin-area label').css('color', '#ddd');
+            $('#username').blur(function () {
+                $('.uin-area label').css('color', '#aaa');
+            });
+        });
+
+        $('#username').on('input', function () {
+            $('.uin-del').css('display', 'block');
+            $('.uin-del').click(function () {
+                $('#username').val('');
+                $('.uin-del').css('display', 'none');
+                $('.uin-area label').css('display', 'block');
+            });
+            $('.email-list').html('');
+
+            var reg = /@/g;
+            var useArr = ['qq.com', 'vip.qq.com', 'foxmail.com'];
+            var value = $(this).val();
+            var str = '';
+            if (value.search(reg) !== -1) {
+                for (var i = 0; i < useArr.length; i++) {
+                    str += '<li>' + value + useArr[i] + '</li>';
+                }
+                $('.email-list').html(str);
+                $('.email-list>li').click(function () {
+                    $('#username').val($(this).text());
+                    $('.email-list').css('display', 'none');
+                });
+            } else if (value.length === 11 && !(/^1[3|4|5|8][0-9]\d{4,8}$/.test(value))) {
+                $('.error-m').text('您的手机号输入有误，请重新输入');
+                setTimeout(function () {
+                    $('.error-m').text('');
+                }, 4000);
+            };
+
+            if (value == 0) {
+                $('.uin-del').css('display', 'none');
+                $('.email-list').css('display', 'none');
+                $('.uin-area label').css('display', 'block');
+            } else {
+                $('.email-list').css('display', 'block');
+                if (value.search(reg) == -1) {
+                    $('.email-list').css('display', 'none');
+                }
+                $('.uin-area label').css('display', 'none');
+            }
+        });
+
+        $('#password').focus(function () {
+            $('.pwd-area label').css('color', '#ddd');
+            $('#password').blur(function () {
+                $('.pwd-area label').css('color', '#aaa');
+            });
+        });
+        $('#password').on('input', function () {
+            $('.pwd-area label').css('display', 'none');
+            if ($(this).val() == 0) {
+                $('.pwd-area label').css('display', 'block');
+            } else if ($(this).val().length > 3) {
+                $('.pwd-area label').css('display', 'none');
+                $(this).attr('disabled', 'disabled');
+                $(this).css('cursor', 'wait');
+                $('.pwd-area input').css('border', '1px solid red');
+                var str = $('#loginButton').val();
+                $('#loginButton').val('你把服务器吓坏了');
+                setTimeout(function () {
+                    $('#loginButton').val(str);
+                }, 6000);
+            }
+        });
+    </script>
+</body>
+
+</html>

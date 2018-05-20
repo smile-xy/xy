@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> 2018xy.xyz | 个人技术练习网站</title>
+    <link rel="stylesheet" type="text/css" href="CSS/reset.css">
+    <script>
+        var str = navigator.platform.slice(0, 3).toLocaleLowerCase();
+        if (str === 'lin' && location.host !== 'm.2018xy.xyz') {
+            window.location.href = "http://m.2018xy.xyz";
+        }
+        if (location.host !== 'm.2018xy.xyz') {
+            loadStyles('CSS/common.css');
+            loadStyles('CSS/index.css');
+        } else {
+            loadStyles('CSS/mobile.css');
+        }
+        function loadStyles(url) {
+            var link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.type = 'text/css';
+            link.href = url;
+            document.head.appendChild(link);
+        }
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="top clearfix">
+            <div class="search">
+                <button class="search-btn">搜索</button>
+                <div class="input-box">
+                    <label for="searchInput">百度搜索</label>
+                    <input id="searchInput" type="text">
+                </div>
+                <ul class="search-line"></ul>
+            </div>
+            <div class="login">
+                <a id="register">注册</a>
+                <span>|</span>
+                <a id="login-btn" title="模仿QQ邮箱登录界面">登录</a>
+            </div>
+        </div>
+        <header class="clearfix">
+            <div class="logo">
+                <img src="IMG/logo.png" alt="2018xy">
+            </div>
+            <nav class="clearfix">
+                <a href="http://2018xy.xyz" class="nav-a" target="_self">首页</a>
+                <a href="#" class="nav-a">项目</a>
+                <a href="#" class="nav-a">关于我</a>
+                <a href="https://github.com/smile-xy/xy" class="nav-a" target="_block">GitHub</a>
+            </nav>
+
+        </header>
+        <main>
+            <div class="mobile-title">
+                <p>移动端界面正在建设中。</p>
+            </div>
+            <section>
+                <div class="show-aside"></div>
+                <div class="slideshow"></div>
+                <div class="content clearfix"></div>
+                <div class="get-more">
+                        <button id="getMore">加载更多</button>
+                    </div>
+            </section>
+            <aside>
+
+            </aside>
+        </main>
+        <footer>
+            <div class="siteinfo">
+                <a href="https://github.com/smile-xy" target="_block">My&nbsp;GitHub</a>
+                <em>2018xy.xyz&copy;2018</em>
+            </div>
+        </footer>
+    </div>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <script type="text/javascript" src="JS/index.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,143 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>JSONP</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+
+    .weather {
+        box-sizing: border-box;
+        position: relative;
+        top: 0;
+        left: -110px;
+        height: 25px;
+        line-height: 25px;
+        cursor: default;
+    }
+
+    .weather input {
+        margin-right: 20px;
+        width: 100px;
+        height: 100%;
+        vertical-align: top;
+    }
+
+    .weather p {
+        display: inline;
+    }
+
+    .wrapper {
+        position: absolute;
+        left: 50%;
+        margin-top: 100px;
+        margin-left: -200px;
+    }
+
+    .wrapper input {
+        width: 400px;
+        height: 34px;
+    }
+
+    .wrapper ul {
+        box-sizing: border-box;
+        display: none;
+        width: 400px;
+        font-size: 18px;
+        line-height: 1.5em;
+        border: 1px solid #ccc;
+        overflow: hidden;
+    }
+
+    .wrapper ul li:hover {
+        background: #ddd;
+    }
+
+    .wrapper ul a {
+        display: inline-block;
+        width: 100%;
+        text-decoration: none;
+        text-indent: 0.5em;
+        color: #000;
+    }
+</style>
+
+<body>
+    <div class="weather">
+        <input type="text">
+        <a href="#">南阳</a>
+        <p></p>
+    </div>
+    <div class="wrapper">
+        <input type="text">
+        <ul></ul>
+    </div>
+    <script>
+        $('.wrapper input').on('input', function () {
+            var oScript = document.createElement('script');
+            oScript.src = 'https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=' + $(this).val() + '&cb=doJson';
+            document.body.appendChild(oScript);
+            document.body.removeChild(oScript);
+        });
+
+        function doJson(data) {
+            var arr = data.s;
+            var str = '';
+            if (arr.length > 0) {
+                arr.forEach(function (elem, index) {
+                    if (index < 9) {
+                        str += '<li><a href="https://www.baidu.com/s?wd=' + elem + '">' + elem + '</a></li>';
+                    }
+                })
+                $('ul').html(str);
+                $('ul').css('display', 'block');
+            } else {
+                $('ul').css('display', 'none');
+            }
+        }
+    </script>
+    <script>
+        $('.weather a').click(function () {
+            event.preventDefault()
+        });
+
+        $('.weather a').on('mouseenter', function () {
+            $('.weather').animate({ left: 0 }, 500);
+
+            $('.weather').on('mouseleave', function () {
+                $('.weather').delay(200).animate({ left: '-110px' }, 600);
+                var value = $('.weather a').text();
+                if ($('.weather input').val() !== '') {
+                    $('.weather a').text($('.weather input').val());
+                } else {
+                    $('.weather a').text(value);
+                }
+            });
+        });
+
+        var value = $('.weather a').text();
+        var oScript = document.createElement('script');
+        oScript.src = 'http://wthrcdn.etouch.cn/weather_mini?city=' + value + '&callback=ds';
+        document.body.appendChild(oScript);
+        document.body.removeChild(oScript);
+
+        function ds(data) {
+            var arr = data.data.forecast[0];
+            var str = '';
+            var reg = /\d+|-\d+/g;
+            str = arr.type + '&nbsp;' + arr.high.match(reg) + '&#8451;/' + arr.low.match(reg) + '&#8451;';
+            $('.weather p').html(str);
+        }
+    </script>
+</body>
+
+
+</html>

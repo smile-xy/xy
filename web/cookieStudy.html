@@ -1,0 +1,58 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>cookie</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+    var oDate = new Date();
+    oDate.setDate(oDate.getDate() + 3);
+
+    document.cookie = 'age=18;max-age=1000'; // 最大时间1000秒
+    document.cookie = 'name=admin;expires=' + oDate; // 到期时间
+    document.cookie = 'age=19;max-age=1000'; // age改变
+    document.cookie = 'school=DD;expires=' + oDate + ';path=/';
+    document.cookie = 'age=none;max-age=-1'; // 到期删除
+    document.cookie = 'age=22;max-age=1000';
+
+    var manageCookie = {
+        setCookie: function (name, value, time) {
+            document.cookie = name + '=' + value + ';max-age=' + time;
+            return this;
+        },
+        removeCookie: function (name) {
+            return this.setCookie(name, '', -1);
+        },
+        getCookie: function (name, callback) {
+            var allCookieArr = document.cookie.split('; ');
+            for (var i = 0; i < allCookieArr.length; i++) {
+                var itemCookieArr = allCookieArr[i].split('=');
+                if (itemCookieArr[0] === name) {
+                    callback(itemCookieArr[1]);
+                    return this;
+                }
+            }
+            callback(undefined);
+            return this;
+        }
+    }
+    manageCookie
+        .setCookie('color', 'red', 10000)
+        .setCookie('border', '1px', 10000)
+        .setCookie('text-align', 'center', 10000)
+        .removeCookie('border')
+        .removeCookie('text-align')
+        .getCookie('aaa', function (data) {
+            console.log(data)
+        });
+
+</script>
+
+</html>

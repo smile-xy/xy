@@ -7,14 +7,25 @@ h1,
 h2,
 h3,
 h4,
-input,
-form,
 a,
 p,
+input,
+form,
+button,
 textarea {
     margin: 0;
     padding: 0;
     font-family: 'microsoft YaHei', Arial, Helvetica, sans-serif;
+}
+
+h1,
+h2,
+h3,
+h4,
+button,
+input,
+    {
+    font-size: 100%;
 }
 
 em,

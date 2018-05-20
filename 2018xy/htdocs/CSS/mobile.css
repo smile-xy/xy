@@ -1,0 +1,108 @@
+/* 全局样式 */
+
+a {
+    color: #569CD6;
+}
+
+a:hover {
+    color: #264F78;
+}
+
+.wrap {
+    width: 100vm;
+    height: 100vh;
+    background-color: #eee;
+    margin: 0;
+}
+
+.top {
+    display: none;
+}
+
+/* 头部导航栏 */
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9;
+    width: 100vw;
+    height: 50px;
+    background-color: #007ACC;
+    border-bottom: 2px solid #23527D;
+    box-shadow: 0 0 3px 1px #23527D;
+}
+
+header .logo {
+    display: none;
+}
+
+header nav {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    font-size: 20px;
+}
+
+header nav a {
+    float: left;
+    display: block;
+    margin-top: 15px;
+    width: 25%;
+    color: #eee;
+    text-align: center;
+}
+
+nav a:hover {
+    color: #ADD6FF;
+}
+
+/* 主体 */
+
+main {
+    position: relative;
+    padding-top: 50px;
+    width: 100vw;
+    height: 100vh;
+}
+
+main section {
+    width: 100%;
+    height: 100%;
+    background: orange;
+}
+
+main .mobile-title {
+    position: absolute;
+    top: 100px;
+    width: 100vw;
+    text-align: center;
+    font-size: 22px;
+}
+
+main aside {
+    display: none;
+}
+
+/* 尾部信息栏 */
+
+footer {
+    position: relative;
+    bottom: 0;
+    height: 30px;
+    width: 100vw;
+    line-height: 30px;
+    background-color: #C1C1C1;
+}
+
+footer .siteinfo {
+    width: 100%;
+    text-align: center;
+}
+
+footer .siteinfo a {
+    margin-right: 10px;
+    font-weight: 700;
+}

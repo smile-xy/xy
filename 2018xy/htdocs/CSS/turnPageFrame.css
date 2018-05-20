@@ -1,0 +1,72 @@
+.turnPageFrame {
+    position: relative;
+    overflow: hidden;
+}
+
+.turnPageFrame .slider-page {
+    /* ul */
+    position: absolute;
+    top: 0;
+    left: 0;
+    list-style: none;
+}
+
+.turnPageFrame .slider-page li {
+    float: left;
+    height: 100%;
+}
+
+.turnPageFrame .slider-page img {
+    width: 100%;
+    height: 100%;
+}
+
+.turnPageFrame .btn {
+    position: absolute;
+    top: 50%;
+    margin-top: -20px;
+    width: 40px;
+    height: 40px;
+    color: #fff;
+    background: #000;
+    text-align: center;
+    line-height: 40px;
+    opacity: 0.1;
+    cursor: pointer;
+}
+
+.turnPageFrame:hover .btn {
+    opacity: 0.8;
+}
+
+.turnPageFrame .left-btn {
+    left: -10px;
+    border-radius: 0 50% 50% 0;
+}
+
+.turnPageFrame .right-btn {
+    right: -10px;
+    border-radius: 50% 0 0 50%;
+}
+
+.turnPageFrame .slider-index {
+    /* index */
+    position: absolute;
+    width: 100%;
+    bottom: 15px;
+    text-align: center;
+    cursor: pointer;
+}
+
+.turnPageFrame .slider-index span {
+    display: inline-block;
+    margin-right: 5px;
+    width: 8px;
+    height: 8px;
+    background: #ccc;
+    border-radius: 50%;
+}
+
+.turnPageFrame .slider-index .active {
+    background: #f40;
+}

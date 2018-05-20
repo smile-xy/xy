@@ -1,0 +1,54 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>iframe</title>
+    <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+    }
+</style>
+
+<body>
+    <iframe src="/ifram/iframe.html" frameborder="0"></iframe>
+    <script>
+        var ageParent = 50;
+        var oIframe = document.getElementsByTagName('iframe')[0];
+
+        // 获取同源子窗口的值
+        // oIframe.onload = function () {
+        //     console.log(oIframe.contentWindow.age); 
+        // };
+
+        // 不同源子窗口的window.name值获取 
+        var toggle = true;
+        var oSrc2 = oIframe.src;
+        oIframe.onload = function () {
+            if (toggle) {
+                oIframe.src = './iframe-same.html';
+                toggle = false;
+            } else {
+                console.log(oIframe.contentWindow.name); // 获取子窗口的值
+            }
+        };
+
+        // 通过hash值向不同域的子窗口传值
+        var oldAge = 33;
+        var oSrc = oIframe.src;
+        document.onclick = function () {
+            oIframe.src = oSrc + '#' + oldAge;
+            oldAge++;
+        };
+
+
+    </script>
+</body>
+
+
+</html>

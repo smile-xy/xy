@@ -1,90 +1,41 @@
-/*导入需要用到的nodejs库*/
 var http = require('http');
-var url = require('url');
-var qs = require('querystring');
+var fs = require('fs');//引入文件读取模块
 
-/**
- * 简单配置个路由 用来检测无用的请求 仅符合路由规则的才能被接受
- * 自己可以按照需要定义
- * @type {{/: string, favicon: string, user: string, login: string, biz: string}}
- */
-var route = {
-    '/': "/",
-    'favicon': '/favicon.ico',
-    'user': '/user',
-    'login': '/user/login',
-    'biz': '/biz'
-};
+var documentRoot = 'D:/github/web';
+//需要访问的文件的存放目录
 
-/**
- * 上述路由的简单判断规则
- * @param reqPath
- * @returns {boolean}
- */
-var isValid = function (reqPath) {
-    for (var key in route) {
-        if (route[key] == reqPath) {
-            return true;
-        }
-    }
-    return false;
-};
+var server = http.createServer(function (req, res) {
 
-/**
- * 照样输出json格式的数据
- * @param query
- * @param res
- */
-var writeOut = function (query, res) {
-    res.write(JSON.stringify(query));
-    res.end();
-}
+    var url = req.url;
+    //客户端输入的url，例如如果输入localhost:8888/index.html
+    //那么这里的url == /index.html 
 
-/**
- * 启用http创建一个端口为8888的服务
- * createServer内侧为回调函数：
- * ...可看作java servlet中的 onService(HttpRequest,HttpResponse)
- * ...或者（doGet、doPost）
- */
-http.createServer(function (req, res) {
+    var file = documentRoot + url;
+    console.log(url);
 
-    if (!isValid(url.parse(req.url).pathname)) {
-        res.writeHead(404, { 'Content-Type': 'text/plain;charset=utf-8' });
-        res.write("{'errcode':404,'errmsg':'404 页面不见啦'}");
-        res.end();
-    } else {
-        res.writeHead(200, { 'Content-Type': 'text/plain;charset=utf-8' });
-        if (req.method.toUpperCase() == 'POST') {
-            var postData = "";
-            /**
-             * 因为post方式的数据不太一样可能很庞大复杂，
-             * 所以要添加监听来获取传递的数据
-             * 也可写作 req.on("data",function(data){});
-             */
-            req.addListener("data", function (data) {
-                postData += data;
+    fs.readFile(file, function (err, data) {
+        /*
+            err为文件路径
+            data为回调函数
+                回调函数的一参为读取错误返回的信息，返回空就没有错误
+                data为读取成功返回的文本内容
+        */
+        if (err) {
+            res.writeHeader(404, {
+                'content-type': 'text/html;charset="utf-8"'
             });
-            /**
-             * 这个是如果数据读取完毕就会执行的监听方法
-             */
-            req.addListener("end", function () {
-                var query = qs.parse(postData);
-                writeOut(query, res);
-            });
-        }
-        else if (req.method.toUpperCase() == 'GET') {
-            /**
-             * 也可使用var query=qs.parse(url.parse(req.url).query);
-             * 区别就是url.parse的arguments[1]为true：
-             * ...也能达到‘querystring库’的解析效果，而且不使用querystring
-             */
-            var query = url.parse(req.url, true).query;
-            writeOut(query, res);
+            res.write('<h1>404错误</h1><p>你要找的页面不存在</p>');
+            res.end();
         } else {
-            //head put delete options etc.
-        }
-    }
+            res.writeHeader(200, {
+                'content-type': 'text/html;charset="utf-8"'
+            });
+            res.write(data);//将index.html显示在客户端
+            res.end();
 
-}).listen(8888, function () {
-    console.log("listen on port 8888");
-});
+        }
+
+    });
+
+}).listen(8888);
+console.log('服务器开启成功');
