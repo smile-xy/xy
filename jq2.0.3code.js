@@ -19,8 +19,9 @@ jQuery.fn = jQuery.prototpye = {
     'sort()': '(内部)',
     'splice()': '(内部)'
 }
+
 jQuery.extend = jQuery.fn.extend = function () {
-    '定义一些变量';
+    var some = '定义一些变量';
     if (true) {
         // 是否深度克隆
     }
@@ -42,6 +43,7 @@ jQuery.extend = jQuery.fn.extend = function () {
         }
     }
 }
+
 jQuery.extend({
     expando: '生成唯一JQ字符串(内部)',
     'noConflict()': '防止冲突',
@@ -76,6 +78,19 @@ jQuery.extend({
     'now()': '当前时间',
     'swap()': 'CSS交换(内部)'
 });
-jQuery.ready.promise = function () { }; // 检测DOM的异步操作(内部)
 
-function isArraylike() { }; // 类似数组的判断(内部)
+jQuery.ready.promise = function () {
+    // 检测DOM的异步操作(内部)
+};
+
+function isArraylike() {
+    // 类似数组的判断(内部)
+};
+
+(function (window, undefined) {
+    // Sizzle CSS Selector
+})(window);
+
+jQuery.Callbacks = function( options ) {
+    // 回调对象
+}
