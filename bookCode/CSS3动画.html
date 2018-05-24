@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS3</title>
+    <style>
+        body {
+            padding-left: 20px;
+        }
+
+        .transform-wrap {
+            position: relative;
+            margin: 50px;
+            border: 1px solid #000;
+            width: 200px;
+            height: 200px;
+            /* 景深 */
+            perspective: 500px;
+        }
+
+        .transform-div {
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255, 0, 0, 0.6);
+            /* 旋转 */
+            /* rotate */
+            /* 水平方向的X轴旋转 */
+            /* transform: rotateX(45deg); */
+            /* 垂直方向的Y轴旋转 */
+            /* transform: rotateY(45deg); */
+            /* 默认值 平面的Z轴旋转 */
+            /* transform: rotate(45deg); */
+            /* 3D旋转 x y z */
+            /* transform: rotate3d(1, 1, 0, 30deg); */
+            /* 缩放 */
+            /* scale */
+            /* 水平方向的X轴缩放 */
+            /* transform: scaleX(1.2); */
+            /* 垂直方向的Y轴缩放 */
+            /* transform: scaleY(1.2); */
+            /* 平面的Z轴缩放 */
+            /* transform: scaleZ(1.2); */
+            /* 2D缩放 x y */
+            /* transform: scale(1.2, 1.2); */
+            /* 3D缩放 x y z */
+            /* transform: scale3d(1.2, 1.2, 0.1); */
+            /* 扭曲 */
+            /* skew */
+            /* 水平方向的X轴扭曲 */
+            /* transform: skewX(45deg); */
+            /* 垂直方向的Y轴扭曲 */
+            /* transform: skewY(45deg); */
+            /* 2D扭曲 x y */
+            /* transform: skew(10deg, 10deg); */
+            /* 移动 */
+            /* translate */
+            /* 水平方向的X轴移动 */
+            /* transform: translateX(200px); */
+            /* 垂直方向的Y轴移动 */
+            /* transform: translateY(200px); */
+            /* 平面的Z轴移动 */
+            /* transform: translateZ(200px); */
+            /* 2D移动 x y */
+            /* transform: translate(200px, 200px); */
+            /* 3D移动 x y z */
+            /* transform: translate3d(200px, 200px, 200px); */
+            transform: rotateX(50deg) rotateY(10deg);
+            transform: rotate3d(5, 1, 0, 10deg);
+        }
+
+        .demo-center {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            border: 1px solid #000;
+            font-size: 0;
+        }
+
+        .item {
+            width: 100px;
+            background-color: gold;
+            font-size: 20px;
+            text-align: center;
+            word-break: break-all;
+            /* 无高度居中 */
+            position: relative;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .demo-watch {
+            position: relative;
+            top: 20px;
+            width: 150px;
+            height: 150px;
+            border: 2px solid green;
+            border-radius: 50%;
+        }
+        .demo-watch li {
+            position: absolute;
+            top: 0;
+            left: 65px;
+            transform-origin: 50% 75px;
+            width: 20px;
+            height: 50px;
+            background-color: rgb(78, 117, 20);
+            list-style: none;
+        }
+
+        .demo-watch li:nth-of-type(2) {
+            transform: rotateZ(45deg);
+        }
+
+        .demo-watch li:nth-of-type(3) {
+            transform: rotateZ(90deg);
+        }
+
+        .demo-watch li:nth-of-type(4) {
+            transform: rotateZ(135deg);
+        }
+
+        .demo-watch li:nth-of-type(5) {
+            transform: rotateZ(180deg);
+        }
+
+        .demo-watch li:nth-of-type(6) {
+            transform: rotateZ(225deg);
+        }
+
+        .demo-watch li:nth-of-type(7) {
+            transform: rotateZ(270deg);
+        }
+
+        .demo-watch li:nth-of-type(8) {
+            transform: rotateZ(315deg);
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div class="transform-wrap">
+        <div class="transform-div">A</div>
+    </div>
+    <div class="demo-center">
+        <div class="item">312fsdfv12312312312B</div>
+    </div>
+    <div class="demo-watch">
+        <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+            <li></li>
+        </ul>
+    </div>
+</body>
+
+</html>

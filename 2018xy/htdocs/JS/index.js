@@ -162,11 +162,11 @@ function showTable(date) {
     $('.content').html(str);
 }
 
-$('.table-section a').each(function () { //FIXME:
-    $(this).on('mouseenter', function () {
-        $(this).next('.table-article').animate({ top: '9em' }, 1000, 'swing');
-        $(this).on('mouseleave', function () {
-            $(this).next('.table-article').animate({ top: '13em' }, 1000, 'linear');
+$('#content').on('mouseenter', '.table-main', function () {
+    var _this = $(this);
+    $(this).children('.table-article').animate({ top: '9em' }, 300, 'swing', () => {
+        _this.on('mouseleave', function () {
+            _this.children('.table-article').animate({ top: '13em' }, 300, 'linear');
         });
     });
 });

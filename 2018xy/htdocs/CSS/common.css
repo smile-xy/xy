@@ -137,6 +137,7 @@ main {
 
 .search-line li a {
     width: 100%;
+    color: #1E1E1E;
 }
 
 .search-line li:hover {

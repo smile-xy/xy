@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>CSS3</title>
+    <style>
+        .transform-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin-left: -150px;
+            margin-top: -150px;
+            width: 300px;
+            height: 300px;
+            /* 景深 */
+            perspective: 300px;
+        }
+
+        .transform-box div {
+            box-sizing: border-box;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            margin: -100px 0 0 -100px;
+            width: 200px;
+            height: 200px;
+            background-color: rgba(255, 215, 0, 0.1);
+            border: 1px solid red;
+            font-size: 100px;
+            font-weight: 900;
+            color: red;
+            text-align: center;
+            line-height: 200px;
+        }
+    </style>
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <div id="transformCube" class="transform-box">
+        <div>1</div>
+        <div>2</div>
+        <div>3</div>
+        <div>4</div>
+        <div>5</div>
+        <div>6</div>
+    </div>
+</body>
+<script>
+    $.fn.cubeMove = function (time, traX, traY, traZ, rotX, rotY, rotZ) {
+        var _this = $(this),
+            num = Math.floor(time / 35),
+            toggle = traX + traY + traZ + rotX + rotY + rotZ,
+            nowNum = 1,
+            timer;
+
+        if (toggle !== 0) {
+            timer = setInterval(timeFun, 35);
+        }
+        return _this;
+
+        function timeFun() {
+            if (nowNum == num) {
+                nowNum = 0;
+                clearInterval(timer);
+                changeTransform(traX, traY, traZ, rotX, rotY, rotZ);
+            } else {
+                changeTransform(traX / num * nowNum, traY / num * nowNum, traZ / num * nowNum, rotX / num * nowNum, rotY / num * nowNum, rotZ / num * nowNum);
+                nowNum++;
+            }
+        }
+
+        function changeTransform(traX, traY, traZ, rotX, rotY, rotZ) {
+            _this.eq(0).css('transform', 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) rotateZ(' + rotZ + 'deg) rotate3d(0, 0, 0, 90deg) translate3d(' + traX + 'px, ' + traY + 'px, ' + (traZ + 100) + 'px)');
+
+            _this.eq(1).css('transform', 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) rotateZ(' + rotZ + 'deg) rotate3d(0, 1, 0, 90deg) translate3d(' + (-traZ) + 'px, ' + traY + 'px, ' + (traX + 100) + 'px)');
+
+            _this.eq(2).css('transform', 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) rotateZ(' + rotZ + 'deg) rotate3d(0, 1, 0, 180deg) translate3d(' + (-traX) + 'px, ' + traY + 'px, ' + (-traZ + 100) + 'px)');
+
+            _this.eq(3).css('transform', 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) rotateZ(' + rotZ + 'deg) rotate3d(0, -1, 0, 90deg) translate3d(' + traZ + 'px, ' + traY + 'px, ' + (-traX + 100) + 'px)');
+
+            _this.eq(4).css('transform', 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) rotateZ(' + rotZ + 'deg) rotate3d(1, 0, 0, 90deg) translate3d(' + traX + 'px, ' + traZ + 'px, ' + (-traY + 100) + 'px)');
+
+            _this.eq(5).css('transform', 'rotateX(' + rotX + 'deg) rotateY(' + rotY + 'deg) rotateZ(' + rotZ + 'deg) rotate3d(-1, 0, 0, 90deg) translate3d(' + traX + 'px, ' + (-traZ) + 'px, ' + (traY + 100) + 'px)');
+        }
+    };
+    // $('#transformCube div').cubeMove(1000, 0, 50, 0, 0, 0, 0).cubeMove(1000, 50, 50, 0, 0, 0, 0).cubeMove(1000, 50, 50, 50, 0, 0, 0).cubeMove(3000, -100, 50, -50, -80, 30, 0);
+
+    $('#transformCube div').cubeMove(3000, -100, 50, -50, -80, -130, 300);
+</script>
+
+</html>
