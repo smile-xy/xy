@@ -123,50 +123,52 @@ function clearInput() {
 }
 
 // get More
-$('#getMore').click(function () {
-    ajaxFun('GET', 'projectLine.json', '', showTable, true);
-});
-function ajaxFun(method, url, data, callback, flag) {
-    var xhr = new XMLHttpRequest();
 
-    method = method.toUpperCase();
-    if (method === 'GET') {
-        xhr.open(method, url + '?' + data, flag);
-        xhr.send();
+// $('#getMore').click(function () {
+//     ajaxFun('GET', 'projectLine.json', '', showTable, true);
+// });
+// function ajaxFun(method, url, data, callback, flag) {
+//     var xhr = new XMLHttpRequest();
 
-    } else if (method === 'POST') {
-        xhr.open(method, url, flag);
-        xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-        xhr.send(data);
-    }
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4) {
-            if (xhr.status === 200) {
-                callback(xhr.responseText);
-            }
-        }
-    }
-}
-function showTable(date) {
-    var value = JSON.parse(date);
-    var str = '';
-    value.forEach(function (elem, index) {
-        str += '<div id="table-section" class="table-section">\
-                     <div class="table-tittle">'+ elem.title + '</div>\
-                     <div class="table-main">\
-                         <a href="'+ elem.link + '"><img src="' + elem.imgUrl + '"></a>\
-                         <div class="table-article">'+ elem.article + '</div>\
-                    </div>\
-                 </div>';
-    });
-    $('.content').html(str);
-}
+//     method = method.toUpperCase();
+//     if (method === 'GET') {
+//         xhr.open(method, url + '?' + data, flag);
+//         xhr.send();
 
-$('#content').on('mouseenter', '.table-main', function () {
-    var _this = $(this);
-    $(this).children('.table-article').animate({ top: '9em' }, 300, 'swing', () => {
-        _this.on('mouseleave', function () {
-            _this.children('.table-article').animate({ top: '13em' }, 300, 'linear');
-        });
-    });
-});
+//     } else if (method === 'POST') {
+//         xhr.open(method, url, flag);
+//         xhr.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+//         xhr.send(data);
+//     }
+//     xhr.onreadystatechange = function () {
+//         if (xhr.readyState === 4) {
+//             if (xhr.status === 200) {
+//                 callback(xhr.responseText);
+//             }
+//         }
+//     }
+// }
+// function showTable(date) {
+//     var value = JSON.parse(date);
+//     var str = '';
+//     value.forEach(function (elem, index) {
+//         str += '<div id="table-section" class="table-section">\
+//                      <div class="table-tittle">'+ elem.title + '</div>\
+//                      <div class="table-main">\
+//                          <a href="'+ elem.link + '"><img src="' + elem.imgUrl + '"></a>\
+//                          <div class="table-article">'+ elem.article + '</div>\
+//                     </div>\
+//                  </div>';
+//     });
+//     $('.content').html(str);
+// }
+
+// table event
+// $('#content').on('mouseenter', '.table-main', function () {
+//     var _this = $(this);
+//     $(this).children('.table-article').animate({ top: '9em' }, 300, 'swing', () => {
+//         _this.on('mouseleave', function () {
+//             _this.children('.table-article').animate({ top: '13em' }, 300, 'linear');
+//         });
+//     });
+// });

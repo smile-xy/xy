@@ -22,6 +22,8 @@
         }
 
         .transform-div {
+            /* 背面隐藏 */
+            /* backface-visibility: hidden; */
             width: 200px;
             height: 200px;
             background-color: rgba(255, 0, 0, 0.6);
@@ -67,8 +69,7 @@
             /* transform: translate(200px, 200px); */
             /* 3D移动 x y z */
             /* transform: translate3d(200px, 200px, 200px); */
-            transform: rotateX(50deg) rotateY(10deg);
-            transform: rotate3d(5, 1, 0, 10deg);
+            transform: rotateX(-20deg) rotateY(30deg) rotate3d(5, 1, 0, 50deg);
         }
 
         .demo-center {
@@ -100,6 +101,7 @@
             border: 2px solid green;
             border-radius: 50%;
         }
+
         .demo-watch li {
             position: absolute;
             top: 0;
@@ -138,6 +140,78 @@
         .demo-watch li:nth-of-type(8) {
             transform: rotateZ(315deg);
         }
+
+        .transition-div {
+            margin-top: 40px;
+            width: 50px;
+            height: 50px;
+            background-color: red;
+            transition: width 1s linear 0.5s, height 0.5s linear;
+        }
+
+        .transition-div:hover {
+            width: 200px;
+            height: 200px;
+        }
+
+        .animation-wrap {
+            position: relative;
+        }
+
+        @keyframes move {
+            0% {
+                transform: rotateZ(0);
+            }
+            100% {
+                transform: rotateZ(360deg);
+            }
+        }
+
+        .animation-div {
+            position: relative;
+            width: 200px;
+            height: 200px;
+            background: url(../2018xy/htdocs/IMG/default-img.jpg) no-repeat -110px;
+            background-size: auto 100%;
+            border: 50px solid #000;
+            border-radius: 50%;
+            animation: move 20s linear 0.5s infinite;
+            animation-play-state: paused;
+        }
+
+        .animation-point {
+            position: absolute;
+            top: -60px;
+            left: 145px;
+            width: 10px;
+            height: 80px;
+            border-radius: 0 0 0 50%;
+            background-color: #ccc;
+            transform-origin: left top;
+            transform: rotateZ(-50deg);
+            transition: all 0.5s linear;
+        }
+
+        .animation-point-active {
+            transform: rotateZ(-10deg);
+            transition: all 0.5s linear;
+        }
+
+        .animation-point span {
+            position: absolute;
+            top: 64px;
+            left: 9px;
+            width: 15px;
+            height: 40px;
+            border-radius: 50% 0 0 0;
+            background-color: #ccc;
+            transform: rotateZ(-40deg);
+
+        }
+
+        .play-start {
+            animation-play-state: running;
+        }
     </style>
     <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 </head>
@@ -161,6 +235,20 @@
             <li></li>
         </ul>
     </div>
+    <div class="transition-div"></div>
+    <div class="animation-wrap">
+        <div class="animation-div"></div>
+        <div class="animation-point">
+            <span></span>
+        </div>
+    </div>
+    <script>
+        var n = 1;
+        $('.animation-div').click(function () {
+            $(this).toggleClass('play-start');
+            $('.animation-point').toggleClass('animation-point-active');
+        });
+    </script>
 </body>
 
 </html>

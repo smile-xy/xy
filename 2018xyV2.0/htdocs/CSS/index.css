@@ -1,0 +1,173 @@
+/* 全局样式 */
+
+.home-template {
+    color: #505050;
+    line-height: 1.75em;
+    background: #eee;
+    position: relative;
+    font-family: "Microsoft YaHei UI", "Microsoft YaHei", Helvetica, Arial, "WenQuanYi Micro Hei", sans-serif;
+}
+
+::selection {
+    background-color: rgba(0, 122, 204, 0.7);
+    color: #fff;
+}
+
+a {
+    color: #569CD6;
+}
+
+a:hover {
+    color: #264F78;
+}
+
+.content {
+    padding: 25px;
+    background-color: #fff;
+    margin-bottom: 30px;
+    position: relative;
+}
+
+.widget {
+    background: #ffffff;
+    padding: 21px 30px;
+    margin-bottom: 35px;
+}
+
+.title {
+    margin-top: 0;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 21px;
+    position: relative;
+}
+
+.title:after {
+    content: "";
+    width: 90px;
+    height: 2px;
+    background: #007ACC;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+}
+
+/* 头 */
+
+.header {
+    background: #007ACC;
+    background-image: url(../IMG/bg-01.jpg);
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: cover;
+    padding: 120px 0 0;
+    text-align: center;
+    min-height: 400px;
+    position: relative;
+}
+
+.logo-text {
+    background-color: rgba(0, 122, 204, 0.6);
+    color: #fff;
+}
+
+.logo-text h1 {
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width:470px) {
+    .text-right {
+        font-size: 1.5rem;
+    }
+}
+
+.logo-sm-color strong {
+    color: #007ACC;
+}
+
+.logo-link {
+    color: #fff;
+}
+
+.logo-link:hover {
+    color: #fff;
+}
+
+.logo {
+    z-index: 9999;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -30px;
+    width: 60px;
+    height: 60px;
+}
+
+/* 主体 */
+
+main {}
+
+.first-img {
+    margin-bottom: 30px;
+}
+
+/* 侧边栏 */
+
+aside {}
+
+/* 尾部 */
+
+.main-footer {
+    background: #007ACC;
+    color: #f1f1f1;
+}
+
+.main-footer a {
+    display: inline-block;
+    padding: 2px 7px;
+    color: #f1f1f1;
+    line-height: 1.5em;
+    margin: 0 7px 7px 0;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.main-footer a:hover {
+    background: #264F78;
+    text-decoration: none;
+}
+
+.main-footer h4 {
+    text-indent: 1.5em;
+    font-weight: 700;
+}
+
+.main-footer .content::before {
+    content: "";
+    width: 90px;
+    height: 2px;
+    background: #264F78;
+    position: absolute;
+    top: -1px;
+    left: 0;
+}
+
+.main-footer .content {
+    border-top: 1px solid #fff;
+}
+
+.main-footer .widget,
+.main-footer .content {
+    background-color: #007ACC;
+    margin-bottom: 0;
+}
+
+.copyright {
+    text-align: center;
+    padding: 5px;
+    background: #264F78;
+}
