@@ -1,0 +1,247 @@
+/* 全局样式 */
+
+.svg-logo-line {
+    fill: #007ACC;
+}
+
+.home-template {
+    color: #505050;
+    line-height: 1.75em;
+    background: #eee;
+    position: relative;
+    font-family: "Microsoft YaHei UI", "Microsoft YaHei", Helvetica, Arial, "WenQuanYi Micro Hei", sans-serif;
+}
+
+::selection {
+    background-color: rgba(0, 122, 204, 0.7);
+    color: #fff;
+}
+
+a {
+    color: #569CD6;
+}
+
+a:hover {
+    color: #264F78;
+}
+
+.content {
+    padding: 30px;
+    background-color: #fff;
+    margin-bottom: 35px;
+    position: relative;
+}
+
+.widget {
+    background: #ffffff;
+    padding: 21px 30px;
+    margin-bottom: 35px;
+}
+
+.widget h4>span {
+    padding: 0 5px;
+}
+
+.title {
+    margin-top: 0;
+    padding-bottom: 7px;
+    border-bottom: 1px solid #ebebeb;
+    margin-bottom: 21px;
+    position: relative;
+}
+
+.title>span {
+    padding: 0 5px;
+}
+
+.title:after {
+    content: "";
+    width: 100px;
+    height: 2px;
+    background: #007ACC;
+    position: absolute;
+    left: 0;
+    bottom: -1px;
+}
+
+/* 模板样式修复 */
+
+.btn-primary {
+    /* 默认按钮样式 */
+    background: linear-gradient(#569CD6, #007ACC);
+}
+
+.btn-primary:hover {
+    background: linear-gradient(#007ACC, #0066AA);
+}
+
+.navbar-form {
+    /* 移动端菜单宽度引起的横向滚动条 */
+    margin-left: 0;
+    margin-right: 0;
+}
+
+@media screen and (max-width:768px) {
+    /* 移动端模布局不合理 */
+    .navbar {
+        margin-bottom: 0 !important;
+    }
+    .first-img {
+        margin-bottom: 0 !important;
+    }
+    .content {
+        margin-left: 0 !important;
+        margin-right: 0 !important;
+        margin-bottom: 2px !important;
+    }
+    .main-section>section {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .main-content {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .sidebar {
+        padding-left: 0 !important;
+        padding-right: 0 !important;
+    }
+    .widget {
+        margin-bottom: 2px !important;
+    }
+}
+
+.modal-dialog {
+    /* pc端登录框高度过高 */
+    top: 200px;
+}
+
+@media screen and (max-width:768px) {
+    /* 移动端键盘遮挡登录框 */
+    .modal-dialog {
+        top: 100px;
+    }
+}
+
+.span-canvas {
+    /* cavaas外围span样式杂乱 */
+    padding: 0 !important;
+    margin: 0;
+    overflow: hidden;
+}
+
+.span-canvas canvas {
+    /* cavaas样式 */
+    display: block;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 150px;
+}
+
+/* 头 */
+
+.header {
+    background: #007ACC;
+    background-repeat: no-repeat;
+    background-position: center 0;
+    background-size: cover;
+    padding: 120px 0 0;
+    text-align: center;
+    min-height: 400px;
+    position: relative;
+}
+
+.logo-text {
+    background-color: rgba(0, 122, 204, 0.6);
+    color: #fff;
+}
+
+.logo-text h1 {
+    margin-bottom: 20px;
+}
+
+@media screen and (max-width:768px) {
+    .text-right {
+        font-size: 1.5rem;
+    }
+}
+
+.logo-sm-color strong {
+    color: #007ACC;
+}
+
+.logo-link {
+    color: #fff;
+}
+
+.logo-link:hover {
+    color: #fff;
+}
+
+.logo {
+    z-index: 9;
+    background: #fff;
+    border-radius: 50%;
+    position: absolute;
+    top: 400px;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: -30px;
+    width: 60px;
+    height: 60px;
+}
+
+/* 尾部 */
+
+.main-footer {
+    background: #007ACC;
+    color: #f1f1f1;
+}
+
+.main-footer a {
+    display: inline-block;
+    padding: 2px 7px;
+    color: #f1f1f1;
+    line-height: 1.5em;
+    margin: 0 7px 7px 0;
+    -webkit-transition: all 0.2s ease;
+    -o-transition: all 0.2s ease;
+    transition: all 0.2s ease;
+}
+
+.main-footer a:hover {
+    background: #264F78;
+    text-decoration: none;
+}
+
+.main-footer h4 {
+    text-indent: 1.5em;
+    font-weight: 700;
+}
+
+.main-footer .content::before {
+    content: "";
+    width: 90px;
+    height: 2px;
+    background: #264F78;
+    position: absolute;
+    top: -1px;
+    left: 0;
+}
+
+.main-footer .content {
+    border-top: 1px solid #fff;
+}
+
+.main-footer .widget,
+.main-footer .content {
+    background-color: #007ACC;
+    margin-bottom: 0;
+}
+
+.copyright {
+    text-align: center;
+    padding: 5px;
+    background: #264F78;
+}
