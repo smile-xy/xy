@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 最新版本的 jquery JavaScript 文件 -->
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <title>HTML5</title>
+    <style>
+        .frame-demo {
+            position: relative;
+            width: 100px;
+            height: 100px;
+            background-color: gold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="frame-demo"></div>
+</body>
+<script>
+    'requestAnimationFrame';
+    '浏览器刷新(1000/60ms)时执行一次 -> setTimeout';
+    var timer;
+    function move() {
+        var nowLeft = $('.frame-demo').position().left;
+        $('.frame-demo').css('left', nowLeft + 10);
+        if (nowLeft > 400) {
+            cancelAnimationFrame(timer);
+        } else {
+            timer = requestAnimationFrame(move);
+        }
+    };
+    move();
+</script>
+
+</html>

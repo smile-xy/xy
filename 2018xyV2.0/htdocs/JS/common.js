@@ -1,4 +1,4 @@
-// img 预加载
+// head背景图预加载
 
 $($('.header').css('background-image', 'url(IMG/bg-01.jpg)'));
 
@@ -26,7 +26,6 @@ $($('.header').css('background-image', 'url(IMG/bg-01.jpg)'));
     });
 
     $('#reset').click(function () {
-        console.log('reset');
         $('#myModal').find($('input')).val('');
         $('.form-group').removeClass('has-error').removeClass('has-success');
     });
@@ -51,7 +50,6 @@ $($('.header').css('background-image', 'url(IMG/bg-01.jpg)'));
             $('#submit').removeAttr('disabled');
 
             $('#submit').click(function () {
-                console.log('submit');
                 $('#submit').attr('disabled', 'disabled').text('loading');
             });
 

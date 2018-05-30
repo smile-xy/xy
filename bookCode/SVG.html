@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="vie300po300t" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SVG</title>
+    <style>
+        svg {
+            width: 500px;
+            height: 500px;
+            border: 1px solid red;
+        }
+
+        line {
+            stroke: gold;
+        }
+
+        rect {
+            fill: transparent;
+            stroke: green;
+            stroke-width: 5px;
+        }
+
+        circle {
+            fill: transparent;
+            stroke: red;
+            stroke-width: 2px;
+        }
+
+        polyline {
+            fill: transparent;
+            /* fill-opacity: 0.3; */
+            stroke: blue;
+            /* 两端变圆 */
+            stroke-linecap: round;
+        }
+
+        polygon {
+            fill: transparent;
+            stroke: blue;
+            stroke-width: 10px;
+            /* 拐点变圆 */
+            stroke-linejoin: round;
+        }
+
+        path {
+            fill: transparent;
+            stroke-width: 20px;
+            stroke: purple;
+            /* 虚线 间隔值可任意添加  */
+            stroke-dasharray: 20px;
+            /* 虚线左右缩进 */
+            stroke-dashoffset: 20px;
+            animation: move 1s linear infinite;
+        }
+        @keyframes move {
+            0%{
+                stroke-dashoffset: 0;
+            }
+            100%{
+                stroke-dashoffset: 500px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <svg viewBox="0, 0, 500, 500">
+        demo: 绝对路径？
+        <!-- <path d="M 200 450 A 100 100 60 1 1 250 450" />
+        <polyline points="200 250, 200 80, 250 80 250 250"></polyline> -->
+        demo END
+
+        <!--
+        <line x1="100" y1="100" x2="200" y2="100"></line>
+
+        <rect x="50" y="150" width="100" height="100" rx="10" ry="10"></rect>
+
+        <circle r="50" cx="250" cy="100"></circle>
+
+        <ellipse rx="100" ry="50" cx="400" cy="250"></ellipse> 
+
+        <polyline points="60 50, 75 35, 100 50, 125 35, 150 50, 175 35, 190 50"></polyline>
+
+        <polygon points="125 125, 130 240, 220 240"></polygon>
+
+        <text x="125" y="220">hello</text>
+        -->
+
+        M->moveTo L-> lineTo 大写-> 绝对坐标
+        <!-- <path d="M 100 100 L 200 100 200 200 300 200 100 100" /> -->
+
+        m->moveTo l-> lineTo 小写-> 相对上一个点坐标
+        <!-- <path d="m 50 50 l -50 50 200 -100 -100 200 100 100" /> -->
+
+        H->水平方向lineTo V-> 垂直方向lineTo 大写-> 绝对坐标 z -> 闭合 不区分大小写
+        <!-- <path d="M 100 100 H200 V200 z" /> -->
+
+        h->水平方向lineTo v-> 垂直方向lineTo 大写-> 绝对坐标
+        <!-- <path d="M 100 100 h200 v200" /> -->
+
+        圆弧
+        A -> rx ry x-axis-rotation large-arc-flag weppe-flag x y rx|ry -> 圆弧x轴y轴半径 x-axis-rotation -> 圆弧相对于x轴旋转角度 默认顺时针 large-arc-flag
+        -> 圆弧路径是大圆弧(1)还是小圆弧(0) weppe-flag -> 从起点到终点顺时针(1)、逆时针(0) x|y -> 表示终点坐标 绝对或相对
+        <!-- <path d="M 250 250 A 100 100 60 1 0 200 250" /> -->
+
+        二次贝尔曲线
+        Q -> x1 y1 x y
+        T -> x y
+        <!-- <path d="M 100 200 Q 200 100 300 300 T 400 100" /> -->
+
+        三次贝尔曲线
+        C -> x1 y1 x2 y2 x y
+        S -> x2 y2 x y
+        <!-- <path d="M 0 200 C 100 100 200 100 300 400 S 450 450 400 100" /> -->
+
+        路径动画
+        <path id="path1" d="M 0 100 L 500 100">
+
+    </svg>
+</body>
+<script>
+    console.log(path1.getTotalLength());
+</script>
+</html>

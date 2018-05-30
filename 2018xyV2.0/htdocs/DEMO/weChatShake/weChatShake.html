@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1 user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <title>weChat-shake | 2018xy.xyz</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        @media screen and (min-width:768px) {
+            .wrap {
+                display: none;
+            }
+            i {
+                display: block;
+                font-size: 120px;
+                text-align: center;
+            }
+        }
+
+        @media screen and (max-width:768px) {
+            i {
+                display: none;
+            }
+            .bg-color {
+                position: absolute;
+                z-index: -999;
+                left: 0;
+                width: 100vw;
+                height: 50vh;
+            }
+            .up {
+                top: 0;
+                background-color: #DE603A;
+            }
+            .down {
+                bottom: 0;
+                background-color: #FEF3D5;
+            }
+            .wrap {
+                position: relative;
+                width: 100vw;
+                height: 100vh;
+                overflow: hidden;
+            }
+            @keyframes move {
+                0% {
+                    transform: rotateZ(-5deg);
+                }
+                100% {
+                    transform: rotateZ(5deg);
+                }
+            }
+            .bg-img {
+                position: relative;
+                top: 20vw;
+                left: -10vw;
+                width: 120vw;
+                height: 60vh;
+                background: url(bg.jpg) no-repeat 0 0;
+                background-size: 100% 100%;
+                animation: move 1s linear infinite alternate;
+            }
+            span {
+                display: block;
+                position: absolute;
+                top: 70vh;
+                width: 100vw;
+                text-align: center;
+                font-size: 11vw;
+                font-weight: 900;
+                color: red;
+            }
+            span>em {
+                display: block;
+                margin-top: 2vh;
+                width: 100vw;
+                text-align: right;
+                font-size: 4vw;
+            }
+            .sorry {
+                display: none;
+                box-sizing: border-box;
+                position: absolute;
+                top: 30vh;
+                left: 10vw;
+                padding-top: 10vw;
+                width: 80vw;
+                height: 60vw;
+                background-color: #fff;
+                text-align: center;
+                font-size: 5vw;
+                border: 2vw solid gold;
+                border-radius: 5vw;
+                color: green;
+            }
+            .sorry a {
+                display: inline-block;
+                margin-top: 5vw;
+                padding: 2vw 5vw;
+                color: #fff;
+                background-color: #DE603A;
+                font-weight: 700;
+            }
+            .active {
+                display: block;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+    <i>电脑端无法观看</i>
+    <div class="bg-color up"></div>
+    <div class="bg-color down"></div>
+    <div class="wrap">
+        <div class="bg-img"></div>
+        <div class="content">
+            <span>摇一摇，中大奖
+                <em>————下一个中奖的就是你！</em>
+            </span>
+            <div class="sorry">
+                <h1>很遗憾</h1>
+                <h1>差一点就中奖了</h1>
+                <a href="">再摇一次</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        // 最佳摇动速度
+        var SHAKE_THRESHOLD = 800;
+        var last_update = 0;
+        var x, y, z, last_x = 0, last_y = 0, last_z = 0;
+        function deviceMotionHeadler(eventData) {
+            var acceleration = eventData.accelerationIncludingGravity;
+            var curTime = new Date().getTime();
+            // 判断时间间隔
+            if ((curTime - last_update) > 300) {
+                var diffTime = curTime - last_update;
+                last_update = curTime;
+                x = acceleration.x;
+                y = acceleration.y;
+                z = acceleration.z;
+                // 摇动速度
+                var speed = Math.abs(x + y + z - last_x - last_y - last_z) / diffTime * 10000;
+                if (speed > SHAKE_THRESHOLD) {
+                    setTimeout(() => {
+                        $('.sorry').addClass('active');
+                    }, 300);
+                }
+                last_x = x;
+                last_y = y;
+                last_z = z;
+            }
+        }
+        window.addEventListener('devicemotion', deviceMotionHeadler, false);
+
+        $('.sorry>a').click(function () {
+            event.preventDefault();
+            $('.sorry').removeClass('active');
+        });
+    </Script>
+</body>
+
+</html>

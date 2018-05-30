@@ -1,0 +1,15 @@
+[
+    {
+        "demoID": 1,
+        "setDate": "1527659475112",
+        "title": "微信摇一摇功能",
+        "describe": "没什么可描述的，还在研究。",
+        "tables": [
+            "javascript",
+            "jquery"
+        ],
+        "imgUrl": "./IMG/weChatShake.png",
+        "showUrl": "DEMO/weChatShake/weChatShake.html",
+        "downloadUrl": "#"
+    }
+]

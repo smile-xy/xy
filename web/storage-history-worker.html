@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- 最新版本的 jquery JavaScript 文件 -->
+    <script type="text/javascript" src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+    <title>storage</title>
+    <style>
+        div {
+            position: relative;
+            background: red;
+            width: 20%;
+            /* 基于父级的宽度设置 */
+            padding-top: 20%;
+        }
+    </style>
+</head>
+
+<body>
+    <div></div>
+</body>
+<script>
+    'localStorage -> 永久存储 | 文档源限制'
+    'sessionStorage -> 窗口关闭前存储 | 文档源+窗口限制'
+
+    localStorage.name = 'admin';
+    localStorage.info = JSON.stringify({
+        "name": "admin",
+        "age": 22,
+        "job": "some where"
+    });
+
+    localStorage.setItem('a', 'b');
+    localStorage.getItem('a'); // a
+    localStorage.removeItem('a'); // 删除某个
+    localStorage.clear(); // 清空存储
+
+    'history.length -> 长度'
+    'history.back() -> 后退'
+    'history.forward() -> 前进'
+    'history.go() -> 转到()页'
+
+    // 调用不会触发popstate事件
+    'history.pushState(state, null, url) -> 添加一条历史记录 | 不刷新页面'
+    'history.replaceState(state, null, url) -> 替换当前历史记录 | 不刷新页面'
+    // state：一个与指定网址相关的状态对象，popstate事件触发时，该对象会传入回调函数中，如不需要填写null
+    // url: 常用与ajax结合做单页面历史记录的参数
+    'popstate事件 -> 历史记录发生改变时触发'
+    'hashchange事件 -> 页面的hash值改变时触发，常用于构建单页面应用'
+
+    var worker = new Worker('worker.js');
+    // worker文件必须和主文件满足同源策略
+    // worker是window的子集，只能实现部分功能，不给你获取到window,document，所以也不能引入jQ,zepto，可以引入一些计算类的库。
+    worker.postMessage(10);
+    worker.onmessage = function (e) {
+        console.log(e.data);
+        // worker.terminate(); // 结束此worker
+    }
+
+</script>
+
+</html>

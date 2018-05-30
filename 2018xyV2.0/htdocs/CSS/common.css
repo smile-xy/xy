@@ -68,17 +68,36 @@ a:hover {
 
 .btn-primary {
     /* 默认按钮样式 */
-    background: linear-gradient(#569CD6, #007ACC);
+    background: #007ACC;
 }
 
-.btn-primary:hover {
-    background: linear-gradient(#007ACC, #0066AA);
+.thumbnail>img {
+    /* 自适应模块图片默认样式 */
+    width: 100%;
+    height: 100%;
 }
 
 .navbar-form {
     /* 移动端菜单宽度引起的横向滚动条 */
     margin-left: 0;
     margin-right: 0;
+}
+
+.nav-placeholder {
+    /* nav变更fixed定位引起抖动 */
+    height: 70px;
+}
+
+@media screen and (max-width:768px) {
+    /* 移动端 nav变更fixed定位引起抖动 */
+    .nav-placeholder {
+        height: 53px;
+    }
+}
+
+.nav-placeholder-active {
+    /* 平时隐藏 nav变更fixed定位引起抖动 */
+    display: none;
 }
 
 @media screen and (max-width:768px) {
@@ -94,7 +113,7 @@ a:hover {
         margin-right: 0 !important;
         margin-bottom: 2px !important;
     }
-    .main-section>section {
+    .main-section {
         padding-left: 0 !important;
         padding-right: 0 !important;
     }
@@ -192,6 +211,42 @@ a:hover {
     height: 60px;
 }
 
+/* nav */
+
+.navbar-brand {
+    font-size: 22px;
+}
+
+/* 主体居中 */
+
+.main-section {
+    position: relative;
+    margin: 0 auto;
+}
+
+@media screen and (min-width:1200px) {
+    .main-section {
+        width: 1180px;
+    }
+    /* nav内容居中 */
+    .container-fluid {
+        margin: 0 auto;
+        width: 1180px;
+    }
+}
+
+@media screen and (min-width:990px) and (max-width:1199px) {
+    .main-section {
+        width: 970px;
+    }
+}
+
+@media screen and (min-width:768px) and (max-width:990px) {
+    .main-section {
+        width: 768px;
+    }
+}
+
 /* 尾部 */
 
 .main-footer {
@@ -244,4 +299,31 @@ a:hover {
     text-align: center;
     padding: 5px;
     background: #264F78;
+}
+
+/* toTop */
+
+.to-top {
+    display: none;
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 40px;
+    height: 35px;
+    background: #007ACC;
+    opacity: 0.4;
+    transition: all 0.5s linear;
+}
+
+.to-top-active {
+    display: block;
+}
+
+.to-top span {
+    color: #fff;
+}
+
+.to-top:hover {
+    opacity: 1;
+    transition: all 0.5s linear;
 }
